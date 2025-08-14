@@ -3,7 +3,7 @@ title: Sanaan Fayaz Wani # site title
 description: >- # site description
   Exploring the intersection of LLMs, agents, and modern security.
 lang: en-US # default lang
-timezone: Asia/Jakarta # set your timezone
+timezone: America/New_York # set your timezone
 image: assets/img/ogp.png # This image used for Open Graph more info https://ogp.me/
 # repo: # site repo [optional]
 mode: dark # default theme "dark" | "light"
@@ -21,7 +21,7 @@ author:
   avatar: /assets/img/avatar.jpg # change with your own avatar
 
 # URL settings
-url: "https://klise.now.sh" #
+url: "https://sfwani.github.io" #
 baseurl:
 permalink: /:title/
 google_analytics: # leave it blank if not wish
