@@ -1,5 +1,5 @@
 ---
-title: About Me
+title: About
 permalink: /about/
 layout: page
 excerpt: Computer science student at USF, Blue Team Captain of CyberHerd, and Offensive Security Engineer at Amazon working on MCP security tools and autonomous CTF solvers.
