@@ -159,16 +159,17 @@ ol {
   li {
     position: relative;
     counter-increment: li;
+    padding-left: 2em;
     &::before {
-      content: counter(li);
+      content: counter(li) ".";
       display: inline-block;
-      width: 1em;
-      margin-right: 0.5em;
-      margin-left: -1.6em;
+      width: 1.5em;
+      margin-left: -2em;
       text-align: right;
-      direction: rtl;
       font-weight: $bold-weight;
       font-size: $small-font-size;
+      position: absolute;
+      left: 0;
     }
   }
 }

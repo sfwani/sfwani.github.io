@@ -76,12 +76,6 @@ body[data-theme="dark"] {
   .post-meta {
     color: $dark-gray;
 
-    time {
-      &::after {
-        background-color: $dark-light;
-      }
-    }
-
     span[itemprop="author"] {
       border-color: $dark-light;
     }
