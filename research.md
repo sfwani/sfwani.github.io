@@ -9,12 +9,15 @@ comments: false
 I hunt unauthenticated remote code execution in the infrastructure that runs large language models: agent frameworks, inference servers, workflow orchestrators, and the serialization formats they trust.
 
 <!-- COUNTERS:START -->
+
 **7 CVEs assigned.** 9 published advisories across 6 projects, from 127 reports filed against 45 open source projects.
+
 <!-- COUNTERS:END -->
 
 ## Published advisories
 
 <!-- ADVISORIES:START -->
+
 | Advisory | Project | CVSS | Class |
 |:---|:---|:---|:---|
 | [CVE-2026-57516](https://github.com/advisories/GHSA-hhrp-gw25-jr43) | `ray` | 8.8 High | Code injection (CWE-94) |
@@ -26,6 +29,7 @@ I hunt unauthenticated remote code execution in the infrastructure that runs lar
 | [GHSA-59h8-w5q6-mfmp](https://github.com/triggerdotdev/trigger.dev/security/advisories/GHSA-59h8-w5q6-mfmp) | `trigger.dev` | 5.3 Medium | Missing authentication (CWE-306) |
 | [CVE-2026-73301](https://github.com/advisories/GHSA-4qcj-m5wp-jmf4) | `@budibase/server` | 4.3 Medium | Missing authorization (CWE-862) |
 | [CVE-2026-59715](https://github.com/advisories/GHSA-gmfw-g93r-vg53) | `open-webui` | 3.1 Low | Missing authentication (CWE-306) |
+
 <!-- ADVISORIES:END -->
 
 Full writeups, with the vulnerable code, reproduction steps, and the fix diff for each, are at [github.com/sfwani/advisories](https://github.com/sfwani/advisories). This table regenerates daily from the [GitHub Advisory Database](https://github.com/advisories?query=credit%3Asfwani), so it only ever lists work that is published, fixed, and credited.

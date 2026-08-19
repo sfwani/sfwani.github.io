@@ -208,7 +208,9 @@ def splice(text, marker, body):
     pattern = re.compile(re.escape(start) + r".*?" + re.escape(end), re.S)
     if not pattern.search(text):
         raise SystemExit(f"marker {marker} not found in {README}")
-    return pattern.sub(f"{start}\n{body}\n{end}", text)
+    # kramdown needs a blank line between an HTML comment and a markdown table,
+    # otherwise the table is swallowed into the surrounding HTML block.
+    return pattern.sub(lambda _: f"{start}\n\n{body}\n\n{end}", text)
 
 
 def main():
