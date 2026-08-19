@@ -48,4 +48,4 @@ First place at AI Village and second at Adversary Village, DEF CON 34. First pla
 
 ## Elsewhere
 
-[GitHub](https://github.com/sfwani) &nbsp;·&nbsp; [LinkedIn](https://www.linkedin.com/in/sfwani) &nbsp;·&nbsp; [Advisories](https://github.com/sfwani/advisories) &nbsp;·&nbsp; [sanaan@usf.edu](mailto:sanaan@usf.edu)
+[GitHub](https://github.com/sfwani) &nbsp;·&nbsp; [LinkedIn](https://www.linkedin.com/in/sfwani) &nbsp;·&nbsp; [Advisories](https://github.com/sfwani/advisories) &nbsp;·&nbsp; [code.sanaan@gmail.com](mailto:code.sanaan@gmail.com)

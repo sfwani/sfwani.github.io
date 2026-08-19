@@ -12,4 +12,4 @@ His research targets the infrastructure that runs large language models: agent f
 
 At DEF CON he took first place at AI Village and second at Adversary Village in 2026, and first at Adversary Village the year before.
 
-Reach him at [sanaan@usf.edu](mailto:sanaan@usf.edu), on [GitHub](https://github.com/sfwani), or on [LinkedIn](https://www.linkedin.com/in/sfwani).
+Reach him at [code.sanaan@gmail.com](mailto:code.sanaan@gmail.com), on [GitHub](https://github.com/sfwani), or on [LinkedIn](https://www.linkedin.com/in/sfwani).
