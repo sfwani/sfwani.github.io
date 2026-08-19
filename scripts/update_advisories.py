@@ -15,7 +15,7 @@ import urllib.parse
 import requests
 
 USER = os.environ.get("ADVISORY_CREDIT_USER", "sfwani")
-README = os.environ.get("README_PATH", "research.md")
+README = os.environ.get("README_PATH", "index.md")
 API = "https://api.github.com"
 UA = "sfwani-profile-updater"
 

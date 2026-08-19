@@ -23,12 +23,12 @@ jobs:
         run: python scripts/update_advisories.py
       - name: Commit if changed
         run: |
-          if git diff --quiet -- research.md; then
+          if git diff --quiet -- index.md; then
             echo "no advisory changes"
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add research.md
+          git add index.md
           git commit -m "chore: refresh advisory table"
           git push

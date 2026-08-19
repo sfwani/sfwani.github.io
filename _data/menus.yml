@@ -2,19 +2,10 @@
   url: /
   external: false
 
-- title: research
-  url: /research/
-  external: false
-
-- title: archive
-  url: /archive/
-  external: false
-
 - title: about
   url: /about/
-  external: false # set true if you using external link, see below
+  external: false
 
-# Example:
-# - title: github
-#   url: https://github.com/piharpi/jekyll-klise
-#   external: true
+- title: advisories
+  url: https://github.com/sfwani/advisories
+  external: true
