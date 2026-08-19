@@ -1,7 +1,7 @@
 # Site settings
 title: Sanaan Fayaz Wani # site title
 description: >- # site description
-  Exploring the intersection of LLMs, agents, and modern security.
+  Security research on AI agent frameworks and the infrastructure that runs large language models.
 lang: en-US # default lang
 timezone: America/New_York # set your timezone
 image: assets/img/ogp.png # This image used for Open Graph more info https://ogp.me/
@@ -12,7 +12,7 @@ mode: light # default theme "dark" | "light"
 author:
   name: Sanaan Fayaz Wani # author name
   bio: >- # tell to the world
-    Exploring the intersection of LLMs, agents, and modern security.
+    Security Engineer at Amazon. I find unauthenticated RCE in AI agent frameworks and LLM infrastructure.
   username: sfwani # general username
   github: sfwani # github username
   twitter: # twitter username
@@ -70,6 +70,10 @@ include:
   - .htaccess
 
 exclude:
+  - scripts
+  - WEBSITE_GUIDE.md
+  - create_post.py
+  - create_post.sh
   - CNAME
   - Gemfile
   - Gemfile.lock
