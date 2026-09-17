@@ -1,0 +1,194 @@
+#!/usr/bin/env python3
+"""Generate one page per published advisory, plus the /advisories/ index.
+
+Source of truth is the same as update_advisories.py: the public credit search
+plus advisories.txt for repo level advisories the global database never got.
+Nothing unpublished can appear here, because both paths gate on state ==
+published and on this user's credit being accepted.
+
+Run: python3 scripts/build_writeups.py
+"""
+
+import pathlib
+import re
+import sys
+from datetime import datetime, timezone
+
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+from update_advisories import (  # noqa: E402
+    API, USER, session, credited_ghsa_ids, extra_repo_advisories, CWE_LABELS,
+    short_package,
+)
+
+ROOT = pathlib.Path(__file__).resolve().parent.parent
+OUT = ROOT / "advisories"
+
+
+def raw_global(s, ghsa_id):
+    r = s.get(f"{API}/advisories/{ghsa_id}", timeout=30)
+    if r.status_code != 200:
+        print(f"skip {ghsa_id}: HTTP {r.status_code}", file=sys.stderr)
+        return None
+    a = r.json()
+    return None if a.get("withdrawn_at") else a
+
+
+def raw_repo_level(s, repo, ghsa_id):
+    """Only an advisory that is published and where USER credit is accepted."""
+    r = s.get(f"{API}/repos/{repo}/security-advisories/{ghsa_id}", timeout=30)
+    if r.status_code != 200:
+        print(f"skip {ghsa_id}: HTTP {r.status_code}", file=sys.stderr)
+        return None
+    a = r.json()
+    if a.get("state") != "published" or a.get("withdrawn_at"):
+        print(f"skip {ghsa_id}: state={a.get('state')}", file=sys.stderr)
+        return None
+    ok = any(
+        (c.get("user") or {}).get("login") == USER and c.get("state") == "accepted"
+        for c in a.get("credits_detailed") or []
+    )
+    if not ok:
+        print(f"skip {ghsa_id}: credit not accepted", file=sys.stderr)
+        return None
+    return a
+
+
+def slug(a):
+    return (a.get("cve_id") or a["ghsa_id"]).lower()
+
+
+def body(a):
+    cvss = a.get("cvss") or {}
+    score = cvss.get("score")
+    cwes = ", ".join(f"{c['cwe_id']} ({c['name']})" for c in a.get("cwes") or []) or "n/a"
+    sev = (a.get("severity") or "").capitalize()
+    sev += f" ({score})" if score is not None else " (no CVSS score published)"
+    out = [
+        f"**{(a.get('summary') or '').strip()}**",
+        "",
+        "| | |",
+        "|:--|:--|",
+        f"| Advisory | [{a['ghsa_id']}]({a.get('html_url')}) |",
+        f"| CVE | {a.get('cve_id') or 'not assigned'} |",
+        f"| Severity | {sev} |",
+        f"| CVSS vector | `{cvss.get('vector_string') or 'not published'}` |",
+        f"| CWE | {cwes} |",
+        f"| Published | {(a.get('published_at') or '')[:10]} |",
+        "",
+    ]
+    vulns = a.get("vulnerabilities") or []
+    if vulns:
+        out += ["### Affected versions", "",
+                "| Package | Ecosystem | Vulnerable | Fixed in |", "|:--|:--|:--|:--|"]
+        for v in vulns:
+            pkg = v.get("package") or {}
+            out.append(
+                f"| `{pkg.get('name','n/a')}` | {pkg.get('ecosystem','n/a')} | "
+                f"{v.get('vulnerable_version_range') or 'n/a'} | "
+                f"{v.get('first_patched_version') or 'n/a'} |"
+            )
+        out.append("")
+    desc = (a.get("description") or "").replace("\r\n", "\n").replace("\r", "\n")
+    out += ["## Details", "", desc.strip(), ""]
+    refs = [r for r in (a.get("references") or []) if r != a.get("html_url")]
+    if refs:
+        out += ["## References", ""] + [f"* <{r}>" for r in refs] + [""]
+    return "\n".join(out)
+
+
+def yaml_q(v):
+    return '"' + str(v).replace('\\', '\\\\').replace('"', '\\"') + '"'
+
+
+def write_page(a, stamp):
+    name = a.get("cve_id") or a["ghsa_id"]
+    desc = re.sub(r"\s+", " ", (a.get("summary") or "").strip())[:200]
+    fm = "\n".join([
+        "---",
+        f"title: {yaml_q(name)}",
+        f"permalink: /advisories/{slug(a)}/",
+        "layout: page",
+        f"description: {yaml_q(desc)}",
+        "comments: false",
+        f"last_modified_at: {stamp}",
+        "---",
+        "",
+    ])
+    p = OUT / f"{slug(a)}.md"
+    new = fm + body(a)
+    old = p.read_text(encoding="utf-8") if p.exists() else None
+    if old is not None:
+        # Keep the existing stamp when only the stamp would change.
+        if re.sub(r"^last_modified_at:.*$", "", old, flags=re.M) == \
+           re.sub(r"^last_modified_at:.*$", "", new, flags=re.M):
+            return False
+    p.write_text(new, encoding="utf-8")
+    return True
+
+
+def write_index(rows, stamp):
+    rows.sort(key=lambda a: (a.get("published_at") or ""), reverse=True)
+    lines = [
+        "---",
+        "title: Advisories",
+        "permalink: /advisories/",
+        "layout: page",
+        'description: "Full writeups for every published security advisory credited to '
+        'Sanaan Wani: root cause, vulnerable code, reproduction and fix."',
+        "comments: false",
+        f"last_modified_at: {stamp}",
+        "---",
+        "",
+        "Every advisory below is published, fixed and credited. Each page carries the root "
+        "cause, the vulnerable code, reproduction steps and the fix, as published in the "
+        "advisory itself. Reports still in coordinated disclosure are not listed, named or "
+        "hinted at until the maintainer ships a fix.",
+        "",
+        "| Advisory | Project | CVSS | Class | Published |",
+        "|:--|:--|:--|:--|:--|",
+    ]
+    for a in rows:
+        name = a.get("cve_id") or a["ghsa_id"]
+        cvss = a.get("cvss") or {}
+        score = cvss.get("score")
+        sev = (a.get("severity") or "").capitalize()
+        rating = f"{score} {sev}" if score is not None else sev
+        pkgs = sorted({v["package"]["name"] for v in a.get("vulnerabilities") or []
+                       if v.get("package")})
+        pkg = short_package(pkgs[0]) if pkgs else "n/a"
+        cwe = (a.get("cwes") or [{}])[0].get("cwe_id")
+        cls = CWE_LABELS.get(cwe, cwe or "n/a")
+        lines.append(
+            f"| [{name}](/advisories/{slug(a)}/) | `{pkg}` | {rating} | {cls} | "
+            f"{(a.get('published_at') or '')[:10]} |"
+        )
+    lines.append("")
+    (ROOT / "advisories.md").write_text("\n".join(lines), encoding="utf-8")
+
+
+def main():
+    OUT.mkdir(exist_ok=True)
+    s = session()
+    stamp = datetime.now(timezone.utc).replace(microsecond=0).isoformat()
+    rows, seen = [], set()
+    for gid in credited_ghsa_ids(s):
+        a = raw_global(s, gid)
+        if a:
+            rows.append(a)
+            seen.add(a["ghsa_id"])
+    for repo, gid in extra_repo_advisories():
+        if gid in seen:
+            continue
+        a = raw_repo_level(s, repo, gid)
+        if a:
+            rows.append(a)
+            seen.add(gid)
+    if not rows:
+        raise SystemExit("no advisories resolved, refusing to write empty pages")
+    changed = sum(write_page(a, stamp) for a in rows)
+    write_index(list(rows), stamp)
+    print(f"{len(rows)} advisories, {changed} pages written or updated", file=sys.stderr)
+
+
+if __name__ == "__main__":
+    main()

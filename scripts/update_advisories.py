@@ -125,7 +125,7 @@ def resolve_repo_level(s, repo, ghsa_id):
         "severity": (a.get("severity") or "").capitalize(),
         "package": packages[0] if packages else repo.split("/")[-1],
         "cwe": cwes[0] if cwes else None,
-        "url": a.get("html_url") or f"https://github.com/{repo}/security/advisories/{ghsa_id}",
+        "url": f"/advisories/{(a.get('cve_id') or a['ghsa_id']).lower()}/",
     }
 
 
@@ -147,7 +147,7 @@ def resolve(s, ghsa_id):
         "severity": (a.get("severity") or "").capitalize(),
         "package": packages[0] if packages else "n/a",
         "cwe": cwes[0] if cwes else None,
-        "url": a.get("html_url") or f"https://github.com/advisories/{a['ghsa_id']}",
+        "url": f"/advisories/{(a.get('cve_id') or a['ghsa_id']).lower()}/",
     }
 
 

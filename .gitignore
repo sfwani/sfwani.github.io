@@ -6,3 +6,5 @@ _drafts
 klise-*.gem
 Gemfile.lock
 WEBSITE_GUIDE.md
+__pycache__/
+*.pyc

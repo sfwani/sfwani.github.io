@@ -1,8 +1,8 @@
 ---
-title: Security Research
+title: AI Security Research
 layout: page
-description: Published security advisories against AI agent frameworks and LLM infrastructure, with root cause, reproduction, and fix for each.
-last_modified_at: 2026-09-17T23:39:22+00:00
+description: Vulnerability research on AI agent frameworks and LLM infrastructure. Seven assigned CVEs and eleven published advisories, with root cause, reproduction and fix for each.
+last_modified_at: 2026-09-17T23:54:04+00:00
 ---
 
 Sanaan Fayaz Wani. Security Engineer at Amazon, working in IAM security on bringing agentic AI into identity and access management. Outside that, I hunt unauthenticated remote code execution in the infrastructure that runs large language models: agent frameworks, inference servers, workflow orchestrators, and the serialization formats they trust.
@@ -19,21 +19,21 @@ Sanaan Fayaz Wani. Security Engineer at Amazon, working in IAM security on bring
 
 | Advisory | Project | CVSS | Class |
 |:---|:---|:---|:---|
-| [CVE-2026-57516](https://github.com/advisories/GHSA-hhrp-gw25-jr43) | `ray` | 8.8 High | Code injection (CWE-94) |
-| [CVE-2026-45675](https://github.com/advisories/GHSA-h3ww-q6xx-w7x3) | `open-webui` | 8.1 High | Privilege escalation (CWE-269) |
-| [GHSA-jc26-22qp-cgqj](https://github.com/triggerdotdev/trigger.dev/security/advisories/GHSA-jc26-22qp-cgqj) | `trigger.dev` | 7.9 High | Missing authentication (CWE-306) |
-| [GHSA-3c52-v5v2-3r56](https://github.com/Budibase/budibase/security/advisories/GHSA-3c52-v5v2-3r56) | `budibase` | 7.7 High | Server side request forgery (CWE-918) |
-| [CVE-2026-59714](https://github.com/advisories/GHSA-x2ff-v5v8-m75m) | `open-webui` | 7.1 High | Missing authorization (CWE-862) |
-| [GHSA-pqxw-g93w-hj9x](https://github.com/triggerdotdev/trigger.dev/security/advisories/GHSA-pqxw-g93w-hj9x) | `trigger.dev` | High | Improper isolation (CWE-653) |
-| [CVE-2026-53577](https://github.com/kestra-io/kestra/security/advisories/GHSA-r6v3-xxwj-9h42) | `kestra` | 6.5 Medium | Incorrect authorization (CWE-863) |
-| [CVE-2026-63342](https://github.com/hatchet-dev/hatchet/security/advisories/GHSA-g26x-m427-f48f) | `hatchet` | 6.3 Medium | Incorrect authorization (CWE-863) |
-| [GHSA-59h8-w5q6-mfmp](https://github.com/triggerdotdev/trigger.dev/security/advisories/GHSA-59h8-w5q6-mfmp) | `trigger.dev` | 5.3 Medium | Missing authentication (CWE-306) |
-| [CVE-2026-73301](https://github.com/advisories/GHSA-4qcj-m5wp-jmf4) | `@budibase/server` | 4.3 Medium | Missing authorization (CWE-862) |
-| [CVE-2026-59715](https://github.com/advisories/GHSA-gmfw-g93r-vg53) | `open-webui` | 3.1 Low | Missing authentication (CWE-306) |
+| [CVE-2026-57516](/advisories/cve-2026-57516/) | `ray` | 8.8 High | Code injection (CWE-94) |
+| [CVE-2026-45675](/advisories/cve-2026-45675/) | `open-webui` | 8.1 High | Privilege escalation (CWE-269) |
+| [GHSA-jc26-22qp-cgqj](/advisories/ghsa-jc26-22qp-cgqj/) | `trigger.dev` | 7.9 High | Missing authentication (CWE-306) |
+| [GHSA-3c52-v5v2-3r56](/advisories/ghsa-3c52-v5v2-3r56/) | `budibase` | 7.7 High | Server side request forgery (CWE-918) |
+| [CVE-2026-59714](/advisories/cve-2026-59714/) | `open-webui` | 7.1 High | Missing authorization (CWE-862) |
+| [GHSA-pqxw-g93w-hj9x](/advisories/ghsa-pqxw-g93w-hj9x/) | `trigger.dev` | High | Improper isolation (CWE-653) |
+| [CVE-2026-53577](/advisories/cve-2026-53577/) | `kestra` | 6.5 Medium | Incorrect authorization (CWE-863) |
+| [CVE-2026-63342](/advisories/cve-2026-63342/) | `hatchet` | 6.3 Medium | Incorrect authorization (CWE-863) |
+| [GHSA-59h8-w5q6-mfmp](/advisories/ghsa-59h8-w5q6-mfmp/) | `trigger.dev` | 5.3 Medium | Missing authentication (CWE-306) |
+| [CVE-2026-73301](/advisories/cve-2026-73301/) | `@budibase/server` | 4.3 Medium | Missing authorization (CWE-862) |
+| [CVE-2026-59715](/advisories/cve-2026-59715/) | `open-webui` | 3.1 Low | Missing authentication (CWE-306) |
 
 <!-- ADVISORIES:END -->
 
-Full writeups, with the vulnerable code, reproduction steps, and the fix diff for each, are at [github.com/sfwani/advisories](https://github.com/sfwani/advisories). This table regenerates daily from the [GitHub Advisory Database](https://github.com/advisories?query=credit%3Asfwani), so it only ever lists work that is published, fixed, and credited.
+Each advisory above links to a full writeup with the vulnerable code, reproduction steps and the fix. The complete index is at [/advisories/](/advisories/). This table regenerates daily from the [GitHub Advisory Database](https://github.com/advisories?query=credit%3Asfwani), so it only ever lists work that is published, fixed, and credited.
 
 ## What I look for
 
@@ -45,19 +45,9 @@ Full writeups, with the vulnerable code, reproduction steps, and the fix diff fo
 
 **Request forgery into control planes.** My highest volume class: metadata endpoints, internal schedulers, and cluster APIs one redirect away from a user supplied URL.
 
-## Competitions
+## Current interests
 
-| Placement | Event |
-|:---|:---|
-| **1st** | AI Village CTF, DEF CON 34 |
-| **2nd** | Adversary Wars CTF, Adversary Village, DEF CON 34 |
-| **1st** | Adversary Wars CTF, Adversary Village, DEF CON 33 |
-| **1st** | SHPE National CTF |
-| **1st** | Hackabull CTF |
-| **1st** | Central Florida Tech Grove CTF |
-| **1st** | Social Engineering Competition, The CARE Lab at Temple University |
-| **3rd** | SecureTheFuture Research Award, Palo Alto Networks |
-| **3rd** | NCAE CyberGames, South East Regionals |
+Agentic systems and autonomous loops, and what happens to authorization when an agent acts on a user's behalf across many services. Where the tool invocation boundary quietly becomes an execution boundary. More, including competition placements and background, on the [about page](/about/).
 
 ## Elsewhere
 

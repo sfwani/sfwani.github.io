@@ -71,6 +71,7 @@ include:
 
 exclude:
   - scripts
+  - advisories.txt
   - WEBSITE_GUIDE.md
   - create_post.py
   - create_post.sh
