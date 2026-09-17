@@ -4,11 +4,11 @@ layout: page
 description: Published security advisories against AI agent frameworks and LLM infrastructure, with root cause, reproduction, and fix for each.
 ---
 
-Sanaan Fayaz Wani. Security Engineer at Amazon. I hunt unauthenticated remote code execution in the infrastructure that runs large language models: agent frameworks, inference servers, workflow orchestrators, and the serialization formats they trust.
+Sanaan Fayaz Wani. Security Engineer at Amazon, working in IAM security on bringing agentic AI into identity and access management. Outside that, I hunt unauthenticated remote code execution in the infrastructure that runs large language models: agent frameworks, inference servers, workflow orchestrators, and the serialization formats they trust.
 
 <!-- COUNTERS:START -->
 
-**7 CVEs assigned.** 9 published advisories across 6 projects, from 127 reports filed against 45 open source projects.
+**7 CVEs assigned.** 11 published advisories across 7 projects, from 167 reports filed against 59 open source projects.
 
 <!-- COUNTERS:END -->
 
@@ -20,6 +20,8 @@ Sanaan Fayaz Wani. Security Engineer at Amazon. I hunt unauthenticated remote co
 |:---|:---|:---|:---|
 | [CVE-2026-57516](https://github.com/advisories/GHSA-hhrp-gw25-jr43) | `ray` | 8.8 High | Code injection (CWE-94) |
 | [CVE-2026-45675](https://github.com/advisories/GHSA-h3ww-q6xx-w7x3) | `open-webui` | 8.1 High | Privilege escalation (CWE-269) |
+| [GHSA-jc26-22qp-cgqj](https://github.com/triggerdotdev/trigger.dev/security/advisories/GHSA-jc26-22qp-cgqj) | `trigger.dev` | 7.9 High | Missing authentication (CWE-306) |
+| [GHSA-3c52-v5v2-3r56](https://github.com/Budibase/budibase/security/advisories/GHSA-3c52-v5v2-3r56) | `budibase` | 7.7 High | Server side request forgery (CWE-918) |
 | [CVE-2026-59714](https://github.com/advisories/GHSA-x2ff-v5v8-m75m) | `open-webui` | 7.1 High | Missing authorization (CWE-862) |
 | [GHSA-pqxw-g93w-hj9x](https://github.com/triggerdotdev/trigger.dev/security/advisories/GHSA-pqxw-g93w-hj9x) | `trigger.dev` | High | Improper isolation (CWE-653) |
 | [CVE-2026-53577](https://github.com/kestra-io/kestra/security/advisories/GHSA-r6v3-xxwj-9h42) | `kestra` | 6.5 Medium | Incorrect authorization (CWE-863) |
@@ -44,7 +46,17 @@ Full writeups, with the vulnerable code, reproduction steps, and the fix diff fo
 
 ## Competitions
 
-First place at AI Village and second at Adversary Village, DEF CON 34. First place at Adversary Village, DEF CON 33.
+| Placement | Event |
+|:---|:---|
+| **1st** | AI Village CTF, DEF CON 34 |
+| **2nd** | Adversary Wars CTF, Adversary Village, DEF CON 34 |
+| **1st** | Adversary Wars CTF, Adversary Village, DEF CON 33 |
+| **1st** | SHPE National CTF |
+| **1st** | Hackabull CTF |
+| **1st** | Central Florida Tech Grove CTF |
+| **1st** | Social Engineering Competition, The CARE Lab at Temple University |
+| **3rd** | SecureTheFuture Research Award, Palo Alto Networks |
+| **3rd** | NCAE CyberGames, South East Regionals |
 
 ## Elsewhere
 

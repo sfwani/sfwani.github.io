@@ -12,7 +12,7 @@ mode: light # default theme "dark" | "light"
 author:
   name: Sanaan Fayaz Wani # author name
   bio: >- # tell to the world
-    Security Engineer at Amazon. I find unauthenticated RCE in AI agent frameworks and LLM infrastructure.
+    Security Engineer at Amazon in IAM security, bringing agentic AI into identity and access management. I find unauthenticated RCE in AI agent frameworks and LLM infrastructure.
   username: sfwani # general username
   github: sfwani # github username
   twitter: # twitter username
