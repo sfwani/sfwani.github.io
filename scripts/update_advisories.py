@@ -8,6 +8,7 @@ search page and each ID is then resolved through the API for structured fields.
 
 import os
 import re
+from datetime import datetime, timezone
 import sys
 import time
 import urllib.parse
@@ -213,6 +214,25 @@ def splice(text, marker, body):
     return pattern.sub(lambda _: f"{start}\n\n{body}\n\n{end}", text)
 
 
+def stamp_last_modified(text):
+    """Set last_modified_at in the front matter.
+
+    jekyll-sitemap only emits <lastmod> for pages that carry this key, and Google
+    only trusts lastmod when it is consistently accurate. So this is called ONLY on
+    the path where the rendered content actually changed, never on a no-op run.
+    """
+    now = datetime.now(timezone.utc).replace(microsecond=0).isoformat()
+    m = re.match(r"(---\n)(.*?)(\n---\n)", text, re.S)
+    if not m:
+        return text
+    head, body, tail = m.groups()
+    if re.search(r"^last_modified_at:", body, re.M):
+        body = re.sub(r"^last_modified_at:.*$", f"last_modified_at: {now}", body, flags=re.M)
+    else:
+        body = body + f"\nlast_modified_at: {now}"
+    return head + body + tail + text[m.end():]
+
+
 def main():
     s = session()
     ids = credited_ghsa_ids(s)
@@ -241,6 +261,7 @@ def main():
     if updated == original:
         print("no change", file=sys.stderr)
         return
+    updated = stamp_last_modified(updated)
     open(README, "w", encoding="utf-8").write(updated)
     print(f"updated {README} with {len(rows)} advisories", file=sys.stderr)
 

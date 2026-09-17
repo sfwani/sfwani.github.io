@@ -2,6 +2,7 @@
 title: Security Research
 layout: page
 description: Published security advisories against AI agent frameworks and LLM infrastructure, with root cause, reproduction, and fix for each.
+last_modified_at: 2026-09-17T23:39:22+00:00
 ---
 
 Sanaan Fayaz Wani. Security Engineer at Amazon, working in IAM security on bringing agentic AI into identity and access management. Outside that, I hunt unauthenticated remote code execution in the infrastructure that runs large language models: agent frameworks, inference servers, workflow orchestrators, and the serialization formats they trust.
