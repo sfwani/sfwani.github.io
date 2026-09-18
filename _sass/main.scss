@@ -510,3 +510,14 @@ body[data-theme="dark"] { @include rouge-dark; }
 @media (prefers-color-scheme: dark) {
   body:not([data-theme="dark"]):not([data-theme="light"]) { @include rouge-dark; }
 }
+
+// The icon must reflect the theme in all three states: explicit dark,
+// explicit light, and following a dark OS with no attribute set.
+.menu a#mode .mode-sunny { display: none; }
+.menu a#mode .mode-moon  { display: block; }
+body[data-theme="dark"] .menu a#mode .mode-sunny { display: block; }
+body[data-theme="dark"] .menu a#mode .mode-moon  { display: none; }
+@media (prefers-color-scheme: dark) {
+  body:not([data-theme="dark"]):not([data-theme="light"]) .menu a#mode .mode-sunny { display: block; }
+  body:not([data-theme="dark"]):not([data-theme="light"]) .menu a#mode .mode-moon  { display: none; }
+}

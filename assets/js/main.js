@@ -3,21 +3,17 @@
   const body = document.body;
   const lamp = document.getElementById("mode");
 
-  const toggleTheme = (state) => {
-    if (state === "dark") {
-      localStorage.setItem("theme", "light");
-      body.removeAttribute("data-theme");
-    } else if (state === "light") {
-      localStorage.setItem("theme", "dark");
-      body.setAttribute("data-theme", "dark");
-    } else {
-      initTheme(state);
-    }
+  const toggleTheme = () => {
+    // Effective theme: an explicit attribute if present, else what the OS says.
+    const current =
+      body.getAttribute("data-theme") ||
+      (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+    const next = current === "dark" ? "light" : "dark";
+    try { localStorage.setItem("theme", next); } catch (e) {}
+    body.setAttribute("data-theme", next);
   };
 
-  lamp.addEventListener("click", () =>
-    toggleTheme(localStorage.getItem("theme"))
-  );
+  if (lamp) lamp.addEventListener("click", toggleTheme);
 
   // Blur the content when the menu is open
   const cbox = document.getElementById("menu-trigger");

@@ -10,24 +10,30 @@ layout: compress
 <body data-theme="{{ site.mode }}" class="notransition">
 
   <script>
-    const body = document.body;
-    const data = body.getAttribute("data-theme");
-
-    /* The compress layout strips newlines, so a // comment in here would
-       swallow the rest of the function. Block comments only.
-       No stored choice, or an explicit "light", both mean: drop the
-       attribute and let prefers-color-scheme decide. */
-    const initTheme = (state) => {
-      if (state === "dark") {
-        body.setAttribute("data-theme", "dark");
-      } else {
-        body.removeAttribute("data-theme");
-      }
-    };
- 
-    initTheme(localStorage.getItem("theme"));
-    
-    setTimeout(() => body.classList.remove("notransition"), 75);
+    /* Block comments only: the compress layout joins these lines, so a //
+       comment would swallow everything after it.
+       Stored value is "dark", "light", or absent. Absent means follow the OS,
+       so the attribute is removed and the prefers-color-scheme rule applies.
+       An explicit choice is written as an attribute so it beats the OS. */
+    (function () {
+      var body = document.body;
+      var apply = function (state) {
+        if (state === "dark" || state === "light") {
+          body.setAttribute("data-theme", state);
+        } else {
+          body.removeAttribute("data-theme");
+        }
+      };
+      var stored = null;
+      try { stored = localStorage.getItem("theme"); } catch (e) {}
+      apply(stored);
+      window.__applyTheme = apply;
+      /* Keep other open tabs in step with an explicit choice. */
+      window.addEventListener("storage", function (e) {
+        if (e.key === "theme") { apply(e.newValue); }
+      });
+      setTimeout(function () { body.classList.remove("notransition"); }, 75);
+    })();
   </script>
 
   {% include navbar.html %}
