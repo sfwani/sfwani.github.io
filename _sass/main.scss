@@ -61,3 +61,126 @@ $on-widescreen: 1152px;
 // Import sass files
 @import "klise/fonts", "klise/base", "klise/layout", "klise/post",
   "klise/miscellaneous", "klise/syntax", "klise/dark";
+
+// ---------------------------------------------------------------------------
+// Fixed Measure: all monospace, warm paper. Loaded last so it wins over the
+// theme's Roboto rules without needing !important on everything.
+// ---------------------------------------------------------------------------
+:root {
+  --fm-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas,
+             "Liberation Mono", "DejaVu Sans Mono", monospace;
+  --fm-bg: #faf9f5;
+  --fm-ink: #23211c;
+  --fm-soft: #46433c;
+  --fm-muted: #7b776e;
+  --fm-rule: #e0ddd3;
+  --fm-rule-strong: #bfbbaf;
+  --fm-link: #1d5c58;
+  --fm-code-bg: #f0eee6;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --fm-bg: #15171a;
+    --fm-ink: #cdcac2;
+    --fm-soft: #aeaba3;
+    --fm-muted: #84817a;
+    --fm-rule: #262a2e;
+    --fm-rule-strong: #3e434a;
+    --fm-link: #79b8b0;
+    --fm-code-bg: #1c1f23;
+  }
+}
+[data-theme="dark"] {
+  --fm-bg: #15171a;
+  --fm-ink: #cdcac2;
+  --fm-soft: #aeaba3;
+  --fm-muted: #84817a;
+  --fm-rule: #262a2e;
+  --fm-rule-strong: #3e434a;
+  --fm-link: #79b8b0;
+  --fm-code-bg: #1c1f23;
+}
+
+body {
+  font-family: var(--fm-mono);
+  font-size: 15px;
+  line-height: 1.7;
+  font-weight: 400;
+  font-variant-ligatures: none;
+  font-variant-numeric: slashed-zero;
+  background-color: var(--fm-bg);
+  color: var(--fm-ink);
+}
+
+h1, h2, h3, h4, h5, h6,
+.header-title, .navbar, .footer, .post-title, .page-title {
+  font-family: var(--fm-mono);
+  color: var(--fm-ink);
+}
+
+// Hierarchy from weight and tracking, not from size.
+h1, .header-title { font-size: 1.5rem;  font-weight: 600; letter-spacing: -0.02em; line-height: 1.3; }
+h2 { font-size: 1.125rem; font-weight: 600; letter-spacing: 0.01em;
+     padding-bottom: 0.4rem; border-bottom: 1px solid var(--fm-rule); margin-top: 2.5rem; }
+h3 { font-size: 0.9375rem; font-weight: 600; text-transform: uppercase;
+     letter-spacing: 0.1em; color: var(--fm-soft); margin-top: 2rem; }
+h4, h5, h6 { font-size: 0.75rem; font-weight: 400; text-transform: uppercase;
+     letter-spacing: 0.14em; color: var(--fm-muted); }
+
+p { margin: 0 0 1.5em; }
+a { color: var(--fm-link); text-decoration: underline;
+    text-underline-offset: 0.2em; text-decoration-thickness: 1px; }
+a:hover { text-decoration-thickness: 2px; }
+hr { border: 0; border-top: 1px solid var(--fm-rule); margin: 2.5rem 0; }
+
+// Ledger: a print table. Rules, not boxes.
+main table {
+  font-size: 0.875rem;
+  line-height: 1.5;
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums slashed-zero lining-nums;
+}
+main table thead {
+  border-bottom: 1px solid var(--fm-rule-strong);
+  color: var(--fm-muted);
+}
+main table thead th {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--fm-muted);
+  text-align: left;
+  border: 0;
+  padding: 0 2ch 0.55em 0;
+  white-space: nowrap;
+}
+main table td, main table tr, main table th {
+  border: 0;
+  border-bottom: 1px solid var(--fm-rule);
+  padding: 0.5em 2ch 0.5em 0;
+  vertical-align: baseline;
+}
+main table tbody tr:last-child td { border-bottom: 1px solid var(--fm-rule-strong); }
+main table td:last-child, main table th:last-child { padding-right: 0; }
+
+// Code has to stay visually distinct from prose now that both are monospace.
+:not(pre) > code {
+  background: var(--fm-code-bg);
+  padding: 0.1em 0.4ch;
+  border-radius: 2px;
+}
+pre.highlight, pre {
+  border-left: 3px solid var(--fm-rule-strong);
+  font-variant-ligatures: none;
+}
+
+// Generated figures (the weakness-class chart) scale with the column.
+main svg.fig-cwe {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0.4rem 0 1.8rem;
+  color: var(--fm-ink);
+}

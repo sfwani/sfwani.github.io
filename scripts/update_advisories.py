@@ -204,6 +204,81 @@ def render_counters(rows):
     )
 
 
+AUTH_CWES = {"CWE-306", "CWE-862", "CWE-863"}
+
+
+def render_chart(rows):
+    """Ranked CWE bars, with the auth/authz classes bracketed against the rest.
+
+    Regenerated from the same rows as the table, so the counts can never drift
+    from what the page says above it.
+    """
+    import collections
+    counts = collections.Counter(r["cwe"] or "n/a" for r in rows)
+    ordered = sorted(counts.items(), key=lambda kv: (kv[0] not in AUTH_CWES, -kv[1], kv[0]))
+    n_auth = sum(v for k, v in counts.items() if k in AUTH_CWES)
+    n_other = sum(counts.values()) - n_auth
+    top = max(counts.values())
+
+    row_h, y0, bar_w = 34, 46, 300
+    h = y0 + row_h * len(ordered) + 18
+    out = [f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 {h}" class="fig-cwe" '
+           f'role="img" aria-labelledby="cweT cweD" preserveAspectRatio="xMidYMid meet">',
+           '<title id="cweT">Weakness classes across the published advisories</title>',
+           f'<desc id="cweD">{n_auth} of {n_auth + n_other} published advisories are '
+           f'authentication or authorization failures; {n_other} are other classes.</desc>',
+           '<style>.fig-cwe{font-family:inherit;font-feature-settings:"tnum" 1}'
+           '.fig-cwe text{fill:currentColor}'
+           '.cw-eyebrow{font-size:10.5px;fill-opacity:.55;letter-spacing:.1em}'
+           '.cw-meta{font-size:11px;fill-opacity:.55}.cw-label{font-size:12px}'
+           '.cw-muted{fill-opacity:.62}.cw-count{font-size:11px;fill-opacity:.6}'
+           '.cw-lead{font-size:15px}.cw-note{font-size:11px;fill-opacity:.62}</style>',
+           '<text class="cw-eyebrow" x="0" y="11">WEAKNESS CLASS</text>',
+           f'<text class="cw-meta" x="640" y="11" text-anchor="end">'
+           f'{n_auth + n_other} published advisories</text>',
+           '<line x1="0" y1="23.5" x2="640" y2="23.5" stroke="currentColor" '
+           'stroke-opacity=".28" stroke-width="1"/>', '<g fill="currentColor">']
+
+    first_auth = last_auth = first_other = last_other = None
+    for i, (cwe, n) in enumerate(ordered):
+        y = y0 + row_h * i
+        is_auth = cwe in AUTH_CWES
+        label = f"{cwe} {label_of(cwe)}"
+        cls = "cw-label" if is_auth else "cw-label cw-muted"
+        op = ".88" if is_auth else ".3"
+        w = round(bar_w * n / top, 2)
+        out += [f'<text class="{cls}" x="0" y="{y}">{label}</text>',
+                f'<rect x="0" y="{y + 9}" width="{w}" height="10" fill-opacity="{op}"/>',
+                f'<text class="cw-count" x="{w + 8}" y="{y + 17.5}">{n}</text>']
+        if is_auth:
+            first_auth = y + 9 if first_auth is None else first_auth
+            last_auth = y + 19
+        else:
+            first_other = y + 9 if first_other is None else first_other
+            last_other = y + 19
+    out.append("</g>")
+
+    if first_auth is not None:
+        mid = (first_auth + last_auth) / 2
+        out += [f'<path d="M424 {first_auth} L430 {first_auth} L430 {last_auth} L424 {last_auth}" '
+                'fill="none" stroke="currentColor" stroke-opacity=".5" stroke-width="1"/>',
+                f'<text class="cw-lead" x="442" y="{mid - 3}">{n_auth} of {n_auth + n_other}</text>',
+                f'<text class="cw-note" x="442" y="{mid + 12}">authentication or</text>',
+                f'<text class="cw-note" x="442" y="{mid + 25}">authorization failures</text>']
+    if first_other is not None:
+        mid2 = (first_other + last_other) / 2
+        out += [f'<path d="M424 {first_other} L430 {first_other} L430 {last_other} L424 {last_other}" '
+                'fill="none" stroke="currentColor" stroke-opacity=".35" stroke-width="1"/>',
+                f'<text class="cw-lead" x="442" y="{mid2 - 3}">{n_other} of {n_auth + n_other}</text>',
+                f'<text class="cw-note" x="442" y="{mid2 + 12}">everything else</text>']
+    out.append("</svg>")
+    return "\n".join(out)
+
+
+def label_of(cwe):
+    return CWE_LABELS.get(cwe, "")
+
+
 def splice(text, marker, body):
     start, end = f"<!-- {marker}:START -->", f"<!-- {marker}:END -->"
     pattern = re.compile(re.escape(start) + r".*?" + re.escape(end), re.S)
@@ -257,6 +332,8 @@ def main():
     original = open(README, encoding="utf-8").read()
     updated = splice(original, "ADVISORIES", render_table(rows))
     updated = splice(updated, "COUNTERS", render_counters(rows))
+    if "<!-- CHART:START -->" in updated:
+        updated = splice(updated, "CHART", render_chart(rows))
 
     if updated == original:
         print("no change", file=sys.stderr)
