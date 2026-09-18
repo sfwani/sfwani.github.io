@@ -4,6 +4,7 @@ permalink: /about/
 layout: page
 excerpt: Sanaan Wani is a Security Engineer at Amazon working on identity and access management, and an independent vulnerability researcher with seven assigned CVEs in AI agent frameworks and LLM infrastructure.
 comments: false
+last_modified_at: 2026-09-18
 ---
 
 Sanaan Wani is a Security Engineer at Amazon, working in IAM security on bringing agentic AI into identity and access management. Separately, he does independent vulnerability research against the infrastructure that runs large language models. Roles, education and competition record are on the [experience page](/experience/).
@@ -12,7 +13,7 @@ Sanaan Wani is a Security Engineer at Amazon, working in IAM security on bringin
 
 The target is the layer underneath the model: agent frameworks, inference servers, workflow orchestrators, vector stores, and the serialization formats they trust. Most of what he finds comes down to reachability rather than novel bug classes. An authenticated code execution sink is a bug. The same sink reachable before authentication is a critical, and AI infrastructure is unusually prone to shipping the second kind, because these projects grow quickly, bind to broad interfaces by default, and add execution features faster than they add authorization.
 
-Seven CVEs have been assigned from that work, with eleven advisories published and credited against projects including Ray, Open WebUI, Kestra, Hatchet, Budibase and trigger.dev. Those are the ones that reached publication; the wider body of work is 167 advisories filed across 59 open source projects, most still in coordinated disclosure or closed by maintainers as accepted risk. Each published finding, with root cause, vulnerable code, reproduction and fix, is listed on the [home page](/).
+Seven CVEs have been assigned from that work, with eleven advisories published and credited against projects including Ray, Open WebUI, Kestra, Hatchet, Budibase and trigger.dev. Those are the ones that reached publication; the wider body of work is 167 advisories filed across 59 open source projects, most still in coordinated disclosure or closed by maintainers as accepted risk. Each published finding, with root cause, vulnerable code, reproduction and fix, is in the [advisory index](/advisories/).
 
 The recurring classes, in rough order of volume: server side request forgery into control planes, missing authentication and authorization in front of machinery that was never meant to be public, unsafe deserialization on exposed inference ports, and sandbox escapes out of the AST allowlist evaluators that agent frameworks ship as safe Python.
 

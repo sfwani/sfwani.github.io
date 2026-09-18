@@ -323,6 +323,20 @@ sup {
   overflow-x: auto;
 }
 
+// The .overflow-table wrapper above is never emitted by kramdown, and
+// overflow-x does nothing on a display:table element anyway. With
+// html/body set to overflow-x:hidden, wide tables were CLIPPED rather
+// than scrollable: on a 390px viewport the Class and Published columns
+// of the advisory table were unreachable. display:block makes the
+// element scroll for real.
+main table {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
 table {
   width: 100%;
   margin-top: $spacing-half;

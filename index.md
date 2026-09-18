@@ -6,7 +6,7 @@ description: Vulnerability research on AI agent frameworks and LLM infrastructur
 last_modified_at: 2026-09-17T23:54:04+00:00
 ---
 
-Security Engineer at Amazon, working in IAM security on bringing agentic AI into identity and access management. Outside that, I hunt unauthenticated remote code execution in the infrastructure that runs large language models: agent frameworks, inference servers, workflow orchestrators, and the serialization formats they trust.
+Sanaan Fayaz Wani is a Security Engineer at Amazon, working in IAM security on bringing agentic AI into identity and access management. Outside that, he hunts unauthenticated remote code execution in the infrastructure that runs large language models: agent frameworks, inference servers, workflow orchestrators, and the serialization formats they trust.
 
 <!-- COUNTERS:START -->
 
@@ -48,7 +48,7 @@ Each advisory above links to a full writeup with the vulnerable code, reproducti
 
 ## Current interests
 
-Agentic systems and autonomous loops, and what happens to authorization when an agent acts on a user's behalf across many services. Where the tool invocation boundary quietly becomes an execution boundary. More, including competition placements and background, on the [about page](/about/).
+Agentic systems and autonomous loops, and what happens to authorization when an agent acts on a user's behalf across many services. Where the tool invocation boundary quietly becomes an execution boundary. More on the [roles, degree and competition record](/experience/), and on the [research approach](/about/).
 
 ## Elsewhere
 

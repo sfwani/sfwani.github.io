@@ -1,10 +1,15 @@
 ---
 title: "GHSA-pqxw-g93w-hj9x"
+heading: "GHSA-pqxw-g93w-hj9x: Self-Hosted Deployment: Default Secrets allow Unauthenticated Infrastructure Compromise"
+seo_title: "GHSA-pqxw-g93w-hj9x: Self-Hosted Deployment: Default Secrets allow Unauthenticated Infrastructure… - Sanaan Fayaz Wani"
+ghsa_id: "GHSA-pqxw-g93w-hj9x"
+cve_id: ""
+published_at: "2026-07-21"
 permalink: /advisories/ghsa-pqxw-g93w-hj9x/
 layout: page
 description: "Self-Hosted Deployment: Default Secrets allow Unauthenticated Infrastructure Compromise"
 comments: false
-last_modified_at: 2026-09-17T23:53:21+00:00
+last_modified_at: 2026-09-18T04:06:14+00:00
 ---
 **Self-Hosted Deployment: Default Secrets allow Unauthenticated Infrastructure Compromise**
 
@@ -22,8 +27,6 @@ last_modified_at: 2026-09-17T23:53:21+00:00
 | Package | Ecosystem | Vulnerable | Fixed in |
 |:--|:--|:--|:--|
 | `trigger.dev` | npm | <= 4.5.5 | n/a |
-
-## Details
 
 ## Summary
 
@@ -96,3 +99,9 @@ docker run --rm --network webapp curlimages/curl curl -s "http://default:passwor
 ## Impact
 
 Complete infrastructure compromise: all tenant data, API keys, encrypted secrets (decryptable with known ENCRYPTION_KEY), user accounts, cross-tenant access. Attacker can modify data, push backdoored Docker images to the registry, and manipulate job queues.
+
+## About this writeup
+
+Sanaan Fayaz Wani (GitHub [`sfwani`](https://github.com/sfwani)) reported this vulnerability to the `trigger.dev` maintainers under coordinated disclosure and is credited as a reporter in [GHSA-pqxw-g93w-hj9x](https://github.com/triggerdotdev/trigger.dev/security/advisories/GHSA-pqxw-g93w-hj9x), published 2026-07-21.
+
+All published findings: [advisory index](/advisories/). About the researcher: [about](/about/) and [experience](/experience/).

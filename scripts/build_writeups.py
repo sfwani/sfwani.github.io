@@ -53,6 +53,16 @@ def raw_repo_level(s, repo, ghsa_id):
     return a
 
 
+def clip(s, n):
+    """Truncate on a word boundary so a <title> never ends mid-token."""
+    s = s.strip()
+    if len(s) <= n:
+        return s
+    cut = s[:n]
+    sp = cut.rfind(" ")
+    return (cut[:sp] if sp > n * 0.6 else cut).rstrip(" ,.:;-") + "\u2026"
+
+
 def slug(a):
     return (a.get("cve_id") or a["ghsa_id"]).lower()
 
@@ -89,10 +99,29 @@ def body(a):
             )
         out.append("")
     desc = (a.get("description") or "").replace("\r\n", "\n").replace("\r", "\n")
-    out += ["## Details", "", desc.strip(), ""]
+    out += [desc.strip(), ""]
     refs = [r for r in (a.get("references") or []) if r != a.get("html_url")]
     if refs:
-        out += ["## References", ""] + [f"* <{r}>" for r in refs] + [""]
+        heading = "## Advisory references" if "## References" in desc else "## References"
+        out += [heading, ""] + [f"* <{r}>" for r in refs] + [""]
+
+    # Attribution and backlinks. Without this the writeups say who the page belongs
+    # to only in <title>, so a retrieval pipeline correctly refuses to credit the
+    # discovery, and every writeup is a dead end for internal linking.
+    pkgs = sorted({v["package"]["name"] for v in a.get("vulnerabilities") or [] if v.get("package")})
+    proj = short_package(pkgs[0]) if pkgs else "the"
+    out += [
+        "## About this writeup",
+        "",
+        f"Sanaan Fayaz Wani (GitHub [`sfwani`](https://github.com/sfwani)) reported this "
+        f"vulnerability to the `{proj}` maintainers under coordinated disclosure and is "
+        f"credited as a reporter in [{a['ghsa_id']}]({a.get('html_url')}), published "
+        f"{(a.get('published_at') or '')[:10]}.",
+        "",
+        "All published findings: [advisory index](/advisories/). "
+        "About the researcher: [about](/about/) and [experience](/experience/).",
+        "",
+    ]
     return "\n".join(out)
 
 
@@ -102,10 +131,16 @@ def yaml_q(v):
 
 def write_page(a, stamp):
     name = a.get("cve_id") or a["ghsa_id"]
-    desc = re.sub(r"\s+", " ", (a.get("summary") or "").strip())[:200]
+    summary = re.sub(r"\s+", " ", (a.get("summary") or "").strip())
+    desc = summary[:200]
     fm = "\n".join([
         "---",
         f"title: {yaml_q(name)}",
+        f"heading: {yaml_q(f'{name}: {summary}')}",
+        f"seo_title: {yaml_q(f'{name}: {clip(summary, 80)} - Sanaan Fayaz Wani')}",
+        f"ghsa_id: {yaml_q(a['ghsa_id'])}",
+        f"cve_id: {yaml_q(a.get('cve_id') or '')}",
+        f"published_at: {yaml_q((a.get('published_at') or '')[:10])}",
         f"permalink: /advisories/{slug(a)}/",
         "layout: page",
         f"description: {yaml_q(desc)}",
@@ -143,6 +178,12 @@ def write_index(rows, stamp):
         "cause, the vulnerable code, reproduction steps and the fix, as published in the "
         "advisory itself. Reports still in coordinated disclosure are not listed, named or "
         "hinted at until the maintainer ships a fix.",
+        "",
+        "Five of these are in the global GitHub Advisory Database and are returned by the "
+        "[public credit search](https://github.com/advisories?query=credit%3Asfwani). The "
+        "others are repository level advisories that the maintainer published and credited "
+        "but never forwarded to the global database, so that search cannot see them. Each "
+        "row links to its own advisory, where the credit is visible.",
         "",
         "| Advisory | Project | CVSS | Class | Published |",
         "|:--|:--|:--|:--|:--|",

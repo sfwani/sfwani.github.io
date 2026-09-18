@@ -1,10 +1,15 @@
 ---
 title: "GHSA-jc26-22qp-cgqj"
+heading: "GHSA-jc26-22qp-cgqj: Supervisor workload API lacks cross-tenant authentication"
+seo_title: "GHSA-jc26-22qp-cgqj: Supervisor workload API lacks cross-tenant authentication - Sanaan Fayaz Wani"
+ghsa_id: "GHSA-jc26-22qp-cgqj"
+cve_id: ""
+published_at: "2026-09-14"
 permalink: /advisories/ghsa-jc26-22qp-cgqj/
 layout: page
 description: "Supervisor workload API lacks cross-tenant authentication"
 comments: false
-last_modified_at: 2026-09-17T23:53:21+00:00
+last_modified_at: 2026-09-18T04:05:59+00:00
 ---
 **Supervisor workload API lacks cross-tenant authentication**
 
@@ -22,8 +27,6 @@ last_modified_at: 2026-09-17T23:53:21+00:00
 | Package | Ecosystem | Vulnerable | Fixed in |
 |:--|:--|:--|:--|
 | `trigger.dev` | npm | <= 4.6.0 | n/a |
-
-## Details
 
 ## Summary
 
@@ -62,3 +65,9 @@ Targeted cross-deployment and potentially cross-tenant run manipulation. An atta
 
 ## Resolution
 The managed service now authenticates workloads using signed deployment-scoped tokens and scopes sensitive worker actions to the verified environment. Requests targeting runs in another environment are rejected. The obsolete deployment-scoped dequeue proxy has also been removed.
+
+## About this writeup
+
+Sanaan Fayaz Wani (GitHub [`sfwani`](https://github.com/sfwani)) reported this vulnerability to the `trigger.dev` maintainers under coordinated disclosure and is credited as a reporter in [GHSA-jc26-22qp-cgqj](https://github.com/triggerdotdev/trigger.dev/security/advisories/GHSA-jc26-22qp-cgqj), published 2026-09-14.
+
+All published findings: [advisory index](/advisories/). About the researcher: [about](/about/) and [experience](/experience/).

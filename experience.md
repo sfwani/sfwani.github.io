@@ -4,21 +4,25 @@ permalink: /experience/
 layout: page
 description: Security Engineer at Amazon working in IAM security. Previously security researcher at Cyber Florida and Red Team intern at Amazon. University of South Florida computer science graduate.
 comments: false
+last_modified_at: 2026-09-18
 ---
+
+Sanaan Fayaz Wani is a Security Engineer at Amazon. This page lists his roles, degree and
+competition record as of September 2026.
 
 ## Amazon
 
-**Security Engineer** &nbsp;&middot;&nbsp; June 2026 to present
+**Amazon &middot; Security Engineer** &nbsp;&middot;&nbsp; June 2026 to present
 
 Identity and access management. Working on bringing agentic AI into IAM, which is the same
 question as the independent research from the other direction: what happens to authorization
 when an agent acts on a user's behalf across many services.
 
-**Security Engineer Intern, Red Team** &nbsp;&middot;&nbsp; Summer 2025
+**Amazon &middot; Security Engineer Intern, Red Team** &nbsp;&middot;&nbsp; Summer 2025
 
 ## Cyber Florida
 
-**Security Researcher** &nbsp;&middot;&nbsp; August 2025 to May 2026
+**Cyber Florida &middot; Security Researcher** &nbsp;&middot;&nbsp; August 2025 to May 2026
 
 Florida Center for Cybersecurity, the state's cybersecurity center, hosted at the University
 of South Florida.

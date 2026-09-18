@@ -183,3 +183,14 @@ pre.highlight, pre {
 .highlight .ss {
   color: #83a598;
 }
+
+
+// The negative margin above pushes code blocks outside the content
+// wrapper on phones, where there is no gutter to bleed into.
+@media screen and (max-width: 768px) {
+  pre.highlight,
+  pre {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}

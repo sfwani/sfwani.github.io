@@ -1,10 +1,15 @@
 ---
 title: "GHSA-59h8-w5q6-mfmp"
+heading: "GHSA-59h8-w5q6-mfmp: Unauthenticated Realtime Stream Data Injection via Run FriendlyId"
+seo_title: "GHSA-59h8-w5q6-mfmp: Unauthenticated Realtime Stream Data Injection via Run FriendlyId - Sanaan Fayaz Wani"
+ghsa_id: "GHSA-59h8-w5q6-mfmp"
+cve_id: ""
+published_at: "2026-07-21"
 permalink: /advisories/ghsa-59h8-w5q6-mfmp/
 layout: page
 description: "Unauthenticated Realtime Stream Data Injection via Run FriendlyId"
 comments: false
-last_modified_at: 2026-09-17T23:53:21+00:00
+last_modified_at: 2026-09-18T04:05:59+00:00
 ---
 **Unauthenticated Realtime Stream Data Injection via Run FriendlyId**
 
@@ -22,8 +27,6 @@ last_modified_at: 2026-09-17T23:53:21+00:00
 | Package | Ecosystem | Vulnerable | Fixed in |
 |:--|:--|:--|:--|
 | `trigger.dev` | npm | <= 4.5.4 | n/a |
-
-## Details
 
 ## Summary
 
@@ -49,3 +52,9 @@ curl -X POST "http://localhost:8030/realtime/v1/streams/run_KNOWN_ID/stream_1"  
 ## Impact
 
 Unauthenticated data injection into any run realtime stream. Cross-environment access (no scoping).
+
+## About this writeup
+
+Sanaan Fayaz Wani (GitHub [`sfwani`](https://github.com/sfwani)) reported this vulnerability to the `trigger.dev` maintainers under coordinated disclosure and is credited as a reporter in [GHSA-59h8-w5q6-mfmp](https://github.com/triggerdotdev/trigger.dev/security/advisories/GHSA-59h8-w5q6-mfmp), published 2026-07-21.
+
+All published findings: [advisory index](/advisories/). About the researcher: [about](/about/) and [experience](/experience/).
