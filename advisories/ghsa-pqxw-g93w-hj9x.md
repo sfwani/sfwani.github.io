@@ -9,10 +9,8 @@ permalink: /advisories/ghsa-pqxw-g93w-hj9x/
 layout: page
 description: "Self-Hosted Deployment: Default Secrets allow Unauthenticated Infrastructure Compromise"
 comments: false
-last_modified_at: 2026-09-18T04:06:14+00:00
+last_modified_at: 2026-09-18T05:11:47+00:00
 ---
-**Self-Hosted Deployment: Default Secrets allow Unauthenticated Infrastructure Compromise**
-
 | | |
 |:--|:--|
 | Advisory | [GHSA-pqxw-g93w-hj9x](https://github.com/triggerdotdev/trigger.dev/security/advisories/GHSA-pqxw-g93w-hj9x) |

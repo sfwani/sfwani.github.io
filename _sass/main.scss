@@ -437,3 +437,7 @@ body:not([data-theme="dark"]) main svg.fig-cwe [fill-opacity=".3"] { fill-opacit
   padding-left: 0;
 }
 .exp.exp--rule ol li::before { content: none; }
+
+// @budibase/server wrapped mid-token in the Project column.
+main table td:nth-child(2),
+main table th:nth-child(2) { white-space: nowrap; }

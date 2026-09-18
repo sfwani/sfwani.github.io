@@ -9,10 +9,8 @@ permalink: /advisories/ghsa-59h8-w5q6-mfmp/
 layout: page
 description: "Unauthenticated Realtime Stream Data Injection via Run FriendlyId"
 comments: false
-last_modified_at: 2026-09-18T04:05:59+00:00
+last_modified_at: 2026-09-18T05:11:47+00:00
 ---
-**Unauthenticated Realtime Stream Data Injection via Run FriendlyId**
-
 | | |
 |:--|:--|
 | Advisory | [GHSA-59h8-w5q6-mfmp](https://github.com/triggerdotdev/trigger.dev/security/advisories/GHSA-59h8-w5q6-mfmp) |

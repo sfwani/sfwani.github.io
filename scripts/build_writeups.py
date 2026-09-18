@@ -75,8 +75,6 @@ def body(a):
     sev = (a.get("severity") or "").capitalize()
     sev += f" ({score})" if score is not None else " (no CVSS score published)"
     out = [
-        f"**{(a.get('summary') or '').strip()}**",
-        "",
         "| | |",
         "|:--|:--|",
         f"| Advisory | [{a['ghsa_id']}]({a.get('html_url')}) |",

@@ -9,10 +9,8 @@ permalink: /advisories/ghsa-jc26-22qp-cgqj/
 layout: page
 description: "Supervisor workload API lacks cross-tenant authentication"
 comments: false
-last_modified_at: 2026-09-18T04:05:59+00:00
+last_modified_at: 2026-09-18T05:11:47+00:00
 ---
-**Supervisor workload API lacks cross-tenant authentication**
-
 | | |
 |:--|:--|
 | Advisory | [GHSA-jc26-22qp-cgqj](https://github.com/triggerdotdev/trigger.dev/security/advisories/GHSA-jc26-22qp-cgqj) |
