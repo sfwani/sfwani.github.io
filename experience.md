@@ -32,7 +32,6 @@ certifications, competition record and press coverage as of September 2026.
           <div class="rl-body">
             <h3 class="rl-title">UNIVERSITY OF SOUTH FLORIDA <span>/ BSc Computer Science, cybersecurity focus</span></h3>
             <p class="rl-desc">Graduated magna cum laude. CyberHerd, USF's cybersecurity competition team; former Blue Team Captain.</p>
-            <p class="rl-tag">FINAL YEAR RAN ALONGSIDE THE ROLE BELOW</p>
           </div>
         </li>
         <li class="rl-entry rl-entry--range">
