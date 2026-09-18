@@ -4,7 +4,7 @@ permalink: /advisories/
 layout: page
 description: "Full writeups for every published security advisory credited to Sanaan Wani: root cause, vulnerable code, reproduction and fix."
 comments: false
-last_modified_at: 2026-09-18T04:46:01+00:00
+last_modified_at: 2026-09-18T04:51:16+00:00
 ---
 
 Every advisory below is published, fixed and credited. Each page carries the root cause, the vulnerable code, reproduction steps and the fix, as published in the advisory itself. Reports still in coordinated disclosure are not listed, named or hinted at until the maintainer ships a fix.

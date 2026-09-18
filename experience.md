@@ -67,7 +67,7 @@ certifications, competition record and press coverage as of September 2026.
   <li class="rl-entry">
     <p class="rl-date"><b>2025</b></p>
     <div class="rl-body">
-      <h3 class="rl-title">CWEE <span>/ Certified Web Exploitation Expert</span></h3>
+      <h3 class="rl-title">CBBH <span>/ Certified Bug Bounty Hunter</span></h3>
       <p class="rl-desc">Hack The Box.</p>
     </div>
   </li>
