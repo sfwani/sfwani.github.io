@@ -438,9 +438,6 @@ body:not([data-theme="dark"]) main svg.fig-cwe [fill-opacity=".3"] { fill-opacit
 }
 .exp.exp--rule ol li::before { content: none; }
 
-// @budibase/server wrapped mid-token in the Project column.
-main table td:nth-child(2),
-main table th:nth-child(2) { white-space: nowrap; }
 
 // ===========================================================================
 // Visual QA fixes. Every one of these was found by rendering the page and
@@ -529,4 +526,52 @@ body[data-theme="dark"] .menu a#mode .mode-moon  { display: none; }
 body[data-theme="dark"] {
   background-color: var(--fm-bg);
   color: var(--fm-ink);
+}
+
+// P1: the nowrap above was hitting the writeup metadata tables, where
+// column 2 is the VALUE column, dragging them to 1285px in a 660px well.
+/* ===================================================================
+   P1. Advisory metadata: stop the label/value table from becoming a
+   horizontally scrolling region.
+   =================================================================== */
+
+/* The blanket nowrap was only ever needed to keep <code> project chips
+   on one line, and `main table td code{white-space:nowrap}` (already in
+   the sheet) does that job. On the 2-column advisory metadata table,
+   column 2 is the VALUE column, so this rule forced the 140-character
+   CWE string onto a single line and dragged the whole table to 1285px. */
+main table td:nth-child(2),
+main table th:nth-child(2){ white-space: normal; }
+
+/* Below the prose measure, a 2-column label/value table reads better as
+   stacked pairs than as a side-scrolling grid. `:has()` picks out tables
+   with no third column; where :has() is unsupported the rule is dropped
+   and behaviour is unchanged. */
+@media (max-width: 599px){
+  main table:not(:has(tbody td:nth-child(3))){ display:block; }
+  main table:not(:has(tbody td:nth-child(3))) thead{ display:none; }
+  main table:not(:has(tbody td:nth-child(3))) tbody,
+  main table:not(:has(tbody td:nth-child(3))) tr,
+  main table:not(:has(tbody td:nth-child(3))) td{
+    display:block; width:100%;
+  }
+  main table:not(:has(tbody td:nth-child(3))) tr{
+    border-bottom:1px solid var(--fm-rule); padding:.55em 0;
+  }
+  main table:not(:has(tbody td:nth-child(3))) td{ border:0; padding:0; }
+  main table:not(:has(tbody td:nth-child(3))) td:first-child{
+    font-size:.6875rem; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--fm-muted);
+  }
+  main table:not(:has(tbody td:nth-child(3))) td code{
+    white-space:normal; overflow-wrap:anywhere;
+  }
+}
+
+/* `.rl-title span` (0,3,1) was silently beating `.rl-place` (0,3,0),
+   so every placement rendered at 400 in --fm-soft. Raise specificity
+   and give the column a fixed advance so the event names align. */
+.page-content .exp.exp--rule .rl-title span.rl-place{
+  display:inline-block; width:4ch; margin-right:1ch;
+  font-weight:600; letter-spacing:.04em; color:var(--fm-ink);
 }
