@@ -1,11 +1,12 @@
 ---
-title: AI Security Research
+title: Sanaan Fayaz Wani
+seo_title: "Sanaan Fayaz Wani - AI Security Researcher"
 layout: page
 description: Vulnerability research on AI agent frameworks and LLM infrastructure. Seven assigned CVEs and eleven published advisories, with root cause, reproduction and fix for each.
 last_modified_at: 2026-09-17T23:54:04+00:00
 ---
 
-Sanaan Fayaz Wani. Security Engineer at Amazon, working in IAM security on bringing agentic AI into identity and access management. Outside that, I hunt unauthenticated remote code execution in the infrastructure that runs large language models: agent frameworks, inference servers, workflow orchestrators, and the serialization formats they trust.
+Security Engineer at Amazon, working in IAM security on bringing agentic AI into identity and access management. Outside that, I hunt unauthenticated remote code execution in the infrastructure that runs large language models: agent frameworks, inference servers, workflow orchestrators, and the serialization formats they trust.
 
 <!-- COUNTERS:START -->
 
