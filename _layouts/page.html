@@ -13,10 +13,11 @@ layout: compress
     const body = document.body;
     const data = body.getAttribute("data-theme");
 
+    /* The compress layout strips newlines, so a // comment in here would
+       swallow the rest of the function. Block comments only.
+       No stored choice, or an explicit "light", both mean: drop the
+       attribute and let prefers-color-scheme decide. */
     const initTheme = (state) => {
-      // No stored choice, or an explicit "light", both mean: drop the attribute
-      // and let prefers-color-scheme decide. Writing "light" into storage here
-      // pinned every first-time visitor to the light theme.
       if (state === "dark") {
         body.setAttribute("data-theme", "dark");
       } else {
