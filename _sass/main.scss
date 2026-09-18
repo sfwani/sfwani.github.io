@@ -425,3 +425,15 @@ body:not([data-theme="dark"]) main svg.fig-cwe [fill-opacity=".3"] { fill-opacit
 .exp.exp--rule .rl-title       { text-transform: uppercase; }
 .exp.exp--rule .rl-title span,
 .exp.exp--rule .rl-comps .rl-title { text-transform: none; }
+
+// The theme numbers every ol item with a generated counter:
+//   ol li{counter-increment:li;padding-left:2em}
+//   ol li::before{content:counter(li) "."; position:absolute; left:0}
+// list-style:none does not suppress a generated ::before, so the experience
+// stream rendered 1. 2. 3. down the margin and 1.-13. beside the competitions.
+.exp.exp--rule ol li,
+.exp.exp--rule ol > li {
+  counter-increment: none;
+  padding-left: 0;
+}
+.exp.exp--rule ol li::before { content: none; }
