@@ -521,3 +521,12 @@ body[data-theme="dark"] .menu a#mode .mode-moon  { display: none; }
   body:not([data-theme="dark"]):not([data-theme="light"]) .menu a#mode .mode-sunny { display: block; }
   body:not([data-theme="dark"]):not([data-theme="light"]) .menu a#mode .mode-moon  { display: none; }
 }
+
+// Explicit dark and OS-following dark produced different backgrounds:
+// #131418 from the legacy body[data-theme="dark"] rule (0,1,1) beat
+// body{background:var(--fm-bg)} (0,0,1), while the media-query path had no
+// legacy rule to fight and used the token. Same weight, one source.
+body[data-theme="dark"] {
+  background-color: var(--fm-bg);
+  color: var(--fm-ink);
+}
