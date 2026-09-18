@@ -6,6 +6,10 @@
   url: /about/
   external: false
 
+- title: experience
+  url: /experience/
+  external: false
+
 - title: advisories
   url: /advisories/
   external: false

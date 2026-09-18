@@ -6,7 +6,7 @@ excerpt: Sanaan Wani is a Security Engineer at Amazon working on identity and ac
 comments: false
 ---
 
-Sanaan Wani is a Security Engineer at Amazon, working in IAM security on bringing agentic AI into identity and access management. Separately, he does independent vulnerability research against the infrastructure that runs large language models.
+Sanaan Wani is a Security Engineer at Amazon, working in IAM security on bringing agentic AI into identity and access management. Separately, he does independent vulnerability research against the infrastructure that runs large language models. Roles, education and competition record are on the [experience page](/experience/).
 
 ## Research
 
@@ -23,12 +23,6 @@ Nothing is reported from code reading alone. Every finding is reproduced against
 ## Current interests
 
 Agentic systems and autonomous loops, and specifically what happens to authorization when an agent acts on a user's behalf across many services: how delegated identity and least privilege survive an agent that plans its own steps, and where the tool invocation boundary becomes an execution boundary. It is the same question as the day job from the other direction.
-
-## Background
-
-Computer science graduate of the University of South Florida, and former Blue Team Captain of CyberHerd, the university's cybersecurity competition team.
-
-At DEF CON 34 he took first place at AI Village and second at Adversary Village, after first place at Adversary Village at DEF CON 33. Other first place finishes include the SHPE National CTF, Hackabull, the Central Florida Tech Grove CTF, and the social engineering competition run by The CARE Lab at Temple University, with third place finishes at the Palo Alto Networks SecureTheFuture research award and the NCAE CyberGames South East regionals.
 
 ## Focus areas
 
