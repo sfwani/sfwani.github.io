@@ -356,3 +356,50 @@ body:not([data-theme="dark"]) main svg.fig-cwe [fill-opacity=".3"] { fill-opacit
   body:not([data-theme="dark"]) pre.highlight { padding-left: 20px; padding-right: 20px; }
   body main table thead th { white-space: normal; }
 }
+
+// ===========================================================================
+// Experience page: Dated Rule treatment.
+// ===========================================================================
+
+.exp.exp--rule{font-family:var(--fm-mono);color:var(--fm-ink);line-height:1.55;font-size:.9375rem}
+.exp.exp--rule *{box-sizing:border-box}
+.exp.exp--rule h2,.exp.exp--rule h3,.exp.exp--rule h4,.exp.exp--rule p,.exp.exp--rule ol{margin:0}
+.exp.exp--rule .rl-h{font-size:.75rem;font-weight:600;letter-spacing:.22em;color:var(--fm-muted);padding-bottom:.75rem;border-bottom:1px solid var(--fm-rule-strong)}
+.exp.exp--rule .rl-legend{font-size:.6875rem;letter-spacing:.08em;color:var(--fm-muted);margin:.75rem 0 2.25rem}
+.exp.exp--rule .rl-sec{font-size:.6875rem;letter-spacing:.2em;color:var(--fm-muted);font-weight:600;margin:0 0 1.25rem}
+.exp.exp--rule .rl-stream{list-style:none;padding:0}
+.exp.exp--rule .rl-entry{display:grid;grid-template-columns:5.5rem 1fr;column-gap:1.25rem}
+.exp.exp--rule .rl-date{text-align:right;font-size:.75rem;letter-spacing:.06em;color:var(--fm-muted);padding-top:.1rem;font-variant-numeric:tabular-nums}
+.exp.exp--rule .rl-date b{display:block;font-weight:600;color:var(--fm-soft)}
+.exp.exp--rule .rl-body{position:relative;border-left:1px solid var(--fm-rule-strong);padding:0 0 1.9rem 1.25rem}
+.exp.exp--rule .rl-body::before{content:"";position:absolute;left:-4px;top:.35rem;width:7px;height:7px;background:var(--fm-ink)}
+.exp.exp--rule .rl-entry--range > .rl-body::before{left:-2px;top:.35rem;bottom:1.9rem;width:3px;height:auto;background:var(--fm-ink)}
+.exp.exp--rule .rl-title{font-size:.9375rem;font-weight:600;letter-spacing:.05em}
+.exp.exp--rule .rl-title span{font-weight:400;letter-spacing:0;color:var(--fm-soft)}
+.exp.exp--rule .rl-desc{color:var(--fm-soft);font-size:.875rem;margin-top:.3rem}
+.exp.exp--rule .rl-tag{display:inline-block;font-size:.625rem;letter-spacing:.12em;color:var(--fm-soft);background:var(--fm-code-bg);padding:.15rem .4rem;margin-top:.5rem}
+.exp.exp--rule .rl-groupwrap{display:block}
+.exp.exp--rule .rl-bracket{margin-left:6.75rem;border:1px solid var(--fm-rule-strong);border-right:0;padding:.9rem 0 0}
+.exp.exp--rule .rl-glabel{font-size:.6875rem;letter-spacing:.16em;color:var(--fm-soft);padding-left:1.25rem;margin-bottom:.9rem}
+.exp.exp--rule .rl-substream{margin-left:-6.75rem}
+.exp.exp--rule .rl-substream .rl-body{border-left:0}
+.exp.exp--rule .rl-substream .rl-entry:last-child > .rl-body{padding-bottom:.9rem}
+.exp.exp--rule .rl-substream .rl-entry--range > .rl-body::before{bottom:.9rem}
+.exp.exp--rule .rl-stream > .rl-entry:last-child > .rl-body{padding-bottom:.35rem}
+.exp.exp--rule .rl-comps .rl-body{padding-bottom:1.05rem}
+.exp.exp--rule .rl-comps .rl-title{font-weight:400;letter-spacing:.02em}
+.exp.exp--rule .rl-comps .rl-body::before{background:var(--fm-rule-strong)}
+.exp.exp--rule .rl-place{font-weight:600;letter-spacing:.06em;margin-right:.6rem}
+.exp.exp--rule .rl-fine{font-size:.75rem;color:var(--fm-muted);margin-top:.35rem;padding-left:6.75rem}
+@media (max-width:560px){
+ .exp.exp--rule .rl-entry{grid-template-columns:1fr;column-gap:0}
+ .exp.exp--rule .rl-date{text-align:left;padding:0 0 .15rem 1.25rem;border-left:1px solid var(--fm-rule-strong)}
+ .exp.exp--rule .rl-date b{display:inline;margin-right:.5rem}
+ .exp.exp--rule .rl-body::before{top:-1.35rem}
+ .exp.exp--rule .rl-entry--range > .rl-body::before{top:-1.35rem}
+ .exp.exp--rule .rl-bracket{margin-left:0;border-left:0}
+ .exp.exp--rule .rl-substream{margin-left:0}
+ .exp.exp--rule .rl-substream .rl-body{border-left:1px solid var(--fm-rule-strong)}
+ .exp.exp--rule .rl-glabel{padding-left:1.25rem}
+ .exp.exp--rule .rl-fine{padding-left:1.25rem}
+}
