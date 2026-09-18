@@ -14,12 +14,13 @@ layout: compress
     const data = body.getAttribute("data-theme");
 
     const initTheme = (state) => {
+      // No stored choice, or an explicit "light", both mean: drop the attribute
+      // and let prefers-color-scheme decide. Writing "light" into storage here
+      // pinned every first-time visitor to the light theme.
       if (state === "dark") {
         body.setAttribute("data-theme", "dark");
-      } else if (state === "light") {
-        body.removeAttribute("data-theme");
       } else {
-        localStorage.setItem("theme", data);
+        body.removeAttribute("data-theme");
       }
     };
  

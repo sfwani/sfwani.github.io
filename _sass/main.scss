@@ -441,3 +441,72 @@ body:not([data-theme="dark"]) main svg.fig-cwe [fill-opacity=".3"] { fill-opacit
 // @budibase/server wrapped mid-token in the Project column.
 main table td:nth-child(2),
 main table th:nth-child(2) { white-space: nowrap; }
+
+// ===========================================================================
+// Visual QA fixes. Every one of these was found by rendering the page and
+// looking at it; none was visible in the stylesheet.
+// ===========================================================================
+
+// P0. Below 768px .menu becomes position:fixed with a hardcoded white
+// background, so in dark mode a pure #ffffff bar rode down the whole page and
+// body text slid under it, slicing the top visible line in half.
+.menu {
+  background-color: var(--fm-bg);
+  border-bottom-color: var(--fm-rule);
+}
+html { scroll-padding-top: 4rem; }
+
+// P0. The theme toggle and hamburger were hardcoded #0d122b navy: the only
+// cool mark on a warm site in light, and 1.05:1 (invisible) in dark.
+.menu a#mode .mode-moon line,
+.menu a#mode .mode-sunny line { stroke: var(--fm-ink); }
+.menu a#mode .mode-moon circle,
+.menu a#mode .mode-sunny circle { fill: var(--fm-ink); stroke: var(--fm-ink); }
+.menu .menu-trigger svg,
+.menu .menu-trigger path { fill: var(--fm-ink); }
+
+// P1. `overflow-wrap:anywhere` on code split chips mid-token and gave each
+// half its own tinted box: @budibase/serve + r, budiba + se, and a CVSS
+// vector broken into two stacked boxes.
+code, code.highlighter-rouge, :not(pre) > code {
+  overflow-wrap: normal;
+  word-break: normal;
+  hyphens: none;
+}
+main table td code, main table th code { white-space: nowrap; }
+
+// P2. Dark rule tokens were systematically weaker than their light siblings,
+// so the experience timeline spine vanished between its marks.
+body[data-theme="dark"] { --fm-rule: #33383e; --fm-rule-strong: #5f666f; }
+@media (prefers-color-scheme: dark) {
+  body:not([data-theme="dark"]):not([data-theme="light"]) {
+    --fm-rule: #33383e; --fm-rule-strong: #5f666f;
+  }
+}
+
+// P0. Rouge token colours were stranded Gruvbox-light hex in BOTH themes, so
+// on the dark code ground keywords sat at 1.92:1 and strings at 2.30:1 -
+// below even the 3:1 large-text floor, on the tokens a reader is tracing.
+// Restraint-first: comments muted, strings italic soft, everything else ink.
+@mixin rouge-dark {
+  .highlight, .highlight .w, .highlight .o, .highlight .ow, .highlight .p,
+  .highlight .pi, .highlight .k, .highlight .kn, .highlight .kp, .highlight .kr,
+  .highlight .kv, .highlight .kc, .highlight .kd, .highlight .kt, .highlight .nt,
+  .highlight .na, .highlight .nn, .highlight .nc, .highlight .no, .highlight .m,
+  .highlight .mb, .highlight .mf, .highlight .mh, .highlight .mi, .highlight .il,
+  .highlight .mo, .highlight .mx, .highlight .ss, .highlight .se, .highlight .gh,
+  .highlight .cp, .highlight .err { color: var(--fm-ink); }
+  .highlight .c, .highlight .cd, .highlight .cm, .highlight .c1, .highlight .cs {
+    color: var(--fm-muted); font-style: italic;
+  }
+  .highlight .s, .highlight .sb, .highlight .sc, .highlight .sd, .highlight .s1,
+  .highlight .s2, .highlight .sh, .highlight .si, .highlight .sr, .highlight .sx {
+    color: var(--fm-soft); font-style: italic;
+  }
+  .highlight .gi { color: var(--fm-ink); background-color: transparent; }
+  .highlight .gd { color: var(--fm-muted); background-color: transparent; }
+}
+body[data-theme="dark"] { @include rouge-dark; }
+@media (prefers-color-scheme: dark) {
+  body:not([data-theme="dark"]):not([data-theme="light"]) { @include rouge-dark; }
+}
