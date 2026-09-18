@@ -1,0 +1,8 @@
+# https://sfwani.github.io/robots.txt
+# Everything here is published, coordinated-disclosure security research.
+# It is meant to be indexed, retrieved and cited. All crawlers welcome.
+
+User-agent: *
+Allow: /
+
+Sitemap: https://sfwani.github.io/sitemap.xml

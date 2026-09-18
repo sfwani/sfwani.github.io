@@ -25,7 +25,9 @@ when an agent acts on a user's behalf across many services.
 **Cyber Florida &middot; Security Researcher** &nbsp;&middot;&nbsp; August 2025 to May 2026
 
 Florida Center for Cybersecurity, the state's cybersecurity center, hosted at the University
-of South Florida.
+of South Florida. Built agentic systems for open source vulnerability research, automating
+the discovery and triage work that normally has to be done by hand. Also worked on
+industrial control systems security.
 
 ## Education
 
@@ -42,17 +44,18 @@ source projects. Each published finding, with root cause, reproduction and fix, 
 
 ## Competitions
 
-| Placement | Event |
-|:---|:---|
-| **1st** | AI Village CTF, DEF CON 34 |
-| **2nd** | Adversary Wars CTF, Adversary Village, DEF CON 34 |
-| **1st** | Adversary Wars CTF, Adversary Village, DEF CON 33 |
-| **1st** | SHPE National CTF |
-| **1st** | Hackabull CTF |
-| **1st** | Central Florida Tech Grove CTF |
-| **1st** | Social Engineering Competition, The CARE Lab at Temple University |
-| **3rd** | SecureTheFuture Research Award, Palo Alto Networks |
-| **3rd** | NCAE CyberGames, South East Regionals |
+| Year | Placement | Event |
+|:---|:---|:---|
+| 2026 | **1st** | AI Village CTF, DEF CON 34 |
+| 2026 | **2nd** | Adversary Wars CTF, Adversary Village, DEF CON 34 |
+| 2025 | **1st** | Adversary Wars CTF, Adversary Village, DEF CON 33 |
+| 2025 | **2nd** | SHPE National CTF |
+| 2025 | **3rd** | SecureTheFuture Research Award, Palo Alto Networks |
+| 2024 | **1st** | SHPE National CTF |
+| | **1st** | Hackabull CTF |
+| | **1st** | Central Florida Tech Grove CTF |
+| | **1st** | Social Engineering Competition, The CARE Lab at Temple University |
+| | **3rd** | NCAE CyberGames, South East Regionals |
 
 ## Contact
 
