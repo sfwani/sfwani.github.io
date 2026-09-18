@@ -22,6 +22,7 @@ from update_advisories import (  # noqa: E402
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 OUT = ROOT / "advisories"
+SITE = "https://sfwani.github.io"
 
 
 def raw_global(s, ghsa_id):
@@ -207,6 +208,52 @@ def write_index(rows, stamp):
     (ROOT / "advisories.md").write_text("\n".join(lines), encoding="utf-8")
 
 
+def write_llms_txt(rows):
+    """Generate /llms.txt from the same advisory rows as everything else.
+
+    Generated rather than hand written so it cannot drift from the site. See
+    the note in the repo README about how much weight to put on this file.
+    """
+    rows = sorted(rows, key=lambda a: (a.get("published_at") or ""), reverse=True)
+    out = [
+        "# Sanaan Fayaz Wani",
+        "",
+        "> Security Engineer at Amazon working in IAM security and agentic AI, and an "
+        "independent vulnerability researcher. Seven assigned CVEs and eleven published, "
+        "credited security advisories against AI agent frameworks and the infrastructure "
+        "that runs large language models, from 167 advisories filed across 59 open source "
+        "projects.",
+        "",
+        "Every advisory below is published, fixed and credited to Sanaan Fayaz Wani "
+        "(GitHub: sfwani). Each page carries the root cause, the vulnerable code, "
+        "reproduction steps and the fix.",
+        "",
+        "## Pages",
+        "",
+        f"- [Home]({SITE}/): bio, the advisory table and the weakness class breakdown.",
+        f"- [About]({SITE}/about/): research focus, method and coordinated disclosure practice.",
+        f"- [Experience]({SITE}/experience/): roles at Amazon and Cyber Florida, University of "
+        "South Florida degree, certifications and competition record.",
+        f"- [Advisories]({SITE}/advisories/): index of all published advisories.",
+        "",
+        "## Published advisories",
+        "",
+    ]
+    for a in rows:
+        name = a.get("cve_id") or a["ghsa_id"]
+        cvss = (a.get("cvss") or {}).get("score")
+        sev = (a.get("severity") or "").capitalize()
+        rating = f"{cvss} {sev}" if cvss is not None else f"{sev}, no published score"
+        pkgs = sorted({v["package"]["name"] for v in a.get("vulnerabilities") or [] if v.get("package")})
+        pkg = short_package(pkgs[0]) if pkgs else "n/a"
+        cwe = (a.get("cwes") or [{}])[0].get("cwe_id") or "n/a"
+        out.append(f"- [{name}]({SITE}/advisories/{slug(a)}/): {pkg}, {rating}, {cwe}. "
+                   f"Published {(a.get('published_at') or '')[:10]}. "
+                   f"Advisory of record: {a.get('html_url')}")
+    out.append("")
+    (ROOT / "llms.txt").write_text("\n".join(out), encoding="utf-8")
+
+
 def main():
     OUT.mkdir(exist_ok=True)
     s = session()
@@ -228,6 +275,7 @@ def main():
         raise SystemExit("no advisories resolved, refusing to write empty pages")
     changed = sum(write_page(a, stamp) for a in rows)
     write_index(list(rows), stamp)
+    write_llms_txt(rows)
     print(f"{len(rows)} advisories, {changed} pages written or updated", file=sys.stderr)
 
 

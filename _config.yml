@@ -68,6 +68,7 @@ sass:
 include:
   - _redirects
   - robots.txt
+  - llms.txt
   - .htaccess
 
 exclude:
