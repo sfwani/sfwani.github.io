@@ -20,6 +20,10 @@ when an agent acts on a user's behalf across many services.
 
 **Amazon &middot; Security Engineer Intern, Red Team** &nbsp;&middot;&nbsp; Summer 2025
 
+Built an autonomous agentic system for red team operations, and worked with the Model
+Context Protocol early in its life, before the tooling and the practice around it had
+settled.
+
 ## Cyber Florida
 
 **Cyber Florida &middot; Security Researcher** &nbsp;&middot;&nbsp; August 2025 to May 2026
@@ -52,14 +56,16 @@ source projects. Each published finding, with root cause, reproduction and fix, 
 | Year | Placement | Event |
 |:---|:---|:---|
 | 2026 | **1st** | AI Village CTF, DEF CON 34 |
+| 2026 | **1st** | Corelight CTF, GuidePoint Security |
+| 2026 | **1st** | Hackabull CTF |
 | 2026 | **2nd** | Adversary Wars CTF, Adversary Village, DEF CON 34 |
 | 2025 | **1st** | Adversary Wars CTF, Adversary Village, DEF CON 33 |
+| 2025 | **1st** | Hackabull CTF |
 | 2025 | **2nd** | SHPE National CTF |
-| 2025 | **3rd** | SecureTheFuture Research Award, Palo Alto Networks |
 | 2025 | **3rd** | NCAE CyberGames, South East Regionals |
+| 2025 | **3rd** | SecureTheFuture Research Award, Palo Alto Networks |
 | 2024 | **1st** | SHPE National CTF |
 | 2020 | **1st** | Social Engineering Competition, The CARE Lab at Temple University |
-| | **1st** | Hackabull CTF |
 | | **1st** | Central Florida Tech Grove CTF |
 
 ## Contact
