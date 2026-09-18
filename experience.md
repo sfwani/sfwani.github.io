@@ -37,7 +37,8 @@ CyberHerd, USF's cybersecurity competition team. Former Blue Team Captain.
 
 ## Certifications
 
-GIAC certified through the SANS industrial control systems security course.
+**GICSP**, Global Industrial Cyber Security Professional (GIAC).
+SANS ICS410: ICS/SCADA Security Essentials.
 
 ## Independent research
 
