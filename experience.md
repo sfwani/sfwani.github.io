@@ -64,9 +64,9 @@ source projects. Each published finding, with root cause, reproduction and fix, 
 | 2025 | **2nd** | SHPE National CTF |
 | 2025 | **3rd** | NCAE CyberGames, South East Regionals |
 | 2025 | **3rd** | SecureTheFuture Research Award, Palo Alto Networks |
+| 2024 | **1st** | Central Florida Tech Grove CTF |
 | 2024 | **1st** | SHPE National CTF |
 | 2020 | **1st** | Social Engineering Competition, The CARE Lab at Temple University |
-| | **1st** | Central Florida Tech Grove CTF |
 
 ## Contact
 
