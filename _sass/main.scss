@@ -218,6 +218,23 @@ body:not([data-theme="dark"]) .page-content a:focus {
   color: var(--fm-link-strong);
   text-decoration-thickness: 2px;
 }
+// ...and the same again for EXPLICIT dark. Scoping the block above to
+// :not([data-theme="dark"]) kept it away from dark, but that left the theme's
+// own `body[data-theme="dark"] .page-content a{color:#ff5277}` in charge, so a
+// reader on OS dark saw teal links and a reader who pressed the toggle saw hot
+// pink, on the same page. Both selectors compute to (0,2,2); this one wins by
+// coming later.
+body[data-theme="dark"] .page-content a {
+  color: var(--fm-link);
+  text-decoration: underline;
+  text-underline-offset: .2em;
+  text-decoration-thickness: 1px;
+}
+body[data-theme="dark"] .page-content a:hover,
+body[data-theme="dark"] .page-content a:focus {
+  color: var(--fm-link-strong);
+  text-decoration-thickness: 2px;
+}
 body .page-content a { overflow-wrap: anywhere; }   // bare URLs clipped at 400px
 
 body:not([data-theme="dark"]) .menu .menu-link { color: var(--fm-muted); opacity: 1; }

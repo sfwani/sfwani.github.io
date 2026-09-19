@@ -15,7 +15,7 @@ The target is the layer underneath the model: agent frameworks, inference server
 
 Seven CVEs have been assigned from that work, with eleven advisories published and credited against projects including Ray, Open WebUI, Kestra, Hatchet, Budibase and trigger.dev. Those are the ones that reached publication; the wider body of work is 167 advisories filed across 59 open source projects, most still in coordinated disclosure or closed by maintainers as accepted risk. Each published finding, with root cause, vulnerable code, reproduction and fix, is in the [advisory index](/advisories/).
 
-The recurring classes, in rough order of volume: server side request forgery into control planes, missing authentication and authorization in front of machinery that was never meant to be public, unsafe deserialization on exposed inference ports, and sandbox escapes out of the AST allowlist evaluators that agent frameworks ship as safe Python.
+The recurring classes, in rough order of volume: missing authentication and authorization in front of machinery that was never meant to be public, server side request forgery into control planes, unsafe deserialization on exposed inference ports, and sandbox escapes out of the AST allowlist evaluators that agent frameworks ship as safe Python.
 
 ## Method
 
