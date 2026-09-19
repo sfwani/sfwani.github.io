@@ -119,6 +119,14 @@ def body(a):
                 f"{v.get('first_patched_version') or 'n/a'} |"
             )
         out.append("")
+    # A hand-built figure for this advisory, if one exists. Kept in _figures/
+    # rather than spliced into the maintainer's own markdown: that text is
+    # theirs and its headings vary, so anchoring to them would be brittle.
+    # Sitting here it gives the reader the shape of the chain before the code.
+    figure = ROOT / "_figures" / f"{slug(a)}.html"
+    if figure.exists():
+        out += ['<div markdown="0">', figure.read_text(encoding="utf-8").strip(), "</div>", ""]
+
     desc = (a.get("description") or "").replace("\r\n", "\n").replace("\r", "\n")
     out += [desc.strip(), ""]
     refs = [r for r in (a.get("references") or []) if r != a.get("html_url")]

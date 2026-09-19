@@ -29,6 +29,23 @@ Agentic systems and autonomous loops, and specifically what happens to authoriza
 
 AI agent security · LLM infrastructure security · agentic systems · autonomous agents · identity and access management · vulnerability research · coordinated disclosure · sandbox escape · unsafe deserialization · server side request forgery
 
+## Off the clock
+
+<div markdown="0">
+<div class="otc">
+  <ul class="otc-list">
+    <li class="otc-item">
+      <span class="otc-key">Soccer</span>
+      <p class="otc-val">Plays pickup often.</p>
+    </li>
+    <li class="otc-item">
+      <span class="otc-key">Climbing</span>
+      <p class="otc-val">Bouldering, and indoor rock climbing.</p>
+    </li>
+  </ul>
+</div>
+</div>
+
 ## Contact
 
 [code.sanaan@gmail.com](mailto:code.sanaan@gmail.com) · [GitHub](https://github.com/sfwani) · [LinkedIn](https://www.linkedin.com/in/sfwani)
