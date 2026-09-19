@@ -255,8 +255,9 @@ def write_index(rows, stamp):
         '<th scope="col">Weakness</th><th scope="col">Published</th></tr></thead>'
         f'<tbody>{"".join(body)}</tbody></table></div>{foot}</div>',
         "",
-        "## How they score",
-        "",
+        # No markdown heading here: the specimen carries its own, and an h2 at
+        # the prose measure above a figure at the breakout width reads as a
+        # misalignment.
         # The specimen lives here rather than on the home page: it is the same
         # eleven advisories as the table directly above it, so this is where a
         # reader already has the context for it, and here it can use the full

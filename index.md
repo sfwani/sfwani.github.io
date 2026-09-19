@@ -34,7 +34,7 @@ credited.
 
 <!-- ADVISORIES:END -->
 
-Every advisory has a writeup carrying the root cause, the vulnerable code, reproduction steps and the fix. The full list, with a CVSS vector for each, is at [/advisories/](/advisories/). It regenerates daily from the [GitHub Advisory Database](https://github.com/advisories?query=credit%3Asfwani), so it only ever shows work that is published, fixed and credited.
+Every entry regenerates daily from the [GitHub Advisory Database](https://github.com/advisories?query=credit%3Asfwani), so this page only ever shows work that is published, fixed and credited.
 
 ## What I look for
 
