@@ -909,3 +909,97 @@ body { overflow-x: clip; overflow-y: visible; }
 @media (prefers-reduced-motion: reduce) {
   .page-content h2::after { display: none; }
 }
+
+
+// M1. The margin measure rail: a hairline in the left margin carrying a tick
+// per section and a cursor riding it at the scroll position. The cursor is pure
+// CSS scroll(root block); the only JS on scroll is the current-section class,
+// rAF-coalesced over cached offsets. Ticks are real anchors, so it doubles as a
+// keyboard-reachable table of contents. Requires M0 or the cursor never moves.
+//
+// Moved out from the agent's 50% - 420px: the breakout figures on /advisories/
+// reach 50% - 445px, so at that offset the rail sat on top of the ledger table
+// and the specimen. It now clears the widest content by 36px, and the
+// breakpoint rises to 1180px so the rail still has room on screen at that width.
+/* P1  Margin measure rail  ------------------------------------------------ */
+.fm-rail{
+  position:fixed;
+  top:2.75rem;
+  bottom:2.75rem;
+  left:calc(50% - 445px - 66px);   /* outside the 890px figure bleed, not the 660px prose */
+  width:30px;
+  z-index:1;
+  display:none;
+  font-variant-numeric:tabular-nums slashed-zero lining-nums;
+}
+@media (min-width:1180px){ .fm-rail{display:block} }
+.fm-rail[hidden]{display:none}
+
+/* the spine: one hairline, the full measure of the document */
+.fm-rail__spine{
+  position:absolute; top:0; bottom:0; right:0; width:1px;
+  background:var(--fm-rule);
+}
+
+/* the cursor: a single tick that rides the spine at scroll position */
+.fm-rail__cursor{
+  position:absolute; left:0; right:0; top:0; bottom:0;
+  border-bottom:1px solid var(--fm-ink);
+  transform:translateY(-100%);
+  pointer-events:none;
+  display:none;
+}
+@supports (animation-timeline:scroll(root block)){
+  .fm-rail__cursor{
+    display:block;
+    animation-name:fm-rail-run;
+    animation-timing-function:linear;
+    animation-fill-mode:both;
+    animation-timeline:scroll(root block);
+  }
+}
+@keyframes fm-rail-run{ from{transform:translateY(-100%)} to{transform:translateY(0)} }
+
+/* section ticks */
+.fm-rail__tick{
+  position:absolute; right:0; top:var(--t,0%);
+  display:block; width:11px; height:1px;
+  background:var(--fm-rule-strong);
+  text-decoration:none;
+  transition:width 160ms ease-out, background-color 160ms ease-out;
+}
+.fm-rail__tick::before{      /* enlarged hit area, invisible */
+  content:""; position:absolute; right:-4px; left:-14px; top:-9px; height:19px;
+}
+.fm-rail__num{
+  position:absolute; right:0; top:-0.72em;
+  font-size:.625rem; letter-spacing:.06em; line-height:1;
+  color:var(--fm-muted);
+  padding-right:15px;
+  opacity:0;
+  transition:opacity 160ms ease-out, color 160ms ease-out;
+}
+.fm-rail__label{
+  position:absolute; right:15px; top:-0.72em;
+  max-width:calc(50vw - 511px - 14px);
+  overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+  text-align:right;
+  font-size:.625rem; letter-spacing:.06em; line-height:1;
+  color:var(--fm-soft);
+  padding-right:2.6em;
+  opacity:0;
+  transition:opacity 160ms ease-out;
+}
+.fm-rail__tick.is-current{ width:19px; background:var(--fm-ink) }
+.fm-rail__tick.is-current .fm-rail__num{ opacity:1; color:var(--fm-ink) }
+.fm-rail__tick:hover, .fm-rail__tick:focus-visible{ width:19px; background:var(--fm-ink) }
+.fm-rail__tick:hover .fm-rail__num,
+.fm-rail__tick:focus-visible .fm-rail__num{ opacity:1; color:var(--fm-ink) }
+.fm-rail__tick:hover .fm-rail__label,
+.fm-rail__tick:focus-visible .fm-rail__label{ opacity:1 }
+.fm-rail__tick:focus-visible{ outline:1px solid var(--fm-link); outline-offset:3px }
+
+@media (prefers-reduced-motion:reduce){
+  .fm-rail__cursor{ display:none }
+  .fm-rail__tick .fm-rail__num{ opacity:1 }
+}
