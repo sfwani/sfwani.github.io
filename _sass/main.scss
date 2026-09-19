@@ -1202,3 +1202,22 @@ body .fig.fig code.highlighter-rouge{
 }
 .fig-chain .ch-scope b{ color: var(--fm-link); font-weight: 600; }
 
+
+// D1 spacing pass, from looking at it on the page rather than in the lab.
+// The last step's light rule and the fan's strong rule landed ~18px apart and
+// read as an accidental double line; the steps ran straight into the fan; and
+// the scope note sat too close to the leaves it comments on.
+.fig-chain .ch-steps > .ch-step:last-child { border-bottom: 0; padding-bottom: .35rem; }
+.fig-chain .ch-bus { margin-top: 1.7rem; }
+.fig-chain .ch-leaves > li { padding-top: 1.15rem; }
+.fig-chain .ch-scope { margin-top: 1.7rem; padding-top: .1rem; padding-bottom: .1rem; }
+.fig-chain .fig-foot { margin-top: 1.5rem; }
+// The opening note is the one block that should sit at reading width rather
+// than stretch the full 890.
+.fig-chain .fig-note { margin-bottom: 1.6rem; }
+@media (max-width: 640px) {
+  // Stacked, the fan's two columns need more air between rows than between
+  // the steps above them, or the four outcomes read as one block of text.
+  .fig-chain .ch-leaves { row-gap: 1.5rem; column-gap: 1.5rem; }
+  .fig-chain .ch-bus { margin-top: 1.4rem; }
+}
