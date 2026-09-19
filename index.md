@@ -3,7 +3,7 @@ title: Sanaan Fayaz Wani
 seo_title: "Sanaan Fayaz Wani - AI Security Researcher"
 layout: page
 description: Vulnerability research on AI agent frameworks and LLM infrastructure. Seven assigned CVEs and eleven published advisories, with root cause, reproduction and fix for each.
-last_modified_at: 2026-09-18T04:13:38+00:00
+last_modified_at: 2026-09-19T20:02:40+00:00
 ---
 
 Sanaan Fayaz Wani is a Security Engineer at Amazon, working in IAM security on bringing agentic AI into identity and access management. Outside that, he hunts unauthenticated remote code execution in the infrastructure that runs large language models: agent frameworks, inference servers, workflow orchestrators, and the serialization formats they trust.
@@ -20,17 +20,19 @@ Sanaan Fayaz Wani is a Security Engineer at Amazon, working in IAM security on b
 
 | Advisory | Project | CVSS | Class |
 |:---|:---|:---|:---|
+| [GHSA-pqxw-g93w-hj9x](/advisories/ghsa-pqxw-g93w-hj9x/) | `trigger.dev` | 9.0&dagger; High | Improper isolation (CWE-653) |
 | [CVE-2026-57516](/advisories/cve-2026-57516/) | `ray` | 8.8 High | Code injection (CWE-94) |
 | [CVE-2026-45675](/advisories/cve-2026-45675/) | `open-webui` | 8.1 High | Privilege escalation (CWE-269) |
 | [GHSA-jc26-22qp-cgqj](/advisories/ghsa-jc26-22qp-cgqj/) | `trigger.dev` | 7.9 High | Missing authentication (CWE-306) |
 | [GHSA-3c52-v5v2-3r56](/advisories/ghsa-3c52-v5v2-3r56/) | `budibase` | 7.7 High | Server side request forgery (CWE-918) |
 | [CVE-2026-59714](/advisories/cve-2026-59714/) | `open-webui` | 7.1 High | Missing authorization (CWE-862) |
-| [GHSA-pqxw-g93w-hj9x](/advisories/ghsa-pqxw-g93w-hj9x/) | `trigger.dev` | High | Improper isolation (CWE-653) |
 | [CVE-2026-53577](/advisories/cve-2026-53577/) | `kestra` | 6.5 Medium | Incorrect authorization (CWE-863) |
 | [CVE-2026-63342](/advisories/cve-2026-63342/) | `hatchet` | 6.3 Medium | Incorrect authorization (CWE-863) |
 | [GHSA-59h8-w5q6-mfmp](/advisories/ghsa-59h8-w5q6-mfmp/) | `trigger.dev` | 5.3 Medium | Missing authentication (CWE-306) |
 | [CVE-2026-73301](/advisories/cve-2026-73301/) | `@budibase/server` | 4.3 Medium | Missing authorization (CWE-862) |
 | [CVE-2026-59715](/advisories/cve-2026-59715/) | `open-webui` | 3.1 Low | Missing authentication (CWE-306) |
+
+&dagger; Scored by me, not by the coordinating database. That advisory was published with a severity but no CVSS score and no vector, in v3 or v4; the score shown is my own CVSS v3.1 base score derived from the published finding, and its vector is on the advisory page.
 
 <!-- ADVISORIES:END -->
 
@@ -46,48 +48,16 @@ Each advisory above links to a full writeup with the vulnerable code, reproducti
 
 **Request forgery into control planes.** My highest volume class: metadata endpoints, internal schedulers, and cluster APIs one redirect away from a user supplied URL.
 
-## Where the bugs are
+## How they score
 
 <!-- CHART:START -->
 
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 302" class="fig-cwe" role="img" aria-labelledby="cweT cweD" preserveAspectRatio="xMidYMid meet">
-<title id="cweT">Weakness classes across the published advisories</title>
-<desc id="cweD">7 of 11 published advisories are authentication or authorization failures; 4 are other classes.</desc>
-<style>.fig-cwe{font-family:inherit;font-feature-settings:"tnum" 1}.fig-cwe text{fill:currentColor}.cw-eyebrow{font-size:10.5px;fill-opacity:.55;letter-spacing:.1em}.cw-meta{font-size:11px;fill-opacity:.55}.cw-label{font-size:12px}.cw-muted{fill-opacity:.62}.cw-count{font-size:11px;fill-opacity:.6}.cw-lead{font-size:15px}.cw-note{font-size:11px;fill-opacity:.62}</style>
-<text class="cw-eyebrow" x="0" y="11">WEAKNESS CLASS</text>
-<text class="cw-meta" x="640" y="11" text-anchor="end">11 published advisories</text>
-<line x1="0" y1="23.5" x2="640" y2="23.5" stroke="currentColor" stroke-opacity=".28" stroke-width="1"/>
-<g fill="currentColor">
-<text class="cw-label" x="0" y="46">CWE-306 Missing authentication</text>
-<rect x="0" y="55" width="300.0" height="10" fill-opacity=".88"/>
-<text class="cw-count" x="308.0" y="63.5">3</text>
-<text class="cw-label" x="0" y="80">CWE-862 Missing authorization</text>
-<rect x="0" y="89" width="200.0" height="10" fill-opacity=".88"/>
-<text class="cw-count" x="208.0" y="97.5">2</text>
-<text class="cw-label" x="0" y="114">CWE-863 Incorrect authorization</text>
-<rect x="0" y="123" width="200.0" height="10" fill-opacity=".88"/>
-<text class="cw-count" x="208.0" y="131.5">2</text>
-<text class="cw-label cw-muted" x="0" y="148">CWE-269 Privilege escalation</text>
-<rect x="0" y="157" width="100.0" height="10" fill-opacity=".3"/>
-<text class="cw-count" x="108.0" y="165.5">1</text>
-<text class="cw-label cw-muted" x="0" y="182">CWE-653 Improper isolation</text>
-<rect x="0" y="191" width="100.0" height="10" fill-opacity=".3"/>
-<text class="cw-count" x="108.0" y="199.5">1</text>
-<text class="cw-label cw-muted" x="0" y="216">CWE-918 Server side request forgery</text>
-<rect x="0" y="225" width="100.0" height="10" fill-opacity=".3"/>
-<text class="cw-count" x="108.0" y="233.5">1</text>
-<text class="cw-label cw-muted" x="0" y="250">CWE-94 Code injection</text>
-<rect x="0" y="259" width="100.0" height="10" fill-opacity=".3"/>
-<text class="cw-count" x="108.0" y="267.5">1</text>
-</g>
-<path d="M424 55 L430 55 L430 133 L424 133" fill="none" stroke="currentColor" stroke-opacity=".5" stroke-width="1"/>
-<text class="cw-lead" x="442" y="91.0">7 of 11</text>
-<text class="cw-note" x="442" y="106.0">authentication or</text>
-<text class="cw-note" x="442" y="119.0">authorization failures</text>
-<path d="M424 157 L430 157 L430 269 L424 269" fill="none" stroke="currentColor" stroke-opacity=".35" stroke-width="1"/>
-<text class="cw-lead" x="442" y="210.0">4 of 11</text>
-<text class="cw-note" x="442" y="225.0">everything else</text>
-</svg>
+<section class="fm-specimen" markdown="0" aria-labelledby="spT">
+<h3 class="sp-h" id="spT">Vector specimen</h3>
+<p class="sp-note">One CVSS v3.1 base vector per advisory, set as an eight cell glyph: attack vector, attack complexity, privileges required and user interaction on the upper line; scope and the three impacts on the lower. Read the shapes against each other.</p>
+<ol class="sp-grid"><li class="sp-cell sp-cell--sa"><div class="sp-glyph" aria-hidden="true"><span class="sp-m"><span class="sp-k">AV</span><span class="sp-v">N</span></span><span class="sp-m"><span class="sp-k">AC</span><span class="sp-v">H</span></span><span class="sp-m"><span class="sp-k">PR</span><span class="sp-v">N</span></span><span class="sp-m"><span class="sp-k">UI</span><span class="sp-v">N</span></span><span class="sp-m"><span class="sp-k">S</span><span class="sp-v">C</span></span><span class="sp-m"><span class="sp-k">C</span><span class="sp-v">H</span></span><span class="sp-m"><span class="sp-k">I</span><span class="sp-v">H</span></span><span class="sp-m"><span class="sp-k">A</span><span class="sp-v">H</span></span></div><p class="sp-vh">CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:C/C:H/I:H/A:H</p><p class="sp-cap"><a href="/advisories/ghsa-pqxw-g93w-hj9x/">GHSA-pqxw-g93w-hj9x</a><span class="sp-p">trigger.dev</span><span class="sp-s sp-s--sa">9.0 self-assessed</span></p></li><li class="sp-cell"><div class="sp-glyph" aria-hidden="true"><span class="sp-m"><span class="sp-k">AV</span><span class="sp-v">N</span></span><span class="sp-m"><span class="sp-k">AC</span><span class="sp-v">L</span></span><span class="sp-m"><span class="sp-k">PR</span><span class="sp-v">N</span></span><span class="sp-m"><span class="sp-k">UI</span><span class="sp-v">R</span></span><span class="sp-m"><span class="sp-k">S</span><span class="sp-v">U</span></span><span class="sp-m"><span class="sp-k">C</span><span class="sp-v">H</span></span><span class="sp-m"><span class="sp-k">I</span><span class="sp-v">H</span></span><span class="sp-m"><span class="sp-k">A</span><span class="sp-v">H</span></span></div><p class="sp-vh">CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H</p><p class="sp-cap"><a href="/advisories/cve-2026-57516/">CVE-2026-57516</a><span class="sp-p">ray</span><span class="sp-s">8.8 High</span></p></li><li class="sp-cell"><div class="sp-glyph" aria-hidden="true"><span class="sp-m"><span class="sp-k">AV</span><span class="sp-v">N</span></span><span class="sp-m"><span class="sp-k">AC</span><span class="sp-v">H</span></span><span class="sp-m"><span class="sp-k">PR</span><span class="sp-v">N</span></span><span class="sp-m"><span class="sp-k">UI</span><span class="sp-v">N</span></span><span class="sp-m"><span class="sp-k">S</span><span class="sp-v">U</span></span><span class="sp-m"><span class="sp-k">C</span><span class="sp-v">H</span></span><span class="sp-m"><span class="sp-k">I</span><span class="sp-v">H</span></span><span class="sp-m"><span class="sp-k">A</span><span class="sp-v">H</span></span></div><p class="sp-vh">CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:H</p><p class="sp-cap"><a href="/advisories/cve-2026-45675/">CVE-2026-45675</a><span class="sp-p">open-webui</span><span class="sp-s">8.1 High</span></p></li><li class="sp-cell"><div class="sp-glyph" aria-hidden="true"><span class="sp-m"><span class="sp-k">AV</span><span class="sp-v">A</span></span><span class="sp-m"><span class="sp-k">AC</span><span class="sp-v">H</span></span><span class="sp-m"><span class="sp-k">PR</span><span class="sp-v">L</span></span><span class="sp-m"><span class="sp-k">UI</span><span class="sp-v">N</span></span><span class="sp-m"><span class="sp-k">S</span><span class="sp-v">C</span></span><span class="sp-m"><span class="sp-k">C</span><span class="sp-v">H</span></span><span class="sp-m"><span class="sp-k">I</span><span class="sp-v">H</span></span><span class="sp-m"><span class="sp-k">A</span><span class="sp-v">L</span></span></div><p class="sp-vh">CVSS:3.1/AV:A/AC:H/PR:L/UI:N/S:C/C:H/I:H/A:L</p><p class="sp-cap"><a href="/advisories/ghsa-jc26-22qp-cgqj/">GHSA-jc26-22qp-cgqj</a><span class="sp-p">trigger.dev</span><span class="sp-s">7.9 High</span></p></li><li class="sp-cell"><div class="sp-glyph" aria-hidden="true"><span class="sp-m"><span class="sp-k">AV</span><span class="sp-v">N</span></span><span class="sp-m"><span class="sp-k">AC</span><span class="sp-v">L</span></span><span class="sp-m"><span class="sp-k">PR</span><span class="sp-v">L</span></span><span class="sp-m"><span class="sp-k">UI</span><span class="sp-v">N</span></span><span class="sp-m"><span class="sp-k">S</span><span class="sp-v">C</span></span><span class="sp-m"><span class="sp-k">C</span><span class="sp-v">H</span></span><span class="sp-m"><span class="sp-k">I</span><span class="sp-v">N</span></span><span class="sp-m"><span class="sp-k">A</span><span class="sp-v">N</span></span></div><p class="sp-vh">CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:C/C:H/I:N/A:N</p><p class="sp-cap"><a href="/advisories/ghsa-3c52-v5v2-3r56/">GHSA-3c52-v5v2-3r56</a><span class="sp-p">budibase</span><span class="sp-s">7.7 High</span></p></li><li class="sp-cell"><div class="sp-glyph" aria-hidden="true"><span class="sp-m"><span class="sp-k">AV</span><span class="sp-v">N</span></span><span class="sp-m"><span class="sp-k">AC</span><span class="sp-v">L</span></span><span class="sp-m"><span class="sp-k">PR</span><span class="sp-v">L</span></span><span class="sp-m"><span class="sp-k">UI</span><span class="sp-v">N</span></span><span class="sp-m"><span class="sp-k">S</span><span class="sp-v">U</span></span><span class="sp-m"><span class="sp-k">C</span><span class="sp-v">N</span></span><span class="sp-m"><span class="sp-k">I</span><span class="sp-v">H</span></span><span class="sp-m"><span class="sp-k">A</span><span class="sp-v">L</span></span></div><p class="sp-vh">CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:H/A:L</p><p class="sp-cap"><a href="/advisories/cve-2026-59714/">CVE-2026-59714</a><span class="sp-p">open-webui</span><span class="sp-s">7.1 High</span></p></li><li class="sp-cell"><div class="sp-glyph" aria-hidden="true"><span class="sp-m"><span class="sp-k">AV</span><span class="sp-v">N</span></span><span class="sp-m"><span class="sp-k">AC</span><span class="sp-v">L</span></span><span class="sp-m"><span class="sp-k">PR</span><span class="sp-v">L</span></span><span class="sp-m"><span class="sp-k">UI</span><span class="sp-v">N</span></span><span class="sp-m"><span class="sp-k">S</span><span class="sp-v">U</span></span><span class="sp-m"><span class="sp-k">C</span><span class="sp-v">H</span></span><span class="sp-m"><span class="sp-k">I</span><span class="sp-v">N</span></span><span class="sp-m"><span class="sp-k">A</span><span class="sp-v">N</span></span></div><p class="sp-vh">CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:N/A:N</p><p class="sp-cap"><a href="/advisories/cve-2026-53577/">CVE-2026-53577</a><span class="sp-p">kestra</span><span class="sp-s">6.5 Medium</span></p></li><li class="sp-cell"><div class="sp-glyph" aria-hidden="true"><span class="sp-m"><span class="sp-k">AV</span><span class="sp-v">N</span></span><span class="sp-m"><span class="sp-k">AC</span><span class="sp-v">H</span></span><span class="sp-m"><span class="sp-k">PR</span><span class="sp-v">L</span></span><span class="sp-m"><span class="sp-k">UI</span><span class="sp-v">N</span></span><span class="sp-m"><span class="sp-k">S</span><span class="sp-v">C</span></span><span class="sp-m"><span class="sp-k">C</span><span class="sp-v">H</span></span><span class="sp-m"><span class="sp-k">I</span><span class="sp-v">N</span></span><span class="sp-m"><span class="sp-k">A</span><span class="sp-v">N</span></span></div><p class="sp-vh">CVSS:3.1/AV:N/AC:H/PR:L/UI:N/S:C/C:H/I:N/A:N</p><p class="sp-cap"><a href="/advisories/cve-2026-63342/">CVE-2026-63342</a><span class="sp-p">hatchet</span><span class="sp-s">6.3 Medium</span></p></li><li class="sp-cell"><div class="sp-glyph" aria-hidden="true"><span class="sp-m"><span class="sp-k">AV</span><span class="sp-v">N</span></span><span class="sp-m"><span class="sp-k">AC</span><span class="sp-v">L</span></span><span class="sp-m"><span class="sp-k">PR</span><span class="sp-v">N</span></span><span class="sp-m"><span class="sp-k">UI</span><span class="sp-v">N</span></span><span class="sp-m"><span class="sp-k">S</span><span class="sp-v">U</span></span><span class="sp-m"><span class="sp-k">C</span><span class="sp-v">N</span></span><span class="sp-m"><span class="sp-k">I</span><span class="sp-v">L</span></span><span class="sp-m"><span class="sp-k">A</span><span class="sp-v">N</span></span></div><p class="sp-vh">CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:L/A:N</p><p class="sp-cap"><a href="/advisories/ghsa-59h8-w5q6-mfmp/">GHSA-59h8-w5q6-mfmp</a><span class="sp-p">trigger.dev</span><span class="sp-s">5.3 Medium</span></p></li><li class="sp-cell"><div class="sp-glyph" aria-hidden="true"><span class="sp-m"><span class="sp-k">AV</span><span class="sp-v">N</span></span><span class="sp-m"><span class="sp-k">AC</span><span class="sp-v">L</span></span><span class="sp-m"><span class="sp-k">PR</span><span class="sp-v">L</span></span><span class="sp-m"><span class="sp-k">UI</span><span class="sp-v">N</span></span><span class="sp-m"><span class="sp-k">S</span><span class="sp-v">U</span></span><span class="sp-m"><span class="sp-k">C</span><span class="sp-v">L</span></span><span class="sp-m"><span class="sp-k">I</span><span class="sp-v">N</span></span><span class="sp-m"><span class="sp-k">A</span><span class="sp-v">N</span></span></div><p class="sp-vh">CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:L/I:N/A:N</p><p class="sp-cap"><a href="/advisories/cve-2026-73301/">CVE-2026-73301</a><span class="sp-p">@budibase/server</span><span class="sp-s">4.3 Medium</span></p></li><li class="sp-cell"><div class="sp-glyph" aria-hidden="true"><span class="sp-m"><span class="sp-k">AV</span><span class="sp-v">N</span></span><span class="sp-m"><span class="sp-k">AC</span><span class="sp-v">H</span></span><span class="sp-m"><span class="sp-k">PR</span><span class="sp-v">L</span></span><span class="sp-m"><span class="sp-k">UI</span><span class="sp-v">N</span></span><span class="sp-m"><span class="sp-k">S</span><span class="sp-v">U</span></span><span class="sp-m"><span class="sp-k">C</span><span class="sp-v">N</span></span><span class="sp-m"><span class="sp-k">I</span><span class="sp-v">L</span></span><span class="sp-m"><span class="sp-k">A</span><span class="sp-v">N</span></span></div><p class="sp-vh">CVSS:3.1/AV:N/AC:H/PR:L/UI:N/S:U/C:N/I:L/A:N</p><p class="sp-cap"><a href="/advisories/cve-2026-59715/">CVE-2026-59715</a><span class="sp-p">open-webui</span><span class="sp-s">3.1 Low</span></p></li></ol>
+<p class="sp-foot">10 of 11 advisories carry a vector published by the coordinating database. The rest were published with a severity but no score and no vector, in v3 or v4; those are scored by me from the published finding and outlined here.</p>
+</section>
 
 <!-- CHART:END -->
 

@@ -117,11 +117,13 @@ def resolve_repo_level(s, repo, ghsa_id):
         return None
     packages = sorted({v["package"]["name"] for v in a.get("vulnerabilities") or [] if v.get("package")})
     cwes = [c["cwe_id"] for c in a.get("cwes") or []]
-    score = (a.get("cvss") or {}).get("score")
+    score, vector, self_assessed = cvss_of(a)
     return {
         "ghsa_id": a["ghsa_id"],
         "cve_id": a.get("cve_id"),
-        "score": score if isinstance(score, (int, float)) else None,
+        "score": score,
+        "vector": vector,
+        "self_assessed": self_assessed,
         "severity": (a.get("severity") or "").capitalize(),
         "package": packages[0] if packages else repo.split("/")[-1],
         "cwe": cwes[0] if cwes else None,
@@ -139,11 +141,13 @@ def resolve(s, ghsa_id):
         return None
     packages = sorted({v["package"]["name"] for v in a.get("vulnerabilities") or [] if v.get("package")})
     cwes = [c["cwe_id"] for c in a.get("cwes") or []]
-    score = (a.get("cvss") or {}).get("score")
+    score, vector, self_assessed = cvss_of(a)
     return {
         "ghsa_id": a["ghsa_id"],
         "cve_id": a.get("cve_id"),
-        "score": score if isinstance(score, (int, float)) else None,
+        "score": score,
+        "vector": vector,
+        "self_assessed": self_assessed,
         "severity": (a.get("severity") or "").capitalize(),
         "package": packages[0] if packages else "n/a",
         "cwe": cwes[0] if cwes else None,
@@ -165,11 +169,13 @@ def short_package(name):
     return name
 
 
-def rating_badge(score, severity):
-    """Colour the severity so the table can be read at a glance."""
-    color = SEVERITY_COLOR.get(severity.lower(), "6e7781")
-    del color
-    return severity if score is None else f"{score:.1f} {severity}"
+def rating_badge(r):
+    """The score as the table shows it, daggered when it is not GitHub's."""
+    score, severity = r["score"], r["severity"]
+    if score is None:
+        return severity
+    mark = "&dagger;" if r.get("self_assessed") else ""
+    return f"{score:.1f}{mark} {severity}"
 
 
 def label(cwe):
@@ -188,8 +194,13 @@ def render_table(rows):
         cls = label(r["cwe"])
         if r["cwe"] and cls != r["cwe"]:
             cls = f"{cls} ({r['cwe']})"
-        rating = rating_badge(r["score"], r["severity"])
+        rating = rating_badge(r)
         out.append(f"| [{name}]({r['url']}) | `{short_package(r['package'])}` | {rating} | {cls} |")
+    if any(r.get("self_assessed") for r in rows):
+        out += ["", "&dagger; Scored by me, not by the coordinating database. That advisory was published "
+                    "with a severity but no CVSS score and no vector, in v3 or v4; the score shown is my own "
+                    "CVSS v3.1 base score derived from the published finding, and its vector is on the "
+                    "advisory page."]
     return "\n".join(out)
 
 
@@ -204,75 +215,88 @@ def render_counters(rows):
     )
 
 
+SELF_ASSESSED = {
+    # GHSA-pqxw-g93w-hj9x was published High with no score and no vector, in
+    # v3 or v4, so nothing upstream can supply one. This vector is derived by
+    # hand from the advisory's own text: unauthenticated (the secrets ship in
+    # hosting/docker/.env.example), AC:H granting the precondition that the
+    # operator kept those defaults, S:C because the documented chain crosses
+    # out of the webapp into Postgres, Redis, ClickHouse and the registry, and
+    # three High impacts. That computes to 9.0. It is flagged everywhere it is
+    # rendered: this site's claim is that its numbers resolve to a public
+    # advisory, and this one does not.
+    "GHSA-pqxw-g93w-hj9x": {
+        "score": 9.0,
+        "vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:C/C:H/I:H/A:H",
+    },
+}
+
+METRIC_ORDER = ["AV", "AC", "PR", "UI", "S", "C", "I", "A"]
+
+
+def cvss_of(a):
+    """Return (score, vector, self_assessed) for one advisory payload."""
+    cvss = a.get("cvss") or {}
+    score, vector = cvss.get("score"), cvss.get("vector_string")
+    if not vector:
+        v3 = (a.get("cvss_severities") or {}).get("cvss_v3") or {}
+        score, vector = score if score is not None else v3.get("score"), v3.get("vector_string")
+    if isinstance(score, (int, float)) and vector:
+        return float(score), vector, False
+    sa = SELF_ASSESSED.get(a.get("ghsa_id"))
+    if sa:
+        return sa["score"], sa["vector"], True
+    return (float(score) if isinstance(score, (int, float)) else None), vector, False
+
+
 AUTH_CWES = {"CWE-306", "CWE-862", "CWE-863"}
 
 
 def render_chart(rows):
-    """Ranked CWE bars, with the auth/authz classes bracketed against the rest.
+    """Every published CVSS vector as an eight cell glyph.
 
-    Regenerated from the same rows as the table, so the counts can never drift
-    from what the page says above it.
+    Set as plain elements rather than as an SVG on purpose: the old bar chart
+    used a fixed 640 viewBox scaled to 100% width, so at 390px its 12px type
+    rendered around 6.5px. This reflows instead. Regenerated from the same rows
+    as the table, so no figure here can drift from what the table says.
     """
-    import collections
-    counts = collections.Counter(r["cwe"] or "n/a" for r in rows)
-    ordered = sorted(counts.items(), key=lambda kv: (kv[0] not in AUTH_CWES, -kv[1], kv[0]))
-    n_auth = sum(v for k, v in counts.items() if k in AUTH_CWES)
-    n_other = sum(counts.values()) - n_auth
-    top = max(counts.values())
+    plates, n_pub, n_self = [], 0, 0
+    for r in rows:
+        vec = r.get("vector")
+        if not vec:
+            continue
+        parts = dict(kv.split(":", 1) for kv in vec.split("/")[1:] if ":" in kv)
+        if not all(m in parts for m in METRIC_ORDER):
+            continue
+        sa = bool(r.get("self_assessed"))
+        n_self, n_pub = (n_self + 1, n_pub) if sa else (n_self, n_pub + 1)
+        cells = "".join(
+            f'<span class="sp-m"><span class="sp-k">{m}</span>'
+            f'<span class="sp-v">{parts[m]}</span></span>' for m in METRIC_ORDER)
+        name = r["cve_id"] or r["ghsa_id"]
+        score = f'{r["score"]:.1f} self-assessed' if sa else f'{r["score"]:.1f} {r["severity"]}'
+        plates.append(
+            f'<li class="sp-cell{" sp-cell--sa" if sa else ""}">'
+            f'<div class="sp-glyph" aria-hidden="true">{cells}</div>'
+            f'<p class="sp-vh">{vec}</p>'
+            f'<p class="sp-cap"><a href="{r["url"]}">{name}</a>'
+            f'<span class="sp-p">{short_package(r["package"])}</span>'
+            f'<span class="sp-s{" sp-s--sa" if sa else ""}">{score}</span></p></li>')
 
-    row_h, y0, bar_w = 34, 46, 300
-    h = y0 + row_h * len(ordered) + 18
-    out = [f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 {h}" class="fig-cwe" '
-           f'role="img" aria-labelledby="cweT cweD" preserveAspectRatio="xMidYMid meet">',
-           '<title id="cweT">Weakness classes across the published advisories</title>',
-           f'<desc id="cweD">{n_auth} of {n_auth + n_other} published advisories are '
-           f'authentication or authorization failures; {n_other} are other classes.</desc>',
-           '<style>.fig-cwe{font-family:inherit;font-feature-settings:"tnum" 1}'
-           '.fig-cwe text{fill:currentColor}'
-           '.cw-eyebrow{font-size:10.5px;fill-opacity:.55;letter-spacing:.1em}'
-           '.cw-meta{font-size:11px;fill-opacity:.55}.cw-label{font-size:12px}'
-           '.cw-muted{fill-opacity:.62}.cw-count{font-size:11px;fill-opacity:.6}'
-           '.cw-lead{font-size:15px}.cw-note{font-size:11px;fill-opacity:.62}</style>',
-           '<text class="cw-eyebrow" x="0" y="11">WEAKNESS CLASS</text>',
-           f'<text class="cw-meta" x="640" y="11" text-anchor="end">'
-           f'{n_auth + n_other} published advisories</text>',
-           '<line x1="0" y1="23.5" x2="640" y2="23.5" stroke="currentColor" '
-           'stroke-opacity=".28" stroke-width="1"/>', '<g fill="currentColor">']
-
-    first_auth = last_auth = first_other = last_other = None
-    for i, (cwe, n) in enumerate(ordered):
-        y = y0 + row_h * i
-        is_auth = cwe in AUTH_CWES
-        label = f"{cwe} {label_of(cwe)}"
-        cls = "cw-label" if is_auth else "cw-label cw-muted"
-        op = ".88" if is_auth else ".3"
-        w = round(bar_w * n / top, 2)
-        out += [f'<text class="{cls}" x="0" y="{y}">{label}</text>',
-                f'<rect x="0" y="{y + 9}" width="{w}" height="10" fill-opacity="{op}"/>',
-                f'<text class="cw-count" x="{w + 8}" y="{y + 17.5}">{n}</text>']
-        if is_auth:
-            first_auth = y + 9 if first_auth is None else first_auth
-            last_auth = y + 19
-        else:
-            first_other = y + 9 if first_other is None else first_other
-            last_other = y + 19
-    out.append("</g>")
-
-    if first_auth is not None:
-        mid = (first_auth + last_auth) / 2
-        out += [f'<path d="M424 {first_auth} L430 {first_auth} L430 {last_auth} L424 {last_auth}" '
-                'fill="none" stroke="currentColor" stroke-opacity=".5" stroke-width="1"/>',
-                f'<text class="cw-lead" x="442" y="{mid - 3}">{n_auth} of {n_auth + n_other}</text>',
-                f'<text class="cw-note" x="442" y="{mid + 12}">authentication or</text>',
-                f'<text class="cw-note" x="442" y="{mid + 25}">authorization failures</text>']
-    if first_other is not None:
-        mid2 = (first_other + last_other) / 2
-        out += [f'<path d="M424 {first_other} L430 {first_other} L430 {last_other} L424 {last_other}" '
-                'fill="none" stroke="currentColor" stroke-opacity=".35" stroke-width="1"/>',
-                f'<text class="cw-lead" x="442" y="{mid2 - 3}">{n_other} of {n_auth + n_other}</text>',
-                f'<text class="cw-note" x="442" y="{mid2 + 12}">everything else</text>']
-    out.append("</svg>")
-    return "\n".join(out)
+    foot = (f"{n_pub} of {n_pub + n_self} advisories carry a vector published by the coordinating "
+            f"database.") if n_self else f"All {n_pub} advisories carry a published vector."
+    if n_self:
+        foot += (" The rest were published with a severity but no score and no vector, in v3 or v4; "
+                 "those are scored by me from the published finding and outlined here.")
+    return (
+        '<section class="fm-specimen" markdown="0" aria-labelledby="spT">\n'
+        '<h3 class="sp-h" id="spT">Vector specimen</h3>\n'
+        '<p class="sp-note">One CVSS v3.1 base vector per advisory, set as an eight cell glyph: '
+        'attack vector, attack complexity, privileges required and user interaction on the upper '
+        'line; scope and the three impacts on the lower. Read the shapes against each other.</p>\n'
+        '<ol class="sp-grid">' + "".join(plates) + '</ol>\n'
+        f'<p class="sp-foot">{foot}</p>\n'
+        '</section>')
 
 
 def label_of(cwe):
