@@ -585,3 +585,21 @@ main table th:nth-child(2){ white-space: normal; }
 .exp.exp--rule .rl-substream > .rl-entry:last-child > .rl-body { padding-bottom: 1.9rem; }
 .exp.exp--rule .rl-bracket { padding-bottom: .1rem; margin-bottom: 1.9rem; }
 .exp.exp--rule .rl-groupwrap + .rl-entry > .rl-body { padding-top: 0; }
+
+// Reduced motion. The theme animates in three places and honoured this
+// setting in none of them: a universal 75ms background/border transition in
+// klise/_base.scss, `blur` (filter: blur(4px)) on the wrapper when the mobile
+// menu opens, and `fadein` on the avatar and that menu. A reader who has asked
+// their OS for less motion was getting all three.
+//
+// Killing the animations outright is safe because every consumer has a usable
+// static state: .author-avatar declares opacity:1, the mobile .trigger has no
+// opacity of its own so it lands on 1 (the keyframe only reached 0.8), and the
+// wrapper simply stays unblurred behind the menu overlay.
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    transition: none !important;
+    animation: none !important;
+    scroll-behavior: auto !important;
+  }
+}
