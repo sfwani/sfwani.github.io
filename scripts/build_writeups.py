@@ -18,6 +18,10 @@ sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 from update_advisories import (  # noqa: E402
     API, USER, session, credited_ghsa_ids, extra_repo_advisories, CWE_LABELS,
     short_package,
+    # The derived score for the one advisory published without one lives in
+    # the sibling generator, so the two pages this repo builds cannot
+    # disagree about it.
+    cvss_of,
 )
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
@@ -69,18 +73,25 @@ def slug(a):
 
 
 def body(a):
-    cvss = a.get("cvss") or {}
-    score = cvss.get("score")
+    score, vector, self_assessed = cvss_of(a)
     cwes = ", ".join(f"{c['cwe_id']} ({c['name']})" for c in a.get("cwes") or []) or "n/a"
     sev = (a.get("severity") or "").capitalize()
-    sev += f" ({score})" if score is not None else " (no CVSS score published)"
+    if score is None:
+        sev += " (no CVSS score published)"
+        vec_cell = "`not published`"
+    elif self_assessed:
+        sev += f" ({score:.1f}, self-assessed)"
+        vec_cell = f"`{vector}` (self-assessed)"
+    else:
+        sev += f" ({score})"
+        vec_cell = f"`{vector}`"
     out = [
         "| | |",
         "|:--|:--|",
         f"| Advisory | [{a['ghsa_id']}]({a.get('html_url')}) |",
         f"| CVE | {a.get('cve_id') or 'not assigned'} |",
         f"| Severity | {sev} |",
-        f"| CVSS vector | `{cvss.get('vector_string') or 'not published'}` |",
+        f"| CVSS vector | {vec_cell} |",
         f"| CWE | {cwes} |",
         f"| Published | {(a.get('published_at') or '')[:10]} |",
         "",
@@ -189,10 +200,10 @@ def write_index(rows, stamp):
     ]
     for a in rows:
         name = a.get("cve_id") or a["ghsa_id"]
-        cvss = a.get("cvss") or {}
-        score = cvss.get("score")
+        score, _v, self_assessed = cvss_of(a)
         sev = (a.get("severity") or "").capitalize()
-        rating = f"{score} {sev}" if score is not None else sev
+        mark = ", self-assessed" if self_assessed else ""
+        rating = f"{score:.1f} {sev}{mark}" if score is not None else sev
         pkgs = sorted({v["package"]["name"] for v in a.get("vulnerabilities") or []
                        if v.get("package")})
         pkg = short_package(pkgs[0]) if pkgs else "n/a"
@@ -239,9 +250,12 @@ def write_llms_txt(rows):
     ]
     for a in rows:
         name = a.get("cve_id") or a["ghsa_id"]
-        cvss = (a.get("cvss") or {}).get("score")
+        score, _v, self_assessed = cvss_of(a)
         sev = (a.get("severity") or "").capitalize()
-        rating = f"{cvss} {sev}" if cvss is not None else f"{sev}, no published score"
+        if score is None:
+            rating = f"{sev}, no published score"
+        else:
+            rating = f"{score:.1f} {sev}" + (", score self-assessed" if self_assessed else "")
         pkgs = sorted({v["package"]["name"] for v in a.get("vulnerabilities") or [] if v.get("package")})
         pkg = short_package(pkgs[0]) if pkgs else "n/a"
         cwe = (a.get("cwes") or [{}])[0].get("cwe_id") or "n/a"

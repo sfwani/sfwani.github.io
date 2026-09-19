@@ -4,7 +4,7 @@ permalink: /advisories/
 layout: page
 description: "Full writeups for every published security advisory credited to Sanaan Wani: root cause, vulnerable code, reproduction and fix."
 comments: false
-last_modified_at: 2026-09-19T02:01:11+00:00
+last_modified_at: 2026-09-19T20:04:54+00:00
 ---
 
 Every advisory below is published, fixed and credited. Each page carries the root cause, the vulnerable code, reproduction steps and the fix, as published in the advisory itself. Reports still in coordinated disclosure are not listed, named or hinted at until the maintainer ships a fix.
@@ -20,7 +20,7 @@ Five of these are in the global GitHub Advisory Database and are returned by the
 | [CVE-2026-59715](/advisories/cve-2026-59715/) | `open-webui` | 3.1 Low | Missing authentication | 2026-07-24 |
 | [CVE-2026-57516](/advisories/cve-2026-57516/) | `ray` | 8.8 High | Code injection | 2026-07-24 |
 | [GHSA-59h8-w5q6-mfmp](/advisories/ghsa-59h8-w5q6-mfmp/) | `trigger.dev` | 5.3 Medium | Missing authentication | 2026-07-21 |
-| [GHSA-pqxw-g93w-hj9x](/advisories/ghsa-pqxw-g93w-hj9x/) | `trigger.dev` | High | Improper isolation | 2026-07-21 |
+| [GHSA-pqxw-g93w-hj9x](/advisories/ghsa-pqxw-g93w-hj9x/) | `trigger.dev` | 9.0 High, self-assessed | Improper isolation | 2026-07-21 |
 | [CVE-2026-63342](/advisories/cve-2026-63342/) | `hatchet` | 6.3 Medium | Incorrect authorization | 2026-06-30 |
 | [CVE-2026-53577](/advisories/cve-2026-53577/) | `kestra` | 6.5 Medium | Incorrect authorization | 2026-06-03 |
 | [CVE-2026-45675](/advisories/cve-2026-45675/) | `open-webui` | 8.1 High | Privilege escalation | 2026-05-14 |
