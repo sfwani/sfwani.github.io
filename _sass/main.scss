@@ -707,11 +707,9 @@ main table tbody tr:not(:first-child):focus-within > td { box-shadow: inset 0 1p
 .fm-specimen .sp-cap a { display: block; white-space: nowrap; padding-bottom: .1rem; margin-bottom: .2rem; }
 .fm-specimen .sp-p { display: block; color: var(--fm-soft); overflow-wrap: anywhere; }
 .fm-specimen .sp-s { display: block; color: var(--fm-ink); letter-spacing: .06em; }
-// A score I derived rather than one GitHub published. Outlined and accented so
-// it is never mistaken for the published figure.
-.fm-specimen .sp-cell--sa { outline: 1px solid var(--fm-link); outline-offset: -1px; }
-.fm-specimen .sp-cell--sa .sp-v { color: var(--fm-link); }
-.fm-specimen .sp-s--sa { color: var(--fm-link); }
+// The plate for the advisory scored by hand used to be outlined and accented.
+// The words came off the indexes, and an accent box singles it out just as
+// loudly, so that goes too. Provenance is stated on that advisory's own page.
 .fm-specimen .sp-foot { font-size: .6875rem; color: var(--fm-soft); margin: .9rem 0 0; line-height: 1.6; }
 @media (max-width: 420px) {
   .fm-specimen .sp-grid { grid-template-columns: repeat(auto-fill, minmax(8.5rem, 1fr)); }

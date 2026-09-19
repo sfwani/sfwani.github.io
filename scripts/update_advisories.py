@@ -318,8 +318,7 @@ def render_chart(rows):
             f'<span class="sp-p">{short_package(r["package"])}</span>'
             f'<span class="sp-s{" sp-s--sa" if sa else ""}">{score}</span></p></li>')
 
-    foot = (f"One CVSS v3.1 base vector for each of the {n_pub + n_self} published "
-            "advisories, as the coordinating database records them.")
+    foot = f"One CVSS v3.1 base vector for each of the {n_pub + n_self} published advisories."
     return (
         '<section class="fm-specimen" markdown="0" aria-labelledby="spT">\n'
         '<h3 class="sp-h" id="spT">Vector specimen</h3>\n'
