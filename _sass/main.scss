@@ -620,3 +620,37 @@ main table th:nth-child(2){ white-space: normal; }
     scroll-behavior: auto !important;
   }
 }
+
+// M1, the ruled row. The site is built out of horizontal rules, so a row
+// affordance darkens the two rules already bracketing the row rather than
+// introducing a highlight colour or a background fill. Worth having mainly on
+// the wide advisory table, where it tells you which row your eye is on across
+// six columns. Hover rules are gated behind a real pointer so a tap does not
+// leave a row stuck in the hovered state; :focus-within is not gated, because
+// that is the keyboard path.
+@media (hover: hover) and (pointer: fine) {
+  main table tbody td { transition: border-bottom-color 140ms ease-out, box-shadow 140ms ease-out; }
+  main table tbody tr:hover > td { border-bottom-color: var(--fm-rule-strong); }
+  main table tbody tr:not(:first-child):hover > td { box-shadow: inset 0 1px 0 0 var(--fm-rule-strong); }
+}
+main table tbody tr:focus-within > td { border-bottom-color: var(--fm-rule-strong); }
+main table tbody tr:not(:first-child):focus-within > td { box-shadow: inset 0 1px 0 0 var(--fm-rule-strong); }
+
+// M3, the span draws itself. The range bar beside a dated role fills from the
+// top down on hover, because the role accrued that way. The bar is already
+// solid ink at rest and stays exactly that, so the page is unchanged until you
+// point at it; only the accent wipe is new. background-image is set here rather
+// than in the original rule because that one uses the `background` shorthand,
+// which would reset it.
+@media (hover: hover) and (pointer: fine) {
+  .exp.exp--rule .rl-entry--range > .rl-body::before {
+    background-image: linear-gradient(var(--fm-link), var(--fm-link));
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    background-size: 100% 0%;
+    transition: background-size 420ms cubic-bezier(.2, .7, .3, 1);
+  }
+  .exp.exp--rule .rl-entry--range:hover > .rl-body::before { background-size: 100% 100%; }
+  .exp.exp--rule .rl-entry > .rl-date { transition: color 220ms ease-out; }
+  .exp.exp--rule .rl-entry:hover > .rl-date { color: var(--fm-ink); }
+}
