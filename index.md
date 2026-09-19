@@ -3,7 +3,7 @@ title: Sanaan Fayaz Wani
 seo_title: "Sanaan Fayaz Wani - AI Security Researcher"
 layout: page
 description: Vulnerability research on AI agent frameworks and LLM infrastructure. Seven assigned CVEs and eleven published advisories, with root cause, reproduction and fix for each.
-last_modified_at: 2026-09-19T20:02:40+00:00
+last_modified_at: 2026-09-19T20:07:34+00:00
 ---
 
 Sanaan Fayaz Wani is a Security Engineer at Amazon, working in IAM security on bringing agentic AI into identity and access management. Outside that, he hunts unauthenticated remote code execution in the infrastructure that runs large language models: agent frameworks, inference servers, workflow orchestrators, and the serialization formats they trust.
@@ -18,21 +18,7 @@ Sanaan Fayaz Wani is a Security Engineer at Amazon, working in IAM security on b
 
 <!-- ADVISORIES:START -->
 
-| Advisory | Project | CVSS | Class |
-|:---|:---|:---|:---|
-| [GHSA-pqxw-g93w-hj9x](/advisories/ghsa-pqxw-g93w-hj9x/) | `trigger.dev` | 9.0&dagger; High | Improper isolation (CWE-653) |
-| [CVE-2026-57516](/advisories/cve-2026-57516/) | `ray` | 8.8 High | Code injection (CWE-94) |
-| [CVE-2026-45675](/advisories/cve-2026-45675/) | `open-webui` | 8.1 High | Privilege escalation (CWE-269) |
-| [GHSA-jc26-22qp-cgqj](/advisories/ghsa-jc26-22qp-cgqj/) | `trigger.dev` | 7.9 High | Missing authentication (CWE-306) |
-| [GHSA-3c52-v5v2-3r56](/advisories/ghsa-3c52-v5v2-3r56/) | `budibase` | 7.7 High | Server side request forgery (CWE-918) |
-| [CVE-2026-59714](/advisories/cve-2026-59714/) | `open-webui` | 7.1 High | Missing authorization (CWE-862) |
-| [CVE-2026-53577](/advisories/cve-2026-53577/) | `kestra` | 6.5 Medium | Incorrect authorization (CWE-863) |
-| [CVE-2026-63342](/advisories/cve-2026-63342/) | `hatchet` | 6.3 Medium | Incorrect authorization (CWE-863) |
-| [GHSA-59h8-w5q6-mfmp](/advisories/ghsa-59h8-w5q6-mfmp/) | `trigger.dev` | 5.3 Medium | Missing authentication (CWE-306) |
-| [CVE-2026-73301](/advisories/cve-2026-73301/) | `@budibase/server` | 4.3 Medium | Missing authorization (CWE-862) |
-| [CVE-2026-59715](/advisories/cve-2026-59715/) | `open-webui` | 3.1 Low | Missing authentication (CWE-306) |
-
-&dagger; Scored by me, not by the coordinating database. That advisory was published with a severity but no CVSS score and no vector, in v3 or v4; the score shown is my own CVSS v3.1 base score derived from the published finding, and its vector is on the advisory page.
+<div class="adv-ledgertable" markdown="0"><p class="adv-ledgertable__note">11 published advisories.<span class="adv-ledgertable__hint"> The table scrolls sideways.</span></p><div class="adv-ledgertable__scroll" role="region" tabindex="0" aria-label="Published advisories"><table><thead><tr><th scope="col">Advisory</th><th scope="col">Project</th><th scope="col">CVSS</th><th scope="col">Severity</th><th scope="col">Weakness</th><th scope="col">Published</th></tr></thead><tbody><tr><th scope="row"><a href="/advisories/ghsa-pqxw-g93w-hj9x/">GHSA-pqxw-g93w-hj9x</a></th><td><code>trigger.dev</code></td><td class="adv-num">9.0<abbr title="Scored by me, not by the coordinating database">&dagger;</abbr></td><td>High</td><td>Improper isolation (CWE-653)</td><td><time datetime="2026-07-21">2026-07-21</time></td></tr><tr><th scope="row"><a href="/advisories/cve-2026-57516/">CVE-2026-57516</a></th><td><code>ray</code></td><td class="adv-num">8.8</td><td>High</td><td>Code injection (CWE-94)</td><td><time datetime="2026-07-24">2026-07-24</time></td></tr><tr><th scope="row"><a href="/advisories/cve-2026-45675/">CVE-2026-45675</a></th><td><code>open-webui</code></td><td class="adv-num">8.1</td><td>High</td><td>Privilege escalation (CWE-269)</td><td><time datetime="2026-05-14">2026-05-14</time></td></tr><tr><th scope="row"><a href="/advisories/ghsa-jc26-22qp-cgqj/">GHSA-jc26-22qp-cgqj</a></th><td><code>trigger.dev</code></td><td class="adv-num">7.9</td><td>High</td><td>Missing authentication (CWE-306)</td><td><time datetime="2026-09-14">2026-09-14</time></td></tr><tr><th scope="row"><a href="/advisories/ghsa-3c52-v5v2-3r56/">GHSA-3c52-v5v2-3r56</a></th><td><code>budibase</code></td><td class="adv-num">7.7</td><td>High</td><td>Server side request forgery (CWE-918)</td><td><time datetime="2026-09-17">2026-09-17</time></td></tr><tr><th scope="row"><a href="/advisories/cve-2026-59714/">CVE-2026-59714</a></th><td><code>open-webui</code></td><td class="adv-num">7.1</td><td>High</td><td>Missing authorization (CWE-862)</td><td><time datetime="2026-07-24">2026-07-24</time></td></tr><tr><th scope="row"><a href="/advisories/cve-2026-53577/">CVE-2026-53577</a></th><td><code>kestra</code></td><td class="adv-num">6.5</td><td>Medium</td><td>Incorrect authorization (CWE-863)</td><td><time datetime="2026-06-03">2026-06-03</time></td></tr><tr><th scope="row"><a href="/advisories/cve-2026-63342/">CVE-2026-63342</a></th><td><code>hatchet</code></td><td class="adv-num">6.3</td><td>Medium</td><td>Incorrect authorization (CWE-863)</td><td><time datetime="2026-06-30">2026-06-30</time></td></tr><tr><th scope="row"><a href="/advisories/ghsa-59h8-w5q6-mfmp/">GHSA-59h8-w5q6-mfmp</a></th><td><code>trigger.dev</code></td><td class="adv-num">5.3</td><td>Medium</td><td>Missing authentication (CWE-306)</td><td><time datetime="2026-07-21">2026-07-21</time></td></tr><tr><th scope="row"><a href="/advisories/cve-2026-73301/">CVE-2026-73301</a></th><td><code>@budibase/server</code></td><td class="adv-num">4.3</td><td>Medium</td><td>Missing authorization (CWE-862)</td><td><time datetime="2026-07-24">2026-07-24</time></td></tr><tr><th scope="row"><a href="/advisories/cve-2026-59715/">CVE-2026-59715</a></th><td><code>open-webui</code></td><td class="adv-num">3.1</td><td>Low</td><td>Missing authentication (CWE-306)</td><td><time datetime="2026-07-24">2026-07-24</time></td></tr></tbody></table></div><p class="adv-ledgertable__foot">&dagger; Scored by me, not by the coordinating database. That advisory was published with a severity but no CVSS score and no vector, in v3 or v4; the score shown is my own CVSS v3.1 base score derived from the published finding, and its vector is on the advisory page.</p></div>
 
 <!-- ADVISORIES:END -->
 

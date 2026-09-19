@@ -704,3 +704,75 @@ main table tbody tr:not(:first-child):focus-within > td { box-shadow: inset 0 1p
   .fm-specimen .sp-grid > li { padding: .65rem .55rem .7rem; }
   .fm-specimen .sp-v { font-size: .9375rem; }
 }
+
+// T1, the ledger table. The advisory table used to pay both costs at once: at
+// desktop it wrapped in four of five columns because it was pinned to the
+// 660px prose measure, and on a phone it scrolled with no affordance. This
+// breaks out to 890px where there is room and scrolls inside a labelled,
+// ruled region where there is not.
+.adv-ledgertable {
+  --adv-bleed: min(890px, calc(100vw - 2.5rem));
+  width: var(--adv-bleed);
+  max-width: none;
+  margin: 1.5rem 0 2.25rem;
+  margin-left: calc(50% - var(--adv-bleed) / 2);
+}
+.adv-ledgertable__note { margin: 0 0 .6rem; font-size: .8125rem; color: var(--fm-muted); }
+.adv-ledgertable__hint { display: none; }
+.adv-ledgertable__scroll { overflow-x: auto; overscroll-behavior-x: contain; }
+.adv-ledgertable__scroll:focus-visible { outline: 2px solid var(--fm-link); outline-offset: 3px; }
+// The theme sets `main table{display:block;width:100%;max-width:100%;overflow-x:auto}`,
+// which would make the table its own scroller and cap it at the measure. The
+// scrolling belongs to the wrapper above, so all four are overridden here.
+.adv-ledgertable table {
+  display: table;
+  overflow: visible;
+  border-collapse: collapse;
+  width: max-content;
+  min-width: 100%;
+  max-width: none;
+  font-size: .8125rem;
+  line-height: 1.45;
+  margin: 0;
+}
+.adv-ledgertable th, .adv-ledgertable td {
+  white-space: nowrap; text-align: left; font-weight: 400;
+  padding: .5rem 1.5rem .5rem 0; vertical-align: baseline;
+  border-bottom: 1px solid var(--fm-rule);
+}
+// `main table td:nth-child(2){white-space:normal}` further up is (0,1,3) and
+// outranks the (0,1,1) rule above, so the project column would wrap and
+// reintroduce exactly the ragged row this treatment exists to remove. That
+// rule is there for the 2-column metadata tables on writeup pages, which this
+// is not, so it is overridden only here.
+.adv-ledgertable td:nth-child(2), .adv-ledgertable th:nth-child(2) { white-space: nowrap; }
+.adv-ledgertable thead th {
+  border-bottom: 1px solid var(--fm-rule-strong); padding-top: 0;
+  font-size: .75rem; text-transform: uppercase; letter-spacing: .12em;
+  color: var(--fm-muted); font-weight: 600;
+}
+.adv-ledgertable tbody th { color: var(--fm-ink); font-weight: 400; }
+.adv-ledgertable td:last-child, .adv-ledgertable th:last-child { padding-right: 0; }
+.adv-ledgertable tbody tr:last-child th, .adv-ledgertable tbody tr:last-child td {
+  border-bottom: 1px solid var(--fm-rule-strong);
+}
+.adv-ledgertable .adv-num { font-variant-numeric: tabular-nums slashed-zero lining-nums; }
+.adv-ledgertable .adv-num abbr { text-decoration: none; color: var(--fm-link); cursor: help; }
+.adv-ledgertable .adv-none { color: var(--fm-muted); }
+.adv-ledgertable code { white-space: nowrap; }
+.adv-ledgertable__foot {
+  margin: .7rem 0 0; font-size: .75rem; line-height: 1.6; color: var(--fm-soft);
+}
+// Below 900 the table cannot fit, so say so and rule the cut.
+@media (max-width: 900px) {
+  .adv-ledgertable__hint { display: inline; }
+  .adv-ledgertable__scroll {
+    border-left: 1px solid var(--fm-rule-strong);
+    border-right: 1px solid var(--fm-rule-strong);
+    padding: 0 .75rem;
+    scroll-snap-type: x proximity;
+    scroll-padding-left: .75rem;
+  }
+  .adv-ledgertable th, .adv-ledgertable td { scroll-snap-align: start; }
+  .adv-ledgertable td:last-child, .adv-ledgertable th:last-child { padding-right: .75rem; }
+}

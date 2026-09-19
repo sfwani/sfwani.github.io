@@ -195,25 +195,66 @@ def write_index(rows, stamp):
         "but never forwarded to the global database, so that search cannot see them. Each "
         "row links to its own advisory, where the credit is visible.",
         "",
-        "| Advisory | Project | CVSS | Class | Published |",
-        "|:--|:--|:--|:--|:--|",
     ]
+    # Same T1 ledger table as the home page: five columns do not fit the prose
+    # measure, so it breaks out where there is room and scrolls in a labelled
+    # region where there is not, instead of silently wrapping or silently
+    # clipping. Markup is built here rather than as a markdown table because
+    # kramdown cannot express the wrapper or the scoped column classes.
+    import html as _html
+
+    def esc(x):
+        return _html.escape(str(x), quote=True)
+
+    body = []
+    any_self = False
     for a in rows:
         name = a.get("cve_id") or a["ghsa_id"]
         score, _v, self_assessed = cvss_of(a)
+        any_self = any_self or self_assessed
         sev = (a.get("severity") or "").capitalize()
-        mark = ", self-assessed" if self_assessed else ""
-        rating = f"{score:.1f} {sev}{mark}" if score is not None else sev
+        if score is None:
+            cvss = '<span class="adv-none">not scored</span>'
+        else:
+            mark = ('<abbr title="Scored by me, not by the coordinating database">&dagger;</abbr>'
+                    if self_assessed else "")
+            cvss = f"{score:.1f}{mark}"
         pkgs = sorted({v["package"]["name"] for v in a.get("vulnerabilities") or []
                        if v.get("package")})
         pkg = short_package(pkgs[0]) if pkgs else "n/a"
         cwe = (a.get("cwes") or [{}])[0].get("cwe_id")
         cls = CWE_LABELS.get(cwe, cwe or "n/a")
-        lines.append(
-            f"| [{name}](/advisories/{slug(a)}/) | `{pkg}` | {rating} | {cls} | "
-            f"{(a.get('published_at') or '')[:10]} |"
-        )
-    lines.append("")
+        if cwe and cls != cwe:
+            cls = f"{cls} ({cwe})"
+        pub = (a.get("published_at") or "")[:10]
+        body.append(
+            f'<tr><th scope="row"><a href="/advisories/{slug(a)}/">{esc(name)}</a></th>'
+            f"<td><code>{esc(pkg)}</code></td>"
+            f'<td class="adv-num">{cvss}</td>'
+            f"<td>{esc(sev)}</td>"
+            f"<td>{esc(cls)}</td>"
+            f'<td><time datetime="{esc(pub)}">{esc(pub)}</time></td></tr>')
+
+    n = len(rows)
+    foot = ""
+    if any_self:
+        foot = ('<p class="adv-ledgertable__foot">&dagger; Scored by me, not by the coordinating '
+                "database. That advisory was published with a severity but no CVSS score and no "
+                "vector, in v3 or v4; the score shown is my own CVSS v3.1 base score derived from "
+                "the published finding, and its vector is on its page.</p>")
+    lines += [
+        '<div class="adv-ledgertable" markdown="0">'
+        f'<p class="adv-ledgertable__note">{n} published '
+        f"{'advisory' if n == 1 else 'advisories'}."
+        '<span class="adv-ledgertable__hint"> The table scrolls sideways.</span></p>'
+        '<div class="adv-ledgertable__scroll" role="region" tabindex="0" '
+        'aria-label="Published advisories">'
+        '<table><thead><tr><th scope="col">Advisory</th><th scope="col">Project</th>'
+        '<th scope="col">CVSS</th><th scope="col">Severity</th>'
+        '<th scope="col">Weakness</th><th scope="col">Published</th></tr></thead>'
+        f'<tbody>{"".join(body)}</tbody></table></div>{foot}</div>',
+        "",
+    ]
     (ROOT / "advisories.md").write_text("\n".join(lines), encoding="utf-8")
 
 
