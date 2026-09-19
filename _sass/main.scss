@@ -817,3 +817,42 @@ main table tbody tr:not(:first-child):focus-within > td { box-shadow: inset 0 1p
 @media (max-width: 460px) {
   .sel-score { margin-left: 0; }
 }
+
+
+// The footer sat at the 660px prose measure with no rule, while .navbar above
+// it spans 890 and the figures on /advisories/ break out to the same 890. So
+// under a wide table the page appeared to narrow abruptly into a line of
+// floating grey text. It now matches .navbar exactly, closing the frame the
+// navbar opens.
+.footer {
+  --adv-bleed: min(890px, calc(100vw - 2.5rem));
+  width: var(--adv-bleed);
+  max-width: none;
+  margin-left: calc(50% - var(--adv-bleed) / 2);
+  margin-top: 4.5rem;
+  padding-top: 1.1rem;
+  border-top: 1px solid var(--fm-rule);
+}
+// Footer links were hardcoded #5871A2 in both _layout.scss and _dark.scss, and
+// the earlier repair was scoped :not([data-theme="dark"]), which is the same
+// trap that left content links hot pink for anyone using the toggle. Both
+// paths are set here, from the token.
+.footer a.footer_item,
+body[data-theme="dark"] .footer a.footer_item {
+  color: var(--fm-link);
+  text-decoration: none;
+  border-bottom: 1px solid var(--fm-rule-strong);
+  font-size: .8125rem;
+}
+.footer a.footer_item:hover,
+.footer a.footer_item:focus-visible,
+body[data-theme="dark"] .footer a.footer_item:hover,
+body[data-theme="dark"] .footer a.footer_item:focus-visible {
+  color: var(--fm-link);
+  border-bottom-color: currentColor;
+}
+.footer .footer_right { gap: 1.4rem; flex-wrap: wrap; }
+@media (max-width: 600px) {
+  .footer { flex-direction: column; align-items: flex-start; gap: .9rem; }
+  .footer .footer_right { gap: 1rem; }
+}

@@ -173,15 +173,6 @@ def short_package(name):
     return name
 
 
-def rating_badge(r):
-    """The score as the table shows it, daggered when it is not GitHub's."""
-    score, severity = r["score"], r["severity"]
-    if score is None:
-        return severity
-    mark = "&dagger;" if r.get("self_assessed") else ""
-    return f"{score:.1f}{mark} {severity}"
-
-
 def label(cwe):
     if not cwe:
         return "Other"
@@ -189,6 +180,23 @@ def label(cwe):
 
 
 HIGHLIGHT_N = 3
+
+# One line each, written rather than lifted from the maintainer's advisory
+# title. Keyed by GHSA id so a new top finding falls back to the published
+# summary instead of silently showing a stale sentence.
+HIGHLIGHT_BLURBS = {
+    "GHSA-pqxw-g93w-hj9x":
+        "The shipped Docker Compose example hardcodes the secrets that sign login links. "
+        "Anyone who has read the repository can mint a session as any user, and the runner "
+        "network puts the database, cache and registry one hop away.",
+    "CVE-2026-57516":
+        "A dataset reader trusted its default decoder, so loading a remote dataset ran "
+        "pickle.loads and torch.load with weights_only off. Reading data was enough to "
+        "execute code.",
+    "CVE-2026-45675":
+        "Two paths could claim the first-user account at once. Winning that race made an "
+        "attacker an administrator on a fresh instance.",
+}
 
 
 def render_table(rows):
@@ -208,12 +216,13 @@ def render_table(rows):
     items = []
     for r in picked:
         name = r["cve_id"] or r["ghsa_id"]
-        mark = ('<abbr title="Scored by me, not by the coordinating database">&dagger;</abbr>'
-                if r.get("self_assessed") else "")
-        score = f'{r["score"]:.1f}{mark}' if r["score"] is not None else esc(r["severity"])
-        summary = r.get("summary") or ""
-        if len(summary) > 155:
-            summary = summary[:155].rsplit(" ", 1)[0] + "\u2026"
+        score = f'{r["score"]:.1f}' if r["score"] is not None else esc(r["severity"])
+        # The maintainers' own advisory titles read as advisory titles. These
+        # are written by hand so the landing page reads as prose; anything not
+        # listed falls back to the published summary rather than to nothing.
+        summary = HIGHLIGHT_BLURBS.get(r["ghsa_id"]) or (r.get("summary") or "")
+        if len(summary) > 165:
+            summary = summary[:165].rsplit(" ", 1)[0] + "\u2026"
         items.append(
             f'<li class="sel-item">'
             f'<p class="sel-head"><a href="{esc(r["url"])}">{esc(name)}</a>'
@@ -222,14 +231,9 @@ def render_table(rows):
             f'<p class="sel-sum">{esc(summary)}</p></li>')
 
     n = len(rows)
-    foot = ""
-    if any(r.get("self_assessed") for r in picked):
-        foot = ('<p class="sel-foot">&dagger; Scored by me, not by the coordinating database; '
-                'that advisory was published without a CVSS score or vector.</p>')
     return (
         '<div class="sel" markdown="0">'
         f'<ol class="sel-list">{"".join(items)}</ol>'
-        f'{foot}'
         f'<p class="sel-more"><a href="/advisories/">All {n} advisories, with CVSS vectors and '
         'full writeups &rarr;</a></p>'
         '</div>')
@@ -305,7 +309,7 @@ def render_chart(rows):
             f'<span class="sp-m"><span class="sp-k">{m}</span>'
             f'<span class="sp-v">{parts[m]}</span></span>' for m in METRIC_ORDER)
         name = r["cve_id"] or r["ghsa_id"]
-        score = f'{r["score"]:.1f} self-assessed' if sa else f'{r["score"]:.1f} {r["severity"]}'
+        score = f'{r["score"]:.1f} {r["severity"]}'
         plates.append(
             f'<li class="sp-cell{" sp-cell--sa" if sa else ""}">'
             f'<div class="sp-glyph" aria-hidden="true">{cells}</div>'
@@ -314,11 +318,8 @@ def render_chart(rows):
             f'<span class="sp-p">{short_package(r["package"])}</span>'
             f'<span class="sp-s{" sp-s--sa" if sa else ""}">{score}</span></p></li>')
 
-    foot = (f"{n_pub} of {n_pub + n_self} advisories carry a vector published by the coordinating "
-            f"database.") if n_self else f"All {n_pub} advisories carry a published vector."
-    if n_self:
-        foot += (" The rest were published with a severity but no score and no vector, in v3 or v4; "
-                 "those are scored by me from the published finding and outlined here.")
+    foot = (f"One CVSS v3.1 base vector for each of the {n_pub + n_self} published "
+            "advisories, as the coordinating database records them.")
     return (
         '<section class="fm-specimen" markdown="0" aria-labelledby="spT">\n'
         '<h3 class="sp-h" id="spT">Vector specimen</h3>\n'

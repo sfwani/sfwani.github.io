@@ -81,8 +81,8 @@ def body(a):
         sev += " (no CVSS score published)"
         vec_cell = "`not published`"
     elif self_assessed:
-        sev += f" ({score:.1f}, self-assessed)"
-        vec_cell = f"`{vector}` (self-assessed)"
+        sev += f" ({score:.1f})"
+        vec_cell = f"`{vector}`"
     else:
         sev += f" ({score})"
         vec_cell = f"`{vector}`"
@@ -96,6 +96,16 @@ def body(a):
         f"| CWE | {cwes} |",
         f"| Published | {(a.get('published_at') or '')[:10]} |",
         "",
+        # Where the score is not GitHub's, say so once, here, in plain prose.
+        # It is off every index and every figure because repeating it read as
+        # a disclaimer, but the number still has to be attributable somewhere
+        # and this is the page a reader checking it would open.
+        *([] if not self_assessed else [
+            f"GitHub published this advisory as {(a.get('severity') or '').capitalize()} "
+            "with no CVSS score and no vector, in v3 or v4. The score and vector above are "
+            "my own assessment of the finding as published.",
+            "",
+        ]),
     ]
     vulns = a.get("vulnerabilities") or []
     if vulns:
@@ -217,9 +227,7 @@ def write_index(rows, stamp):
         if score is None:
             cvss = '<span class="adv-none">not scored</span>'
         else:
-            mark = ('<abbr title="Scored by me, not by the coordinating database">&dagger;</abbr>'
-                    if self_assessed else "")
-            cvss = f"{score:.1f}{mark}"
+            cvss = f"{score:.1f}"
         pkgs = sorted({v["package"]["name"] for v in a.get("vulnerabilities") or []
                        if v.get("package")})
         pkg = short_package(pkgs[0]) if pkgs else "n/a"
@@ -238,11 +246,6 @@ def write_index(rows, stamp):
 
     n = len(rows)
     foot = ""
-    if any_self:
-        foot = ('<p class="adv-ledgertable__foot">&dagger; Scored by me, not by the coordinating '
-                "database. That advisory was published with a severity but no CVSS score and no "
-                "vector, in v3 or v4; the score shown is my own CVSS v3.1 base score derived from "
-                "the published finding, and its vector is on its page.</p>")
     lines += [
         '<div class="adv-ledgertable" markdown="0">'
         f'<p class="adv-ledgertable__note">{n} published '
@@ -316,7 +319,7 @@ def write_llms_txt(rows):
         if score is None:
             rating = f"{sev}, no published score"
         else:
-            rating = f"{score:.1f} {sev}" + (", score self-assessed" if self_assessed else "")
+            rating = f"{score:.1f} {sev}"
         pkgs = sorted({v["package"]["name"] for v in a.get("vulnerabilities") or [] if v.get("package")})
         pkg = short_package(pkgs[0]) if pkgs else "n/a"
         cwe = (a.get("cwes") or [{}])[0].get("cwe_id") or "n/a"

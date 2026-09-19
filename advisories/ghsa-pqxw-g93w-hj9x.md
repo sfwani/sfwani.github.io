@@ -9,16 +9,18 @@ permalink: /advisories/ghsa-pqxw-g93w-hj9x/
 layout: page
 description: "Self-Hosted Deployment: Default Secrets allow Unauthenticated Infrastructure Compromise"
 comments: false
-last_modified_at: 2026-09-19T20:04:49+00:00
+last_modified_at: 2026-09-19T20:25:40+00:00
 ---
 | | |
 |:--|:--|
 | Advisory | [GHSA-pqxw-g93w-hj9x](https://github.com/triggerdotdev/trigger.dev/security/advisories/GHSA-pqxw-g93w-hj9x) |
 | CVE | not assigned |
-| Severity | High (9.0, self-assessed) |
-| CVSS vector | `CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:C/C:H/I:H/A:H` (self-assessed) |
+| Severity | High (9.0) |
+| CVSS vector | `CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:C/C:H/I:H/A:H` |
 | CWE | CWE-653 (Improper Isolation or Compartmentalization), CWE-1393 (Use of Default Password) |
 | Published | 2026-07-21 |
+
+GitHub published this advisory as High with no CVSS score and no vector, in v3 or v4. The score and vector above are my own assessment of the finding as published.
 
 ### Affected versions
 

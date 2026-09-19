@@ -3,7 +3,7 @@ title: Sanaan Fayaz Wani
 seo_title: "Sanaan Fayaz Wani - AI Security Researcher"
 layout: page
 description: Vulnerability research on AI agent frameworks and LLM infrastructure. Seven assigned CVEs and eleven published advisories, with root cause, reproduction and fix for each.
-last_modified_at: 2026-09-19T20:14:11+00:00
+last_modified_at: 2026-09-19T20:25:40+00:00
 ---
 
 Sanaan Fayaz Wani is a Security Engineer at Amazon, working in IAM security on bringing agentic AI into identity and access management. Outside that, he hunts unauthenticated remote code execution in the infrastructure that runs large language models: agent frameworks, inference servers, workflow orchestrators, and the serialization formats they trust.
@@ -30,7 +30,7 @@ credited.
 
 <!-- ADVISORIES:START -->
 
-<div class="sel" markdown="0"><ol class="sel-list"><li class="sel-item"><p class="sel-head"><a href="/advisories/ghsa-pqxw-g93w-hj9x/">GHSA-pqxw-g93w-hj9x</a><span class="sel-proj"><code>trigger.dev</code></span><span class="sel-score">9.0<abbr title="Scored by me, not by the coordinating database">&dagger;</abbr></span></p><p class="sel-sum">Self-Hosted Deployment: Default Secrets allow Unauthenticated Infrastructure Compromise</p></li><li class="sel-item"><p class="sel-head"><a href="/advisories/cve-2026-57516/">CVE-2026-57516</a><span class="sel-proj"><code>ray</code></span><span class="sel-score">8.8</span></p><p class="sel-sum">Ray: Arbitrary code execution via ray.data.read_webdataset default decoder: pickle.loads(value) and torch.load(weights_only=False)</p></li><li class="sel-item"><p class="sel-head"><a href="/advisories/cve-2026-45675/">CVE-2026-45675</a><span class="sel-proj"><code>open-webui</code></span><span class="sel-score">8.1</span></p><p class="sel-sum">Open WebUI: LDAP and OAuth First-User Race Condition Allows Multiple Admin Accounts</p></li></ol><p class="sel-foot">&dagger; Scored by me, not by the coordinating database; that advisory was published without a CVSS score or vector.</p><p class="sel-more"><a href="/advisories/">All 11 advisories, with CVSS vectors and full writeups &rarr;</a></p></div>
+<div class="sel" markdown="0"><ol class="sel-list"><li class="sel-item"><p class="sel-head"><a href="/advisories/ghsa-pqxw-g93w-hj9x/">GHSA-pqxw-g93w-hj9x</a><span class="sel-proj"><code>trigger.dev</code></span><span class="sel-score">9.0</span></p><p class="sel-sum">The shipped Docker Compose example hardcodes the secrets that sign login links. Anyone who has read the repository can mint a session as any user, and the runner…</p></li><li class="sel-item"><p class="sel-head"><a href="/advisories/cve-2026-57516/">CVE-2026-57516</a><span class="sel-proj"><code>ray</code></span><span class="sel-score">8.8</span></p><p class="sel-sum">Ray: Arbitrary code execution via ray.data.read_webdataset default decoder: pickle.loads(value) and torch.load(weights_only=False)</p></li><li class="sel-item"><p class="sel-head"><a href="/advisories/cve-2026-45675/">CVE-2026-45675</a><span class="sel-proj"><code>open-webui</code></span><span class="sel-score">8.1</span></p><p class="sel-sum">Open WebUI: LDAP and OAuth First-User Race Condition Allows Multiple Admin Accounts</p></li></ol><p class="sel-more"><a href="/advisories/">All 11 advisories, with CVSS vectors and full writeups &rarr;</a></p></div>
 
 <!-- ADVISORIES:END -->
 
