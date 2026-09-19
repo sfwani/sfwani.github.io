@@ -854,3 +854,58 @@ body[data-theme="dark"] .footer a.footer_item:focus-visible {
   .footer { flex-direction: column; align-items: flex-start; gap: .9rem; }
   .footer .footer_right { gap: 1rem; }
 }
+
+// M0. The theme sets overflow-x:hidden on html AND body. On body that is not
+// cosmetic: overflow-x:hidden forces the computed overflow-y to auto, so <body>
+// silently becomes a scroll container that never scrolls, and any scroll-driven
+// animation inside it attaches to that dead container and pins forever. Measured
+// stuck at 41.9998% at every scroll offset before this change.
+//
+// `clip` clips exactly as `hidden` did but does NOT create a scroll container.
+// html keeps overflow-y:scroll deliberately: it is the root scroller, it is not
+// the culprit, and dropping it would let the scrollbar appear and disappear
+// between short and long pages, shifting the layout sideways.
+html { overflow-x: clip; }
+body { overflow-x: clip; overflow-y: visible; }
+
+// M2. The section rule engages. Every h2 already carries a bottom rule; this
+// draws a stronger one over it as the heading arrives, starting slightly out in
+// the margin so the text column and the empty margin are connected once per
+// section. No JS, no new DOM, no layout: only a transform on a pseudo-element.
+//
+// --fm-lead is capped at 44px rather than the full margin because the rail (M1)
+// lives further out and a rule crossing its spine reads as an accident.
+:root { --fm-lead: clamp(0px, calc((100vw - 720px) / 2 - 22px), 44px); }
+
+.page-content h2 { position: relative; }
+.page-content h2::after {
+  content: "";
+  position: absolute;
+  left: calc(0px - var(--fm-lead));
+  right: 0;
+  bottom: -1px;
+  height: 1px;
+  background: var(--fm-rule-strong);
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  pointer-events: none;
+}
+// The timeline is named on the h2 and referenced from the pseudo-element.
+// animation-timeline: view() declared directly on the ::after does not resolve.
+@supports (animation-timeline: view()) {
+  .page-content h2 { view-timeline-name: --fm-sec; view-timeline-axis: block; }
+  .page-content h2::after {
+    animation-name: fm-rule-in;
+    animation-timing-function: cubic-bezier(.2, .7, .3, 1);
+    animation-fill-mode: both;
+    animation-timeline: --fm-sec;
+    animation-range: entry 0% cover 42%;
+  }
+}
+@keyframes fm-rule-in { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+
+// Reduced motion removes the overlay entirely, leaving the existing border
+// untouched, so the page is byte-identical to before.
+@media (prefers-reduced-motion: reduce) {
+  .page-content h2::after { display: none; }
+}
