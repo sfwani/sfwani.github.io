@@ -129,6 +129,7 @@ def resolve_repo_level(s, repo, ghsa_id):
         "cwe": cwes[0] if cwes else None,
         "url": f"/advisories/{(a.get('cve_id') or a['ghsa_id']).lower()}/",
         "published": (a.get("published_at") or "")[:10],
+        "summary": (a.get("summary") or "").strip(),
     }
 
 
@@ -154,6 +155,7 @@ def resolve(s, ghsa_id):
         "cwe": cwes[0] if cwes else None,
         "url": f"/advisories/{(a.get('cve_id') or a['ghsa_id']).lower()}/",
         "published": (a.get("published_at") or "")[:10],
+        "summary": (a.get("summary") or "").strip(),
     }
 
 
@@ -186,66 +188,50 @@ def label(cwe):
     return CWE_LABELS.get(cwe, cwe)
 
 
-def render_table(rows):
-    """T1, the ledger table: a real table that breaks its own measure.
+HIGHLIGHT_N = 3
 
-    The old markdown table paid both costs at once. At desktop it wrapped in
-    four of five columns because it was pinned to the 660px prose measure, and
-    on a phone it scrolled with no affordance at all. This one widens to 890px
-    where there is room, keeps every cell on one line, and where there is not
-    it scrolls inside a labelled region with rules marking the cut and a line
-    of text saying so. tabindex makes that region reachable by keyboard, which
-    is required once a scroll container holds content.
+
+def render_table(rows):
+    """The home page summary: the highest findings, not the whole ledger.
+
+    The full table lives on /advisories/ and used to be duplicated here, which
+    made the landing page a data dump and repeated eleven rows verbatim one
+    click apart. Rows arrive sorted by severity then score, so the first few
+    are the strongest.
     """
     import html as _html
 
     def esc(x):
         return _html.escape(str(x), quote=True)
 
-    head = ("<thead><tr>"
-            "<th scope=\"col\">Advisory</th><th scope=\"col\">Project</th>"
-            "<th scope=\"col\">CVSS</th><th scope=\"col\">Severity</th>"
-            "<th scope=\"col\">Weakness</th><th scope=\"col\">Published</th>"
-            "</tr></thead>")
-    body = []
-    for r in rows:
+    picked = rows[:HIGHLIGHT_N]
+    items = []
+    for r in picked:
         name = r["cve_id"] or r["ghsa_id"]
-        cls = label(r["cwe"])
-        if r["cwe"] and cls != r["cwe"]:
-            cls = f"{cls} ({r['cwe']})"
-        if r["score"] is None:
-            cvss = "<span class=\"adv-none\">not scored</span>"
-        else:
-            mark = "<abbr title=\"Scored by me, not by the coordinating database\">&dagger;</abbr>" \
-                   if r.get("self_assessed") else ""
-            cvss = f"{r['score']:.1f}{mark}"
-        pub = f"<time datetime=\"{esc(r['published'])}\">{esc(r['published'])}</time>" \
-              if r.get("published") else "&mdash;"
-        body.append(
-            f"<tr><th scope=\"row\"><a href=\"{esc(r['url'])}\">{esc(name)}</a></th>"
-            f"<td><code>{esc(short_package(r['package']))}</code></td>"
-            f"<td class=\"adv-num\">{cvss}</td>"
-            f"<td>{esc(r['severity'])}</td>"
-            f"<td>{esc(cls)}</td>"
-            f"<td>{pub}</td></tr>")
+        mark = ('<abbr title="Scored by me, not by the coordinating database">&dagger;</abbr>'
+                if r.get("self_assessed") else "")
+        score = f'{r["score"]:.1f}{mark}' if r["score"] is not None else esc(r["severity"])
+        summary = r.get("summary") or ""
+        if len(summary) > 155:
+            summary = summary[:155].rsplit(" ", 1)[0] + "\u2026"
+        items.append(
+            f'<li class="sel-item">'
+            f'<p class="sel-head"><a href="{esc(r["url"])}">{esc(name)}</a>'
+            f'<span class="sel-proj"><code>{esc(short_package(r["package"]))}</code></span>'
+            f'<span class="sel-score">{score}</span></p>'
+            f'<p class="sel-sum">{esc(summary)}</p></li>')
 
     n = len(rows)
-    note = f"{n} published {'advisory' if n == 1 else 'advisories'}."
     foot = ""
-    if any(r.get("self_assessed") for r in rows):
-        foot = ("<p class=\"adv-ledgertable__foot\">&dagger; Scored by me, not by the "
-                "coordinating database. That advisory was published with a severity but no CVSS "
-                "score and no vector, in v3 or v4; the score shown is my own CVSS v3.1 base score "
-                "derived from the published finding, and its vector is on the advisory page.</p>")
+    if any(r.get("self_assessed") for r in picked):
+        foot = ('<p class="sel-foot">&dagger; Scored by me, not by the coordinating database; '
+                'that advisory was published without a CVSS score or vector.</p>')
     return (
-        '<div class="adv-ledgertable" markdown="0">'
-        f'<p class="adv-ledgertable__note">{note}'
-        '<span class="adv-ledgertable__hint"> The table scrolls sideways.</span></p>'
-        '<div class="adv-ledgertable__scroll" role="region" tabindex="0" '
-        'aria-label="Published advisories">'
-        f'<table>{head}<tbody>{"".join(body)}</tbody></table>'
-        '</div>'
+        '<div class="sel" markdown="0">'
+        f'<ol class="sel-list">{"".join(items)}</ol>'
         f'{foot}'
+        f'<p class="sel-more"><a href="/advisories/">All {n} advisories, with CVSS vectors and '
+        'full writeups &rarr;</a></p>'
         '</div>')
 
 

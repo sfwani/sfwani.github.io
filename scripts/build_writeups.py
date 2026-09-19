@@ -18,6 +18,7 @@ sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 from update_advisories import (  # noqa: E402
     API, USER, session, credited_ghsa_ids, extra_repo_advisories, CWE_LABELS,
     short_package,
+    render_chart,
     # The derived score for the one advisory published without one lives in
     # the sibling generator, so the two pages this repo builds cannot
     # disagree about it.
@@ -253,6 +254,24 @@ def write_index(rows, stamp):
         '<th scope="col">CVSS</th><th scope="col">Severity</th>'
         '<th scope="col">Weakness</th><th scope="col">Published</th></tr></thead>'
         f'<tbody>{"".join(body)}</tbody></table></div>{foot}</div>',
+        "",
+        "## How they score",
+        "",
+        # The specimen lives here rather than on the home page: it is the same
+        # eleven advisories as the table directly above it, so this is where a
+        # reader already has the context for it, and here it can use the full
+        # breakout width instead of being squeezed into the prose measure.
+        render_chart([{
+            "vector": cvss_of(a)[1],
+            "score": cvss_of(a)[0],
+            "self_assessed": cvss_of(a)[2],
+            "severity": (a.get("severity") or "").capitalize(),
+            "cve_id": a.get("cve_id"),
+            "ghsa_id": a["ghsa_id"],
+            "package": (sorted({v["package"]["name"] for v in a.get("vulnerabilities") or []
+                                if v.get("package")}) or ["n/a"])[0],
+            "url": f"/advisories/{slug(a)}/",
+        } for a in rows]),
         "",
     ]
     (ROOT / "advisories.md").write_text("\n".join(lines), encoding="utf-8")
