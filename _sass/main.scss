@@ -575,3 +575,13 @@ main table th:nth-child(2){ white-space: normal; }
   display:inline-block; width:4ch; margin-right:1ch;
   font-weight:600; letter-spacing:.04em; color:var(--fm-ink);
 }
+
+// The concurrency bracket collapsed against the entry after it.
+// .rl-stream > .rl-entry:last-child > .rl-body{padding-bottom:.35rem} was meant
+// to trim the tail of the whole stream, but .rl-substream also carries
+// .rl-stream, so it matched the last entry INSIDE the bracket too. Cyber
+// Florida therefore ended with 5.6px instead of 30.4px, and .rl-bracket has no
+// bottom padding or margin, so the Amazon internship began 2px later.
+.exp.exp--rule .rl-substream > .rl-entry:last-child > .rl-body { padding-bottom: 1.9rem; }
+.exp.exp--rule .rl-bracket { padding-bottom: .1rem; margin-bottom: 1.9rem; }
+.exp.exp--rule .rl-groupwrap + .rl-entry > .rl-body { padding-top: 0; }
