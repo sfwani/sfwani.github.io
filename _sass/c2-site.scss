@@ -464,3 +464,25 @@
 @media (min-width: 1024px) and (max-width: 1199px){
   .org-mark{ margin-left: calc(var(--u) * 3); }
 }
+
+/* ── The gutter between body and aside ────────────────────────────
+   In the same section, the head separates its two columns by 120px (h2
+   spans 2-6, the note starts at 8, so column 7 is left empty) while the
+   body row separates them by 24px (body spans 2-7, the aside starts at 8,
+   adjacent). A 5x difference between two rows of the same block, and the
+   body row is the outlier, not the head.
+   Closed with padding rather than by moving either column. Giving the
+   aside columns 9-11 would have widened the gutter to 128px but squeezed
+   the aside to 264px, wrapping the disclosure note into a narrow stack
+   with a void beside it; narrowing the body to match the h2 would have
+   cut the measure to about 45 characters. Padding costs neither: the
+   prose simply stops short of a column edge it was never drawing. */
+@media (min-width: 1024px){
+  .sec:has(.col-aside) .col-body{ padding-right: calc(var(--u) * 4); }
+}
+/* Half of it on the narrow twelve column tier. The full 32px there took
+   the measure down to 42 characters, and 45 was already the number that
+   made the writeup pages read badly earlier. */
+@media (min-width: 1024px) and (max-width: 1199px){
+  .sec:has(.col-aside) .col-body{ padding-right: calc(var(--u) * 2); }
+}
