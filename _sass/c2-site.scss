@@ -161,7 +161,12 @@
    biography. For a reader arriving from a GHSA credit line, "is this real"
    should be answered before the first scroll. */
 .figs-lead{ margin-bottom: calc(var(--u)*6); }
-.figs-lead .figs{ grid-column: 1 / -1; margin: 0; }
+/* C2 set the counters 8px under their rule, which was right when they sat
+   under a section head as a caption. Up here under the title they carry a
+   heavy rule above and 48px of air below, so 8px read as stuck to the line:
+   a 6:1 imbalance. 24px puts them clearly under the rule while the larger
+   gap below still does the work of separating them from the first section. */
+.figs-lead .figs{ grid-column: 1 / -1; margin: 0; padding-top: calc(var(--u)*3); }
 
 /* Advisory identifiers are long monospace-ish strings and the display size is
    tuned for a two or three word name, so the title steps down on a writeup

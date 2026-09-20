@@ -192,7 +192,7 @@ last_modified_at: 2026-09-20T03:43:55+00:00
         <li><span class="yr">2025</span><span class="pl">2nd</span><span class="ev">SHPE National CTF</span><span class="nt">Won a cash prize</span></li>
         <li><span class="yr">2025</span><span class="pl">3rd</span><span class="ev">SecureTheFuture Research Award, Palo Alto Networks</span><span class="nt">Won a cash prize</span></li>
         <li><span class="yr">2025</span><span class="pl">3rd</span><span class="ev">NCAE CyberGames, South East Regionals</span><span class="nt">Won swag</span></li>
-        <li><span class="yr">2024</span><span class="pl">1st</span><span class="ev">SHPE National CTF</span><span class="nt">Won $4,500 with the team</span></li>
+        <li><span class="yr">2024</span><span class="pl">1st</span><span class="ev">SHPE National CTF</span><span class="nt">Won a cash prize</span></li>
         <li><span class="yr">2024</span><span class="pl">1st</span><span class="ev">Central Florida Tech Grove CTF</span><span class="nt">Won a cash prize</span></li>
       </ol>
     </section>
@@ -208,7 +208,7 @@ last_modified_at: 2026-09-20T03:43:55+00:00
         <li>
           <span class="src"><b>Cyber Florida</b><time datetime="2026-06-02">2 Jun 2026</time></span>
           <span class="ttl"><a href="https://cyberflorida.org/career-launch-series-from-socap-to-security-engineering/">Career Launch Series: From SOCAP to Security Engineering</a></span>
-          <span class="nt">Profile</span>
+          <span class="nt">Work shout out</span>
         </li>
         <li>
           <span class="src"><b>Cyber Florida</b><time datetime="2026-05-20">20 May 2026</time></span>
@@ -223,7 +223,7 @@ last_modified_at: 2026-09-20T03:43:55+00:00
         <li>
           <span class="src"><b>USF Bellini College</b><time datetime="2025-11-03">3 Nov 2025</time></span>
           <span class="ttl"><a href="https://www.usf.edu/ai-cybersecurity-computing/news/2025/cyberherd--cyberhawk-ctf.aspx">USF&rsquo;s CyberHerd team dominates in CyberHawk CTF win</a></span>
-          
+          <span class="nt">College shout out</span>
         </li>
         <li>
           <span class="src"><b>USF Bellini College</b><time datetime="2025-08-13">13 Aug 2025</time></span>
@@ -233,7 +233,7 @@ last_modified_at: 2026-09-20T03:43:55+00:00
         <li>
           <span class="src"><b>USF College of Engineering</b><time datetime="2025-01-08">8 Jan 2025</time></span>
           <span class="ttl"><a href="https://www.usf.edu/engineering/news/2025/usf-cyberherd-wrapped-2024-competitions-story.aspx">USF CyberHerd Team Dominates National Cybersecurity Competitions in 2024</a></span>
-          
+          <span class="nt">College shout out</span>
         </li>
         <li>
           <span class="src"><b>SHPE</b></span>
@@ -243,7 +243,7 @@ last_modified_at: 2026-09-20T03:43:55+00:00
         <li>
           <span class="src"><b>USF College of Engineering</b><time datetime="2024-11-12">12 Nov 2024</time></span>
           <span class="ttl"><a href="https://www.usf.edu/engineering/news/2024/cse/shpe_cyberherd.aspx">CyberHerd Member Leads Team to Victory and a $4,500 Prize at SHPE National Convention</a></span>
-          
+          <span class="nt">College shout out</span>
         </li>
       </ol>
     </section>
