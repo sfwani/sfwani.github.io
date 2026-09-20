@@ -190,7 +190,7 @@ last_modified_at: 2026-09-20T03:43:55+00:00
         <li><span class="yr">2025</span><span class="pl">1st</span><span class="ev">Hackabull CTF</span><span class="nt">Won swag and a lockpick set</span></li>
         <li><span class="yr">2025</span><span class="pl">1st</span><span class="ev">Social Engineering Competition, The CARE Lab at Temple University</span><span class="nt">Won a cash prize</span></li>
         <li><span class="yr">2025</span><span class="pl">2nd</span><span class="ev">SHPE National CTF</span><span class="nt">Won a cash prize</span></li>
-        <li><span class="yr">2025</span><span class="pl">2nd</span><span class="ev">CPTC Southeast Regionals</span><span class="nt">Won bragging rights</span></li>
+        <li><span class="yr">2025</span><span class="pl">2nd</span><span class="ev">CPTC Southeast Regionals</span><span class="nt">Won a heartbreak</span></li>
         <li><span class="yr">2025</span><span class="pl">3rd</span><span class="ev">SecureTheFuture Research Award, Palo Alto Networks</span><span class="nt">Won a cash prize</span></li>
         <li><span class="yr">2025</span><span class="pl">3rd</span><span class="ev">NCAE CyberGames, South East Regionals</span><span class="nt">Won swag</span></li>
         <li><span class="yr">2024</span><span class="pl">1st</span><span class="ev">SHPE National CTF</span><span class="nt">Won a cash prize</span></li>
