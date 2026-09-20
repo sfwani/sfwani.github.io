@@ -298,3 +298,17 @@
             mask-image: linear-gradient(to right, #000 calc(100% - 28px), transparent);
   }
 }
+
+/* ── The counters row ──────────────────────────────────────────────
+   Five figures at `span 2` use ten of the twelve columns, so the row
+   stopped 192px short of the rule above it and the rule below it, both
+   of which run the full field. Five does not divide into twelve, so the
+   row gets its own five equal tracks instead of borrowing the page's
+   subgrid: the figures then sit edge to edge between the two rules,
+   which is the alignment the eye is actually checking. Only above
+   1024px, where all five share a row; below that they wrap 3 + 2 and
+   the first row already reaches both edges. */
+@media (min-width: 1024px){
+  .figs{ grid-template-columns: repeat(5, minmax(0, 1fr)); }
+  .figs .fig{ grid-column: span 1; }
+}
