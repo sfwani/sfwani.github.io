@@ -127,6 +127,7 @@ last_modified_at: 2026-09-20T03:43:55+00:00
       <ol class="stream">
         <li>
           <p class="when">2026.06&ndash;<br>present</p>
+          <div class="org-mark org-mark--amazon" aria-hidden="true"></div>
           <div class="what">
             <h3>Amazon <span>/ Security Engineer</span></h3>
             <p>Identity and access management. Bringing agentic AI into IAM, which is the same question as the independent research from the other direction: what happens to authorization when an agent acts on a user&rsquo;s behalf across many services.</p>
@@ -134,6 +135,7 @@ last_modified_at: 2026-09-20T03:43:55+00:00
         </li>
         <li>
           <p class="when">2025.08&ndash;<br>2026.05</p>
+          <div class="org-mark org-mark--cyber-florida" aria-hidden="true"></div>
           <div class="what">
             <h3>Cyber Florida <span>/ Security Researcher</span></h3>
             <p>Florida Center for Cybersecurity, the state&rsquo;s cybersecurity center, hosted at the University of South Florida. Worked in the Cyber Florida SOC. Built agentic systems for open source vulnerability research, automating discovery and triage work that normally has to be done by hand. Also worked on industrial control systems security.</p>
@@ -141,6 +143,7 @@ last_modified_at: 2026-09-20T03:43:55+00:00
         </li>
         <li>
           <p class="when">2026.05<br>graduated</p>
+          <div class="org-mark org-mark--usf" aria-hidden="true"></div>
           <div class="what">
             <h3>University of South Florida <span>/ BSc Computer Science, cybersecurity focus</span></h3>
             <p>Graduated magna cum laude. CyberHerd, USF&rsquo;s cybersecurity competition team; former Blue Team Captain.</p>
@@ -148,6 +151,7 @@ last_modified_at: 2026-09-20T03:43:55+00:00
         </li>
         <li>
           <p class="when">2025.05&ndash;<br>2025.08</p>
+          <div class="org-mark org-mark--amazon" aria-hidden="true"></div>
           <div class="what">
             <h3>Amazon <span>/ Security Engineer Intern, Red Team</span></h3>
             <p>Built an autonomous agentic system for red team operations, and worked with the Model Context Protocol early in its life, before the tooling and the practice around it had settled. Month boundaries approximate.</p>

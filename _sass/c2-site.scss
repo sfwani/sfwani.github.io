@@ -312,3 +312,56 @@
   .figs{ grid-template-columns: repeat(5, minmax(0, 1fr)); }
   .figs .fig{ grid-column: span 1; }
 }
+
+/* ── Organisation marks in the Record section ──────────────────────
+   .when takes columns 1-2 and .what takes 3-9, so 10-12 were empty on
+   every row: 288px at 1280px, 239px at 1024. The marks fill that gutter
+   and give the rows a right edge, the same thing the counters row above
+   them needed.
+
+   Every mark is one ink. Two are SVGs whose fills were rewritten to
+   currentColor; Cyber Florida publishes no vector, so its raster is
+   reduced to an alpha mask and painted with background-color, which
+   gets the same currentColor behaviour and the same theme response as
+   the other two rather than a second asset for dark mode. */
+.org-mark{
+  grid-column: 10 / span 3;
+  justify-self: end;
+  align-self: start;
+  width: 100%;
+  max-width: 132px;
+  color: var(--ink-3);
+  opacity: .85;
+}
+.org-mark--usf{
+  aspect-ratio: 1330 / 314;
+  background-color: currentColor;
+  -webkit-mask: url("/assets/logos/usf.svg") no-repeat right center / contain;
+          mask: url("/assets/logos/usf.svg") no-repeat right center / contain;
+}
+.org-mark--amazon{
+  aspect-ratio: 1 / 1;
+  background-color: currentColor;
+  -webkit-mask: url("/assets/logos/amazon.svg") no-repeat right center / contain;
+          mask: url("/assets/logos/amazon.svg") no-repeat right center / contain;
+}
+
+.org-mark--cyber-florida{
+  aspect-ratio: 446 / 160;
+  background-color: currentColor;
+  -webkit-mask: url("/assets/logos/cyber-florida.png") no-repeat right center / contain;
+          mask: url("/assets/logos/cyber-florida.png") no-repeat right center / contain;
+}
+/* The Amazon mark is a glyph, not a lockup, so at the lockups' width it
+   would read twice their size. */
+.org-mark--amazon{ max-width: 46px; }
+
+@media (max-width: 1023px){
+  /* .what runs to the edge in the six column tier, so there is no gutter
+     left to sit in: the mark goes under the dates instead. */
+  .org-mark{ grid-column: 1 / span 2; justify-self: start; margin-top: var(--u); max-width: 104px; }
+  .org-mark--amazon{ max-width: 38px; }
+}
+@media (max-width: 639px){
+  .org-mark{ grid-column: 1 / -1; order: 3; margin-top: calc(var(--u)*1.5); }
+}
