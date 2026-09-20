@@ -370,7 +370,15 @@
           mask: url("/assets/logos/amazon.svg") no-repeat right center / contain;
 }
 
+/* Cyber Florida carried 2966px of ink against 284 for Hack The Box and
+   834 for USF: a solid pixel map plus a bold two line wordmark, so at the
+   shared 132px it was 3.4x the weight of its nearest neighbour and simply
+   shouted. Sized by ink rather than by width it comes down to 104, which
+   brings the set's spread from 10.4x to 3.6x. It cannot be equalised
+   outright, since matching the thin outline cube would make this wordmark
+   unreadable. */
 .org-mark--cyber-florida{
+  max-width: 104px;
   aspect-ratio: 446 / 160;
   background-color: currentColor;
   -webkit-mask: url("/assets/logos/cyber-florida.png") no-repeat right center / contain;
@@ -378,7 +386,7 @@
 }
 /* The Amazon mark is a glyph, not a lockup, so at the lockups' width it
    would read twice their size. */
-.org-mark--amazon{ max-width: 46px; }
+.org-mark--amazon{ max-width: 52px; }
 
 @media (max-width: 1023px){
   /* .what runs to the edge in the six column tier, so there is no gutter
@@ -401,7 +409,7 @@
           mask: url("/assets/logos/giac.svg") no-repeat right center / contain;
 }
 .org-mark--htb{
-  max-width: 28px;
+  max-width: 38px;
   aspect-ratio: 1 / 1;
   background-color: currentColor;
   -webkit-mask: url("/assets/logos/hackthebox.svg") no-repeat right center / contain;
@@ -409,7 +417,7 @@
 }
 @media (max-width: 1023px){
   .org-mark--giac{ max-width: 66px; }
-  .org-mark--htb{ max-width: 24px; }
+  .org-mark--htb{ max-width: 32px; }
 }
 
 /* ── Section head alignment ────────────────────────────────────────
@@ -443,4 +451,16 @@
    is the clearance Cyber Florida needs to stop reading as cropped. */
 @media (min-width: 1024px){
   .org-mark{ grid-column: 10 / span 3; }
+  /* Shifted right inside that span. With justify-self:center the margin
+     box is what gets centred, so a left margin moves the artwork right by
+     half its value: 48px here is a 24px shift. Done this way rather than
+     by narrowing the span, because a span of 11 to 12 is narrower than the
+     widest mark and would have pushed it back to 18px of clearance. */
+  .org-mark{ margin-left: calc(var(--u) * 6); }
+}
+/* The twelve column tier starts at 1024 but the columns there are at their
+   narrowest, and the full shift left the widest mark only 18px clear of the
+   column 12 line. Half the shift until there is room for all of it. */
+@media (min-width: 1024px) and (max-width: 1199px){
+  .org-mark{ margin-left: calc(var(--u) * 3); }
 }
