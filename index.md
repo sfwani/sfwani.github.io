@@ -133,14 +133,14 @@ last_modified_at: 2026-09-20T03:43:55+00:00
           </div>
         </li>
         <li>
-          <p class="when">2025.08&ndash;<br>2026.05<em>Concurrent</em></p>
+          <p class="when">2025.08&ndash;<br>2026.05</p>
           <div class="what">
             <h3>Cyber Florida <span>/ Security Researcher</span></h3>
             <p>Florida Center for Cybersecurity, the state&rsquo;s cybersecurity center, hosted at the University of South Florida. Worked in the Cyber Florida SOC. Built agentic systems for open source vulnerability research, automating discovery and triage work that normally has to be done by hand. Also worked on industrial control systems security.</p>
           </div>
         </li>
         <li>
-          <p class="when">2026.05<br>graduated<em>Concurrent</em></p>
+          <p class="when">2026.05<br>graduated</p>
           <div class="what">
             <h3>University of South Florida <span>/ BSc Computer Science, cybersecurity focus</span></h3>
             <p>Graduated magna cum laude. CyberHerd, USF&rsquo;s cybersecurity competition team; former Blue Team Captain.</p>

@@ -155,3 +155,16 @@
   letter-spacing: -.01em;
   overflow-wrap: anywhere;
 }
+
+/* The score column was 126px wide for a three character number, with the
+   figures right aligned under a left aligned header: a large gap to the left
+   of every score, and the number pressed against the severity beside it.
+   Right aligning the header instead only made it worse, because the table is
+   auto-layout and `width` on a cell is a hint, not a rule: the column took the
+   slack and grew to 377px.
+   Left aligned throughout is the answer. Every score is X.X, so the figures
+   line up anyway, the number sits under its own header, and the slack falls
+   to the right where it reads as column spacing. */
+.rec--compact .c-sc,
+.rec--compact thead .c-sc{ text-align: left; }
+.rec--compact .c-sc{ font-variant-numeric: proportional-nums; padding-right: calc(var(--u)*3); }

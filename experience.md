@@ -33,7 +33,6 @@ certifications, competition record and press coverage as of September 2026.
 
   <li class="rl-groupwrap">
     <div class="rl-bracket">
-      <p class="rl-glabel">CONCURRENT, 2025.08 TO 2026.05</p>
       <ol class="rl-stream rl-substream">
         <li class="rl-entry">
           <p class="rl-date"><b>2026.05</b>graduated</p>
