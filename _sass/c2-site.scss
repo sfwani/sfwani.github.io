@@ -141,6 +141,22 @@
   .mast-nav a{ font-size:.625rem; }
 }
 
+/* C2 sized the masthead's right hand track for the single word DARK:
+   three of twelve columns above 1024px, two of six below it. HOME /
+   ADVISORIES / ABOUT do not fit in either, so the flex children shrank
+   and the labels broke mid word, rendering as "HOM / E" and "ADVISORI /
+   ES" everywhere between 640 and 840 and again between 1040 and 1120.
+   The track keeps its end line, which is what the design aligns to, but
+   the group now sizes to its content and grows leftwards into the empty
+   columns beside it. Nothing moves at the widths that already fit. */
+@media (min-width: 480px){
+  .mast-tools{
+    width: max-content;
+    justify-self: end;
+  }
+  .mast-nav a{ white-space: nowrap; }
+}
+
 /* The five figures now sit directly under the title rather than under the
    biography. For a reader arriving from a GHSA credit line, "is this real"
    should be answered before the first scroll. */
@@ -266,4 +282,19 @@
 @media (max-width:639px){
   .mast-nav a{ padding-block:4px 5px; }
   .contact a{ display:inline-block; padding-block:5px; }
+}
+
+/* ── Running index on small screens ────────────────────────────────
+   C2 drops the section labels below 900px and leaves "01 02 03 04 05
+   06": a nav that costs 40px of every page and tells a reader nothing.
+   The strip is already a nowrap flex row with overflow-x:auto and the
+   scrollbar hidden, so the labels simply swipe. A fade on the trailing
+   edge is the only affordance there is that more of it exists. */
+@media (max-width: 899px){
+  .index .lab{ display: inline; }
+  .index a{ padding-inline-end: calc(var(--u) * 2.5); }
+  .index ol{
+    -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 28px), transparent);
+            mask-image: linear-gradient(to right, #000 calc(100% - 28px), transparent);
+  }
 }

@@ -68,14 +68,14 @@ last_modified_at: 2026-09-20T03:43:55+00:00
 <section class="sec g" id="classes" aria-labelledby="h-classes">
       <div class="sec-head">
         <p class="idx">03</p>
-        <h2 id="h-classes">What I look for</h2>
-        <p class="sec-sub">Four recurring classes, in rough order of volume.</p>
+        <h2 id="h-classes">Weakness classes</h2>
+        <p class="sec-sub">Four recurring, in rough order of volume.</p>
       </div>
 
       <ol class="classes">
         <li>
           <h3>Unauthenticated reachability</h3>
-          <p>An auth gated code execution sink is a bug. The same sink reachable before auth is a critical. Most of my highest severity findings are reachability failures rather than novel sinks: missing authentication and missing authorization in front of machinery that was never meant to be public.</p>
+          <p>An auth gated code execution sink is a bug. The same sink reachable before auth is a critical. Most of the highest severity findings here are reachability failures rather than novel sinks: missing authentication and missing authorization in front of machinery that was never meant to be public.</p>
         </li>
         <li>
           <h3>Sandboxes that are not sandboxes</h3>
