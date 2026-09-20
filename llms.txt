@@ -6,9 +6,7 @@ Every advisory below is published, fixed and credited to Sanaan Fayaz Wani (GitH
 
 ## Pages
 
-- [Home](https://sfwani.github.io/): bio, the advisory table and the weakness class breakdown.
-- [About](https://sfwani.github.io/about/): research focus, method and coordinated disclosure practice.
-- [Experience](https://sfwani.github.io/experience/): roles at Amazon and Cyber Florida, University of South Florida degree, certifications and competition record.
+- [Home](https://sfwani.github.io/): bio, the advisory table, the weakness class breakdown, roles, certifications and competition record.
 - [Advisories](https://sfwani.github.io/advisories/): index of all published advisories.
 
 ## Published advisories

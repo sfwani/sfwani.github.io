@@ -64,7 +64,7 @@ Unauthenticated data injection into any run realtime stream. Cross-environment a
 
 Sanaan Fayaz Wani (GitHub [`sfwani`](https://github.com/sfwani)) reported this vulnerability to the `trigger.dev` maintainers under coordinated disclosure and is credited as a reporter in [GHSA-59h8-w5q6-mfmp](https://github.com/triggerdotdev/trigger.dev/security/advisories/GHSA-59h8-w5q6-mfmp), published 2026-07-21.
 
-All published findings: [advisory index](/advisories/). About the researcher: [about](/about/) and [experience](/experience/).
+All published findings: [advisory index](/advisories/).
 
 
   </div>

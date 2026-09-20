@@ -77,7 +77,7 @@ The managed service now authenticates workloads using signed deployment-scoped t
 
 Sanaan Fayaz Wani (GitHub [`sfwani`](https://github.com/sfwani)) reported this vulnerability to the `trigger.dev` maintainers under coordinated disclosure and is credited as a reporter in [GHSA-jc26-22qp-cgqj](https://github.com/triggerdotdev/trigger.dev/security/advisories/GHSA-jc26-22qp-cgqj), published 2026-09-14.
 
-All published findings: [advisory index](/advisories/). About the researcher: [about](/about/) and [experience](/experience/).
+All published findings: [advisory index](/advisories/).
 
 
   </div>

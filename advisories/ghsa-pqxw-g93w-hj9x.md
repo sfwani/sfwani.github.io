@@ -192,7 +192,7 @@ Complete infrastructure compromise: all tenant data, API keys, encrypted secrets
 
 Sanaan Fayaz Wani (GitHub [`sfwani`](https://github.com/sfwani)) reported this vulnerability to the `trigger.dev` maintainers under coordinated disclosure and is credited as a reporter in [GHSA-pqxw-g93w-hj9x](https://github.com/triggerdotdev/trigger.dev/security/advisories/GHSA-pqxw-g93w-hj9x), published 2026-07-21.
 
-All published findings: [advisory index](/advisories/). About the researcher: [about](/about/) and [experience](/experience/).
+All published findings: [advisory index](/advisories/).
 
 
   </div>

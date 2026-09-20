@@ -25,7 +25,6 @@ layout: compress
           {% assign nav = site.data.nav | default: null %}
           <a href="/"{% if page.url == '/' %} aria-current="page"{% endif %}>Home</a>
           <a href="/advisories/"{% if page.url contains '/advisories' %} aria-current="page"{% endif %}>Advisories</a>
-          <a href="/about/"{% if page.url == '/about/' %} aria-current="page"{% endif %}>About</a>
         </nav>
         <button type="button" class="tgl" id="theme" aria-label="Switch colour theme">Theme</button>
       </div>

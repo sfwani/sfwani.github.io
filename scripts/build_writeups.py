@@ -147,8 +147,7 @@ def body(a):
         f"credited as a reporter in [{a['ghsa_id']}]({a.get('html_url')}), published "
         f"{(a.get('published_at') or '')[:10]}.",
         "",
-        "All published findings: [advisory index](/advisories/). "
-        "About the researcher: [about](/about/) and [experience](/experience/).",
+        "All published findings: [advisory index](/advisories/).",
         "",
     ]
     return "\n".join(out)
@@ -330,10 +329,8 @@ def write_llms_txt(rows):
         "",
         "## Pages",
         "",
-        f"- [Home]({SITE}/): bio, the advisory table and the weakness class breakdown.",
-        f"- [About]({SITE}/about/): research focus, method and coordinated disclosure practice.",
-        f"- [Experience]({SITE}/experience/): roles at Amazon and Cyber Florida, University of "
-        "South Florida degree, certifications and competition record.",
+        f"- [Home]({SITE}/): bio, the advisory table, the weakness class breakdown, "
+        "roles, certifications and competition record.",
         f"- [Advisories]({SITE}/advisories/): index of all published advisories.",
         "",
         "## Published advisories",
