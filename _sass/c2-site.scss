@@ -510,3 +510,25 @@
 @media (min-width: 1024px) and (max-width: 1199px){
   .sec:has(.col-aside) .col-body{ padding-right: calc(var(--u) * 2); }
 }
+
+/* ── The title block, without the accent rule ─────────────────────
+   C2 opens every page with a 3px accent bar above the title. It was
+   carrying 27% of all the accent on the site, which is the argument for
+   it, but it sat badly: from the running index to the name was 101px and
+   the bar cut that at 72 above and 26 below, so it read as a wide empty
+   band with the name crowded underneath it, and on the home page it was
+   the second full width red stroke within 100px, the index already having
+   its own. It encoded nothing either, unlike the numerals that sequence
+   the sections or the underline that marks where you are.
+
+   Gone from the layout. That also removes a grid row and its 24px gap, so
+   the title jumped up 43px in total; the padding goes from nine units to
+   eleven to give most of it back, leaving 74px of single clean gap against
+   the 82px of visual separation there used to be. Below 640 C2 tightens
+   this padding by design, so this only applies above that.
+
+   The .title-rule rule itself stays in c2.scss, unused, because that file
+   is kept diffable against the template it came from. */
+@media (min-width: 640px){
+  .title{ padding-top: calc(var(--u) * 11); }
+}
