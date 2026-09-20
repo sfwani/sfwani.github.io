@@ -153,7 +153,7 @@ last_modified_at: 2026-09-20T03:43:55+00:00
           <p class="when">2025.05&ndash;<br>2025.08</p>
           <div class="what">
             <h3>Amazon <span>/ Security Engineer Intern, Red Team</span></h3>
-            <p>Built an autonomous agentic system for red team operations, and worked with the Model Context Protocol early in its life, before the tooling and the practice around it had settled. Month boundaries approximate.</p>
+            <p>Built an autonomous agentic system for red team operations, and worked with the Model Context Protocol early in its life, before the tooling and the practice around it had settled.</p>
           </div>
           <div class="org-mark org-mark--amazon" aria-hidden="true"></div>
         </li>
