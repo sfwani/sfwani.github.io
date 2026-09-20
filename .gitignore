@@ -8,3 +8,4 @@ Gemfile.lock
 WEBSITE_GUIDE.md
 __pycache__/
 *.pyc
+_site/

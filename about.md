@@ -1,11 +1,19 @@
 ---
 title: About
 permalink: /about/
-layout: page
+layout: c2
 excerpt: Sanaan Fayaz Wani is a Security Engineer at Amazon working on identity and access management, and an independent vulnerability researcher with seven assigned CVEs in AI agent frameworks and LLM infrastructure.
 comments: false
 last_modified_at: 2026-09-18
+heading: About
 ---
+
+<section class="sec g" id="about" aria-labelledby="h-about">
+  <div class="sec-head">
+    <p class="sec-nr">01</p>
+    <h2 id="h-about">Research</h2>
+  </div>
+  <div class="col-body prose" markdown="1">
 
 Sanaan Wani is a Security Engineer at Amazon, working in IAM security on bringing agentic AI into identity and access management. Separately, he does independent vulnerability research against the infrastructure that runs large language models. Roles, education and competition record are on the [experience page](/experience/).
 
@@ -49,3 +57,6 @@ AI agent security · LLM infrastructure security · agentic systems · autonomou
 ## Contact
 
 [code.sanaan@gmail.com](mailto:code.sanaan@gmail.com) · [GitHub](https://github.com/sfwani) · [LinkedIn](https://www.linkedin.com/in/sfwani)
+
+  </div>
+</section>

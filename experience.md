@@ -1,11 +1,19 @@
 ---
 title: Experience
 permalink: /experience/
-layout: page
+layout: c2
 description: Security Engineer at Amazon working in IAM security. Previously security researcher at Cyber Florida and Red Team intern at Amazon. University of South Florida computer science graduate, magna cum laude.
 comments: false
 last_modified_at: 2026-09-18
+heading: Experience
 ---
+
+<section class="sec g" id="experience" aria-labelledby="h-exp">
+  <div class="sec-head">
+    <p class="sec-nr">01</p>
+    <h2 id="h-exp">Roles and study</h2>
+  </div>
+  <div class="col-body prose" markdown="1">
 
 Sanaan Fayaz Wani is a Security Engineer at Amazon. This page lists his roles, degree,
 certifications, competition record and press coverage as of September 2026.
@@ -113,3 +121,6 @@ Third party sources that name him, newest first.
 ## Contact
 
 [code.sanaan@gmail.com](mailto:code.sanaan@gmail.com) &nbsp;&middot;&nbsp; [GitHub](https://github.com/sfwani) &nbsp;&middot;&nbsp; [LinkedIn](https://www.linkedin.com/in/sfwani)
+
+  </div>
+</section>

@@ -1,0 +1,129 @@
+---
+layout: compress
+---
+<!DOCTYPE html>
+<html lang="{{ page.lang | default: site.lang | default: 'en' }}">
+{% include header.html %}
+<body>
+<script>
+  try {
+    var t = localStorage.getItem('sfw-theme');
+    if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t);
+  } catch (e) {}
+</script>
+<div class="page">
+  <div class="gridlines" aria-hidden="true">
+    <div class="wrap"><span></span><span></span><span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span><span></span><span></span></div>
+  </div>
+  <div class="wrap">
+
+    <header class="masthead g">
+      <p class="mast-name"><a href="/">Sanaan&nbsp;Fayaz&nbsp;Wani</a></p>
+      <div class="mast-tools">
+        <nav class="mast-nav" aria-label="Sections of this site">
+          {% assign nav = site.data.nav | default: null %}
+          <a href="/"{% if page.url == '/' %} aria-current="page"{% endif %}>Home</a>
+          <a href="/advisories/"{% if page.url contains '/advisories' %} aria-current="page"{% endif %}>Advisories</a>
+          <a href="/about/"{% if page.url == '/about/' %} aria-current="page"{% endif %}>About</a>
+        </nav>
+        <button type="button" class="tgl" id="theme" aria-label="Switch colour theme">Theme</button>
+      </div>
+    </header>
+
+    <nav class="index" id="index" aria-label="Contents"></nav>
+
+    <div class="title g" id="top">
+      <div class="title-rule" aria-hidden="true"></div>
+      <h1>{{ page.heading | default: page.title }}</h1>
+      {% if page.role %}<p class="title-role">{{ page.role }}</p>{% endif %}
+      {% if page.standfirst %}<p class="title-meta">{{ page.standfirst }}</p>{% endif %}
+    </div>
+
+    {{ content }}
+
+    <footer class="colophon g">
+      <p>Sanaan Fayaz Wani &copy; {{ site.time | date: "%Y" }}</p>
+      <p>Set in Schibsted Grotesk on a twelve column field</p>
+    </footer>
+  </div>
+</div>
+<script>
+
+(function () {
+  var root = document.documentElement;
+  var btn = document.getElementById('theme');
+  if (!btn) return;
+  /* The OS preference is deliberately not consulted: light is the default
+     state of this page and dark is an explicit, remembered choice. */
+  function current() {
+    return root.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+  }
+  function paint() {
+    var next = current() === 'dark' ? 'light' : 'dark';
+    btn.textContent = next === 'dark' ? 'Dark' : 'Light';
+    btn.setAttribute('aria-label', 'Switch to ' + next + ' theme');
+  }
+  btn.addEventListener('click', function () {
+    var next = current() === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('sfw-theme', next); } catch (e) {}
+    paint();
+  });
+  paint();
+})();
+
+/* The running index is built from this page's own section headings, so every
+   page gets its own contents without the layout knowing what they are. */
+(function () {
+  var nav = document.getElementById('index');
+  if (!nav) return;
+  var hs = [].slice.call(document.querySelectorAll('main .sec > .sec-head h2[id], .sec > .sec-head h2[id]'));
+  if (hs.length < 2) { nav.remove(); return; }
+  /* The stylesheet lays this out as .index ol > li, so the list is not
+     optional: bare anchors stack vertically and eat the top of the page. */
+  nav.innerHTML = '<ol>' + hs.map(function (h, i) {
+    var n = (i + 1 < 10 ? '0' : '') + (i + 1);
+    return '<li><a href="#' + h.id + '"><b>' + n + '</b><span class="lab">' +
+           h.textContent.trim() + '</span></a></li>';
+  }).join('') + '</ol>';
+})();
+
+/* Running index: mark the section the reader is actually in. */
+(function () {
+  var links = [].slice.call(document.querySelectorAll('.index a[href^="#"]'));
+  if (!links.length) return;
+  var pairs = [];
+  links.forEach(function (a) {
+    var el = document.getElementById(a.getAttribute('href').slice(1));
+    if (el) pairs.push([el, a]);
+  });
+  if (!pairs.length) return;
+  var ticking = false, last = null;
+
+  function mark() {
+    ticking = false;
+    var cut = 96, best = pairs[0];
+    for (var i = 0; i < pairs.length; i++) {
+      if (pairs[i][0].getBoundingClientRect().top <= cut) best = pairs[i];
+    }
+    if (window.innerHeight + window.scrollY >= document.body.scrollHeight - 4) {
+      best = pairs[pairs.length - 1];
+    }
+    if (best[1] === last) return;
+    if (last) last.removeAttribute('aria-current');
+    best[1].setAttribute('aria-current', 'true');
+    last = best[1];
+  }
+  function schedule() {
+    if (ticking) return;
+    ticking = true;
+    window.requestAnimationFrame(mark);
+  }
+  window.addEventListener('scroll', schedule, { passive: true });
+  window.addEventListener('resize', schedule);
+  mark();
+})();
+</script>
+</body>
+</html>

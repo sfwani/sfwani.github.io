@@ -165,13 +165,14 @@ def write_page(a, stamp):
     fm = "\n".join([
         "---",
         f"title: {yaml_q(name)}",
-        f"heading: {yaml_q(f'{name}: {summary}')}",
+        f"heading: {yaml_q(name)}",
+        f"role: {yaml_q(summary)}",
         f"seo_title: {yaml_q(f'{name}: {clip(summary, 80)} - Sanaan Fayaz Wani')}",
         f"ghsa_id: {yaml_q(a['ghsa_id'])}",
         f"cve_id: {yaml_q(a.get('cve_id') or '')}",
         f"published_at: {yaml_q((a.get('published_at') or '')[:10])}",
         f"permalink: /advisories/{slug(a)}/",
-        "layout: page",
+        "layout: c2",
         f"description: {yaml_q(desc)}",
         "comments: false",
         f"last_modified_at: {stamp}",
@@ -179,7 +180,19 @@ def write_page(a, stamp):
         "",
     ])
     p = OUT / f"{slug(a)}.md"
-    new = fm + body(a)
+    # Wrapped as a C2 section so the page inherits the grid, the section rule
+    # and the measure. markdown="1" keeps kramdown processing the inner text.
+    new = fm + (
+        '<section class="sec g" id="writeup" aria-labelledby="h-writeup">\n'
+        '  <div class="sec-head">\n'
+        '    <p class="sec-nr">\u2014</p>\n'
+        f'    <h2 id="h-writeup">{a["ghsa_id"]}</h2>\n'
+        '    <p class="sec-sub">Published, fixed and credited. Root cause, the vulnerable code, '
+        'reproduction and the fix, as published in the advisory itself.</p>\n'
+        '  </div>\n'
+        '  <div class="col-body prose" markdown="1">\n\n'
+        + body(a) +
+        '\n\n  </div>\n</section>\n')
     old = p.read_text(encoding="utf-8") if p.exists() else None
     if old is not None:
         # Keep the existing stamp when only the stamp would change.
@@ -191,6 +204,12 @@ def write_page(a, stamp):
 
 
 def write_index(rows, stamp):
+    """Disabled: /advisories/ is now a C2 page in the repo, and its record is
+    spliced by update_advisories.py between the RECORD markers. Two writers for
+    one file is exactly how the three-surface drift used to happen."""
+    return
+
+def _superseded_write_index(rows, stamp):
     rows.sort(key=lambda a: (a.get("published_at") or ""), reverse=True)
     lines = [
         "---",

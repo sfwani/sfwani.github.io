@@ -1,16 +1,25 @@
 ---
 title: "GHSA-59h8-w5q6-mfmp"
-heading: "GHSA-59h8-w5q6-mfmp: Unauthenticated Realtime Stream Data Injection via Run FriendlyId"
+heading: "GHSA-59h8-w5q6-mfmp"
+role: "Unauthenticated Realtime Stream Data Injection via Run FriendlyId"
 seo_title: "GHSA-59h8-w5q6-mfmp: Unauthenticated Realtime Stream Data Injection via Run FriendlyId - Sanaan Fayaz Wani"
 ghsa_id: "GHSA-59h8-w5q6-mfmp"
 cve_id: ""
 published_at: "2026-07-21"
 permalink: /advisories/ghsa-59h8-w5q6-mfmp/
-layout: page
+layout: c2
 description: "Unauthenticated Realtime Stream Data Injection via Run FriendlyId"
 comments: false
-last_modified_at: 2026-09-18T05:11:47+00:00
+last_modified_at: 2026-09-20T03:45:26+00:00
 ---
+<section class="sec g" id="writeup" aria-labelledby="h-writeup">
+  <div class="sec-head">
+    <p class="sec-nr">—</p>
+    <h2 id="h-writeup">GHSA-59h8-w5q6-mfmp</h2>
+    <p class="sec-sub">Published, fixed and credited. Root cause, the vulnerable code, reproduction and the fix, as published in the advisory itself.</p>
+  </div>
+  <div class="col-body prose" markdown="1">
+
 | | |
 |:--|:--|
 | Advisory | [GHSA-59h8-w5q6-mfmp](https://github.com/triggerdotdev/trigger.dev/security/advisories/GHSA-59h8-w5q6-mfmp) |
@@ -56,3 +65,7 @@ Unauthenticated data injection into any run realtime stream. Cross-environment a
 Sanaan Fayaz Wani (GitHub [`sfwani`](https://github.com/sfwani)) reported this vulnerability to the `trigger.dev` maintainers under coordinated disclosure and is credited as a reporter in [GHSA-59h8-w5q6-mfmp](https://github.com/triggerdotdev/trigger.dev/security/advisories/GHSA-59h8-w5q6-mfmp), published 2026-07-21.
 
 All published findings: [advisory index](/advisories/). About the researcher: [about](/about/) and [experience](/experience/).
+
+
+  </div>
+</section>

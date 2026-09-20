@@ -1,16 +1,25 @@
 ---
 title: "GHSA-jc26-22qp-cgqj"
-heading: "GHSA-jc26-22qp-cgqj: Supervisor workload API lacks cross-tenant authentication"
+heading: "GHSA-jc26-22qp-cgqj"
+role: "Supervisor workload API lacks cross-tenant authentication"
 seo_title: "GHSA-jc26-22qp-cgqj: Supervisor workload API lacks cross-tenant authentication - Sanaan Fayaz Wani"
 ghsa_id: "GHSA-jc26-22qp-cgqj"
 cve_id: ""
 published_at: "2026-09-14"
 permalink: /advisories/ghsa-jc26-22qp-cgqj/
-layout: page
+layout: c2
 description: "Supervisor workload API lacks cross-tenant authentication"
 comments: false
-last_modified_at: 2026-09-18T05:11:47+00:00
+last_modified_at: 2026-09-20T03:45:26+00:00
 ---
+<section class="sec g" id="writeup" aria-labelledby="h-writeup">
+  <div class="sec-head">
+    <p class="sec-nr">—</p>
+    <h2 id="h-writeup">GHSA-jc26-22qp-cgqj</h2>
+    <p class="sec-sub">Published, fixed and credited. Root cause, the vulnerable code, reproduction and the fix, as published in the advisory itself.</p>
+  </div>
+  <div class="col-body prose" markdown="1">
+
 | | |
 |:--|:--|
 | Advisory | [GHSA-jc26-22qp-cgqj](https://github.com/triggerdotdev/trigger.dev/security/advisories/GHSA-jc26-22qp-cgqj) |
@@ -69,3 +78,7 @@ The managed service now authenticates workloads using signed deployment-scoped t
 Sanaan Fayaz Wani (GitHub [`sfwani`](https://github.com/sfwani)) reported this vulnerability to the `trigger.dev` maintainers under coordinated disclosure and is credited as a reporter in [GHSA-jc26-22qp-cgqj](https://github.com/triggerdotdev/trigger.dev/security/advisories/GHSA-jc26-22qp-cgqj), published 2026-09-14.
 
 All published findings: [advisory index](/advisories/). About the researcher: [about](/about/) and [experience](/experience/).
+
+
+  </div>
+</section>

@@ -1,4 +1,8 @@
 ---
 ---
 
-@import "main";
+// The design is C2, taken whole. Site-specific additions (writeup pages,
+// figures, anything the single-page template had no need for) live in
+// c2-site so c2.scss stays diffable against the template it came from.
+@import "c2";
+@import "c2-site";

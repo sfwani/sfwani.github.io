@@ -1,0 +1,157 @@
+// Site-specific additions on top of C2.
+
+/* ───────────────────────────────────────────────────────────────
+   WRITEUP PAGES
+   C2 was a single page and never had to carry an advisory writeup:
+   long code blocks, wide metadata tables, the attack-chain figure.
+   Everything below exists only for that page type.
+   ─────────────────────────────────────────────────────────────── */
+
+/* Code is the reason the writeups overflowed: a <pre> will happily grow to
+   its longest line and drag the document sideways with it. Each block gets
+   its own scroll region and is never allowed to set the page width. */
+.prose pre{
+  max-width:100%;
+  overflow-x:auto;
+  overflow-y:hidden;
+  background:var(--bg-2);
+  border:1px solid var(--rule);
+  padding:calc(var(--u)*1.5) calc(var(--u)*2);
+  margin:calc(var(--u)*3) 0;
+  font-size:.8125rem;
+  line-height:1.55;
+  -webkit-overflow-scrolling:touch;
+}
+.prose pre code{
+  display:block;
+  width:max-content;
+  min-width:100%;
+  background:none;
+  border:0;
+  padding:0;
+  white-space:pre;
+  font-size:inherit;
+}
+.prose pre:focus-visible{ outline:2px solid var(--accent); outline-offset:2px; }
+
+/* Inline code keeps the tint but must be able to break, or a long
+   identifier in running prose does the same damage a <pre> does. */
+.prose :not(pre) > code{
+  background:var(--bg-2);
+  padding:1px .25em;
+  margin-inline:-.18em;
+  font-size:.92em;
+  overflow-wrap:anywhere;
+}
+
+/* The metadata and affected-versions tables. Same treatment as the record:
+   scroll the table, never the page. */
+.prose table{
+  width:100%;
+  border-collapse:collapse;
+  font-size:.8125rem;
+  margin:calc(var(--u)*3) 0;
+}
+.prose table th,
+.prose table td{
+  text-align:left;
+  vertical-align:baseline;
+  padding:calc(var(--u)*.75) calc(var(--u)*2) calc(var(--u)*.75) 0;
+  border-bottom:1px solid var(--rule);
+}
+.prose table thead th{
+  font-size:.6875rem;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--ink-3);
+  border-bottom:1px solid var(--rule-heavy);
+}
+.prose table td:last-child,
+.prose table th:last-child{ padding-right:0; }
+/* Keeping table code on one line is right where there is room and wrong on a
+   phone: the CVSS vector alone is wider than the viewport, and it was this
+   rule, not the content, that pushed the document sideways at 390px. */
+.prose table code{ overflow-wrap:anywhere; }
+@media (min-width:620px){ .prose table code{ white-space:nowrap; } }
+
+/* Long bare URLs in the references list. */
+.prose a{ overflow-wrap:anywhere; }
+
+.prose h3{
+  font-size:var(--t-m);
+  font-weight:600;
+  letter-spacing:-.01em;
+  margin:calc(var(--u)*5) 0 calc(var(--u)*1.5);
+  padding-bottom:calc(var(--u)*.75);
+  border-bottom:1px solid var(--rule);
+}
+.prose h4{
+  font-size:var(--t-s);
+  font-weight:600;
+  margin:calc(var(--u)*4) 0 calc(var(--u)*1);
+}
+.prose ul,.prose ol{ margin:calc(var(--u)*2) 0; padding-left:1.4em; }
+.prose li{ margin:0 0 calc(var(--u)*.75); }
+.prose blockquote{
+  margin:calc(var(--u)*3) 0;
+  padding-left:calc(var(--u)*2);
+  border-left:2px solid var(--accent);
+  color:var(--ink-2);
+}
+
+/* The writeup section has no numeral, so the em dash placeholder should not
+   claim the width of one. */
+.sec-nr:empty,
+#writeup .sec-nr{ color:var(--ink-3); }
+
+/* A wide code block inside its own scroll region does not make the page
+   scroll sideways, but it does inflate documentElement.scrollWidth, which
+   makes every future overflow check report a problem that is not there.
+   `clip` settles it without creating a scroll container, so the sticky
+   running index still sticks. */
+.page{ overflow-x: clip; }
+
+/* The single-page template had no site navigation: it only ever linked to its
+   own sections. A multi-page site needs real links in the masthead, and they
+   need to sit apart from the theme switch rather than colliding with it. */
+.mast-tools{
+  display:flex;
+  align-items:center;
+  gap:calc(var(--u)*3);
+}
+.mast-nav{
+  display:flex;
+  gap:calc(var(--u)*2.5);
+}
+.mast-nav a{
+  font-size:var(--t-xs);
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--ink-2);
+  text-decoration:none;
+  border-bottom:1px solid transparent;
+  padding-bottom:2px;
+}
+.mast-nav a:hover,
+.mast-nav a:focus-visible{ color:var(--ink); border-bottom-color:var(--ink); }
+.mast-nav a[aria-current="page"]{ color:var(--ink); border-bottom-color:var(--accent); }
+@media (max-width:560px){
+  .mast-tools{ gap:calc(var(--u)*2); }
+  .mast-nav{ gap:calc(var(--u)*1.75); }
+  .mast-nav a{ font-size:.625rem; }
+}
+
+/* The five figures now sit directly under the title rather than under the
+   biography. For a reader arriving from a GHSA credit line, "is this real"
+   should be answered before the first scroll. */
+.figs-lead{ margin-bottom: calc(var(--u)*6); }
+.figs-lead .figs{ grid-column: 1 / -1; margin: 0; }
+
+/* Advisory identifiers are long monospace-ish strings and the display size is
+   tuned for a two or three word name, so the title steps down on a writeup
+   and is allowed to break between the hyphenated groups rather than overflow. */
+.page:has(#writeup) h1{
+  font-size: clamp(1.9rem, 4.4vw, 3rem);
+  letter-spacing: -.01em;
+  overflow-wrap: anywhere;
+}

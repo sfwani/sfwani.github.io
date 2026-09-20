@@ -1,21 +1,235 @@
 ---
+layout: c2
 title: Advisories
+heading: Advisories
+seo_title: "Published security advisories credited to Sanaan Fayaz Wani"
+role: "Every advisory below is published, fixed and credited. Reports still in coordinated disclosure are not listed, named or hinted at until the maintainer ships a fix."
+description: Eleven published security advisories credited to Sanaan Fayaz Wani, with CVSS base vectors, weakness classes and full writeups.
 permalink: /advisories/
-layout: page
-description: "Full writeups for every published security advisory credited to Sanaan Wani: root cause, vulnerable code, reproduction and fix."
-comments: false
-last_modified_at: 2026-09-19T20:51:00+00:00
+last_modified_at: 2026-09-20T03:35:01+00:00
 ---
 
-Every advisory below is published, fixed and credited. Each page carries the root cause, the vulnerable code, reproduction steps and the fix, as published in the advisory itself. Reports still in coordinated disclosure are not listed, named or hinted at until the maintainer ships a fix.
+<section class="sec g" id="advisories" aria-labelledby="h-adv">
+      <div class="sec-head">
+        <p class="idx">02</p>
+        <h2 id="h-adv">Advisories</h2>
+        <p class="sec-sub">Eleven, published, fixed and credited. Descending by CVSS v3.1 base score. Summaries are keyed to the NR column and set below the table.</p>
+      </div>
 
-Five of these are in the global GitHub Advisory Database and are returned by the [public credit search](https://github.com/advisories?query=credit%3Asfwani). The others are repository level advisories that the maintainer published and credited but never forwarded to the global database, so that search cannot see them. Each row links to its own advisory, where the credit is visible.
+      <!-- RECORD:START -->
 
-<div class="adv-ledgertable" markdown="0"><p class="adv-ledgertable__note">11 published advisories.<span class="adv-ledgertable__hint"> The table scrolls sideways.</span></p><div class="adv-ledgertable__scroll" role="region" tabindex="0" aria-label="Published advisories"><table><thead><tr><th scope="col">Advisory</th><th scope="col">Project</th><th scope="col">CVSS</th><th scope="col">Severity</th><th scope="col">Weakness</th><th scope="col">Published</th></tr></thead><tbody><tr><th scope="row"><a href="/advisories/ghsa-3c52-v5v2-3r56/">GHSA-3c52-v5v2-3r56</a></th><td><code>budibase</code></td><td class="adv-num">7.7</td><td>High</td><td>Server side request forgery (CWE-918)</td><td><time datetime="2026-09-17">2026-09-17</time></td></tr><tr><th scope="row"><a href="/advisories/ghsa-jc26-22qp-cgqj/">GHSA-jc26-22qp-cgqj</a></th><td><code>trigger.dev</code></td><td class="adv-num">7.9</td><td>High</td><td>Missing authentication (CWE-306)</td><td><time datetime="2026-09-14">2026-09-14</time></td></tr><tr><th scope="row"><a href="/advisories/cve-2026-73301/">CVE-2026-73301</a></th><td><code>@budibase/server</code></td><td class="adv-num">4.3</td><td>Medium</td><td>Missing authorization (CWE-862)</td><td><time datetime="2026-07-24">2026-07-24</time></td></tr><tr><th scope="row"><a href="/advisories/cve-2026-59714/">CVE-2026-59714</a></th><td><code>open-webui</code></td><td class="adv-num">7.1</td><td>High</td><td>Missing authorization (CWE-862)</td><td><time datetime="2026-07-24">2026-07-24</time></td></tr><tr><th scope="row"><a href="/advisories/cve-2026-59715/">CVE-2026-59715</a></th><td><code>open-webui</code></td><td class="adv-num">3.1</td><td>Low</td><td>Missing authentication (CWE-306)</td><td><time datetime="2026-07-24">2026-07-24</time></td></tr><tr><th scope="row"><a href="/advisories/cve-2026-57516/">CVE-2026-57516</a></th><td><code>ray</code></td><td class="adv-num">8.8</td><td>High</td><td>Code injection (CWE-94)</td><td><time datetime="2026-07-24">2026-07-24</time></td></tr><tr><th scope="row"><a href="/advisories/ghsa-59h8-w5q6-mfmp/">GHSA-59h8-w5q6-mfmp</a></th><td><code>trigger.dev</code></td><td class="adv-num">5.3</td><td>Medium</td><td>Missing authentication (CWE-306)</td><td><time datetime="2026-07-21">2026-07-21</time></td></tr><tr><th scope="row"><a href="/advisories/ghsa-pqxw-g93w-hj9x/">GHSA-pqxw-g93w-hj9x</a></th><td><code>trigger.dev</code></td><td class="adv-num">9.0</td><td>High</td><td>Improper isolation (CWE-653)</td><td><time datetime="2026-07-21">2026-07-21</time></td></tr><tr><th scope="row"><a href="/advisories/cve-2026-63342/">CVE-2026-63342</a></th><td><code>hatchet</code></td><td class="adv-num">6.3</td><td>Medium</td><td>Incorrect authorization (CWE-863)</td><td><time datetime="2026-06-30">2026-06-30</time></td></tr><tr><th scope="row"><a href="/advisories/cve-2026-53577/">CVE-2026-53577</a></th><td><code>kestra</code></td><td class="adv-num">6.5</td><td>Medium</td><td>Incorrect authorization (CWE-863)</td><td><time datetime="2026-06-03">2026-06-03</time></td></tr><tr><th scope="row"><a href="/advisories/cve-2026-45675/">CVE-2026-45675</a></th><td><code>open-webui</code></td><td class="adv-num">8.1</td><td>High</td><td>Privilege escalation (CWE-269)</td><td><time datetime="2026-05-14">2026-05-14</time></td></tr></tbody></table></div></div>
+      <div class="tablewrap" role="region" aria-label="Published advisories, full table" tabindex="0">
+        <table role="table">
+          <caption>Published advisories, 2026-05-14 to 2026-09-17</caption>
+          <thead role="rowgroup">
+            <tr role="row">
+              <th role="columnheader" scope="col" rowspan="2" class="c-nr">NR</th>
+              <th role="columnheader" scope="col" rowspan="2" class="c-id">Advisory</th>
+              <th role="columnheader" scope="col" rowspan="2" class="c-pkg">Package</th>
+              <th role="columnheader" scope="col" rowspan="2" class="c-sc">CVSS</th>
+              <th role="columnheader" scope="col" rowspan="2" class="c-sev">Severity</th>
+              <th role="columnheader" scope="col" rowspan="2" class="c-cls">Weakness</th>
+              <th role="columnheader" scope="col" rowspan="2" class="c-cwe">CWE</th>
+              <th role="columnheader" scope="colgroup" colspan="8" class="vgroup">Base vector</th>
+              <th role="columnheader" scope="col" rowspan="2" class="c-pub">Published</th>
+            </tr>
+            <tr role="row">
+              <th role="columnheader" scope="col" class="v" title="Attack vector">AV</th>
+              <th role="columnheader" scope="col" class="v" title="Attack complexity">AC</th>
+              <th role="columnheader" scope="col" class="v" title="Privileges required">PR</th>
+              <th role="columnheader" scope="col" class="v" title="User interaction">UI</th>
+              <th role="columnheader" scope="col" class="v" title="Scope">S</th>
+              <th role="columnheader" scope="col" class="v" title="Confidentiality">C</th>
+              <th role="columnheader" scope="col" class="v" title="Integrity">I</th>
+              <th role="columnheader" scope="col" class="v" title="Availability">A</th>
+            </tr>
+          </thead>
+          <tbody role="rowgroup">
+            <tr role="row">
+              <th role="rowheader" scope="row" class="c-nr">01</th>
+              <td role="cell" class="c-id"><a href="/advisories/cve-2026-57516/">CVE-2026-57516</a></td>
+              <td role="cell" class="c-pkg">ray</td>
+              <td role="cell" class="c-sc">8.8</td>
+              <td role="cell" class="c-sev sev-high">High</td>
+              <td role="cell" class="c-cls">Code injection</td>
+              <td role="cell" class="c-cwe">94</td>
+              <td role="cell" class="v" data-m="AV">N</td><td role="cell" class="v" data-m="AC">L</td><td role="cell" class="v" data-m="PR">N</td><td role="cell" class="v" data-m="UI">R</td>
+              <td role="cell" class="v" data-m="S">U</td><td role="cell" class="v" data-m="C">H</td><td role="cell" class="v" data-m="I">H</td><td role="cell" class="v" data-m="A">H</td>
+              <td role="cell" class="c-pub">2026-07-24</td>
+            </tr>
+            <tr role="row">
+              <th role="rowheader" scope="row" class="c-nr">02</th>
+              <td role="cell" class="c-id"><a href="/advisories/cve-2026-45675/">CVE-2026-45675</a></td>
+              <td role="cell" class="c-pkg">open-webui</td>
+              <td role="cell" class="c-sc">8.1</td>
+              <td role="cell" class="c-sev sev-high">High</td>
+              <td role="cell" class="c-cls">Privilege escalation</td>
+              <td role="cell" class="c-cwe">269</td>
+              <td role="cell" class="v" data-m="AV">N</td><td role="cell" class="v" data-m="AC">H</td><td role="cell" class="v" data-m="PR">N</td><td role="cell" class="v" data-m="UI">N</td>
+              <td role="cell" class="v" data-m="S">U</td><td role="cell" class="v" data-m="C">H</td><td role="cell" class="v" data-m="I">H</td><td role="cell" class="v" data-m="A">H</td>
+              <td role="cell" class="c-pub">2026-05-14</td>
+            </tr>
+            <tr role="row">
+              <th role="rowheader" scope="row" class="c-nr">03</th>
+              <td role="cell" class="c-id"><a href="/advisories/ghsa-pqxw-g93w-hj9x/">GHSA-pqxw-g93w-hj9x</a></td>
+              <td role="cell" class="c-pkg">trigger.dev</td>
+              <td role="cell" class="c-sc">8.1</td>
+              <td role="cell" class="c-sev sev-high">High</td>
+              <td role="cell" class="c-cls">Improper isolation</td>
+              <td role="cell" class="c-cwe">653</td>
+              <td role="cell" class="v" data-m="AV">N</td><td role="cell" class="v" data-m="AC">H</td><td role="cell" class="v" data-m="PR">N</td><td role="cell" class="v" data-m="UI">N</td>
+              <td role="cell" class="v" data-m="S">U</td><td role="cell" class="v" data-m="C">H</td><td role="cell" class="v" data-m="I">H</td><td role="cell" class="v" data-m="A">H</td>
+              <td role="cell" class="c-pub">2026-07-21</td>
+            </tr>
+            <tr role="row">
+              <th role="rowheader" scope="row" class="c-nr">04</th>
+              <td role="cell" class="c-id"><a href="/advisories/ghsa-jc26-22qp-cgqj/">GHSA-jc26-22qp-cgqj</a></td>
+              <td role="cell" class="c-pkg">trigger.dev</td>
+              <td role="cell" class="c-sc">7.9</td>
+              <td role="cell" class="c-sev sev-high">High</td>
+              <td role="cell" class="c-cls">Missing authentication</td>
+              <td role="cell" class="c-cwe">306</td>
+              <td role="cell" class="v" data-m="AV">A</td><td role="cell" class="v" data-m="AC">H</td><td role="cell" class="v" data-m="PR">L</td><td role="cell" class="v" data-m="UI">N</td>
+              <td role="cell" class="v" data-m="S">C</td><td role="cell" class="v" data-m="C">H</td><td role="cell" class="v" data-m="I">H</td><td role="cell" class="v" data-m="A">L</td>
+              <td role="cell" class="c-pub">2026-09-14</td>
+            </tr>
+            <tr role="row">
+              <th role="rowheader" scope="row" class="c-nr">05</th>
+              <td role="cell" class="c-id"><a href="/advisories/ghsa-3c52-v5v2-3r56/">GHSA-3c52-v5v2-3r56</a></td>
+              <td role="cell" class="c-pkg">budibase</td>
+              <td role="cell" class="c-sc">7.7</td>
+              <td role="cell" class="c-sev sev-high">High</td>
+              <td role="cell" class="c-cls">Server side request forgery</td>
+              <td role="cell" class="c-cwe">918</td>
+              <td role="cell" class="v" data-m="AV">N</td><td role="cell" class="v" data-m="AC">L</td><td role="cell" class="v" data-m="PR">L</td><td role="cell" class="v" data-m="UI">N</td>
+              <td role="cell" class="v" data-m="S">C</td><td role="cell" class="v" data-m="C">H</td><td role="cell" class="v" data-m="I">N</td><td role="cell" class="v" data-m="A">N</td>
+              <td role="cell" class="c-pub">2026-09-17</td>
+            </tr>
+            <tr role="row">
+              <th role="rowheader" scope="row" class="c-nr">06</th>
+              <td role="cell" class="c-id"><a href="/advisories/cve-2026-59714/">CVE-2026-59714</a></td>
+              <td role="cell" class="c-pkg">open-webui</td>
+              <td role="cell" class="c-sc">7.1</td>
+              <td role="cell" class="c-sev sev-high">High</td>
+              <td role="cell" class="c-cls">Missing authorization</td>
+              <td role="cell" class="c-cwe">862</td>
+              <td role="cell" class="v" data-m="AV">N</td><td role="cell" class="v" data-m="AC">L</td><td role="cell" class="v" data-m="PR">L</td><td role="cell" class="v" data-m="UI">N</td>
+              <td role="cell" class="v" data-m="S">U</td><td role="cell" class="v" data-m="C">N</td><td role="cell" class="v" data-m="I">H</td><td role="cell" class="v" data-m="A">L</td>
+              <td role="cell" class="c-pub">2026-07-24</td>
+            </tr>
+            <tr role="row">
+              <th role="rowheader" scope="row" class="c-nr">07</th>
+              <td role="cell" class="c-id"><a href="/advisories/cve-2026-53577/">CVE-2026-53577</a></td>
+              <td role="cell" class="c-pkg">io.kestra:kestra</td>
+              <td role="cell" class="c-sc">6.5</td>
+              <td role="cell" class="c-sev sev-med">Medium</td>
+              <td role="cell" class="c-cls">Incorrect authorization</td>
+              <td role="cell" class="c-cwe">863</td>
+              <td role="cell" class="v" data-m="AV">N</td><td role="cell" class="v" data-m="AC">L</td><td role="cell" class="v" data-m="PR">L</td><td role="cell" class="v" data-m="UI">N</td>
+              <td role="cell" class="v" data-m="S">U</td><td role="cell" class="v" data-m="C">H</td><td role="cell" class="v" data-m="I">N</td><td role="cell" class="v" data-m="A">N</td>
+              <td role="cell" class="c-pub">2026-06-03</td>
+            </tr>
+            <tr role="row">
+              <th role="rowheader" scope="row" class="c-nr">08</th>
+              <td role="cell" class="c-id"><a href="/advisories/cve-2026-63342/">CVE-2026-63342</a></td>
+              <td role="cell" class="c-pkg">github.com/<wbr>hatchet-dev/<wbr>hatchet</td>
+              <td role="cell" class="c-sc">6.3</td>
+              <td role="cell" class="c-sev sev-med">Medium</td>
+              <td role="cell" class="c-cls">Incorrect authorization</td>
+              <td role="cell" class="c-cwe">863</td>
+              <td role="cell" class="v" data-m="AV">N</td><td role="cell" class="v" data-m="AC">H</td><td role="cell" class="v" data-m="PR">L</td><td role="cell" class="v" data-m="UI">N</td>
+              <td role="cell" class="v" data-m="S">C</td><td role="cell" class="v" data-m="C">H</td><td role="cell" class="v" data-m="I">N</td><td role="cell" class="v" data-m="A">N</td>
+              <td role="cell" class="c-pub">2026-06-30</td>
+            </tr>
+            <tr role="row">
+              <th role="rowheader" scope="row" class="c-nr">09</th>
+              <td role="cell" class="c-id"><a href="/advisories/ghsa-59h8-w5q6-mfmp/">GHSA-59h8-w5q6-mfmp</a></td>
+              <td role="cell" class="c-pkg">trigger.dev</td>
+              <td role="cell" class="c-sc">5.3</td>
+              <td role="cell" class="c-sev sev-med">Medium</td>
+              <td role="cell" class="c-cls">Missing authentication</td>
+              <td role="cell" class="c-cwe">306</td>
+              <td role="cell" class="v" data-m="AV">N</td><td role="cell" class="v" data-m="AC">L</td><td role="cell" class="v" data-m="PR">N</td><td role="cell" class="v" data-m="UI">N</td>
+              <td role="cell" class="v" data-m="S">U</td><td role="cell" class="v" data-m="C">N</td><td role="cell" class="v" data-m="I">L</td><td role="cell" class="v" data-m="A">N</td>
+              <td role="cell" class="c-pub">2026-07-21</td>
+            </tr>
+            <tr role="row">
+              <th role="rowheader" scope="row" class="c-nr">10</th>
+              <td role="cell" class="c-id"><a href="/advisories/cve-2026-73301/">CVE-2026-73301</a></td>
+              <td role="cell" class="c-pkg">@budibase/server</td>
+              <td role="cell" class="c-sc">4.3</td>
+              <td role="cell" class="c-sev sev-med">Medium</td>
+              <td role="cell" class="c-cls">Missing authorization</td>
+              <td role="cell" class="c-cwe">862</td>
+              <td role="cell" class="v" data-m="AV">N</td><td role="cell" class="v" data-m="AC">L</td><td role="cell" class="v" data-m="PR">L</td><td role="cell" class="v" data-m="UI">N</td>
+              <td role="cell" class="v" data-m="S">U</td><td role="cell" class="v" data-m="C">L</td><td role="cell" class="v" data-m="I">N</td><td role="cell" class="v" data-m="A">N</td>
+              <td role="cell" class="c-pub">2026-07-24</td>
+            </tr>
+            <tr role="row">
+              <th role="rowheader" scope="row" class="c-nr">11</th>
+              <td role="cell" class="c-id"><a href="/advisories/cve-2026-59715/">CVE-2026-59715</a></td>
+              <td role="cell" class="c-pkg">open-webui</td>
+              <td role="cell" class="c-sc">3.1</td>
+              <td role="cell" class="c-sev sev-low">Low</td>
+              <td role="cell" class="c-cls">Missing authentication</td>
+              <td role="cell" class="c-cwe">306</td>
+              <td role="cell" class="v" data-m="AV">N</td><td role="cell" class="v" data-m="AC">H</td><td role="cell" class="v" data-m="PR">L</td><td role="cell" class="v" data-m="UI">N</td>
+              <td role="cell" class="v" data-m="S">U</td><td role="cell" class="v" data-m="C">N</td><td role="cell" class="v" data-m="I">L</td><td role="cell" class="v" data-m="A">N</td>
+              <td role="cell" class="c-pub">2026-07-24</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
-<section class="fm-specimen" markdown="0" aria-labelledby="spT">
-<h3 class="sp-h" id="spT">Vector specimen</h3>
-<p class="sp-note">One CVSS v3.1 base vector per advisory, set as an eight cell glyph: attack vector, attack complexity, privileges required and user interaction on the upper line; scope and the three impacts on the lower. Read the shapes against each other.</p>
-<ol class="sp-grid"><li class="sp-cell"><div class="sp-glyph" aria-hidden="true"><span class="sp-m"><span class="sp-k">AV</span><span class="sp-v">N</span></span><span class="sp-m"><span class="sp-k">AC</span><span class="sp-v">L</span></span><span class="sp-m"><span class="sp-k">PR</span><span class="sp-v">L</span></span><span class="sp-m"><span class="sp-k">UI</span><span class="sp-v">N</span></span><span class="sp-m"><span class="sp-k">S</span><span class="sp-v">C</span></span><span class="sp-m"><span class="sp-k">C</span><span class="sp-v">H</span></span><span class="sp-m"><span class="sp-k">I</span><span class="sp-v">N</span></span><span class="sp-m"><span class="sp-k">A</span><span class="sp-v">N</span></span></div><p class="sp-vh">CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:C/C:H/I:N/A:N</p><p class="sp-cap"><a href="/advisories/ghsa-3c52-v5v2-3r56/">GHSA-3c52-v5v2-3r56</a><span class="sp-p">budibase</span><span class="sp-s">7.7 High</span></p></li><li class="sp-cell"><div class="sp-glyph" aria-hidden="true"><span class="sp-m"><span class="sp-k">AV</span><span class="sp-v">A</span></span><span class="sp-m"><span class="sp-k">AC</span><span class="sp-v">H</span></span><span class="sp-m"><span class="sp-k">PR</span><span class="sp-v">L</span></span><span class="sp-m"><span class="sp-k">UI</span><span class="sp-v">N</span></span><span class="sp-m"><span class="sp-k">S</span><span class="sp-v">C</span></span><span class="sp-m"><span class="sp-k">C</span><span class="sp-v">H</span></span><span class="sp-m"><span class="sp-k">I</span><span class="sp-v">H</span></span><span class="sp-m"><span class="sp-k">A</span><span class="sp-v">L</span></span></div><p class="sp-vh">CVSS:3.1/AV:A/AC:H/PR:L/UI:N/S:C/C:H/I:H/A:L</p><p class="sp-cap"><a href="/advisories/ghsa-jc26-22qp-cgqj/">GHSA-jc26-22qp-cgqj</a><span class="sp-p">trigger.dev</span><span class="sp-s">7.9 High</span></p></li><li class="sp-cell"><div class="sp-glyph" aria-hidden="true"><span class="sp-m"><span class="sp-k">AV</span><span class="sp-v">N</span></span><span class="sp-m"><span class="sp-k">AC</span><span class="sp-v">L</span></span><span class="sp-m"><span class="sp-k">PR</span><span class="sp-v">L</span></span><span class="sp-m"><span class="sp-k">UI</span><span class="sp-v">N</span></span><span class="sp-m"><span class="sp-k">S</span><span class="sp-v">U</span></span><span class="sp-m"><span class="sp-k">C</span><span class="sp-v">L</span></span><span class="sp-m"><span class="sp-k">I</span><span class="sp-v">N</span></span><span class="sp-m"><span class="sp-k">A</span><span class="sp-v">N</span></span></div><p class="sp-vh">CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:L/I:N/A:N</p><p class="sp-cap"><a href="/advisories/cve-2026-73301/">CVE-2026-73301</a><span class="sp-p">@budibase/server</span><span class="sp-s">4.3 Medium</span></p></li><li class="sp-cell"><div class="sp-glyph" aria-hidden="true"><span class="sp-m"><span class="sp-k">AV</span><span class="sp-v">N</span></span><span class="sp-m"><span class="sp-k">AC</span><span class="sp-v">L</span></span><span class="sp-m"><span class="sp-k">PR</span><span class="sp-v">L</span></span><span class="sp-m"><span class="sp-k">UI</span><span class="sp-v">N</span></span><span class="sp-m"><span class="sp-k">S</span><span class="sp-v">U</span></span><span class="sp-m"><span class="sp-k">C</span><span class="sp-v">N</span></span><span class="sp-m"><span class="sp-k">I</span><span class="sp-v">H</span></span><span class="sp-m"><span class="sp-k">A</span><span class="sp-v">L</span></span></div><p class="sp-vh">CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:H/A:L</p><p class="sp-cap"><a href="/advisories/cve-2026-59714/">CVE-2026-59714</a><span class="sp-p">open-webui</span><span class="sp-s">7.1 High</span></p></li><li class="sp-cell"><div class="sp-glyph" aria-hidden="true"><span class="sp-m"><span class="sp-k">AV</span><span class="sp-v">N</span></span><span class="sp-m"><span class="sp-k">AC</span><span class="sp-v">H</span></span><span class="sp-m"><span class="sp-k">PR</span><span class="sp-v">L</span></span><span class="sp-m"><span class="sp-k">UI</span><span class="sp-v">N</span></span><span class="sp-m"><span class="sp-k">S</span><span class="sp-v">U</span></span><span class="sp-m"><span class="sp-k">C</span><span class="sp-v">N</span></span><span class="sp-m"><span class="sp-k">I</span><span class="sp-v">L</span></span><span class="sp-m"><span class="sp-k">A</span><span class="sp-v">N</span></span></div><p class="sp-vh">CVSS:3.1/AV:N/AC:H/PR:L/UI:N/S:U/C:N/I:L/A:N</p><p class="sp-cap"><a href="/advisories/cve-2026-59715/">CVE-2026-59715</a><span class="sp-p">open-webui</span><span class="sp-s">3.1 Low</span></p></li><li class="sp-cell"><div class="sp-glyph" aria-hidden="true"><span class="sp-m"><span class="sp-k">AV</span><span class="sp-v">N</span></span><span class="sp-m"><span class="sp-k">AC</span><span class="sp-v">L</span></span><span class="sp-m"><span class="sp-k">PR</span><span class="sp-v">N</span></span><span class="sp-m"><span class="sp-k">UI</span><span class="sp-v">R</span></span><span class="sp-m"><span class="sp-k">S</span><span class="sp-v">U</span></span><span class="sp-m"><span class="sp-k">C</span><span class="sp-v">H</span></span><span class="sp-m"><span class="sp-k">I</span><span class="sp-v">H</span></span><span class="sp-m"><span class="sp-k">A</span><span class="sp-v">H</span></span></div><p class="sp-vh">CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H</p><p class="sp-cap"><a href="/advisories/cve-2026-57516/">CVE-2026-57516</a><span class="sp-p">ray</span><span class="sp-s">8.8 High</span></p></li><li class="sp-cell"><div class="sp-glyph" aria-hidden="true"><span class="sp-m"><span class="sp-k">AV</span><span class="sp-v">N</span></span><span class="sp-m"><span class="sp-k">AC</span><span class="sp-v">L</span></span><span class="sp-m"><span class="sp-k">PR</span><span class="sp-v">N</span></span><span class="sp-m"><span class="sp-k">UI</span><span class="sp-v">N</span></span><span class="sp-m"><span class="sp-k">S</span><span class="sp-v">U</span></span><span class="sp-m"><span class="sp-k">C</span><span class="sp-v">N</span></span><span class="sp-m"><span class="sp-k">I</span><span class="sp-v">L</span></span><span class="sp-m"><span class="sp-k">A</span><span class="sp-v">N</span></span></div><p class="sp-vh">CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:L/A:N</p><p class="sp-cap"><a href="/advisories/ghsa-59h8-w5q6-mfmp/">GHSA-59h8-w5q6-mfmp</a><span class="sp-p">trigger.dev</span><span class="sp-s">5.3 Medium</span></p></li><li class="sp-cell sp-cell--sa"><div class="sp-glyph" aria-hidden="true"><span class="sp-m"><span class="sp-k">AV</span><span class="sp-v">N</span></span><span class="sp-m"><span class="sp-k">AC</span><span class="sp-v">H</span></span><span class="sp-m"><span class="sp-k">PR</span><span class="sp-v">N</span></span><span class="sp-m"><span class="sp-k">UI</span><span class="sp-v">N</span></span><span class="sp-m"><span class="sp-k">S</span><span class="sp-v">C</span></span><span class="sp-m"><span class="sp-k">C</span><span class="sp-v">H</span></span><span class="sp-m"><span class="sp-k">I</span><span class="sp-v">H</span></span><span class="sp-m"><span class="sp-k">A</span><span class="sp-v">H</span></span></div><p class="sp-vh">CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:C/C:H/I:H/A:H</p><p class="sp-cap"><a href="/advisories/ghsa-pqxw-g93w-hj9x/">GHSA-pqxw-g93w-hj9x</a><span class="sp-p">trigger.dev</span><span class="sp-s sp-s--sa">9.0 High</span></p></li><li class="sp-cell"><div class="sp-glyph" aria-hidden="true"><span class="sp-m"><span class="sp-k">AV</span><span class="sp-v">N</span></span><span class="sp-m"><span class="sp-k">AC</span><span class="sp-v">H</span></span><span class="sp-m"><span class="sp-k">PR</span><span class="sp-v">L</span></span><span class="sp-m"><span class="sp-k">UI</span><span class="sp-v">N</span></span><span class="sp-m"><span class="sp-k">S</span><span class="sp-v">C</span></span><span class="sp-m"><span class="sp-k">C</span><span class="sp-v">H</span></span><span class="sp-m"><span class="sp-k">I</span><span class="sp-v">N</span></span><span class="sp-m"><span class="sp-k">A</span><span class="sp-v">N</span></span></div><p class="sp-vh">CVSS:3.1/AV:N/AC:H/PR:L/UI:N/S:C/C:H/I:N/A:N</p><p class="sp-cap"><a href="/advisories/cve-2026-63342/">CVE-2026-63342</a><span class="sp-p">hatchet</span><span class="sp-s">6.3 Medium</span></p></li><li class="sp-cell"><div class="sp-glyph" aria-hidden="true"><span class="sp-m"><span class="sp-k">AV</span><span class="sp-v">N</span></span><span class="sp-m"><span class="sp-k">AC</span><span class="sp-v">L</span></span><span class="sp-m"><span class="sp-k">PR</span><span class="sp-v">L</span></span><span class="sp-m"><span class="sp-k">UI</span><span class="sp-v">N</span></span><span class="sp-m"><span class="sp-k">S</span><span class="sp-v">U</span></span><span class="sp-m"><span class="sp-k">C</span><span class="sp-v">H</span></span><span class="sp-m"><span class="sp-k">I</span><span class="sp-v">N</span></span><span class="sp-m"><span class="sp-k">A</span><span class="sp-v">N</span></span></div><p class="sp-vh">CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:N/A:N</p><p class="sp-cap"><a href="/advisories/cve-2026-53577/">CVE-2026-53577</a><span class="sp-p">kestra</span><span class="sp-s">6.5 Medium</span></p></li><li class="sp-cell"><div class="sp-glyph" aria-hidden="true"><span class="sp-m"><span class="sp-k">AV</span><span class="sp-v">N</span></span><span class="sp-m"><span class="sp-k">AC</span><span class="sp-v">H</span></span><span class="sp-m"><span class="sp-k">PR</span><span class="sp-v">N</span></span><span class="sp-m"><span class="sp-k">UI</span><span class="sp-v">N</span></span><span class="sp-m"><span class="sp-k">S</span><span class="sp-v">U</span></span><span class="sp-m"><span class="sp-k">C</span><span class="sp-v">H</span></span><span class="sp-m"><span class="sp-k">I</span><span class="sp-v">H</span></span><span class="sp-m"><span class="sp-k">A</span><span class="sp-v">H</span></span></div><p class="sp-vh">CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:H</p><p class="sp-cap"><a href="/advisories/cve-2026-45675/">CVE-2026-45675</a><span class="sp-p">open-webui</span><span class="sp-s">8.1 High</span></p></li></ol>
-<p class="sp-foot">One CVSS v3.1 base vector for each of the 11 published advisories.</p>
-</section>
+<!-- RECORD:END -->
+      <div class="tfoot">
+        <p class="right">Every entry regenerates daily from the <a href="https://github.com/advisories?query=credit%3Asfwani">GitHub Advisory Database</a>, so this list only ever shows work that is published, fixed and credited.</p>
+      </div>
+
+      <ol class="notes">
+        <li><b>01</b>
+          <span class="nid">GHSA-pqxw-g93w-hj9x &middot; trigger.dev</span>
+          Self-hosted deployment: default secrets allow unauthenticated infrastructure compromise.
+        </li>
+        <li><b>02</b>
+          <span class="nid">GHSA-hhrp-gw25-jr43 &middot; ray</span>
+          Arbitrary code execution via the <span class="code">ray.data.read_webdataset</span> default decoder: <span class="code">pickle.loads(value)</span> and <span class="code">torch.load(weights_only=False)</span>.
+        </li>
+        <li><b>03</b>
+          <span class="nid">GHSA-h3ww-q6xx-w7x3 &middot; open-webui</span>
+          LDAP and OAuth first-user race condition allows multiple admin accounts.
+        </li>
+        <li><b>04</b>
+          <span class="nid">GHSA-jc26-22qp-cgqj &middot; trigger.dev</span>
+          Supervisor workload API lacks cross-tenant authentication.
+        </li>
+        <li><b>05</b>
+          <span class="nid">GHSA-3c52-v5v2-3r56 &middot; budibase</span>
+          SSRF in AI table generation via <span class="code">uploadUrl</span>: raw fetch without blacklist protection.
+        </li>
+        <li><b>06</b>
+          <span class="nid">GHSA-x2ff-v5v8-m75m &middot; open-webui</span>
+          Cross-channel message overwrite via the chat completion API, in both single-model and multimodel <span class="code">message_ids</span>.
+        </li>
+        <li><b>07</b>
+          <span class="nid">GHSA-r6v3-xxwj-9h42 &middot; io.kestra:kestra</span>
+          Cross-execution file read via the preview endpoint (IDOR).
+        </li>
+        <li><b>08</b>
+          <span class="nid">GHSA-g26x-m427-f48f &middot; hatchet</span>
+          Cross-tenant durable task event log disclosure via a missing authorization check.
+        </li>
+        <li><b>09</b>
+          <span class="nid">GHSA-59h8-w5q6-mfmp &middot; trigger.dev</span>
+          Unauthenticated realtime stream data injection via run <span class="code">friendlyId</span>.
+        </li>
+        <li><b>10</b>
+          <span class="nid">GHSA-4qcj-m5wp-jmf4 &middot; @budibase/server</span>
+          Missing RBAC on <span class="code">GET /api/global/groups</span> allows BASIC users to enumerate all tenant groups and role mappings.
+        </li>
+        <li><b>11</b>
+          <span class="nid">GHSA-gmfw-g93r-vg53 &middot; open-webui</span>
+          Unauthenticated WebSocket access to collaborative document handlers, <span class="code">ydoc:awareness:update</span> and <span class="code">ydoc:document:leave</span>.
+        </li>
+      </ol>
+    </section>

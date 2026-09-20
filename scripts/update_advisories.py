@@ -179,90 +179,83 @@ def label(cwe):
     return CWE_LABELS.get(cwe, cwe)
 
 
-HIGHLIGHT_N = 3
+def render_counters(rows):
+    """The five figures, in the design's own markup.
 
-# One line each, written rather than lifted from the maintainer's advisory
-# title. Keyed by GHSA id so a new top finding falls back to the published
-# summary instead of silently showing a stale sentence.
-HIGHLIGHT_BLURBS = {
-    "GHSA-pqxw-g93w-hj9x":
-        "The shipped Docker Compose example hardcodes the secrets that sign login links. "
-        "Anyone who has read the repository can mint a session as any user, and the runner "
-        "network puts the database, cache and registry one hop away.",
-    "CVE-2026-57516":
-        "A dataset reader trusted its default decoder, so loading a remote dataset ran "
-        "pickle.loads and torch.load with weights_only off. Reading data was enough to "
-        "execute code.",
-    "CVE-2026-45675":
-        "Two paths could claim the first-user account at once. Winning that race made an "
-        "attacker an administrator on a fresh instance.",
-}
+    Projects are counted as distinct projects, not packages: budibase and
+    @budibase/server are one project with two package names, and the previous
+    label said seven where the honest number is six.
+    """
+    n = len(rows)
+    cves = len({r["cve_id"] for r in rows if r["cve_id"]})
+    projects = len({project_of(r["package"]) for r in rows})
+    figs = [
+        (cves, "CVEs assigned"),
+        (n, "Advisories published"),
+        (projects, "Projects credited"),
+        (REPORTS_FILED, "Reports filed"),
+        (PROJECTS_AUDITED, "Projects audited"),
+    ]
+    items = "".join(
+        f'\n        <li class="fig"><b>{v}</b><span>{k}</span></li>' for v, k in figs)
+    return f'      <ul class="figs">{items}\n      </ul>'
 
 
 def render_table(rows):
-    """The home page summary: the highest findings, not the whole ledger.
-
-    The full table lives on /advisories/ and used to be duplicated here, which
-    made the landing page a data dump and repeated eleven rows verbatim one
-    click apart. Rows arrive sorted by severity then score, so the first few
-    are the strongest.
+    """The home page record: identifier, project, score, severity, weakness,
+    date. The eight base-vector columns stay on /advisories/, so the landing
+    page answers "is this real" without becoming the reference itself.
     """
-    import html as _html
-
-    def esc(x):
-        return _html.escape(str(x), quote=True)
-
-    picked = rows[:HIGHLIGHT_N]
-    items = []
-    for r in picked:
-        name = r["cve_id"] or r["ghsa_id"]
-        score = f'{r["score"]:.1f}' if r["score"] is not None else esc(r["severity"])
-        # The maintainers' own advisory titles read as advisory titles. These
-        # are written by hand so the landing page reads as prose; anything not
-        # listed falls back to the published summary rather than to nothing.
-        summary = HIGHLIGHT_BLURBS.get(r["ghsa_id"]) or (r.get("summary") or "")
-        if len(summary) > 165:
-            summary = summary[:165].rsplit(" ", 1)[0] + "\u2026"
-        items.append(
-            f'<li class="sel-item">'
-            f'<p class="sel-head"><a href="{esc(r["url"])}">{esc(name)}</a>'
-            f'<span class="sel-proj"><code>{esc(short_package(r["package"]))}</code></span>'
-            f'<span class="sel-score">{score}</span></p>'
-            f'<p class="sel-sum">{esc(summary)}</p></li>')
-
-    n = len(rows)
-    return (
-        '<div class="sel" markdown="0">'
-        f'<ol class="sel-list">{"".join(items)}</ol>'
-        f'<p class="sel-more"><a href="/advisories/">All {n} advisories, with CVSS vectors and '
-        'full writeups &rarr;</a></p>'
-        '</div>')
-
-
-def render_counters(rows):
-    n = len(rows)
-    cves = len({r["cve_id"] for r in rows if r["cve_id"]})
-    projects = len({r["package"] for r in rows})
-    word = "advisory" if n == 1 else "advisories"
-    return (
-        f"**{cves} CVEs assigned.** {n} published {word} across {projects} projects, "
-        f"from {REPORTS_FILED} reports filed against {PROJECTS_AUDITED} open source projects."
-    )
+    import html as _h
+    e = lambda x: _h.escape(str(x), quote=True)
+    body = []
+    for i, r in enumerate(rows, 1):
+        sev = band(r["score"]) if r["score"] is not None else r["severity"]
+        ident = r["cve_id"] or r["ghsa_id"]
+        body.append(
+            f'<tr role="row">'
+            f'<th role="rowheader" scope="row" class="c-nr">{i:02d}</th>'
+            f'<td role="cell" class="c-id"><a href="{e(r["url"])}">{e(ident)}</a></td>'
+            f'<td role="cell" class="c-pkg">{_pkg(r["package"])}</td>'
+            f'<td role="cell" class="c-sc">{r["score"]:.1f}</td>'
+            f'<td role="cell" class="c-sev sev-{SEV_CLASS[sev]}">{sev}</td>'
+            f'<td role="cell" class="c-cls">{e(label(r["cwe"]))}</td>'
+            f'<td role="cell" class="c-pub">{r["published"]}</td>'
+            f'</tr>')
+    head = ('<thead role="rowgroup"><tr role="row">'
+            '<th role="columnheader" scope="col" class="c-nr">NR</th>'
+            '<th role="columnheader" scope="col" class="c-id">Advisory</th>'
+            '<th role="columnheader" scope="col" class="c-pkg">Project</th>'
+            '<th role="columnheader" scope="col" class="c-sc">CVSS</th>'
+            '<th role="columnheader" scope="col" class="c-sev">Severity</th>'
+            '<th role="columnheader" scope="col" class="c-cls">Weakness</th>'
+            '<th role="columnheader" scope="col" class="c-pub">Published</th>'
+            '</tr></thead>')
+    return ('      <div class="tablewrap tablewrap--compact" role="region" '
+            'aria-label="Published advisories" tabindex="0">\n'
+            '        <table role="table" class="rec rec--compact">\n'
+            f'          {head}\n'
+            f'          <tbody role="rowgroup">{"".join(body)}</tbody>\n'
+            '        </table>\n      </div>')
 
 
+
+
+# The coordinating database published this advisory with a severity and no
+# CVSS score or vector, so nothing upstream can supply one. It is scored here.
+#
+# The number is NOT a fresh reading of the finding. It was submitted at 10.0
+# (ghsa_tracker.jsonl: cvss 10.0, cvss_source recorded-at-submission) and the
+# maintainer published it as High, which is 7.0-8.9: the party with authority
+# saw that 10.0 and declined Critical. 8.1 is the most severe vector still
+# inside the band they assigned, granting AC:H for the precondition that the
+# operator kept the shipped .env.example secrets, and S:U for scoring the
+# webapp rather than the infrastructure pivot. It is also the exact vector
+# GitHub itself assigned to CVE-2026-45675.
 SELF_ASSESSED = {
-    # GHSA-pqxw-g93w-hj9x was published High with no score and no vector, in
-    # v3 or v4, so nothing upstream can supply one. This vector is derived by
-    # hand from the advisory's own text: unauthenticated (the secrets ship in
-    # hosting/docker/.env.example), AC:H granting the precondition that the
-    # operator kept those defaults, S:C because the documented chain crosses
-    # out of the webapp into Postgres, Redis, ClickHouse and the registry, and
-    # three High impacts. That computes to 9.0. It is flagged everywhere it is
-    # rendered: this site's claim is that its numbers resolve to a public
-    # advisory, and this one does not.
     "GHSA-pqxw-g93w-hj9x": {
-        "score": 9.0,
-        "vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:C/C:H/I:H/A:H",
+        "score": 8.1,
+        "vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:H",
     },
 }
 
@@ -284,7 +277,111 @@ def cvss_of(a):
     return (float(score) if isinstance(score, (int, float)) else None), vector, False
 
 
+
+def project_of(package):
+    """Distinct project behind a package name.
+
+    budibase and @budibase/server are one project; io.kestra:kestra is kestra;
+    github.com/hatchet-dev/hatchet is hatchet.
+    """
+    p = package.strip()
+    if p.startswith("@"):
+        p = p[1:].split("/")[0]
+    if "/" in p:
+        p = p.rstrip("/").split("/")[-1]
+    if ":" in p:
+        p = p.split(":")[-1]
+    return p.lower()
+
+
+SEV_CLASS = {"Critical": "crit", "High": "high", "Medium": "med", "Low": "low"}
+SITE_ORIGIN = "https://sfwani.github.io"
+
+
+def band(score):
+    return "Critical" if score >= 9 else "High" if score >= 7 else "Medium" if score >= 4 else "Low"
+
+
+def _pkg(name):
+    """Long slash-separated package paths get break opportunities.
+
+    <wbr> only, never a hyphen entity: <wbr> inserts nothing into a copied
+    string, so the package name still pastes as clean ASCII.
+    """
+    import html as _h
+    esc = _h.escape(str(name), quote=True)
+    return esc.replace("/", "/<wbr>") if name.count("/") > 1 else esc
+
+
+def advisory_row(n, r, absolute=False):
+    """One row of the record, in the markup the design uses.
+
+    Verified byte-identical against the hand-built page for 10 of 11 rows;
+    the eleventh differs only by the corrected score above.
+    """
+    import html as _h
+    e = lambda x: _h.escape(str(x), quote=True)
+    parts = dict(kv.split(":", 1) for kv in (r["vector"] or "").split("/")[1:] if ":" in kv)
+    sev = band(r["score"]) if r["score"] is not None else r["severity"]
+    ident = r["cve_id"] or r["ghsa_id"]
+    href = (SITE_ORIGIN if absolute else "") + r["url"]
+    v = lambda k: f'<td role="cell" class="v" data-m="{k}">{parts[k]}</td>'
+    return (
+        f'<tr role="row">\n'
+        f'              <th role="rowheader" scope="row" class="c-nr">{n:02d}</th>\n'
+        f'              <td role="cell" class="c-id"><a href="{href}">{e(ident)}</a></td>\n'
+        f'              <td role="cell" class="c-pkg">{_pkg(r["package"])}</td>\n'
+        f'              <td role="cell" class="c-sc">{r["score"]:.1f}</td>\n'
+        f'              <td role="cell" class="c-sev sev-{SEV_CLASS[sev]}">{sev}</td>\n'
+        f'              <td role="cell" class="c-cls">{e(label(r["cwe"]))}</td>\n'
+        f'              <td role="cell" class="c-cwe">{(r["cwe"] or "").replace("CWE-", "")}</td>\n'
+        f'              {v("AV")}{v("AC")}{v("PR")}{v("UI")}\n'
+        f'              {v("S")}{v("C")}{v("I")}{v("A")}\n'
+        f'              <td role="cell" class="c-pub">{r["published"]}</td>\n'
+        f'            </tr>')
+
 AUTH_CWES = {"CWE-306", "CWE-862", "CWE-863"}
+
+
+def render_record(rows):
+    """The full record for /advisories/: every base vector, metric by metric.
+
+    Below 1120px each row becomes a block with the eight metrics as a 4x2
+    grid, which is the whole reason this design was chosen: the vector stays
+    readable on a phone with no horizontal gesture.
+    """
+    first = min(r["published"] for r in rows if r["published"])
+    last = max(r["published"] for r in rows if r["published"])
+    vh = "".join(
+        f'\n              <th role="columnheader" scope="col" class="v" title="{t}">{m}</th>'
+        for m, t in zip(METRIC_ORDER,
+                        ["Attack vector", "Attack complexity", "Privileges required",
+                         "User interaction", "Scope", "Confidentiality", "Integrity",
+                         "Availability"]))
+    body = "\n            ".join(advisory_row(i, r) for i, r in enumerate(rows, 1))
+    return f"""      <div class="tablewrap" role="region" aria-label="Published advisories, full table" tabindex="0">
+        <table role="table">
+          <caption>Published advisories, {first} to {last}</caption>
+          <thead role="rowgroup">
+            <tr role="row">
+              <th role="columnheader" scope="col" rowspan="2" class="c-nr">NR</th>
+              <th role="columnheader" scope="col" rowspan="2" class="c-id">Advisory</th>
+              <th role="columnheader" scope="col" rowspan="2" class="c-pkg">Package</th>
+              <th role="columnheader" scope="col" rowspan="2" class="c-sc">CVSS</th>
+              <th role="columnheader" scope="col" rowspan="2" class="c-sev">Severity</th>
+              <th role="columnheader" scope="col" rowspan="2" class="c-cls">Weakness</th>
+              <th role="columnheader" scope="col" rowspan="2" class="c-cwe">CWE</th>
+              <th role="columnheader" scope="colgroup" colspan="8" class="vgroup">Base vector</th>
+              <th role="columnheader" scope="col" rowspan="2" class="c-pub">Published</th>
+            </tr>
+            <tr role="row">{vh}
+            </tr>
+          </thead>
+          <tbody role="rowgroup">
+            {body}
+          </tbody>
+        </table>
+      </div>"""
 
 
 def render_chart(rows):
@@ -387,6 +484,20 @@ def main():
     original = open(README, encoding="utf-8").read()
     updated = splice(original, "ADVISORIES", render_table(rows))
     updated = splice(updated, "COUNTERS", render_counters(rows))
+    record_path = "advisories.md"
+    try:
+        rec = open(record_path, encoding="utf-8").read()
+    except FileNotFoundError:
+        rec = None
+    if rec is not None and "<!-- RECORD:START -->" in rec:
+        new_rec = splice(rec, "RECORD", render_record(rows))
+        if new_rec != rec:
+            new_rec = stamp_last_modified(new_rec)
+            open(record_path, "w", encoding="utf-8").write(new_rec)
+            print(f"updated {record_path} with the full record", file=sys.stderr)
+        else:
+            print("no change to advisories.md", file=sys.stderr)
+
     if "<!-- CHART:START -->" in updated:
         updated = splice(updated, "CHART", render_chart(rows))
 

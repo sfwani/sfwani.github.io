@@ -1,22 +1,31 @@
 ---
 title: "GHSA-pqxw-g93w-hj9x"
-heading: "GHSA-pqxw-g93w-hj9x: Self-Hosted Deployment: Default Secrets allow Unauthenticated Infrastructure Compromise"
+heading: "GHSA-pqxw-g93w-hj9x"
+role: "Self-Hosted Deployment: Default Secrets allow Unauthenticated Infrastructure Compromise"
 seo_title: "GHSA-pqxw-g93w-hj9x: Self-Hosted Deployment: Default Secrets allow Unauthenticated Infrastructure… - Sanaan Fayaz Wani"
 ghsa_id: "GHSA-pqxw-g93w-hj9x"
 cve_id: ""
 published_at: "2026-07-21"
 permalink: /advisories/ghsa-pqxw-g93w-hj9x/
-layout: page
+layout: c2
 description: "Self-Hosted Deployment: Default Secrets allow Unauthenticated Infrastructure Compromise"
 comments: false
-last_modified_at: 2026-09-19T20:50:55+00:00
+last_modified_at: 2026-09-20T03:45:26+00:00
 ---
+<section class="sec g" id="writeup" aria-labelledby="h-writeup">
+  <div class="sec-head">
+    <p class="sec-nr">—</p>
+    <h2 id="h-writeup">GHSA-pqxw-g93w-hj9x</h2>
+    <p class="sec-sub">Published, fixed and credited. Root cause, the vulnerable code, reproduction and the fix, as published in the advisory itself.</p>
+  </div>
+  <div class="col-body prose" markdown="1">
+
 | | |
 |:--|:--|
 | Advisory | [GHSA-pqxw-g93w-hj9x](https://github.com/triggerdotdev/trigger.dev/security/advisories/GHSA-pqxw-g93w-hj9x) |
 | CVE | not assigned |
-| Severity | High (9.0) |
-| CVSS vector | `CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:C/C:H/I:H/A:H` |
+| Severity | High (8.1) |
+| CVSS vector | `CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:H` |
 | CWE | CWE-653 (Improper Isolation or Compartmentalization), CWE-1393 (Use of Default Password) |
 | Published | 2026-07-21 |
 
@@ -184,3 +193,7 @@ Complete infrastructure compromise: all tenant data, API keys, encrypted secrets
 Sanaan Fayaz Wani (GitHub [`sfwani`](https://github.com/sfwani)) reported this vulnerability to the `trigger.dev` maintainers under coordinated disclosure and is credited as a reporter in [GHSA-pqxw-g93w-hj9x](https://github.com/triggerdotdev/trigger.dev/security/advisories/GHSA-pqxw-g93w-hj9x), published 2026-07-21.
 
 All published findings: [advisory index](/advisories/). About the researcher: [about](/about/) and [experience](/experience/).
+
+
+  </div>
+</section>
