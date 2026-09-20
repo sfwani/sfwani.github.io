@@ -164,7 +164,106 @@
    slack and grew to 377px.
    Left aligned throughout is the answer. Every score is X.X, so the figures
    line up anyway, the number sits under its own header, and the slack falls
-   to the right where it reads as column spacing. */
-.rec--compact .c-sc,
-.rec--compact thead .c-sc{ text-align: left; }
-.rec--compact .c-sc{ font-variant-numeric: proportional-nums; padding-right: calc(var(--u)*3); }
+   to the right where it reads as column spacing.
+   Selectors are qualified to .tablewrap tbody td / thead th because the C2
+   rules they override carry that weight: `.tablewrap tbody td.c-sc` is
+   (0,2,2), and a bare `.rec--compact .c-sc` at (0,2,0) silently loses to it. */
+.tablewrap .rec--compact tbody td.c-sc,
+.tablewrap .rec--compact thead th.c-sc{ text-align: left; }
+.tablewrap .rec--compact tbody td.c-sc{
+  font-variant-numeric: proportional-nums;
+  padding-right: calc(var(--u)*3);
+}
+
+/* ── Writeup column width ──────────────────────────────────────────
+   C2's .col-body is columns 2-7 because on the profile page a .col-aside
+   sits in 8-11 beside it. A writeup has no aside, so those five columns
+   were simply empty: 552px of prose against 1032px of available width,
+   a 55 character measure at 1280px and 45 at 1024px.
+   Worse, the metadata table cannot shrink below its own min-content
+   width, so it ignored the 552px cell and ran 428px past the prose:
+   the ragged right edge that made the page look broken.
+   The body now takes the full width the grid has, and the running text
+   alone keeps a measure. Rules, tables and code blocks run the whole
+   column, which is what makes the narrower text read as a decision. */
+@media (min-width: 1024px){
+  #writeup .col-body{ grid-column: 2 / span 10; }
+  #writeup .col-body > p,
+  #writeup .col-body > ul,
+  #writeup .col-body > ol,
+  #writeup .col-body > blockquote,
+  #writeup .col-body > h4{ max-width: 42rem; }
+}
+
+/* The title role is a person's one line description on the profile, so C2
+   caps it at 30ch. On a writeup it carries the advisory summary, which is
+   four times that: it was setting a 262px column four lines deep under an
+   800px headline. */
+.page:has(#writeup) .title-role{
+  grid-column: 1 / span 8;
+  max-width: 62ch;
+  color: var(--ink-2);
+}
+
+/* ── Writeup heading hierarchy ─────────────────────────────────────
+   The section title (the GHSA id) is an h2, and so is every heading in
+   the body markdown, so "Summary" was rendering at the same 30px, the
+   same weight and the same left edge as "GHSA-hhrp-gw25-jr43" directly
+   above it: two headings that look like peers, one of which contains
+   the other. The body headings step down and take the ruled treatment
+   that was already written for h3. */
+#writeup .col-body h2{
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: -.012em;
+  line-height: 1.2;
+  margin: calc(var(--u)*6) 0 calc(var(--u)*2);
+  padding-bottom: calc(var(--u)*.75);
+  border-bottom: 1px solid var(--rule);
+}
+#writeup .col-body h3{
+  font-size: var(--t-m);
+  font-weight: 600;
+  letter-spacing: 0;
+  margin: calc(var(--u)*4) 0 calc(var(--u)*1);
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+/* The section already opened with three units of row gap above the body,
+   so the first heading or table must not add its own. */
+#writeup .col-body > :first-child{ margin-top: 0; }
+
+/* ── Masthead at phone width ───────────────────────────────────────
+   C2's masthead held a name and one word, DARK, so below 640px it sets
+   `1fr auto` and lets the name take the slack. This site put HOME /
+   ADVISORIES / ABOUT in that auto track, which needs 228px of the 350px
+   a 390px phone has: the name was left 132px, wrapped to two lines, and
+   ran into the nav with no gap at all. Below 480px the two halves take a
+   row each instead, nav left and the theme switch right. */
+@media (max-width: 479px){
+  .masthead{
+    grid-template-columns: 1fr;
+    row-gap: calc(var(--u)*1.25);
+  }
+  .mast-name{ grid-column: 1; }
+  .mast-tools{
+    grid-column: 1;
+    width: 100%;
+    justify-content: space-between;
+  }
+}
+
+/* C2 gives .prose p overflow-wrap:anywhere but there was no prose list to
+   worry about. A bare URL and a repo path in list items were overrunning
+   the column by 19px at 360px, and .page{overflow-x:clip} meant they were
+   silently cut off rather than scrolled to. */
+.prose li{ overflow-wrap:anywhere; }
+
+/* Tap targets. The masthead links were 19px tall and the contact links 16px,
+   both under the 24px minimum, and the contact list is the one place on the
+   site a reader is actually trying to hit something on a phone. Padding only,
+   so nothing moves on a pointer device where the rows are already fine. */
+@media (max-width:639px){
+  .mast-nav a{ padding-block:4px 5px; }
+  .contact a{ display:inline-block; padding-block:5px; }
+}

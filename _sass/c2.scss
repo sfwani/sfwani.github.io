@@ -1,6 +1,14 @@
 // Template C2, taken whole from the chosen design. This file is the design:
 // it is not adapted, summarised or re-derived. Anything site-specific lives
 // in _sass/c2-site.scss so this stays diffable against the source template.
+//
+// One mechanical change: C2 had exactly one table, so its record matrix was
+// written on bare `table` / `thead` / `tbody` / `th` / `td` selectors. On a
+// multi-page site those also caught the writeup tables, which inherited
+// `min-width: 980px`, `table-layout: fixed`, and below 1120px the whole
+// row-to-card transform, header row included. Every one of those selectors is
+// now prefixed `.tablewrap `, the wrapper both record tables already sit in.
+// Nothing else changed: `sed 's/\.tablewrap //g'` returns the original file.
 
 /* ───────────────────────────────────────────────────────────────
    TOKENS: complete light palette on bare :root
@@ -421,7 +429,7 @@ h1{
   overscroll-behavior-x: contain;
   border-top: 1px solid var(--rule-heavy);
 }
-table{
+.tablewrap table{
   width: 100%;
   min-width: 980px;
   table-layout: fixed;
@@ -429,7 +437,7 @@ table{
   font-size: var(--t-s);
   line-height: 1.4;
 }
-caption{
+.tablewrap caption{
   text-align: left;
   font-size: var(--t-xs);
   font-weight: 500;
@@ -438,13 +446,13 @@ caption{
   color: var(--ink-3);
   padding-bottom: var(--u);
 }
-th, td{
+.tablewrap th, .tablewrap td{
   text-align: left;
   vertical-align: baseline;
   padding: 9px 10px 9px 0;
   border-bottom: 1px solid var(--rule);
 }
-thead th{
+.tablewrap thead th{
   font-size: var(--t-xs);
   font-weight: 700;
   letter-spacing: 0.11em;
@@ -454,31 +462,31 @@ thead th{
   border-bottom: 1px solid var(--rule-2);
   white-space: nowrap;
 }
-thead tr:first-child th{ padding-top: 10px; }
-tbody tr:last-child td{ border-bottom: 1px solid var(--rule-heavy); }
+.tablewrap thead tr:first-child th{ padding-top: 10px; }
+.tablewrap tbody tr:last-child td{ border-bottom: 1px solid var(--rule-heavy); }
 
-.c-nr   { width: 3.39%;  color: var(--ink-3); font-weight: 500; }
-.c-id   { width: 16.40%; font-weight: 500; white-space: nowrap; }
-.c-id a { text-decoration-color: var(--rule); }
-.c-pkg  { width: 12.90%; color: var(--ink-2); overflow-wrap: anywhere; }
+.tablewrap .c-nr   { width: 3.39%;  color: var(--ink-3); font-weight: 500; }
+.tablewrap .c-id   { width: 16.40%; font-weight: 500; white-space: nowrap; }
+.tablewrap .c-id a { text-decoration-color: var(--rule); }
+.tablewrap .c-pkg  { width: 12.90%; color: var(--ink-2); overflow-wrap: anywhere; }
 
 /* The one element given real compositional weight: the score column is
    set at the large step, so eleven numerals fall 9.0 to 3.1 down a single
    column and give the table, and the page, a focal point. */
-.c-sc   { width: 8.40%; font-variant-numeric: tabular-nums; }
-tbody td.c-sc{
+.tablewrap .c-sc   { width: 8.40%; font-variant-numeric: tabular-nums; }
+.tablewrap tbody td.c-sc{
   font-size: var(--t-l);
   font-weight: 500;
   line-height: 0.95;
   letter-spacing: -0.03em;
 }
-.c-sev  { width: 7.60%;  }
-.c-cls  { width: 17.30%; }
-.c-cwe  { width: 4.71%;  color: var(--ink-2); white-space: nowrap; }
-.c-pub  { width: 8.94%;  color: var(--ink-2); white-space: nowrap; }
+.tablewrap .c-sev  { width: 7.60%;  }
+.tablewrap .c-cls  { width: 17.30%; }
+.tablewrap .c-cwe  { width: 4.71%;  color: var(--ink-2); white-space: nowrap; }
+.tablewrap .c-pub  { width: 8.94%;  color: var(--ink-2); white-space: nowrap; }
 
 /* the eight-cell CVSS glyph: a flat tone field, no border, no radius */
-.v{
+.tablewrap .v{
   width: 2.545%;
   background: var(--bg-2);
   font-weight: 500;
@@ -486,34 +494,34 @@ tbody td.c-sc{
   padding-right: 4px;
   text-indent: 6px;
 }
-th.v{ background: var(--bg-2); letter-spacing: 0.02em; }
-th.vgroup{
+.tablewrap th.v{ background: var(--bg-2); letter-spacing: 0.02em; }
+.tablewrap th.vgroup{
   background: var(--bg-2);
   text-indent: 6px;
   padding-right: 4px;
 }
 
-.sev-high  { font-weight: 700; color: var(--ink); }
-.sev-med   { font-weight: 400; color: var(--ink); }
-.sev-low   { font-weight: 400; color: var(--ink-2); }
+.tablewrap .sev-high  { font-weight: 700; color: var(--ink); }
+.tablewrap .sev-med   { font-weight: 400; color: var(--ink); }
+.tablewrap .sev-low   { font-weight: 400; color: var(--ink-2); }
 
-.dag{
+.tablewrap .dag{
   color: var(--accent);
   font-weight: 700;
   text-decoration: none;
   padding-left: 1px;
 }
 
-tbody tr:hover td{ background: var(--bg-2); }
-tbody tr:hover td.v{ background: var(--bg-3); }
+.tablewrap tbody tr:hover td{ background: var(--bg-2); }
+.tablewrap tbody tr:hover td.v{ background: var(--bg-3); }
 /* the display score sets the row height, so the 13px cells drop to sit
    on its baseline instead of hanging off the cap line */
 @media (min-width: 1120px){
-  tbody th.c-nr{ padding-top: 14px; }
+  .tablewrap tbody th.c-nr{ padding-top: 14px; }
   tbody .c-id, tbody .c-pkg, tbody .c-sev,
   tbody .c-cls, tbody .c-cwe, tbody .c-pub,
-  tbody td.v{ padding-top: 15px; }
-  tbody td.c-sc{ padding-top: 8px; }
+  .tablewrap tbody td.v{ padding-top: 15px; }
+  .tablewrap tbody td.c-sc{ padding-top: 8px; }
 }
 
 .tfoot{
@@ -545,23 +553,23 @@ tbody tr:hover td.v{ background: var(--bg-3); }
 @media (max-width: 1119px){
   /* tbody tr:last-child td (0,1,3) outranked the block-form reset (0,0,2),
      so the final advisory kept a near-black rule under all sixteen cells. */
-  tbody tr:last-child th, tbody tr:last-child td{ border-bottom: 0; }
-  tbody tr:nth-last-child(2) th, tbody tr:nth-last-child(2) td{ border-bottom: 0; }
+  .tablewrap tbody tr:last-child th, .tablewrap tbody tr:last-child td{ border-bottom: 0; }
+  .tablewrap tbody tr:nth-last-child(2) th, .tablewrap tbody tr:nth-last-child(2) td{ border-bottom: 0; }
 
   .tablewrap{
     overflow-x: visible;
     border-top: 2px solid var(--rule-heavy);
   }
-  table{ display: block; width: 100%; min-width: 0; table-layout: auto; }
-  caption{ display: block; padding-top: var(--u); }
-  thead{
+  .tablewrap table{ display: block; width: 100%; min-width: 0; table-layout: auto; }
+  .tablewrap caption{ display: block; padding-top: var(--u); }
+  .tablewrap thead{
     position: absolute; width: 1px; height: 1px;
     margin: -1px; padding: 0; overflow: hidden;
     clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap;
   }
-  tbody{ display: block; }
+  .tablewrap tbody{ display: block; }
 
-  tbody tr{
+  .tablewrap tbody tr{
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
     column-gap: 2px;
@@ -569,31 +577,31 @@ tbody tr:hover td.v{ background: var(--bg-3); }
     border-bottom: 1px solid var(--rule);
     padding-block: calc(var(--u) * 2.5) calc(var(--u) * 3);
   }
-  tbody tr:last-child{ border-bottom: 2px solid var(--rule-heavy); }
-  tbody th, tbody td{
+  .tablewrap tbody tr:last-child{ border-bottom: 2px solid var(--rule-heavy); }
+  .tablewrap tbody th, .tablewrap tbody td{
     display: block;
     width: auto;
     padding: 0;
     border-bottom: 0;
     background: none;
   }
-  tbody tr:hover td, tbody tr:hover td.v{ background: none; }
-  tbody tr:hover td.v{ background: var(--bg-2); }
+  .tablewrap tbody tr:hover td, .tablewrap tbody tr:hover td.v{ background: none; }
+  .tablewrap tbody tr:hover td.v{ background: var(--bg-2); }
 
-  .c-nr { grid-area: 1 / 1 / 2 / 3; width: auto; color: var(--accent); font-weight: 700; padding-top: 0; }
-  .c-sc { grid-area: 1 / 3 / 2 / 5; width: auto; text-align: right; padding-top: 0; }
-  .c-id { grid-area: 2 / 1 / 3 / 5; width: auto; white-space: normal; font-size: var(--t-m); padding-top: 3px; }
-  .c-pkg{ grid-area: 3 / 1 / 4 / 3; width: auto; padding-top: 5px; }
-  .c-sev{ grid-area: 3 / 3 / 4 / 5; width: auto; text-align: right; padding-top: 5px; }
-  .c-cls{ grid-area: 4 / 1 / 5 / 4; width: auto; padding-top: calc(var(--u) * 1.75); }
-  .c-cwe{ grid-area: 4 / 4 / 5 / 5; width: auto; text-align: right; padding-top: calc(var(--u) * 1.75); }
-  .c-cwe::before{ content: "CWE\00a0"; color: var(--ink-3); }
-  .c-pub{ grid-area: 5 / 1 / 6 / 5; width: auto; color: var(--ink-3); padding-top: 3px; }
-  .c-pub::before{ content: "Published "; }
+  .tablewrap .c-nr { grid-area: 1 / 1 / 2 / 3; width: auto; color: var(--accent); font-weight: 700; padding-top: 0; }
+  .tablewrap .c-sc { grid-area: 1 / 3 / 2 / 5; width: auto; text-align: right; padding-top: 0; }
+  .tablewrap .c-id { grid-area: 2 / 1 / 3 / 5; width: auto; white-space: normal; font-size: var(--t-m); padding-top: 3px; }
+  .tablewrap .c-pkg{ grid-area: 3 / 1 / 4 / 3; width: auto; padding-top: 5px; }
+  .tablewrap .c-sev{ grid-area: 3 / 3 / 4 / 5; width: auto; text-align: right; padding-top: 5px; }
+  .tablewrap .c-cls{ grid-area: 4 / 1 / 5 / 4; width: auto; padding-top: calc(var(--u) * 1.75); }
+  .tablewrap .c-cwe{ grid-area: 4 / 4 / 5 / 5; width: auto; text-align: right; padding-top: calc(var(--u) * 1.75); }
+  .tablewrap .c-cwe::before{ content: "CWE\00a0"; color: var(--ink-3); }
+  .tablewrap .c-pub{ grid-area: 5 / 1 / 6 / 5; width: auto; color: var(--ink-3); padding-top: 3px; }
+  .tablewrap .c-pub::before{ content: "Published "; }
 
   /* rows 1 to 5 are fully covered, so the eight metric cells auto-flow
      into rows 6 and 7 as a 4x2 matrix */
-  td.v{
+  .tablewrap td.v{
     width: auto;
     background: var(--bg-2);
     text-indent: 0;
@@ -603,7 +611,7 @@ tbody tr:hover td.v{ background: var(--bg-3); }
     font-weight: 500;
     line-height: 1;
   }
-  td.v::before{
+  .tablewrap td.v::before{
     content: attr(data-m);
     display: block;
     margin-bottom: 5px;
@@ -617,12 +625,12 @@ tbody tr:hover td.v{ background: var(--bg-3); }
 /* Two blocks abreast as soon as the field can hold two, so the block form
    is not eleven sparse full width bands on a tablet. */
 @media (min-width: 860px) and (max-width: 1119px){
-  tbody{
+  .tablewrap tbody{
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     column-gap: calc(var(--gap) * 2);
   }
-  tbody tr:nth-last-child(2){ border-bottom: 2px solid var(--rule-heavy); }
+  .tablewrap tbody tr:nth-last-child(2){ border-bottom: 2px solid var(--rule-heavy); }
 }
 
 /* ───────────────────────────────────────────────────────────────
@@ -952,7 +960,7 @@ tbody tr:hover td.v{ background: var(--bg-3); }
    ─────────────────────────────────────────────────────────────── */
 @media (prefers-reduced-motion: no-preference){
   html{ scroll-behavior: smooth; }
-  a, .tgl, tbody tr td{
+  a, .tgl, .tablewrap tbody tr td{
     transition: color 120ms linear, background-color 120ms linear,
                 text-decoration-color 120ms linear, border-color 120ms linear;
   }
@@ -975,7 +983,7 @@ tbody tr:hover td.v{ background: var(--bg-3); }
 /* The score numerals are one digit either side of the point, so tabular
    figures buy no alignment and cost the period a full digit advance: the
    focal number was setting as "9 . 0". Proportional figures, right aligned. */
-tbody td.c-sc{ font-variant-numeric: proportional-nums; text-align: right; }
+.tablewrap tbody td.c-sc{ font-variant-numeric: proportional-nums; text-align: right; }
 
 /* Inline code padding pushed the following comma clear of the tint, which
    orphaned punctuation five times in two sentences. Negative inline margin
