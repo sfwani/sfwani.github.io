@@ -232,15 +232,29 @@
   #writeup .col-body > h4{ max-width: 46rem; }
 }
 
-/* The title role is a person's one line description on the profile, so C2
-   caps it at 30ch. On a writeup it carries the advisory summary, which is
-   four times that: it was setting a 262px column four lines deep under an
-   800px headline. */
-.page:has(section.sec:only-of-type) .title-role{
-  grid-column: 1 / span 8;
-  max-width: 62ch;
-  color: var(--ink-2);
+/* C2 caps the title role at 30ch, which suits a three word job title and
+   nothing longer. Every role on this site is a sentence or two, so at 30ch
+   they all stacked into a narrow block: 300px and five lines under an
+   840px name on the home page, 262px and four lines under an advisory id.
+   One width for all of them now, 620px and three lines, which sits under
+   the headline instead of beside a void. Scoped to 1024 and up, because
+   below that C2 narrows the role again by design and then lets it run full
+   width on a phone.
+
+   Only the tone still varies. On the home page the role is the identity
+   line and keeps full ink; on the single section pages it is a descriptive
+   summary under an id that should stay the loudest thing there, so it
+   steps back a tone. */
+@media (min-width: 640px){
+  /* The 30ch cap, not the column span, is what squeezes the role on a
+     tablet: at 900px the track is 540px wide and the cap was holding the
+     text to 300px and five lines. */
+  .title-role{ max-width: 62ch; }
 }
+@media (min-width: 1024px){
+  .title-role{ grid-column: 1 / span 8; }
+}
+.page:has(section.sec:only-of-type) .title-role{ color: var(--ink-2); }
 
 /* ── Writeup heading hierarchy ─────────────────────────────────────
    The section title (the GHSA id) is an h2, and so is every heading in
