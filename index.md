@@ -190,6 +190,7 @@ last_modified_at: 2026-09-20T03:43:55+00:00
         <li><span class="yr">2025</span><span class="pl">1st</span><span class="ev">Hackabull CTF</span><span class="nt">Won swag and a lockpick set</span></li>
         <li><span class="yr">2025</span><span class="pl">1st</span><span class="ev">Social Engineering Competition, The CARE Lab at Temple University</span><span class="nt">Won a cash prize</span></li>
         <li><span class="yr">2025</span><span class="pl">2nd</span><span class="ev">SHPE National CTF</span><span class="nt">Won a cash prize</span></li>
+        <li><span class="yr">2025</span><span class="pl">2nd</span><span class="ev">CPTC Southeast Regionals</span><span class="nt">Won bragging rights</span></li>
         <li><span class="yr">2025</span><span class="pl">3rd</span><span class="ev">SecureTheFuture Research Award, Palo Alto Networks</span><span class="nt">Won a cash prize</span></li>
         <li><span class="yr">2025</span><span class="pl">3rd</span><span class="ev">NCAE CyberGames, South East Regionals</span><span class="nt">Won swag</span></li>
         <li><span class="yr">2024</span><span class="pl">1st</span><span class="ev">SHPE National CTF</span><span class="nt">Won a cash prize</span></li>
@@ -228,7 +229,7 @@ last_modified_at: 2026-09-20T03:43:55+00:00
         <li>
           <span class="src"><b>USF Bellini College</b><time datetime="2025-08-13">13 Aug 2025</time></span>
           <span class="ttl"><a href="https://www.usf.edu/ai-cybersecurity-computing/news/2025/defcon33.aspx">USF CyberHerd captures first place at world&rsquo;s largest hacker conference</a></span>
-          <span class="nt">DEF CON 33</span>
+          <span class="nt">College shout out</span>
         </li>
         <li>
           <span class="src"><b>USF College of Engineering</b><time datetime="2025-01-08">8 Jan 2025</time></span>
