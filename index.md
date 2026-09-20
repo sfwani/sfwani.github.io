@@ -3,7 +3,7 @@ layout: c2
 title: Sanaan Fayaz Wani
 heading: Sanaan Fayaz Wani
 seo_title: "Sanaan Fayaz Wani - Security Engineer and vulnerability researcher"
-role: "Security Engineer, IAM at Amazon. Independent vulnerability research against the infrastructure that runs large language models."
+role: "Security Engineer at Amazon, bringing agentic AI into identity and access management. Independent vulnerability research across open source infrastructure."
 description: Vulnerability research on AI agent frameworks and LLM infrastructure. Seven assigned CVEs and eleven published advisories, with root cause, reproduction and fix for each.
 permalink: /
 last_modified_at: 2026-09-20T03:43:55+00:00
