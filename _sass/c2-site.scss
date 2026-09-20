@@ -203,6 +203,11 @@
    alone keeps a measure. Rules, tables and code blocks run the whole
    column, which is what makes the narrower text read as a decision. */
 @media (min-width: 1024px){
+  /* Only where the mark sits in the right gutter beside the text. Below this
+     it takes a row of its own, and pinning it to row 1 there would push .what
+     down again, which is the very bug this is guarding against. */
+  .org-mark{ grid-row: 1; }
+
   #writeup .col-body{ grid-column: 2 / span 10; }
   #writeup .col-body > p,
   #writeup .col-body > ul,
@@ -325,9 +330,15 @@
    gets the same currentColor behaviour and the same theme response as
    the other two rather than a second asset for dark mode. */
 .org-mark{
+  /* Explicit row. The mark used to sit before .what in the markup, and grid
+     sparse auto-placement will not walk the cursor backwards: after the mark
+     claimed columns 10-12 of row 1, .what could not fit in row 1 any more and
+     dropped to row 2, setting every heading 48-55px below its own date. The
+     mark is last in the markup now, and pinned here so the order cannot
+     matter again. */
   grid-column: 10 / span 3;
   justify-self: end;
-  align-self: start;
+  align-self: center;
   width: 100%;
   max-width: 132px;
   color: var(--ink-3);
@@ -359,9 +370,31 @@
 @media (max-width: 1023px){
   /* .what runs to the edge in the six column tier, so there is no gutter
      left to sit in: the mark goes under the dates instead. */
-  .org-mark{ grid-column: 1 / span 2; justify-self: start; margin-top: var(--u); max-width: 104px; }
+  .org-mark{ grid-row: auto; grid-column: 1 / span 2; justify-self: start; margin-top: var(--u); max-width: 104px; }
   .org-mark--amazon{ max-width: 38px; }
 }
 @media (max-width: 639px){
   .org-mark{ grid-column: 1 / -1; order: 3; margin-top: calc(var(--u)*1.5); }
+}
+
+/* The certification rows are 63px tall against 83-124px for the roles, so
+   the issuing bodies are set smaller than the employers. The mark names the
+   body, not the certificate: GIAC issues the GICSP, Hack The Box the CBBH. */
+.org-mark--giac{
+  max-width: 78px;
+  aspect-ratio: 64 / 34;
+  background-color: currentColor;
+  -webkit-mask: url("/assets/logos/giac.svg") no-repeat right center / contain;
+          mask: url("/assets/logos/giac.svg") no-repeat right center / contain;
+}
+.org-mark--htb{
+  max-width: 28px;
+  aspect-ratio: 1 / 1;
+  background-color: currentColor;
+  -webkit-mask: url("/assets/logos/hackthebox.svg") no-repeat right center / contain;
+          mask: url("/assets/logos/hackthebox.svg") no-repeat right center / contain;
+}
+@media (max-width: 1023px){
+  .org-mark--giac{ max-width: 66px; }
+  .org-mark--htb{ max-width: 24px; }
 }
