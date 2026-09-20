@@ -435,9 +435,12 @@
    boundary and reads as cropped rather than placed.
    Ending on column 11 instead puts them on the same line the section
    notes are laid out to, and gives the artwork somewhere to breathe.
-   Columns 10 to 11, not 9 to 11: .what spans 3 to 9, so starting at 9
+   Not starting at 9: .what spans 3 to 9, so a mark beginning there
    collides with it, and because .what is auto placed in the row it loses
-   and drops to row two, which is the heading offset bug all over again. */
+   and drops to row two, which is the heading offset bug all over again.
+   Columns 10 to 12 with the group centred inside, rather than flush to
+   the far line: the widest mark then ends 66px short of column 12, which
+   is the clearance Cyber Florida needs to stop reading as cropped. */
 @media (min-width: 1024px){
-  .org-mark{ grid-column: 10 / span 2; }
+  .org-mark{ grid-column: 10 / span 3; }
 }
