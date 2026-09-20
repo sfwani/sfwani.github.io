@@ -99,10 +99,14 @@
   color:var(--ink-2);
 }
 
-/* The writeup section has no numeral, so the em dash placeholder should not
-   claim the width of one. */
-.sec-nr:empty,
-#writeup .sec-nr{ color:var(--ink-3); }
+/* Pages with a single section have no number to show, so they carry an em
+   dash instead. It was being drawn three different ways: .sec-nr on the
+   writeups (grey), .idx on the 404 (accent red and bold, because .idx is
+   the numbered style), and a literal "02" on /advisories/, carried over
+   from the home page sequence where there is no 01 to precede it. One
+   structural class with a modifier now, so the dash sits on the grid where
+   a numeral would but is not dressed as one. */
+.idx--none{ color:var(--ink-3); font-weight:400; }
 
 /* A wide code block inside its own scroll region does not make the page
    scroll sideways, but it does inflate documentElement.scrollWidth, which
@@ -213,19 +217,26 @@
      down again, which is the very bug this is guarding against. */
   .org-mark{ grid-row: 1; }
 
-  #writeup .col-body{ grid-column: 2 / span 10; }
+  /* Three right edges were visible on these pages: prose stopped at 930
+     while headings, rules, tables and code all ran to 1182, so the text
+     column read as conspicuously narrower than everything beside it.
+     Closed from both sides. The block comes in by one column and the
+     measure goes out four rem, leaving 93px between them instead of 252
+     and putting the text at 74 characters, wide for prose but right for
+     writing this full of inline identifiers. */
+  #writeup .col-body{ grid-column: 2 / span 9; }
   #writeup .col-body > p,
   #writeup .col-body > ul,
   #writeup .col-body > ol,
   #writeup .col-body > blockquote,
-  #writeup .col-body > h4{ max-width: 42rem; }
+  #writeup .col-body > h4{ max-width: 46rem; }
 }
 
 /* The title role is a person's one line description on the profile, so C2
    caps it at 30ch. On a writeup it carries the advisory summary, which is
    four times that: it was setting a 262px column four lines deep under an
    800px headline. */
-.page:has(#writeup) .title-role{
+.page:has(section.sec:only-of-type) .title-role{
   grid-column: 1 / span 8;
   max-width: 62ch;
   color: var(--ink-2);
@@ -432,8 +443,7 @@
    between the two sizes and is not removable without faking it. */
 .sec-head{ align-items: start; }
 .sec-head h2,
-.sec-head .idx,
-.sec-head .sec-nr{ align-self: baseline; }
+.sec-head .idx{ align-self: baseline; }
 
 /* ── Where the organisation marks sit ──────────────────────────────
    They ended on column 12, the line the section rules run to, so they sat

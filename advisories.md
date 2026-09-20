@@ -11,8 +11,8 @@ last_modified_at: 2026-09-20T03:35:01+00:00
 
 <section class="sec g" id="advisories" aria-labelledby="h-adv">
       <div class="sec-head">
-        <p class="idx">02</p>
-        <h2 id="h-adv">Advisories</h2>
+        <p class="idx idx--none">&mdash;</p>
+        <h2 id="h-adv">Full record</h2>
         <p class="sec-sub">Eleven, published, fixed and credited. Descending by CVSS v3.1 base score. Summaries are keyed to the NR column and set below the table.</p>
       </div>
 

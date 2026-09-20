@@ -184,7 +184,7 @@ def write_page(a, stamp):
     new = fm + (
         '<section class="sec g" id="writeup" aria-labelledby="h-writeup">\n'
         '  <div class="sec-head">\n'
-        '    <p class="sec-nr">\u2014</p>\n'
+        '    <p class="idx idx--none">\u2014</p>\n'
         f'    <h2 id="h-writeup">{a["ghsa_id"]}</h2>\n'
         '    <p class="sec-sub">Published, fixed and credited. Root cause, the vulnerable code, '
         'reproduction and the fix, as published in the advisory itself.</p>\n'

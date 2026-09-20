@@ -159,7 +159,7 @@ last_modified_at: 2026-09-20T03:43:55+00:00
         </li>
       </ol>
 
-      <p class="subhead">Certifications</p>
+      <h3 class="subhead">Certifications</h3>
       <ol class="stream" style="margin-top:calc(var(--u)*3)">
         <li>
           <p class="when">2026</p>
@@ -179,7 +179,7 @@ last_modified_at: 2026-09-20T03:43:55+00:00
         </li>
       </ol>
 
-      <p class="subhead">Competitions</p>
+      <h3 class="subhead">Competitions</h3>
       <ol class="comps" style="margin-top:calc(var(--u)*3)">
         <li><span class="yr">2026</span><span class="pl">1st</span><span class="ev">AI Village CTF, DEF CON 34</span><span class="nt">Won an NVIDIA DGX Spark</span></li>
         <li><span class="yr">2026</span><span class="pl">2nd</span><span class="ev">Adversary Wars CTF, Adversary Village, DEF CON 34</span><span class="nt">Won a certification</span></li>
