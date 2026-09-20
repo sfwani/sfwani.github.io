@@ -403,3 +403,33 @@
   .org-mark--giac{ max-width: 66px; }
   .org-mark--htb{ max-width: 24px; }
 }
+
+/* ── Section head alignment ────────────────────────────────────────
+   C2 aligns the section head on the baseline, which is right for the
+   numeral against the heading but wrong for the note beside it: the
+   heading is 30px and the note 13px, so sharing a baseline put the note's
+   first line 16px below the top of the heading in every section. The row
+   below them, body against aside, starts level, which is what makes the
+   head look off by comparison.
+   The numeral and the heading keep their shared baseline; the note tops
+   out instead. 3px of residual offset is the difference in half leading
+   between the two sizes and is not removable without faking it. */
+.sec-head{ align-items: start; }
+.sec-head h2,
+.sec-head .idx,
+.sec-head .sec-nr{ align-self: baseline; }
+
+/* ── Where the organisation marks sit ──────────────────────────────
+   They ended on column 12, the line the section rules run to, so they sat
+   hard against the edge of the field. Cyber Florida shows it worst: that
+   artwork has no internal padding at all, its ink reaches all four edges
+   of the image, so flush right the final A of FLORIDA stops exactly on the
+   boundary and reads as cropped rather than placed.
+   Ending on column 11 instead puts them on the same line the section
+   notes are laid out to, and gives the artwork somewhere to breathe.
+   Columns 10 to 11, not 9 to 11: .what spans 3 to 9, so starting at 9
+   collides with it, and because .what is auto placed in the row it loses
+   and drops to row two, which is the heading offset bug all over again. */
+@media (min-width: 1024px){
+  .org-mark{ grid-column: 10 / span 2; }
+}
