@@ -342,7 +342,15 @@
      mark is last in the markup now, and pinned here so the order cannot
      matter again. */
   grid-column: 10 / span 3;
-  justify-self: end;
+  /* Centred against each other, not flush to a grid line. The marks run
+     from 28px to 132px wide, and nothing else on the page ends on column
+     11: the section notes stop short of it and the competition and
+     coverage notes run past it to 12. So there is no line here to align
+     to, and right aligning only stranded the two 46px Amazon glyphs at
+     the margin while the 132px lockups reached left, which made the
+     column zigzag. Their shared centre is the only alignment that is
+     actually doing work. */
+  justify-self: center;
   align-self: center;
   width: 100%;
   max-width: 132px;
