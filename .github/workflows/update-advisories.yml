@@ -22,13 +22,22 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: python scripts/update_advisories.py
       - name: Commit if changed
+        # update_advisories.py writes exactly these two files: the compact table
+        # and counters into index.md, the full record into advisories.md. Both
+        # names live in one variable so the guard and the add cannot disagree,
+        # which is the bug this replaces: the guard tested index.md and the add
+        # staged index.md, so every run regenerated advisories.md in the runner
+        # and then threw it away. advisories.md sat frozen from 2026-09-20 while
+        # the home page moved on, until the home page claimed twelve advisories
+        # and the page it links to listed eleven.
         run: |
-          if git diff --quiet -- index.md; then
+          FILES="index.md advisories.md"
+          if git diff --quiet -- $FILES; then
             echo "no advisory changes"
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add index.md
+          git add $FILES
           git commit -m "chore: refresh advisory table"
           git push

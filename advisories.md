@@ -6,7 +6,7 @@ seo_title: "Published security advisories credited to Sanaan Fayaz Wani"
 role: "Every advisory below is published, fixed and credited. Reports still in coordinated disclosure are not listed, named or hinted at until the maintainer ships a fix."
 description: Eleven published security advisories credited to Sanaan Fayaz Wani, with CVSS base vectors, weakness classes and full writeups.
 permalink: /advisories/
-last_modified_at: 2026-09-20T03:35:01+00:00
+last_modified_at: 2026-09-29T03:25:13+00:00
 ---
 
 <section class="sec g" id="advisories" aria-labelledby="h-adv">
@@ -20,7 +20,7 @@ last_modified_at: 2026-09-20T03:35:01+00:00
 
       <div class="tablewrap" role="region" aria-label="Published advisories, full table" tabindex="0">
         <table role="table">
-          <caption>Published advisories, 2026-05-14 to 2026-09-17</caption>
+          <caption>Published advisories, 2026-05-14 to 2026-09-22</caption>
           <thead role="rowgroup">
             <tr role="row">
               <th role="columnheader" scope="col" rowspan="2" class="c-nr">NR</th>
@@ -119,6 +119,18 @@ last_modified_at: 2026-09-20T03:35:01+00:00
             </tr>
             <tr role="row">
               <th role="rowheader" scope="row" class="c-nr">07</th>
+              <td role="cell" class="c-id"><a href="/advisories/ghsa-8p4j-2mm9-rh78/">GHSA-8p4j-2mm9-rh78</a></td>
+              <td role="cell" class="c-pkg">Tracecat</td>
+              <td role="cell" class="c-sc">6.5</td>
+              <td role="cell" class="c-sev sev-med">Medium</td>
+              <td role="cell" class="c-cls">Server side request forgery</td>
+              <td role="cell" class="c-cwe">918</td>
+              <td role="cell" class="v" data-m="AV">N</td><td role="cell" class="v" data-m="AC">L</td><td role="cell" class="v" data-m="PR">L</td><td role="cell" class="v" data-m="UI">N</td>
+              <td role="cell" class="v" data-m="S">U</td><td role="cell" class="v" data-m="C">H</td><td role="cell" class="v" data-m="I">N</td><td role="cell" class="v" data-m="A">N</td>
+              <td role="cell" class="c-pub">2026-09-20</td>
+            </tr>
+            <tr role="row">
+              <th role="rowheader" scope="row" class="c-nr">08</th>
               <td role="cell" class="c-id"><a href="/advisories/cve-2026-53577/">CVE-2026-53577</a></td>
               <td role="cell" class="c-pkg">io.kestra:kestra</td>
               <td role="cell" class="c-sc">6.5</td>
@@ -130,7 +142,7 @@ last_modified_at: 2026-09-20T03:35:01+00:00
               <td role="cell" class="c-pub">2026-06-03</td>
             </tr>
             <tr role="row">
-              <th role="rowheader" scope="row" class="c-nr">08</th>
+              <th role="rowheader" scope="row" class="c-nr">09</th>
               <td role="cell" class="c-id"><a href="/advisories/cve-2026-63342/">CVE-2026-63342</a></td>
               <td role="cell" class="c-pkg">github.com/<wbr>hatchet-dev/<wbr>hatchet</td>
               <td role="cell" class="c-sc">6.3</td>
@@ -139,10 +151,10 @@ last_modified_at: 2026-09-20T03:35:01+00:00
               <td role="cell" class="c-cwe">863</td>
               <td role="cell" class="v" data-m="AV">N</td><td role="cell" class="v" data-m="AC">H</td><td role="cell" class="v" data-m="PR">L</td><td role="cell" class="v" data-m="UI">N</td>
               <td role="cell" class="v" data-m="S">C</td><td role="cell" class="v" data-m="C">H</td><td role="cell" class="v" data-m="I">N</td><td role="cell" class="v" data-m="A">N</td>
-              <td role="cell" class="c-pub">2026-06-30</td>
+              <td role="cell" class="c-pub">2026-09-22</td>
             </tr>
             <tr role="row">
-              <th role="rowheader" scope="row" class="c-nr">09</th>
+              <th role="rowheader" scope="row" class="c-nr">10</th>
               <td role="cell" class="c-id"><a href="/advisories/ghsa-59h8-w5q6-mfmp/">GHSA-59h8-w5q6-mfmp</a></td>
               <td role="cell" class="c-pkg">trigger.dev</td>
               <td role="cell" class="c-sc">5.3</td>
@@ -154,7 +166,7 @@ last_modified_at: 2026-09-20T03:35:01+00:00
               <td role="cell" class="c-pub">2026-07-21</td>
             </tr>
             <tr role="row">
-              <th role="rowheader" scope="row" class="c-nr">10</th>
+              <th role="rowheader" scope="row" class="c-nr">11</th>
               <td role="cell" class="c-id"><a href="/advisories/cve-2026-73301/">CVE-2026-73301</a></td>
               <td role="cell" class="c-pkg">@budibase/server</td>
               <td role="cell" class="c-sc">4.3</td>
@@ -166,7 +178,7 @@ last_modified_at: 2026-09-20T03:35:01+00:00
               <td role="cell" class="c-pub">2026-07-24</td>
             </tr>
             <tr role="row">
-              <th role="rowheader" scope="row" class="c-nr">11</th>
+              <th role="rowheader" scope="row" class="c-nr">12</th>
               <td role="cell" class="c-id"><a href="/advisories/cve-2026-59715/">CVE-2026-59715</a></td>
               <td role="cell" class="c-pkg">open-webui</td>
               <td role="cell" class="c-sc">3.1</td>
