@@ -6,7 +6,7 @@ seo_title: "Published security advisories credited to Sanaan Fayaz Wani"
 role: "Every advisory below is published, fixed and credited. Reports still in coordinated disclosure are not listed, named or hinted at until the maintainer ships a fix."
 description: Eleven published security advisories credited to Sanaan Fayaz Wani, with CVSS base vectors, weakness classes and full writeups.
 permalink: /advisories/
-last_modified_at: 2026-09-29T03:25:13+00:00
+last_modified_at: 2026-10-03T11:58:10+00:00
 ---
 
 <section class="sec g" id="advisories" aria-labelledby="h-adv">
@@ -20,7 +20,7 @@ last_modified_at: 2026-09-29T03:25:13+00:00
 
       <div class="tablewrap" role="region" aria-label="Published advisories, full table" tabindex="0">
         <table role="table">
-          <caption>Published advisories, 2026-05-14 to 2026-09-22</caption>
+          <caption>Published advisories, 2026-05-14 to 2026-10-02</caption>
           <thead role="rowgroup">
             <tr role="row">
               <th role="columnheader" scope="col" rowspan="2" class="c-nr">NR</th>
@@ -79,7 +79,7 @@ last_modified_at: 2026-09-29T03:25:13+00:00
               <td role="cell" class="c-cwe">653</td>
               <td role="cell" class="v" data-m="AV">N</td><td role="cell" class="v" data-m="AC">H</td><td role="cell" class="v" data-m="PR">N</td><td role="cell" class="v" data-m="UI">N</td>
               <td role="cell" class="v" data-m="S">U</td><td role="cell" class="v" data-m="C">H</td><td role="cell" class="v" data-m="I">H</td><td role="cell" class="v" data-m="A">H</td>
-              <td role="cell" class="c-pub">2026-07-21</td>
+              <td role="cell" class="c-pub">2026-10-02</td>
             </tr>
             <tr role="row">
               <th role="rowheader" scope="row" class="c-nr">04</th>
@@ -163,7 +163,7 @@ last_modified_at: 2026-09-29T03:25:13+00:00
               <td role="cell" class="c-cwe">306</td>
               <td role="cell" class="v" data-m="AV">N</td><td role="cell" class="v" data-m="AC">L</td><td role="cell" class="v" data-m="PR">N</td><td role="cell" class="v" data-m="UI">N</td>
               <td role="cell" class="v" data-m="S">U</td><td role="cell" class="v" data-m="C">N</td><td role="cell" class="v" data-m="I">L</td><td role="cell" class="v" data-m="A">N</td>
-              <td role="cell" class="c-pub">2026-07-21</td>
+              <td role="cell" class="c-pub">2026-10-02</td>
             </tr>
             <tr role="row">
               <th role="rowheader" scope="row" class="c-nr">11</th>
