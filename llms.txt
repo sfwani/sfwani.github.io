@@ -13,6 +13,7 @@ Every advisory below is published, fixed and credited to Sanaan Fayaz Wani (GitH
 
 - [GHSA-xf86-hfpm-92xr](https://sfwani.github.io/advisories/ghsa-xf86-hfpm-92xr/): directus, 3.1 Low, CWE-863. Published 2026-10-19. Advisory of record: https://github.com/directus/directus/security/advisories/GHSA-xf86-hfpm-92xr
 - [GHSA-v3vj-mch3-x6c2](https://sfwani.github.io/advisories/ghsa-v3vj-mch3-x6c2/): omnigent, 8.8 High, CWE-668. Published 2026-10-13. Advisory of record: https://github.com/omnigent-ai/omnigent/security/advisories/GHSA-v3vj-mch3-x6c2
+- [GHSA-42mf-vpmr-gw5r](https://sfwani.github.io/advisories/ghsa-42mf-vpmr-gw5r/): ag2, 9.8 Critical, CWE-78. Published 2026-10-03. Advisory of record: https://github.com/ag2ai/ag2/security/advisories/GHSA-42mf-vpmr-gw5r
 - [GHSA-59h8-w5q6-mfmp](https://sfwani.github.io/advisories/ghsa-59h8-w5q6-mfmp/): trigger.dev, 5.3 Medium, CWE-306. Published 2026-10-02. Advisory of record: https://github.com/advisories/GHSA-59h8-w5q6-mfmp
 - [GHSA-pqxw-g93w-hj9x](https://sfwani.github.io/advisories/ghsa-pqxw-g93w-hj9x/): trigger.dev, 8.1 High, CWE-653. Published 2026-10-02. Advisory of record: https://github.com/advisories/GHSA-pqxw-g93w-hj9x
 - [CVE-2026-63342](https://sfwani.github.io/advisories/cve-2026-63342/): hatchet, 6.3 Medium, CWE-863. Published 2026-09-22. Advisory of record: https://github.com/advisories/GHSA-g26x-m427-f48f

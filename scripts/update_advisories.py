@@ -47,6 +47,7 @@ CWE_LABELS = {
     "CWE-862": "Missing authorization",
     "CWE-863": "Incorrect authorization",
     "CWE-653": "Improper isolation",
+    "CWE-668": "Resource exposure",
     "CWE-918": "Server side request forgery",
     "CWE-1333": "Regex denial of service",
 }
@@ -256,6 +257,14 @@ SELF_ASSESSED = {
     "GHSA-pqxw-g93w-hj9x": {
         "score": 8.1,
         "vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:H",
+    },
+    # ag2ai/ag2: published Critical with no CVSS vector. shell=True with
+    # prefix-only command filtering is bypassed by shell metacharacters for
+    # arbitrary OS command execution. 9.8 is the standard unauthenticated-RCE
+    # vector and sits in the maintainer's Critical band.
+    "GHSA-42mf-vpmr-gw5r": {
+        "score": 9.8,
+        "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
     },
 }
 
