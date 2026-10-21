@@ -1,16 +1,16 @@
 ---
 title: "GHSA-59h8-w5q6-mfmp"
 heading: "GHSA-59h8-w5q6-mfmp"
-role: "Unauthenticated Realtime Stream Data Injection via Run FriendlyId"
-seo_title: "GHSA-59h8-w5q6-mfmp: Unauthenticated Realtime Stream Data Injection via Run FriendlyId - Sanaan Fayaz Wani"
+role: "Trigger.dev: Unauthenticated Realtime Stream Data Injection via Run FriendlyId"
+seo_title: "GHSA-59h8-w5q6-mfmp: Trigger.dev: Unauthenticated Realtime Stream Data Injection via Run FriendlyId - Sanaan Fayaz Wani"
 ghsa_id: "GHSA-59h8-w5q6-mfmp"
 cve_id: ""
-published_at: "2026-07-21"
+published_at: "2026-10-02"
 permalink: /advisories/ghsa-59h8-w5q6-mfmp/
 layout: c2
-description: "Unauthenticated Realtime Stream Data Injection via Run FriendlyId"
+description: "Trigger.dev: Unauthenticated Realtime Stream Data Injection via Run FriendlyId"
 comments: false
-last_modified_at: 2026-09-20T03:45:26+00:00
+last_modified_at: 2026-10-21T04:14:07+00:00
 ---
 <section class="sec g" id="writeup" aria-labelledby="h-writeup">
   <div class="sec-head">
@@ -22,18 +22,18 @@ last_modified_at: 2026-09-20T03:45:26+00:00
 
 | | |
 |:--|:--|
-| Advisory | [GHSA-59h8-w5q6-mfmp](https://github.com/triggerdotdev/trigger.dev/security/advisories/GHSA-59h8-w5q6-mfmp) |
+| Advisory | [GHSA-59h8-w5q6-mfmp](https://github.com/advisories/GHSA-59h8-w5q6-mfmp) |
 | CVE | not assigned |
 | Severity | Medium (5.3) |
 | CVSS vector | `CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:L/A:N` |
 | CWE | CWE-306 (Missing Authentication for Critical Function) |
-| Published | 2026-07-21 |
+| Published | 2026-10-02 |
 
 ### Affected versions
 
 | Package | Ecosystem | Vulnerable | Fixed in |
 |:--|:--|:--|:--|
-| `trigger.dev` | npm | <= 4.5.4 | n/a |
+| `trigger.dev` | npm | <= 4.5.4 | 4.5.5 |
 
 ## Summary
 
@@ -60,9 +60,16 @@ curl -X POST "http://localhost:8030/realtime/v1/streams/run_KNOWN_ID/stream_1"  
 
 Unauthenticated data injection into any run realtime stream. Cross-environment access (no scoping).
 
+## References
+
+* <https://github.com/triggerdotdev/trigger.dev/security/advisories/GHSA-59h8-w5q6-mfmp>
+* <https://github.com/triggerdotdev/trigger.dev/pull/4250>
+* <https://github.com/triggerdotdev/trigger.dev/commit/73d966ad226548b5f96fb5b4fc6fa607a3b7b8f8>
+* <https://github.com/triggerdotdev/trigger.dev/releases/tag/v4.5.5>
+
 ## About this writeup
 
-Sanaan Fayaz Wani (GitHub [`sfwani`](https://github.com/sfwani)) reported this vulnerability to the `trigger.dev` maintainers under coordinated disclosure and is credited as a reporter in [GHSA-59h8-w5q6-mfmp](https://github.com/triggerdotdev/trigger.dev/security/advisories/GHSA-59h8-w5q6-mfmp), published 2026-07-21.
+Sanaan Fayaz Wani (GitHub [`sfwani`](https://github.com/sfwani)) reported this vulnerability to the `trigger.dev` maintainers under coordinated disclosure and is credited as a reporter in [GHSA-59h8-w5q6-mfmp](https://github.com/advisories/GHSA-59h8-w5q6-mfmp), published 2026-10-02.
 
 All published findings: [advisory index](/advisories/).
 

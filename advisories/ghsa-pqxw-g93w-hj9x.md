@@ -1,16 +1,16 @@
 ---
 title: "GHSA-pqxw-g93w-hj9x"
 heading: "GHSA-pqxw-g93w-hj9x"
-role: "Self-Hosted Deployment: Default Secrets allow Unauthenticated Infrastructure Compromise"
-seo_title: "GHSA-pqxw-g93w-hj9x: Self-Hosted Deployment: Default Secrets allow Unauthenticated Infrastructure… - Sanaan Fayaz Wani"
+role: "Trigger.dev Self-Hosted Deployment: Default Secrets allow Unauthenticated Infrastructure Compromise"
+seo_title: "GHSA-pqxw-g93w-hj9x: Trigger.dev Self-Hosted Deployment: Default Secrets allow Unauthenticated… - Sanaan Fayaz Wani"
 ghsa_id: "GHSA-pqxw-g93w-hj9x"
 cve_id: ""
-published_at: "2026-07-21"
+published_at: "2026-10-02"
 permalink: /advisories/ghsa-pqxw-g93w-hj9x/
 layout: c2
-description: "Self-Hosted Deployment: Default Secrets allow Unauthenticated Infrastructure Compromise"
+description: "Trigger.dev Self-Hosted Deployment: Default Secrets allow Unauthenticated Infrastructure Compromise"
 comments: false
-last_modified_at: 2026-09-20T03:45:26+00:00
+last_modified_at: 2026-10-21T04:14:07+00:00
 ---
 <section class="sec g" id="writeup" aria-labelledby="h-writeup">
   <div class="sec-head">
@@ -22,12 +22,12 @@ last_modified_at: 2026-09-20T03:45:26+00:00
 
 | | |
 |:--|:--|
-| Advisory | [GHSA-pqxw-g93w-hj9x](https://github.com/triggerdotdev/trigger.dev/security/advisories/GHSA-pqxw-g93w-hj9x) |
+| Advisory | [GHSA-pqxw-g93w-hj9x](https://github.com/advisories/GHSA-pqxw-g93w-hj9x) |
 | CVE | not assigned |
 | Severity | High (8.1) |
 | CVSS vector | `CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:H` |
 | CWE | CWE-653 (Improper Isolation or Compartmentalization), CWE-1393 (Use of Default Password) |
-| Published | 2026-07-21 |
+| Published | 2026-10-02 |
 
 GitHub published this advisory as High with no CVSS score and no vector, in v3 or v4. The score and vector above are my own assessment of the finding as published.
 
@@ -35,7 +35,7 @@ GitHub published this advisory as High with no CVSS score and no vector, in v3 o
 
 | Package | Ecosystem | Vulnerable | Fixed in |
 |:--|:--|:--|:--|
-| `trigger.dev` | npm | <= 4.5.5 | n/a |
+| `trigger.dev` | npm | <= 4.5.5 | 4.5.6 |
 
 <div markdown="0">
 <figure class="fig fig-chain" id="fig-chain" aria-labelledby="chain-h">
@@ -188,9 +188,16 @@ docker run --rm --network webapp curlimages/curl curl -s "http://default:passwor
 
 Complete infrastructure compromise: all tenant data, API keys, encrypted secrets (decryptable with known ENCRYPTION_KEY), user accounts, cross-tenant access. Attacker can modify data, push backdoored Docker images to the registry, and manipulate job queues.
 
+## References
+
+* <https://github.com/triggerdotdev/trigger.dev/security/advisories/GHSA-pqxw-g93w-hj9x>
+* <https://github.com/triggerdotdev/trigger.dev/pull/4316>
+* <https://github.com/triggerdotdev/trigger.dev/commit/6997aeb05e27d2db47f9eda01fdc8a17c81a1ae0>
+* <https://github.com/triggerdotdev/trigger.dev/releases/tag/v4.5.6>
+
 ## About this writeup
 
-Sanaan Fayaz Wani (GitHub [`sfwani`](https://github.com/sfwani)) reported this vulnerability to the `trigger.dev` maintainers under coordinated disclosure and is credited as a reporter in [GHSA-pqxw-g93w-hj9x](https://github.com/triggerdotdev/trigger.dev/security/advisories/GHSA-pqxw-g93w-hj9x), published 2026-07-21.
+Sanaan Fayaz Wani (GitHub [`sfwani`](https://github.com/sfwani)) reported this vulnerability to the `trigger.dev` maintainers under coordinated disclosure and is credited as a reporter in [GHSA-pqxw-g93w-hj9x](https://github.com/advisories/GHSA-pqxw-g93w-hj9x), published 2026-10-02.
 
 All published findings: [advisory index](/advisories/).
 
