@@ -387,7 +387,7 @@ h1{
    the section in view, in the same editorial key as the running index. Hidden
    below the two-column breakpoint, where the body already takes the full field. */
 .writeup-toc{
-  grid-column: 8 / span 4;
+  grid-column: 10 / -1;
   align-self: start;
   position: sticky;
   top: calc(var(--u) * 4);
@@ -433,7 +433,7 @@ h1{
    side rather than overlapping. Only at the width where the index shows; below
    it the body keeps the full measure. The id plus class outranks the span-9 rule. */
 @media (min-width: 1120px){
-  #writeup.has-toc .col-body{ grid-column: 2 / span 6; }
+  #writeup.has-toc .col-body{ grid-column: 2 / span 8; }
 }
 
 .kicker{
