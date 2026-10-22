@@ -215,11 +215,15 @@ def write_llms_txt(rows):
     the note in the repo README about how much weight to put on this file.
     """
     rows = sorted(rows, key=lambda a: (a.get("published_at") or ""), reverse=True)
+    # Derived from the same rows as everything else, so the counts cannot drift
+    # from the table the way a hand-written number did.
+    n_pub = len(rows)
+    n_cve = len({a.get("cve_id") for a in rows if a.get("cve_id")})
     out = [
         "# Sanaan Fayaz Wani",
         "",
         "> Security Engineer at Amazon working in IAM security and agentic AI, and an "
-        "independent vulnerability researcher. Seven assigned CVEs and eleven published, "
+        f"independent vulnerability researcher. {n_cve} assigned CVEs and {n_pub} published, "
         "credited security advisories against AI agent frameworks and the infrastructure "
         "that runs large language models, from 167 advisories filed across 59 open source "
         "projects.",

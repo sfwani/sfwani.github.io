@@ -266,6 +266,16 @@ SELF_ASSESSED = {
         "score": 9.8,
         "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
     },
+    # ag2ai/ag2: a second advisory, published High with no CVSS vector. Path
+    # traversal in DiskKnowledgeStore from a startswith containment check that a
+    # prefix-sharing sibling directory bypasses, giving read, write and delete
+    # outside the root to an agent that drives the knowledge tool. Score and
+    # vector are taken verbatim from the advisory's own CVSS line, inside the
+    # maintainer's High band.
+    "GHSA-qrjx-72xx-xhmh": {
+        "score": 7.5,
+        "vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:N",
+    },
 }
 
 METRIC_ORDER = ["AV", "AC", "PR", "UI", "S", "C", "I", "A"]
