@@ -147,6 +147,7 @@ layout: compress
            h.textContent.trim() + '</span></a></li>';
   }).join('') + '</ol>';
   sec.appendChild(nav);
+  sec.classList.add('has-toc');
 
   var pairs = [].slice.call(nav.querySelectorAll('a')).map(function (a) {
     return [document.getElementById(a.getAttribute('href').slice(1)), a];

@@ -428,6 +428,14 @@ h1{
 .writeup-toc a:focus-visible{ outline-offset: 2px; }
 @media (max-width: 1119px){ .writeup-toc{ display: none; } }
 
+/* A writeup body is otherwise widened to span 9 for a comfortable measure. When
+   the index is present it gives those right columns back, so the two sit side by
+   side rather than overlapping. Only at the width where the index shows; below
+   it the body keeps the full measure. The id plus class outranks the span-9 rule. */
+@media (min-width: 1120px){
+  #writeup.has-toc .col-body{ grid-column: 2 / span 6; }
+}
+
 .kicker{
   font-size: var(--t-xs);
   font-weight: 700;
