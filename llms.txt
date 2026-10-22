@@ -1,6 +1,6 @@
 # Sanaan Fayaz Wani
 
-> Security Engineer at Amazon working in IAM security and agentic AI, and an independent vulnerability researcher. 8 assigned CVEs and 17 published, credited security advisories against AI agent frameworks and the infrastructure that runs large language models, from 167 advisories filed across 59 open source projects.
+> Security Engineer at Amazon working in IAM security and agentic AI, and an independent vulnerability researcher. 10 assigned CVEs and 24 published, credited security advisories against AI agent frameworks and the infrastructure that runs large language models, from 167 advisories filed across 59 open source projects.
 
 Every advisory below is published, fixed and credited to Sanaan Fayaz Wani (GitHub: sfwani). Each page carries the root cause, the vulnerable code, reproduction steps and the fix.
 
@@ -14,9 +14,14 @@ Every advisory below is published, fixed and credited to Sanaan Fayaz Wani (GitH
 - [GHSA-xf86-hfpm-92xr](https://sfwani.github.io/advisories/ghsa-xf86-hfpm-92xr/): directus, 3.1 Low, CWE-863. Published 2026-10-19. Advisory of record: https://github.com/directus/directus/security/advisories/GHSA-xf86-hfpm-92xr
 - [CVE-2026-49950](https://sfwani.github.io/advisories/cve-2026-49950/): xinference, 9.3 Critical, CWE-306. Published 2026-10-16. Advisory of record: https://github.com/xorbitsai/inference/security/advisories/GHSA-2hj6-h88x-mv4j
 - [GHSA-v3vj-mch3-x6c2](https://sfwani.github.io/advisories/ghsa-v3vj-mch3-x6c2/): omnigent, 8.8 High, CWE-668. Published 2026-10-13. Advisory of record: https://github.com/omnigent-ai/omnigent/security/advisories/GHSA-v3vj-mch3-x6c2
+- [GHSA-jvm6-86c5-f8j8](https://sfwani.github.io/advisories/ghsa-jvm6-86c5-f8j8/): teable, 6.5 Medium, CWE-918. Published 2026-10-13. Advisory of record: https://github.com/teableio/teable/security/advisories/GHSA-jvm6-86c5-f8j8
+- [GHSA-w677-p6hx-85vw](https://sfwani.github.io/advisories/ghsa-w677-p6hx-85vw/): teable, 7.1 High, CWE-287. Published 2026-10-13. Advisory of record: https://github.com/teableio/teable/security/advisories/GHSA-w677-p6hx-85vw
+- [GHSA-jmr9-98g4-2phv](https://sfwani.github.io/advisories/ghsa-jmr9-98g4-2phv/): portainer, 9.4 Critical, CWE-284. Published 2026-10-08. Advisory of record: https://github.com/portainer/portainer/security/advisories/GHSA-jmr9-98g4-2phv
+- [GHSA-24q6-6h89-f9p7](https://sfwani.github.io/advisories/ghsa-24q6-6h89-f9p7/): autogpt-platform-backend, 10.0 Critical, CWE-287. Published 2026-10-05. Advisory of record: https://github.com/Significant-Gravitas/AutoGPT/security/advisories/GHSA-24q6-6h89-f9p7
+- [GHSA-57mf-wqwq-6g6x](https://sfwani.github.io/advisories/ghsa-57mf-wqwq-6g6x/): autogpt-platform-backend, 8.2 High, CWE-321. Published 2026-10-05. Advisory of record: https://github.com/Significant-Gravitas/AutoGPT/security/advisories/GHSA-57mf-wqwq-6g6x
 - [GHSA-42mf-vpmr-gw5r](https://sfwani.github.io/advisories/ghsa-42mf-vpmr-gw5r/): ag2, 9.8 Critical, CWE-78. Published 2026-10-03. Advisory of record: https://github.com/ag2ai/ag2/security/advisories/GHSA-42mf-vpmr-gw5r
 - [GHSA-59h8-w5q6-mfmp](https://sfwani.github.io/advisories/ghsa-59h8-w5q6-mfmp/): trigger.dev, 5.3 Medium, CWE-306. Published 2026-10-02. Advisory of record: https://github.com/advisories/GHSA-59h8-w5q6-mfmp
-- [GHSA-pqxw-g93w-hj9x](https://sfwani.github.io/advisories/ghsa-pqxw-g93w-hj9x/): trigger.dev, 0.0 High, CWE-653. Published 2026-10-02. Advisory of record: https://github.com/advisories/GHSA-pqxw-g93w-hj9x
+- [GHSA-pqxw-g93w-hj9x](https://sfwani.github.io/advisories/ghsa-pqxw-g93w-hj9x/): trigger.dev, 8.1 High, CWE-653. Published 2026-10-02. Advisory of record: https://github.com/advisories/GHSA-pqxw-g93w-hj9x
 - [GHSA-qrjx-72xx-xhmh](https://sfwani.github.io/advisories/ghsa-qrjx-72xx-xhmh/): ag2, 7.5 High, CWE-22. Published 2026-09-25. Advisory of record: https://github.com/ag2ai/ag2/security/advisories/GHSA-qrjx-72xx-xhmh
 - [CVE-2026-63342](https://sfwani.github.io/advisories/cve-2026-63342/): hatchet, 6.3 Medium, CWE-863. Published 2026-09-22. Advisory of record: https://github.com/advisories/GHSA-g26x-m427-f48f
 - [GHSA-8p4j-2mm9-rh78](https://sfwani.github.io/advisories/ghsa-8p4j-2mm9-rh78/): Tracecat, 6.5 Medium, CWE-918. Published 2026-09-20. Advisory of record: https://github.com/TracecatHQ/tracecat/security/advisories/GHSA-8p4j-2mm9-rh78
@@ -26,5 +31,7 @@ Every advisory below is published, fixed and credited to Sanaan Fayaz Wani (GitH
 - [CVE-2026-59714](https://sfwani.github.io/advisories/cve-2026-59714/): open-webui, 7.1 High, CWE-862. Published 2026-07-24. Advisory of record: https://github.com/advisories/GHSA-x2ff-v5v8-m75m
 - [CVE-2026-59715](https://sfwani.github.io/advisories/cve-2026-59715/): open-webui, 3.1 Low, CWE-306. Published 2026-07-24. Advisory of record: https://github.com/advisories/GHSA-gmfw-g93r-vg53
 - [CVE-2026-57516](https://sfwani.github.io/advisories/cve-2026-57516/): ray, 8.8 High, CWE-94. Published 2026-07-24. Advisory of record: https://github.com/advisories/GHSA-hhrp-gw25-jr43
+- [CVE-2026-56673](https://sfwani.github.io/advisories/cve-2026-56673/): ComfyUI, 7.5 High, CWE-22. Published 2026-07-15. Advisory of record: https://github.com/Comfy-Org/ComfyUI/security/advisories/GHSA-rvxv-29p8-pxgq
+- [CVE-2026-56671](https://sfwani.github.io/advisories/cve-2026-56671/): ComfyUI, 7.5 High, CWE-22. Published 2026-07-15. Advisory of record: https://github.com/Comfy-Org/ComfyUI/security/advisories/GHSA-pj59-g5vv-74q4
 - [CVE-2026-53577](https://sfwani.github.io/advisories/cve-2026-53577/): kestra, 6.5 Medium, CWE-863. Published 2026-06-03. Advisory of record: https://github.com/kestra-io/kestra/security/advisories/GHSA-r6v3-xxwj-9h42
 - [CVE-2026-45675](https://sfwani.github.io/advisories/cve-2026-45675/): open-webui, 8.1 High, CWE-269. Published 2026-05-14. Advisory of record: https://github.com/advisories/GHSA-h3ww-q6xx-w7x3
