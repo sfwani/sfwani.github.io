@@ -501,6 +501,21 @@ h1{
   padding-right: 4px;
 }
 
+/* A v4.0 advisory has a different metric set than the eight v3 cells, so its
+   vector spans the whole base-vector group as one tinted cell on the same tone
+   field as the glyph, rather than being forced into columns that do not fit. */
+.tablewrap .v--whole{
+  background: var(--bg-2);
+  padding: 0 8px;
+}
+.tablewrap .v--whole .vq{
+  font-size: var(--t-xs);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.01em;
+  color: var(--ink-2);
+  overflow-wrap: anywhere;
+}
+
 .tablewrap .sev-high  { font-weight: 700; color: var(--ink); }
 .tablewrap .sev-med   { font-weight: 400; color: var(--ink); }
 .tablewrap .sev-low   { font-weight: 400; color: var(--ink-2); }

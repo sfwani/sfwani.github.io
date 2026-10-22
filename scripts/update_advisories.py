@@ -282,12 +282,23 @@ METRIC_ORDER = ["AV", "AC", "PR", "UI", "S", "C", "I", "A"]
 
 
 def cvss_of(a):
-    """Return (score, vector, self_assessed) for one advisory payload."""
+    """Return (score, vector, self_assessed) for one advisory payload.
+
+    Prefers a published v3.1 vector, then falls back to a published v4.0 vector
+    when that is all the maintainer supplied (GitHub increasingly scores on v4).
+    A v4 vector is still vendor sourced, so self_assessed stays False. Callers
+    that lay a vector out metric by metric detect v4 from its "CVSS:4" prefix,
+    since the v3 metric set does not apply to it.
+    """
     cvss = a.get("cvss") or {}
     score, vector = cvss.get("score"), cvss.get("vector_string")
+    sev = a.get("cvss_severities") or {}
     if not vector:
-        v3 = (a.get("cvss_severities") or {}).get("cvss_v3") or {}
-        score, vector = score if score is not None else v3.get("score"), v3.get("vector_string")
+        v3 = sev.get("cvss_v3") or {}
+        score, vector = (score if score is not None else v3.get("score")), v3.get("vector_string")
+    if not vector:
+        v4 = sev.get("cvss_v4") or {}
+        score, vector = (score if score is not None else v4.get("score")), v4.get("vector_string")
     if isinstance(score, (int, float)) and vector:
         return float(score), vector, False
     sa = SELF_ASSESSED.get(a.get("ghsa_id"))
@@ -345,6 +356,16 @@ def advisory_row(n, r, absolute=False):
     ident = r["cve_id"] or r["ghsa_id"]
     href = (SITE_ORIGIN if absolute else "") + r["url"]
     v = lambda k: f'<td role="cell" class="v" data-m="{k}">{parts[k]}</td>'
+    # The eight metric columns are CVSS v3.1. An advisory the maintainer scored
+    # on v4.0 has a different metric set, so rather than force it into v3 cells
+    # its real v4 vector spans the group in one cell, flagged so the reader sees
+    # it is a different scale.
+    if all(m in parts for m in METRIC_ORDER):
+        vector_cells = (f'{v("AV")}{v("AC")}{v("PR")}{v("UI")}\n'
+                        f'              {v("S")}{v("C")}{v("I")}{v("A")}')
+    else:
+        vector_cells = (f'<td role="cell" class="v v--whole" colspan="8">'
+                        f'<span class="vq">{e(r["vector"])}</span></td>')
     return (
         f'<tr role="row">\n'
         f'              <th role="rowheader" scope="row" class="c-nr">{n:02d}</th>\n'
@@ -354,8 +375,7 @@ def advisory_row(n, r, absolute=False):
         f'              <td role="cell" class="c-sev sev-{SEV_CLASS[sev]}">{sev}</td>\n'
         f'              <td role="cell" class="c-cls">{e(label(r["cwe"]))}</td>\n'
         f'              <td role="cell" class="c-cwe">{(r["cwe"] or "").replace("CWE-", "")}</td>\n'
-        f'              {v("AV")}{v("AC")}{v("PR")}{v("UI")}\n'
-        f'              {v("S")}{v("C")}{v("I")}{v("A")}\n'
+        f'              {vector_cells}\n'
         f'              <td role="cell" class="c-pub">{r["published"]}</td>\n'
         f'            </tr>')
 
@@ -434,11 +454,11 @@ def render_chart(rows):
             f'<span class="sp-p">{short_package(r["package"])}</span>'
             f'<span class="sp-s{" sp-s--sa" if sa else ""}">{score}</span></p></li>')
 
-    foot = f"One CVSS v3.1 base vector for each of the {n_pub + n_self} published advisories."
+    foot = f"One CVSS v3.1 base vector for each of the {n_pub + n_self} advisories scored on that scale."
     return (
         '<section class="fm-specimen" markdown="0" aria-labelledby="spT">\n'
         '<h3 class="sp-h" id="spT">Vector specimen</h3>\n'
-        '<p class="sp-note">One CVSS v3.1 base vector per advisory, set as an eight cell glyph: '
+        '<p class="sp-note">One CVSS v3.1 base vector per v3.1 scored advisory, set as an eight cell glyph: '
         'attack vector, attack complexity, privileges required and user interaction on the upper '
         'line; scope and the three impacts on the lower. Read the shapes against each other.</p>\n'
         '<ol class="sp-grid">' + "".join(plates) + '</ol>\n'
