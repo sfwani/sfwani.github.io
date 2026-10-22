@@ -261,11 +261,13 @@ SELF_ASSESSED = {
     },
     # ag2ai/ag2: published Critical with no CVSS vector. shell=True with
     # prefix-only command filtering is bypassed by shell metacharacters for
-    # arbitrary OS command execution. 9.8 is the standard unauthenticated-RCE
-    # vector and sits in the maintainer's Critical band.
+    # arbitrary OS command execution. Score and vector are the exact CVSS
+    # line stated in the advisory I published: PR:L for the agent/developer
+    # context the shell tool runs in, S:C because the filter boundary is crossed
+    # to host OS execution. Computes to 9.9, inside the maintainer Critical band.
     "GHSA-42mf-vpmr-gw5r": {
-        "score": 9.8,
-        "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+        "score": 9.9,
+        "vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:C/C:H/I:H/A:H",
     },
     # ag2ai/ag2: a second advisory, published High with no CVSS vector. Path
     # traversal in DiskKnowledgeStore from a startswith containment check that a

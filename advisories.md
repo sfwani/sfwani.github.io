@@ -6,7 +6,7 @@ seo_title: "Published security advisories credited to Sanaan Fayaz Wani"
 role: "Every advisory below is published, fixed and credited. Reports still in coordinated disclosure are not listed, named or hinted at until the maintainer ships a fix."
 description: Published security advisories credited to Sanaan Fayaz Wani, with CVSS base vectors, weakness classes and full writeups.
 permalink: /advisories/
-last_modified_at: 2026-10-22T03:49:44+00:00
+last_modified_at: 2026-10-22T04:19:43+00:00
 ---
 
 <section class="sec g" id="advisories" aria-labelledby="h-adv">
@@ -61,12 +61,12 @@ last_modified_at: 2026-10-22T03:49:44+00:00
               <th role="rowheader" scope="row" class="c-nr">02</th>
               <td role="cell" class="c-id"><a href="/advisories/ghsa-42mf-vpmr-gw5r/">GHSA-42mf-vpmr-gw5r</a></td>
               <td role="cell" class="c-pkg">ag2</td>
-              <td role="cell" class="c-sc">9.8</td>
+              <td role="cell" class="c-sc">9.9</td>
               <td role="cell" class="c-sev sev-crit">Critical</td>
               <td role="cell" class="c-cls">Command injection</td>
               <td role="cell" class="c-cwe">78</td>
-              <td role="cell" class="v" data-m="AV">N</td><td role="cell" class="v" data-m="AC">L</td><td role="cell" class="v" data-m="PR">N</td><td role="cell" class="v" data-m="UI">N</td>
-              <td role="cell" class="v" data-m="S">U</td><td role="cell" class="v" data-m="C">H</td><td role="cell" class="v" data-m="I">H</td><td role="cell" class="v" data-m="A">H</td>
+              <td role="cell" class="v" data-m="AV">N</td><td role="cell" class="v" data-m="AC">L</td><td role="cell" class="v" data-m="PR">L</td><td role="cell" class="v" data-m="UI">N</td>
+              <td role="cell" class="v" data-m="S">C</td><td role="cell" class="v" data-m="C">H</td><td role="cell" class="v" data-m="I">H</td><td role="cell" class="v" data-m="A">H</td>
               <td role="cell" class="c-pub">2026-10-03</td>
             </tr>
             <tr role="row">

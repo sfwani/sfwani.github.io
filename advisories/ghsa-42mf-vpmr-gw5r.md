@@ -10,7 +10,7 @@ permalink: /advisories/ghsa-42mf-vpmr-gw5r/
 layout: c2
 description: "Command Filter Bypass in LocalShellEnvironment via shell=True Allows Arbitrary OS Command Execution"
 comments: false
-last_modified_at: 2026-10-21T04:29:36+00:00
+last_modified_at: 2026-10-22T04:19:44+00:00
 ---
 <section class="sec g" id="writeup" aria-labelledby="h-writeup">
   <div class="sec-head">
@@ -24,8 +24,8 @@ last_modified_at: 2026-10-21T04:29:36+00:00
 |:--|:--|
 | Advisory | [GHSA-42mf-vpmr-gw5r](https://github.com/ag2ai/ag2/security/advisories/GHSA-42mf-vpmr-gw5r) |
 | CVE | not assigned |
-| Severity | Critical (9.8) |
-| CVSS vector | `CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H` |
+| Severity | Critical (9.9) |
+| CVSS vector | `CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:C/C:H/I:H/A:H` |
 | CWE | CWE-78 (Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')) |
 | Published | 2026-10-03 |
 

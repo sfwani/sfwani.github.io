@@ -122,6 +122,55 @@ layout: compress
   window.addEventListener('resize', schedule);
   mark();
 })();
+
+/* Writeup pages: a sticky section index in the right column, built from the
+   prose headings, with the same scroll-spy. The running index above removes
+   itself on these pages (one section heading), so the two never both show. */
+(function () {
+  var sec = document.getElementById('writeup');
+  var prose = sec && sec.querySelector('.prose');
+  if (!prose) return;
+  var hs = [].slice.call(prose.querySelectorAll('h2'));
+  if (hs.length < 2) return;
+  hs.forEach(function (h, i) {
+    if (!h.id) {
+      h.id = 'w' + (i + 1) + '-' + h.textContent.toLowerCase()
+        .replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 24);
+    }
+  });
+  var nav = document.createElement('nav');
+  nav.className = 'writeup-toc';
+  nav.setAttribute('aria-label', 'On this page');
+  nav.innerHTML = '<p class="toc-h">On this page</p><ol>' + hs.map(function (h, i) {
+    var n = (i + 1 < 10 ? '0' : '') + (i + 1);
+    return '<li><a href="#' + h.id + '"><b>' + n + '</b><span>' +
+           h.textContent.trim() + '</span></a></li>';
+  }).join('') + '</ol>';
+  sec.appendChild(nav);
+
+  var pairs = [].slice.call(nav.querySelectorAll('a')).map(function (a) {
+    return [document.getElementById(a.getAttribute('href').slice(1)), a];
+  }).filter(function (p) { return p[0]; });
+  var ticking = false, last = null;
+  function mark() {
+    ticking = false;
+    var cut = 120, best = pairs[0];
+    for (var i = 0; i < pairs.length; i++) {
+      if (pairs[i][0].getBoundingClientRect().top <= cut) best = pairs[i];
+    }
+    if (window.innerHeight + window.scrollY >= document.body.scrollHeight - 4) {
+      best = pairs[pairs.length - 1];
+    }
+    if (!best || best[1] === last) return;
+    if (last) last.removeAttribute('aria-current');
+    best[1].setAttribute('aria-current', 'true');
+    last = best[1];
+  }
+  function schedule() { if (ticking) return; ticking = true; requestAnimationFrame(mark); }
+  window.addEventListener('scroll', schedule, { passive: true });
+  window.addEventListener('resize', schedule);
+  mark();
+})();
 </script>
 </body>
 </html>

@@ -382,6 +382,52 @@ h1{
 .prose p{ max-width: 64ch; overflow-wrap: anywhere; }
 .prose strong{ font-weight: 700; }
 
+/* A writeup page's body sits in the left columns; its section index sits in the
+   empty right column as a sticky rail, built from the prose headings. It tracks
+   the section in view, in the same editorial key as the running index. Hidden
+   below the two-column breakpoint, where the body already takes the full field. */
+.writeup-toc{
+  grid-column: 8 / span 4;
+  align-self: start;
+  position: sticky;
+  top: calc(var(--u) * 4);
+}
+.writeup-toc .toc-h{
+  font-size: var(--t-xs);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin-bottom: var(--u);
+}
+.writeup-toc ol{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--rule);
+}
+.writeup-toc li{ border-bottom: 1px solid var(--rule); }
+.writeup-toc a{
+  display: flex;
+  gap: 0.7em;
+  align-items: baseline;
+  padding: calc(var(--u) * 1.1) 0;
+  color: var(--ink-2);
+  text-decoration: none;
+  line-height: 1.35;
+  transition: color 0.15s ease;
+}
+.writeup-toc a b{
+  font-weight: 700;
+  color: var(--ink-3);
+  font-variant-numeric: tabular-nums;
+  font-size: var(--t-xs);
+}
+.writeup-toc a:hover, .writeup-toc a:hover b{ color: var(--accent); }
+.writeup-toc a[aria-current="true"], .writeup-toc a[aria-current="true"] b{ color: var(--accent); }
+.writeup-toc a:focus-visible{ outline-offset: 2px; }
+@media (max-width: 1119px){ .writeup-toc{ display: none; } }
+
 .kicker{
   font-size: var(--t-xs);
   font-weight: 700;
