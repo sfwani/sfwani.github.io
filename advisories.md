@@ -6,7 +6,7 @@ seo_title: "Published security advisories credited to Sanaan Fayaz Wani"
 role: "Every advisory below is published, fixed and credited. Reports still in coordinated disclosure are not listed, named or hinted at until the maintainer ships a fix."
 description: Published security advisories credited to Sanaan Fayaz Wani, with CVSS base vectors, weakness classes and full writeups.
 permalink: /advisories/
-last_modified_at: 2026-10-22T03:22:44+00:00
+last_modified_at: 2026-10-22T03:49:44+00:00
 ---
 
 <section class="sec g" id="advisories" aria-labelledby="h-adv">
@@ -77,7 +77,7 @@ last_modified_at: 2026-10-22T03:22:44+00:00
               <td role="cell" class="c-sev sev-crit">Critical</td>
               <td role="cell" class="c-cls">Access control</td>
               <td role="cell" class="c-cwe">284</td>
-              <td role="cell" class="v v--whole" colspan="8"><span class="vq">CVSS:4.0/AV:N/AC:L/AT:N/PR:L/UI:N/VC:H/VI:H/VA:H/SC:H/SI:H/SA:H</span></td>
+              <td role="cell" class="v v--whole" colspan="8"><span class="vq">CVSS:4.0/<wbr>AV:N/<wbr>AC:L/<wbr>AT:N/<wbr>PR:L/<wbr>UI:N/<wbr>VC:H/<wbr>VI:H/<wbr>VA:H/<wbr>SC:H/<wbr>SI:H/<wbr>SA:H</span></td>
               <td role="cell" class="c-pub">2026-10-08</td>
             </tr>
             <tr role="row">
@@ -88,7 +88,7 @@ last_modified_at: 2026-10-22T03:22:44+00:00
               <td role="cell" class="c-sev sev-crit">Critical</td>
               <td role="cell" class="c-cls">Missing authentication</td>
               <td role="cell" class="c-cwe">306</td>
-              <td role="cell" class="v v--whole" colspan="8"><span class="vq">CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:H/VI:H/VA:H/SC:N/SI:N/SA:N</span></td>
+              <td role="cell" class="v v--whole" colspan="8"><span class="vq">CVSS:4.0/<wbr>AV:N/<wbr>AC:L/<wbr>AT:N/<wbr>PR:N/<wbr>UI:N/<wbr>VC:H/<wbr>VI:H/<wbr>VA:H/<wbr>SC:N/<wbr>SI:N/<wbr>SA:N</span></td>
               <td role="cell" class="c-pub">2026-10-16</td>
             </tr>
             <tr role="row">

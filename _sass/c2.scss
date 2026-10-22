@@ -513,10 +513,18 @@ h1{
   font-variant-numeric: tabular-nums;
   letter-spacing: 0.01em;
   color: var(--ink-2);
-  overflow-wrap: anywhere;
+  /* Break only at the slash boundaries (marked with <wbr> in the markup), never
+     mid metric, so the vector never shatters into character soup. */
+  overflow-wrap: normal;
+  word-break: normal;
 }
 
-.tablewrap .sev-high  { font-weight: 700; color: var(--ink); }
+/* Weight tracks severity so the eye lands on the worst first: Critical is the
+   heaviest, High a step below, Medium and Low at text weight (Low also muted).
+   Critical previously had no rule and fell to text weight, so High read as the
+   boldest label on the page, which was backwards. */
+.tablewrap .sev-crit  { font-weight: 700; color: var(--ink); }
+.tablewrap .sev-high  { font-weight: 600; color: var(--ink); }
 .tablewrap .sev-med   { font-weight: 400; color: var(--ink); }
 .tablewrap .sev-low   { font-weight: 400; color: var(--ink-2); }
 
@@ -613,6 +621,16 @@ h1{
   .tablewrap .c-cwe::before{ content: "CWE\00a0"; color: var(--ink-3); }
   .tablewrap .c-pub{ grid-area: 5 / 1 / 6 / 5; width: auto; color: var(--ink-3); padding-top: 3px; }
   .tablewrap .c-pub::before{ content: "Published "; }
+
+  /* A v4.0 advisory's single spanning cell takes the full row width here, not
+     one quarter column, so its vector reads on one block instead of a narrow
+     strip that wraps every few characters. */
+  .tablewrap td.v--whole{
+    grid-column: 1 / -1;
+    margin-top: 4px;
+    padding: 8px 10px 9px;
+  }
+  .tablewrap td.v--whole .vq{ font-size: var(--t-s); line-height: 1.5; }
 
   /* rows 1 to 5 are fully covered, so the eight metric cells auto-flow
      into rows 6 and 7 as a 4x2 matrix */

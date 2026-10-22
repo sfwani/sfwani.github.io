@@ -378,8 +378,11 @@ def advisory_row(n, r, absolute=False):
         vector_cells = (f'{v("AV")}{v("AC")}{v("PR")}{v("UI")}\n'
                         f'              {v("S")}{v("C")}{v("I")}{v("A")}')
     else:
+        # <wbr> after each slash gives the browser a break point at every metric
+        # boundary, so a long v4 vector wraps cleanly instead of mid token.
+        vec = e(r["vector"]).replace("/", "/<wbr>")
         vector_cells = (f'<td role="cell" class="v v--whole" colspan="8">'
-                        f'<span class="vq">{e(r["vector"])}</span></td>')
+                        f'<span class="vq">{vec}</span></td>')
     return (
         f'<tr role="row">\n'
         f'              <th role="rowheader" scope="row" class="c-nr">{n:02d}</th>\n'

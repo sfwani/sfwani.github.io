@@ -73,6 +73,13 @@ def slug(a):
     return (a.get("cve_id") or a["ghsa_id"]).lower()
 
 
+def own_writeup(a):
+    """Path to my own writeup for this advisory, or None. Keyed by the same slug
+    the page uses, so _writeups/<slug>.md opts one advisory into my own text."""
+    p = ROOT / "_writeups" / f"{slug(a)}.md"
+    return p if p.exists() else None
+
+
 def body(a):
     score, vector, self_assessed = cvss_of(a)
     cwes = ", ".join(f"{c['cwe_id']} ({c['name']})" for c in a.get("cwes") or []) or "n/a"
@@ -127,8 +134,17 @@ def body(a):
     if figure.exists():
         out += ['<div markdown="0">', figure.read_text(encoding="utf-8").strip(), "</div>", ""]
 
-    desc = (a.get("description") or "").replace("\r\n", "\n").replace("\r", "\n")
-    out += [desc.strip(), ""]
+    # My own writeup, if one exists for this advisory, replaces the maintainer's
+    # published text. The official advisory stays linked in the table above as
+    # the record; this page is then my analysis of the finding, in my words and
+    # in the site's format. Advisories without a file here fall back to the
+    # published text, so the switch is opt in, one advisory at a time.
+    own = own_writeup(a)
+    if own:
+        desc = own.read_text(encoding="utf-8").strip()
+    else:
+        desc = (a.get("description") or "").replace("\r\n", "\n").replace("\r", "\n").strip()
+    out += [desc, ""]
     refs = [r for r in (a.get("references") or []) if r != a.get("html_url")]
     if refs:
         heading = "## Advisory references" if "## References" in desc else "## References"
@@ -179,6 +195,13 @@ def write_page(a, stamp):
         "",
     ])
     p = OUT / f"{slug(a)}.md"
+    if own_writeup(a):
+        subsub = ("My analysis of this finding: root cause, the vulnerable code, the impact "
+                  "and the fix, in the site's format. The official advisory of record is "
+                  "linked in the table below.")
+    else:
+        subsub = ("Published, fixed and credited. Root cause, the vulnerable code, "
+                  "reproduction and the fix, as published in the advisory itself.")
     # Wrapped as a C2 section so the page inherits the grid, the section rule
     # and the measure. markdown="1" keeps kramdown processing the inner text.
     new = fm + (
@@ -186,8 +209,7 @@ def write_page(a, stamp):
         '  <div class="sec-head">\n'
         '    <p class="idx idx--none">\u2014</p>\n'
         f'    <h2 id="h-writeup">{a["ghsa_id"]}</h2>\n'
-        '    <p class="sec-sub">Published, fixed and credited. Root cause, the vulnerable code, '
-        'reproduction and the fix, as published in the advisory itself.</p>\n'
+        f'    <p class="sec-sub">{subsub}</p>\n'
         '  </div>\n'
         '  <div class="col-body prose" markdown="1">\n\n'
         + body(a) +

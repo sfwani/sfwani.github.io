@@ -10,13 +10,13 @@ permalink: /advisories/ghsa-57mf-wqwq-6g6x/
 layout: c2
 description: "Hardcoded Default Fernet Encryption Key Exposes All Stored OAuth Credentials"
 comments: false
-last_modified_at: 2026-10-22T03:22:44+00:00
+last_modified_at: 2026-10-22T03:49:44+00:00
 ---
 <section class="sec g" id="writeup" aria-labelledby="h-writeup">
   <div class="sec-head">
     <p class="idx idx--none">—</p>
     <h2 id="h-writeup">GHSA-57mf-wqwq-6g6x</h2>
-    <p class="sec-sub">Published, fixed and credited. Root cause, the vulnerable code, reproduction and the fix, as published in the advisory itself.</p>
+    <p class="sec-sub">My analysis of this finding: root cause, the vulnerable code, the impact and the fix, in the site's format. The official advisory of record is linked in the table below.</p>
   </div>
   <div class="col-body prose" markdown="1">
 
@@ -35,100 +35,64 @@ last_modified_at: 2026-10-22T03:22:44+00:00
 |:--|:--|:--|:--|
 | `autogpt-platform-backend` | other | >= 0.6.23, <= 0.7.4 | n/a |
 
-AutoGPT Platform ships with a hardcoded default Fernet symmetric encryption key (`ENCRYPTION_KEY=dvziYgz0KSK8FENhju0ZYi8-fRTfAdlz6YLhdB_jhNw=`) committed to the public repository in `backend/.env.default`. This key encrypts all user OAuth tokens, API keys, and integration credentials stored in the `User.integrations` database column. Any attacker with database read access can decrypt the entire credential store using this publicly known key.
+## Summary
 
-### Impact
+The AutoGPT platform shipped a hardcoded `ENCRYPTION_KEY` in `backend/.env.default`, committed to the public repository and loaded automatically by the default Docker Compose configuration. That one key does two jobs: it encrypts every stored user credential with Fernet, and it derives the HMAC key that signs pickle serialized cache entries in Redis. Because the key is public, both protections collapse for any deployment left on the default.
 
-Any self-hosted AutoGPT Platform deployment using the default `.env` is affected. An attacker who obtains database contents (via the companion ts-ag3-001 auth bypass, SQL injection, or a backup leak) can:
-1. Decrypt all OAuth access/refresh tokens for every connected service (GitHub, Google, Notion, Twitter/X, Linear, Discord, etc.) and act on behalf of all users
-2. Extract OpenAI, Anthropic, and other LLM API keys and use them at victims' expense
-3. Silently exfiltrate the complete integration credential store for every user in the system
+## Where it lives
 
-### Details
+Three places tie the public key to real impact.
 
-**Details**
-
-`autogpt_platform/backend/backend/util/encryption.py`:
+Credential encryption, `backend/util/encryption.py`:
 
 ```python
-ENCRYPTION_KEY = Settings().secrets.encryption_key
+ENCRYPTION_KEY = Settings().secrets.encryption_key  # from .env.default
 
 class JSONCryptor:
-    def __init__(self, key: Optional[str] = None):
+    def __init__(self, key=None):
         self.key = key or ENCRYPTION_KEY
-        self.fernet = Fernet(
-            self.key.encode() if isinstance(self.key, str) else self.key
-        )
+        self.fernet = Fernet(self.key.encode())
 ```
 
-`autogpt_platform/backend/backend/data/user.py`:
+`backend/data/user.py` uses this to encrypt and decrypt `UserIntegrations`, which hold OAuth tokens, API keys and refresh tokens.
+
+Cache HMAC signing, `backend/util/cache.py`:
 
 ```python
-async def update_user_integrations(user_id: str, data: UserIntegrations):
-    encrypted_data = JSONCryptor().encrypt(data.model_dump(exclude_none=True))
-    await PrismaUser.prisma().update(
-        where={"id": user_id},
-        data={"integrations": encrypted_data},
-    )
+def _get_hmac_key() -> bytes:
+    secret = settings.secrets.encryption_key
+    if not secret:
+        secret = "autogpt-cache-default-hmac-key"
+    return hashlib.sha256(secret.encode()).digest()
 ```
 
-`backend/.env.default` ships:
+The derived key HMAC signs pickle serialized cache entries before they are stored in Redis. Reads call `pickle.loads()` after verifying the HMAC.
+
+Default loading, `docker-compose.platform.yml`:
+
+```yaml
+x-backend-env-files: &backend-env-files
+  env_file:
+    - backend/.env.default   # base defaults, always present
+    - path: backend/.env     # user overrides, optional
+      required: false
 ```
-ENCRYPTION_KEY=dvziYgz0KSK8FENhju0ZYi8-fRTfAdlz6YLhdB_jhNw=
-```
 
-This is a valid Fernet key committed to the public repository. Any deployment using the default `.env` stores all user credentials encrypted with a key any attacker already knows.
+The default file is always loaded, so a deployment that never sets its own key runs on the published one.
 
-Note: this same key is used as the HMAC key fallback in the Redis cache (ts-ag2-001), compounding the risk.
+## Impact
 
-Affected commit: `94ebce7f633f40af8fd59e5cdaea75159cf2e6d1`
+Two distinct chains, separated by what the attacker can reach.
 
-**🤖 Carried from GHSA-x7fr-7grv-gqxc, closed as a duplicate of this report**
+**Credential decryption.** Anyone who can read the PostgreSQL store (a backup leak, SQL injection, misconfigured access, a compromised admin surface) can decrypt every stored credential with the public key: GitHub and Discord OAuth tokens, model provider API keys, and every other integration secret.
 
-Two remediation-relevant facts the duplicate stated and this record did not. Both verified against `dev` at `c91105ff36`.
+**Remote code execution.** Anyone who can write to Redis can forge an HMAC signed pickle payload with the derived key `sha256(ENCRYPTION_KEY)`. When the application next reads that poisoned entry, `pickle.loads()` runs attacker controlled code. The HMAC stops being a defense the moment its key is public.
 
-1. **There is no way to rotate off the compromised key.** `encryption.py:8` binds `ENCRYPTION_KEY` to a module-level constant and `scoped_credentials.py:20` builds one process-wide `JSONCryptor()` from it; `IntegrationCredential` carries no key-version column, and the repository contains no rotation or re-encryption code. Changing `ENCRYPTION_KEY` therefore makes existing ciphertext undecryptable rather than re-keying it, and `JSONCryptor.decrypt` swallows the failure and returns `{}`. Remediating this needs a re-encryption migration, not just a new key.
+A working proof of concept demonstrated all three steps end to end: encrypt and decrypt with the known key, forge a signature that passes the application's own verification, and deserialize the forged payload.
 
-2. **The public default key is what a deployment actually runs, even when setup was followed correctly.** `docker-compose.platform.yml:42-46` always loads `backend/.env.default` as the base env file, with `backend/.env` only an optional override, and `autogpt_platform/.env.default` — the file the setup documentation has operators copy — defines no `ENCRYPTION_KEY` at all. "Deployments using the default .env" understates the exposure.
+## Fix
 
-
-
----
-
-### Proof of concept
-
-```python
-from cryptography.fernet import Fernet
-import json
-
-KNOWN_KEY = "dvziYgz0KSK8FENhju0ZYi8-fRTfAdlz6YLhdB_jhNw="
-fernet = Fernet(KNOWN_KEY.encode())
-
-# ciphertext obtained from User.integrations database column
-ciphertext = "<base64_fernet_token_from_db>"
-plaintext = fernet.decrypt(ciphertext.encode())
-credentials = json.loads(plaintext)
-# → { "oauth_tokens": { "github": { "access_token": "gho_..." }, ... }, "api_keys": { "openai": "sk-..." } }
-```
-Full reproduction: `python3 poc_ts_ag3_002.py --demo` [reproduce.zip](https://github.com/user-attachments/files/27853509/reproduce.zip)
-
-### Fix
-
-Fixed in `8da6c931be` (2026-09-17, [#14518](https://github.com/Significant-Gravitas/AutoGPT/pull/14518)) and first shipped in `autogpt-platform-beta-v0.8.0`: `ENCRYPTION_KEY` ships blank and the backend refuses to boot on the retired default. A key-rotation command was added in `ef3c9c6967` ([#14712](https://github.com/Significant-Gravitas/AutoGPT/pull/14712)). Upgrade to v0.8.0 or later and rotate the key if the default was ever used.
-
-### Workarounds
-
-None.
-
-### References
-
-- Fix commit `8da6c931be` ([#14518](https://github.com/Significant-Gravitas/AutoGPT/pull/14518), in v0.8.0)
-- Key rotation: `ef3c9c6967` ([#14712](https://github.com/Significant-Gravitas/AutoGPT/pull/14712))
-- CWE-321, CWE-798
-
-### Timeline
-
-Reported 2026-05-16 · Triaged 2026-09-07 · Fixed 2026-09-17 (released in v0.8.0) · Published pending
+Remove the shipped key and fail closed on it: refuse to start when `ENCRYPTION_KEY` is empty, matches a known published default, or is not a valid Fernet key, and document a rotation procedure. For the cache specifically, a safe serializer such as JSON or msgpack removes the deserialization sink entirely, so an HMAC bypass can no longer reach code execution.
 
 ## About this writeup
 
