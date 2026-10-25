@@ -15,6 +15,9 @@ import urllib.parse
 
 import requests
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import advisory_facts as F  # noqa: E402
+
 USER = os.environ.get("ADVISORY_CREDIT_USER", "sfwani")
 README = os.environ.get("README_PATH", "index.md")
 API = "https://api.github.com"
@@ -100,12 +103,41 @@ def extra_repo_advisories():
     return out
 
 
+def maintainer_published(s, a):
+    """The date the maintainer published the advisory.
+
+    The global database's published_at is when GitHub reviewed the advisory
+    in, which trailed the maintainer's own publication by up to three months
+    on eight of these. The repo advisory carries the disclosure date; the
+    global one is the fallback when the repo cannot be reached.
+    """
+    m = re.search(r"github\.com/([^/]+/[^/#?]+)", a.get("source_code_location") or "")
+    if m:
+        r = s.get(f"{API}/repos/{m.group(1)}/security-advisories/{a['ghsa_id']}", timeout=30)
+        if r.status_code == 200 and r.json().get("published_at"):
+            return r.json()["published_at"]
+    return a.get("published_at")
+
+
+def row_facts(s, a, repo):
+    """What the homepage row opens to: the affected records and the disclosure
+    dates. If the repository advisory cannot be read, the row simply says less
+    rather than stopping the daily refresh."""
+    try:
+        disc = F.disclosure_facts(s, a, repo)
+    except SystemExit as e:
+        print(f"{a['ghsa_id']}: no disclosure dates ({e})", file=sys.stderr)
+        disc = None
+    return {"vulns": F.vulns_of(a), "disc": disc}
+
+
 def resolve_repo_level(s, repo, ghsa_id):
     """Only returns an advisory that is published and where USER credit is accepted."""
     r = s.get(f"{API}/repos/{repo}/security-advisories/{ghsa_id}", timeout=30)
     if r.status_code != 200:
-        print(f"skip {ghsa_id}: HTTP {r.status_code}", file=sys.stderr)
-        return None
+        # A failed fetch is not a withdrawn advisory. Skipping it would commit
+        # a shorter record, so stop and leave the page as it was.
+        raise SystemExit(f"{ghsa_id}: HTTP {r.status_code}, nothing written")
     a = r.json()
     if a.get("state") != "published" or a.get("withdrawn_at"):
         print(f"skip {ghsa_id}: state={a.get('state')}", file=sys.stderr)
@@ -132,14 +164,16 @@ def resolve_repo_level(s, repo, ghsa_id):
         "url": f"/advisories/{(a.get('cve_id') or a['ghsa_id']).lower()}/",
         "published": (a.get("published_at") or "")[:10],
         "summary": (a.get("summary") or "").strip(),
+        **row_facts(s, a, repo),
     }
 
 
 def resolve(s, ghsa_id):
     r = s.get(f"{API}/advisories/{ghsa_id}", timeout=30)
     if r.status_code != 200:
-        print(f"skip {ghsa_id}: HTTP {r.status_code}", file=sys.stderr)
-        return None
+        # A failed fetch is not a withdrawn advisory. Skipping it would commit
+        # a shorter record, so stop and leave the page as it was.
+        raise SystemExit(f"{ghsa_id}: HTTP {r.status_code}, nothing written")
     a = r.json()
     if a.get("withdrawn_at"):
         return None
@@ -156,8 +190,9 @@ def resolve(s, ghsa_id):
         "package": packages[0] if packages else "n/a",
         "cwe": cwes[0] if cwes else None,
         "url": f"/advisories/{(a.get('cve_id') or a['ghsa_id']).lower()}/",
-        "published": (a.get("published_at") or "")[:10],
+        "published": (maintainer_published(s, a) or "")[:10],
         "summary": (a.get("summary") or "").strip(),
+        **row_facts(s, a, None),
     }
 
 
@@ -203,6 +238,32 @@ def render_counters(rows):
     return f'      <ul class="figs">{items}\n      </ul>'
 
 
+def peek_row(i, r, sev):
+    """The short reading a row opens to: the vector as a sentence, what to do,
+    and how long disclosure took. Hidden until the reader asks for it."""
+    import html as _h
+    e = lambda x: _h.escape(str(x), quote=True)
+    act = F.action(r["vulns"])
+    nodes = F.disclosure(r["disc"] or {}, r["published"] or None)
+    if len(nodes) > 1:
+        disc = (f'<b>{F.days(nodes[0][0], nodes[1][0])} days</b><small>{e(nodes[0][1])} {e(nodes[0][0])}, '
+                f'published {e(nodes[1][0])}</small>')
+        disc_k = "Report to publication"
+    else:
+        disc = f'<b>{e(r["published"])}</b><small>Published by the maintainer</small>'
+        disc_k = "Published"
+    sent = F.sentence(F.parse_vec(r["vector"])) if r["vector"] else ""
+    note = ('<div class="pk-f"><small>Score is my assessment; GitHub published no CVSS for this advisory.</small></div>'
+            if r["self_assessed"] else "")
+    return (f'<tr role="row" class="peek" id="peek-{i:02d}" data-sev="{e(sev.lower())}" hidden>'
+            f'<td role="cell" colspan="7"><div class="pk">'
+            f'<div><p class="pk-s">{sent}</p>{note}</div>'
+            f'<div class="pk-f"><span class="k-lab">What to do</span><b{" class=\"quiet\"" if act["warn"] else ""}>{e(act["short"])}</b></div>'
+            f'<div class="pk-f"><span class="k-lab">{disc_k}</span>{disc}</div>'
+            f'<a class="pk-a" href="{e(r["url"])}">Read the writeup &rarr;</a>'
+            f'</div></td></tr>')
+
+
 def render_table(rows):
     """The home page record: identifier, project, score, severity, weakness,
     date. The eight base-vector columns stay on /advisories/, so the landing
@@ -215,15 +276,19 @@ def render_table(rows):
         sev = band(r["score"]) if r["score"] is not None else r["severity"]
         ident = r["cve_id"] or r["ghsa_id"]
         body.append(
-            f'<tr role="row">'
+            f'<tr role="row" data-sev="{e(sev.lower())}">'
             f'<th role="rowheader" scope="row" class="c-nr">{i:02d}</th>'
             f'<td role="cell" class="c-id"><a href="{e(r["url"])}">{e(ident)}</a></td>'
-            f'<td role="cell" class="c-pkg">{_pkg(r["package"])}</td>'
+            # The column is headed Project: a Go module path such as
+            # github.com/portainer/portainer is the package, not the project,
+            # and it wrapped to two lines. The /advisories/ record keeps the
+            # full path under its Package header.
+            f'<td role="cell" class="c-pkg">{_pkg(short_package(r["package"]))}</td>'
             f'<td role="cell" class="c-sc">{r["score"]:.1f}</td>'
             f'<td role="cell" class="c-sev sev-{SEV_CLASS[sev]}">{sev}</td>'
             f'<td role="cell" class="c-cls">{e(label(r["cwe"]))}</td>'
             f'<td role="cell" class="c-pub">{r["published"]}</td>'
-            f'</tr>')
+            f'</tr>' + peek_row(i, r, sev))
     head = ('<thead role="rowgroup"><tr role="row">'
             '<th role="columnheader" scope="col" class="c-nr">NR</th>'
             '<th role="columnheader" scope="col" class="c-id">Advisory</th>'
@@ -272,11 +337,13 @@ SELF_ASSESSED = {
     # ag2ai/ag2: a second advisory, published High with no CVSS vector. Path
     # traversal in DiskKnowledgeStore from a startswith containment check that a
     # prefix-sharing sibling directory bypasses, giving read, write and delete
-    # outside the root to an agent that drives the knowledge tool. Score and
-    # vector are taken verbatim from the advisory's own CVSS line, inside the
-    # maintainer's High band.
+    # outside the root to an agent that drives the knowledge tool. The vector
+    # is taken verbatim from the advisory's own CVSS line. That line states
+    # 7.5, but the vector computes to 8.1 under CVSS 3.1 (exploitability 2.835
+    # + impact 5.177, rounded up), so the score is the computed one, still
+    # inside the maintainer's High band.
     "GHSA-qrjx-72xx-xhmh": {
-        "score": 7.5,
+        "score": 8.1,
         "vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:N",
     },
 }
@@ -298,14 +365,17 @@ def _cvss_pick(obj, prefix):
 def cvss_of(a):
     """Return (score, vector, self_assessed) for one advisory payload.
 
-    Priority: a published CVSS v3.1 base score, then a deliberate self
-    assessment, then a published CVSS v4.0 base score (GitHub increasingly
-    scores on v4). The self assessment wins over v4 on purpose: where we have
-    chosen a curated v3.1 number inside the maintainer's band, a maintainer or
-    database v4 vector added later must not silently replace it. The top level
-    `cvss` node can hold either version, so it is checked under both prefixes.
-    Callers that lay a vector out metric by metric detect v4 from its "CVSS:4"
-    prefix, since the v3 metric set does not apply to it.
+    GitHub's published base score is authoritative: a CVSS v3.1 score if present,
+    otherwise a v4.0 score (GitHub increasingly scores on v4). This is on purpose.
+    These pages are a public record, so the number a reader sees is the maintainer
+    and CNA's own, never ours, wherever they published one. Only when GitHub
+    published a severity band with no numeric score at all do we fall back to a
+    deliberate self assessment, which the page then labels plainly as ours and
+    inside the band GitHub published. The 0.0 placeholder GitHub sometimes stores
+    next to an uncomputed vector is rejected by _cvss_pick (it requires score > 0),
+    so it never masquerades as a real score. The top level `cvss` node can hold
+    either version, so it is checked under both prefixes. Callers that lay a vector
+    out metric by metric detect v4 from its "CVSS:4" prefix.
     """
     cvss = a.get("cvss") or {}
     sev = a.get("cvss_severities") or {}
@@ -313,13 +383,13 @@ def cvss_of(a):
         s, v = _cvss_pick(obj, "CVSS:3")
         if s:
             return s, v, False
-    sa = SELF_ASSESSED.get(a.get("ghsa_id"))
-    if sa:
-        return sa["score"], sa["vector"], True
     for obj in (cvss, sev.get("cvss_v4")):
         s, v = _cvss_pick(obj, "CVSS:4")
         if s:
             return s, v, False
+    sa = SELF_ASSESSED.get(a.get("ghsa_id"))
+    if sa:
+        return sa["score"], sa["vector"], True
     return None, None, False
 
 

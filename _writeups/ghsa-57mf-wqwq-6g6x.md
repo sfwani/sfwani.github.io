@@ -8,6 +8,7 @@ Three places tie the public key to real impact.
 
 Credential encryption, `backend/util/encryption.py`:
 
+<!-- bug: ENCRYPTION_KEY = Settings().secrets.encryption_key :: credential key comes from the published default env file -->
 ```python
 ENCRYPTION_KEY = Settings().secrets.encryption_key  # from .env.default
 
@@ -21,6 +22,7 @@ class JSONCryptor:
 
 Cache HMAC signing, `backend/util/cache.py`:
 
+<!-- bug: secret = settings.secrets.encryption_key :: derives the cache HMAC key from the public encryption key -->
 ```python
 def _get_hmac_key() -> bytes:
     secret = settings.secrets.encryption_key
@@ -33,6 +35,7 @@ The derived key HMAC signs pickle serialized cache entries before they are store
 
 Default loading, `docker-compose.platform.yml`:
 
+<!-- bug: - backend/.env.default   # base defaults :: the default env file is always loaded -->
 ```yaml
 x-backend-env-files: &backend-env-files
   env_file:

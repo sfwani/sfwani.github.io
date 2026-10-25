@@ -1,0 +1,60 @@
+<figure class="fig fig-chain" id="fig-chain" aria-labelledby="chain-h">
+  <figcaption>
+    <p class="fig-h" id="chain-h">Chain &middot; GHSA-24q6-6h89-f9p7 &middot; AutoGPT</p>
+    <p class="fig-note" id="chain-n">Three steps from a secret committed to the public repository to any account, to admin, and to the third-party credentials those accounts hold. Each step is paired with the control that was supposed to stop it and was not there. Every fact is taken from the published advisory.</p>
+  </figcaption>
+
+  <p class="fig-vh">Text alternative. Step 00: the signing secret ships in the repository. backend/.env.default line 33 sets JWT_VERIFY_KEY to your-super-secret-jwt-token-with-at-least-32-characters-long, and the platform .env.default line 7 carries the same string as JWT_SECRET; the documented install copies these files into place. Absent control: nothing refuses to start on the default value, so a deployment runs on the committed secret. Step 01: forge a token offline. With the public secret the attacker signs an HS256 JWT whose sub claim is any victim's id and whose role claim is admin, in a few lines of PyJWT, with no contact with the target. Absent control: the token is a signature over its own claims, not a server-side session record, so nothing binds it to a login the server issued. Step 02: the backend accepts it. parse_jwt_token in autogpt_libs/auth/jwt_utils.py checks only the signature, the algorithm and the audience; verify_user then reads identity from the sub claim and treats role as a plain string, so a forged sub and role equal to admin clear both gates. Absent control: claims are trusted wholesale, and identity and privilege are self-asserted fields verified by nothing but a signature made with a public key. From there the forged token reaches any account (sub set to any id reads and mutates that user's agents, integrations and runs), admin-only endpoints (role set to admin clears the admin_only check), and, because the default ENCRYPTION_KEY is equally public, the stored OAuth tokens and provider API keys those accounts hold, decrypted at rest. Affects autogpt-platform-backend 0.6.26 through 0.7.4. Published 2026-10-05.</p>
+
+  <ol class="ch-steps" aria-hidden="true">
+    <li class="ch-step">
+      <p class="ch-i">00</p>
+      <div class="ch-b">
+        <p class="ch-act">The signing secret ships in the repository</p>
+        <p class="ch-ev"><code>backend/.env.default</code> line 33 sets <code>JWT_VERIFY_KEY=your-super-secret-jwt-token-with-at-least-32-characters-long</code>, and the platform <code>.env.default</code> line 7 carries the same string as <code>JWT_SECRET</code>. The documented install copies these files into place.</p>
+      </div>
+      <p class="ch-gate"><span class="ch-gk">Absent control</span>Nothing refuses to start on the default value, so a deployment runs on the committed secret without anyone choosing to.</p>
+    </li>
+    <li class="ch-step">
+      <p class="ch-i">01</p>
+      <div class="ch-b">
+        <p class="ch-act">Forge a token, offline</p>
+        <p class="ch-ev">With the public secret, sign an HS256 JWT whose <code>sub</code> is any victim&rsquo;s id and whose <code>role</code> is <code>admin</code>. A few lines of <code>PyJWT</code>, and no contact with the target yet.</p>
+      </div>
+      <p class="ch-gate"><span class="ch-gk">Absent control</span>The token is a signature over its own claims, not a server-side session record. Nothing binds it to a login the server issued.</p>
+    </li>
+    <li class="ch-step">
+      <p class="ch-i">02</p>
+      <div class="ch-b">
+        <p class="ch-act">The backend accepts it</p>
+        <p class="ch-ev"><code>parse_jwt_token</code> in <code>autogpt_libs/auth/jwt_utils.py</code> checks only the signature, algorithm and audience. <code>verify_user</code> then reads identity from <code>sub</code> and treats <code>role</code> as a plain string, so a forged <code>sub</code> and <code>role=admin</code> clear both gates.</p>
+      </div>
+      <p class="ch-gate"><span class="ch-gk">Absent control</span>Claims are trusted wholesale. Identity and privilege are self-asserted fields, verified by nothing but a signature made with a public key.</p>
+    </li>
+  </ol>
+
+  <div class="ch-bus" aria-hidden="true"></div>
+
+  <ul class="ch-leaves" aria-hidden="true">
+    <li>
+      <p class="ch-ln">Any account</p>
+      <p class="ch-le"><code>sub</code> set to any user&rsquo;s id reads and mutates that user&rsquo;s agents, integrations and runs.</p>
+    </li>
+    <li>
+      <p class="ch-ln">Admin endpoints</p>
+      <p class="ch-le"><code>role</code> set to <code>admin</code> clears the <code>admin_only</code> check and reaches admin-only routes.</p>
+    </li>
+    <li>
+      <p class="ch-ln">Stored OAuth tokens</p>
+      <p class="ch-le">The equally public default <code>ENCRYPTION_KEY</code> decrypts the OAuth tokens connected accounts hold.</p>
+    </li>
+    <li>
+      <p class="ch-ln">Provider API keys</p>
+      <p class="ch-le">The same key decrypts the stored provider API keys those accounts hold, at rest.</p>
+    </li>
+  </ul>
+
+  <p class="ch-scope"><b>Scope changed.</b> The vulnerable component is AutoGPT&rsquo;s own authentication. The OAuth tokens and API keys it stores belong to the external providers each user connected, which are separate security authorities with credentials of their own, and the default-key chain hands them over. That is the <code>S:C</code> in the vector, and it is what carries a forged login past a single-app compromise.</p>
+
+  <p class="fig-foot">A standalone PoC forges the token with <code>PyJWT</code>, signs it HS256 with the public secret, and runs it back through the same <code>jwt.decode</code> call the backend uses; it is accepted. Affects autogpt-platform-backend <code>&gt;= 0.6.26, &lt;= 0.7.4</code>. Published 2026-10-05.</p>
+</figure>

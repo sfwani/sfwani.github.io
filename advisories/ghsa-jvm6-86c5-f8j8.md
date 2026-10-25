@@ -1,169 +1,72 @@
 ---
 title: "GHSA-jvm6-86c5-f8j8"
 heading: "GHSA-jvm6-86c5-f8j8"
-role: "SSRF via AI provider baseUrl — bypasses safeFetch, reachable by space|updat"
-seo_title: "GHSA-jvm6-86c5-f8j8: SSRF via AI provider baseUrl — bypasses safeFetch, reachable by space|updat - Sanaan Fayaz Wani"
+role: "SSRF via AI provider baseUrl bypasses safeFetch, reachable by any space owner"
+seo_title: "GHSA-jvm6-86c5-f8j8: SSRF via AI provider baseUrl bypasses safeFetch, reachable by any space owner - Sanaan Fayaz Wani"
 ghsa_id: "GHSA-jvm6-86c5-f8j8"
 cve_id: ""
 published_at: "2026-10-13"
 permalink: /advisories/ghsa-jvm6-86c5-f8j8/
 layout: c2
-description: "SSRF via AI provider baseUrl — bypasses safeFetch, reachable by space|updat"
+description: "SSRF via AI provider baseUrl bypasses safeFetch, reachable by any space owner. teable, CVSS 6.5 Medium, CWE-918 Server side request forgery. Writeup by Sanaan Fayaz Wani, the credited reporter."
+image: /assets/img/og/ghsa-jvm6-86c5-f8j8.png
+kicker_repo: "teableio/teable"
 comments: false
-last_modified_at: 2026-10-22T03:22:44+00:00
+last_modified_at: 2026-10-24T23:51:00+00:00
 ---
-<section class="sec g" id="writeup" aria-labelledby="h-writeup">
-  <div class="sec-head">
-    <p class="idx idx--none">—</p>
-    <h2 id="h-writeup">GHSA-jvm6-86c5-f8j8</h2>
-    <p class="sec-sub">Published, fixed and credited. Root cause, the vulnerable code, reproduction and the fix, as published in the advisory itself.</p>
-  </div>
+<section class="sec g" id="writeup" aria-labelledby="h-writeup" data-sev="medium" data-score="6.5" data-sevword="Medium" data-short="Upgrade to release.2026-10-12T12-45-53Z.3331">
+  <h2 id="h-writeup" class="vh">GHSA-jvm6-86c5-f8j8</h2>
+  <div class="ah" data-sev="medium"><div class="ah-score"><p class="ah-num">6.5</p><p class="ah-sev">Medium</p><p class="ah-of">CVSS 3.1 base</p><div class="ah-meter" aria-hidden="true"><i style="width:65%"></i></div><ol class="tlv" aria-label="Disclosure timeline"><li><b>2026-09-04</b><span>Reported privately</span></li><li><span class="tlv-d">39 days later</span><b>2026-10-13</b><span>Published by the maintainer</span></li></ol></div><div class="act"><p class="act-k">What to do</p><p class="act-v">If you run <b>teable</b> <b>before release.2026-10-12T12-45-53Z.3331</b>, upgrade to <b>release.2026-10-12T12-45-53Z.3331</b> or later.</p></div><p class="ts"><em>Anyone who can reach it over the network</em>, with <em>a low-privilege account</em> and no user interaction, can <em>read sensitive data</em>.<span class="ts-src">Read from the CVSS 3.1 vector</span></p><div class="bx" style="--n:4"><div class="bx-head"><span class="k-lab">CVSS 3.1 metrics</span></div><div class="bx-row"><p class="bx-g">To exploit it</p><dl class="bx-grid"><div class="bx-c"><dt>Attack vector</dt><dd>Network</dd></div><div class="bx-c"><dt>Attack complexity</dt><dd>Low</dd></div><div class="bx-c"><dt>Privileges required</dt><dd>Low</dd></div><div class="bx-c"><dt>User interaction</dt><dd>None</dd></div></dl></div><div class="bx-row"><p class="bx-g">What it gets</p><dl class="bx-grid"><div class="bx-c"><dt>Confidentiality</dt><dd>High</dd></div><div class="bx-c"><dt>Integrity</dt><dd>None</dd></div><div class="bx-c"><dt>Availability</dt><dd>None</dd></div><div class="bx-c"><dt>Scope</dt><dd>Unchanged</dd></div></dl></div><p class="bx-foot"><a href="https://www.first.org/cvss/calculator/3.1#CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:N/A:N" rel="noopener">Open this vector in the FIRST calculator &#8599;</a></p></div><dl class="meta"><div class="meta-i wide"><dt class="k-lab">Weakness</dt><dd class="meta-v"><abbr title="Server-Side Request Forgery (SSRF)">CWE-918</abbr> <span class="meta-s">Server-Side Request Forgery (SSRF)</span></dd></div><div class="meta-i"><dt class="k-lab">Advisory</dt><dd class="meta-v"><a href="https://github.com/teableio/teable/security/advisories/GHSA-jvm6-86c5-f8j8">GHSA-jvm6-86c5-f8j8</a></dd></div><div class="meta-i"><dt class="k-lab">CVE</dt><dd class="meta-v">not assigned</dd></div><div class="meta-i"><dt class="k-lab">Vector</dt><dd class="meta-v"><span class="vec">CVSS:3.1/<wbr>AV:N/<wbr>AC:L/<wbr>PR:L/<wbr>UI:N/<wbr>S:U/<wbr>C:H/<wbr>I:N/<wbr>A:N</span></dd></div><div class="meta-i wide"><dt class="k-lab">Also in teable</dt><dd class="meta-v"><a href="/advisories/ghsa-w677-p6hx-85vw/">GHSA-w677-p6hx-85vw</a> 7.1</dd></div></dl><div class="tl" role="group" aria-label="Disclosure timeline"><div class="tl-n"><b>2026-09-04</b><span>Reported privately</span></div><div class="tl-seg"><span>39 days</span></div><div class="tl-n"><b>2026-10-13</b><span>Published by the maintainer</span></div></div><p class="ah-note">My analysis of this finding: root cause, the vulnerable code, the impact and the fix, in the site’s format. The official advisory of record is linked above.</p></div>
   <div class="col-body prose" markdown="1">
-
-| | |
-|:--|:--|
-| Advisory | [GHSA-jvm6-86c5-f8j8](https://github.com/teableio/teable/security/advisories/GHSA-jvm6-86c5-f8j8) |
-| CVE | not assigned |
-| Severity | Medium (6.5) |
-| CVSS vector | `CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:N/A:N` |
-| CWE | CWE-918 (Server-Side Request Forgery (SSRF)) |
-| Published | 2026-10-13 |
 
 ### Affected versions
 
+<div class="vts"><div class="vt" aria-hidden="true"><div class="vt-pkg">teableio/teable</div><div class="vt-bar nolo"><div class="vt-bad"><b>No lower bound</b><i>Affected</i><b>before release.2026-10-12T12-45-53Z.3331</b></div><div class="vt-fix">Fixed in <b>release.2026-10-12T12-45-53Z.3331</b></div></div></div></div>
+
 | Package | Ecosystem | Vulnerable | Fixed in |
 |:--|:--|:--|:--|
-| `teableio/teable` | other | < release.2026-10-12T12-45-53Z.3331 | n/a |
-
-Hi
-
-I'm an independent security researcher. Following your security policy, I'm
-privately reporting a server-side request forgery (SSRF) bug I found reviewing
-the open-source code. A space admin can point an AI integration's provider
-baseUrl at an internal address; the server then fetches it with a plain fetch
-that bypasses Teable's own safeFetch SSRF protection, and streams the response
-back. Full write-up, with the safeFetch inconsistency that proves it's an
-oversight, a PoC, and a one-line fix, below.
-
-# SSRF: AI provider `baseUrl` fetch bypasses Teable's own SSRF-safe fetch
-
-**Target:** Teable — GitHub Security Advisories (github.com/teableio/teable/security/advisories/new)
-**Commit reviewed:** `5ef2238` (cloned HEAD, main)
-**Class:** CWE-918 Server-Side Request Forgery
-**Severity (self-assessed):** Medium — CVSS ~5–6.5, higher on multi-tenant/cloud
-`CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:N/A:N` (PR:L = requires a `space|update` role; response-returning)
-
----
+| `teableio/teable` | other | < release.2026-10-12T12-45-53Z.3331 | release.2026-10-12T12-45-53Z.3331 |
+{: .vh}
 
 ## Summary
 
-A space administrator (`space|update`) can register an AI integration whose
-LLM provider `baseUrl` points at an internal address. When any base member
-triggers AI generation, the server fetches that `baseUrl` with a **plain
-`fetch`** — bypassing Teable's own SSRF-safe fetch (`safeFetch`) that is
-applied to imports and external-DB connections. The upstream response is
-streamed back to the caller, making this a response-returning SSRF into the
-server's internal network (and cloud metadata) in multi-tenant deployments.
+Teable ships its own SSRF guard (`createSsrfSafeFetch` / `safeFetch`) and wires it into the import and attachment paths. The AI provider path does not use it. `POST /api/space/:spaceId/test-llm` builds an LLM provider from a fully user-controlled `baseUrl` and makes the server issue an outbound request to it, through a plain global `fetch` with no host or scheme allowlist. Any authenticated user can reach the endpoint, and the error responses distinguish open ports from closed ones, giving a server-side internal port-scan and reachability oracle against hosts the attacker cannot reach directly. This is a server-side request forgery (CWE-918).
 
-## The inconsistency (why this is a bug, not a feature)
+## Where it lives
 
-Teable already ships centralized SSRF protection and uses it elsewhere:
+The route carries `@Permissions('space|update')`, which sounds privileged but is held by every user on a space they create: `POST /api/space` needs only `space|create` (a default capability), and the creator becomes `Role.Owner`, which has `space|update`. The handler ignores the path `spaceId` entirely and acts on the request body, so an attacker's own throwaway space satisfies the gate. `baseUrl` is validated only as `z.url()`, with no host or scheme restriction.
 
-- `apps/nestjs-backend/src/utils/ssrf-http.ts` → `safeFetch` — *"SSRF-safe
-  node-fetch; trust is re-evaluated for every redirect."*
-- Imports use it: `import/open-api/import-open-api-v2.service.ts`,
-  `import/open-api/import.class.ts` (`import { safeFetch } from '.../ssrf-http'`).
-- External DB connections enforce it: `space/data-db-preflight.service.ts`
-  (`TEABLE_SSRF_PROTECTION_DISABLED`, `isPrivateNetworkAllowed`).
-- v2 wires `createSsrfSafeFetch()` via `setSafeFetch()`.
+`testLLM` in `apps/nestjs-backend/src/features/setting/open-api/setting-open-api.service.ts` takes `baseUrl` straight from the request body, builds the provider, and calls `generateText`, which performs the outbound request:
 
-The **AI provider path does not**. `apps/nestjs-backend/src/features/ai/util.ts`:
+<pre class="has-mark"><code class="language-ts"><span class="ln">async testLLM(testLLMRo: ITestLLMRo): Promise&lt;ITestLLMVo&gt; {</span><span class="ln">  const { type, baseUrl, apiKey, models, ... } = testLLMRo;</span><span class="ln">  ...</span><span class="ln bug">  const providerOptions = getAdaptedProviderOptions(type, { name: model, baseURL: baseUrl, apiKey });</span><span class="ln">  const modelProvider = provider({ ...providerOptions } as never) as OpenAIProvider;</span></code></pre>
 
-```ts
-const createFixingFetch = (): typeof fetch => {
-  return async (input, init) => {
-    const response = await fetch(input, init);   // <-- plain global fetch, no safeFetch
-    ...
-  };
-};
+<p class="mark-cap"><span><span class="mark-k">The bug</span>user supplied baseUrl becomes the provider endpoint</span></p>
 
-const createOpenAICompatibleWrapper = (options) =>
-  createOpenAICompatible({ ...options, fetch: createFixingFetch() });
-```
+The provider fetch is defined in `apps/nestjs-backend/src/features/ai/util.ts`, and it is the unguarded global `fetch`, not `safeFetch`:
 
-The other provider factories in `modelProviders` (createOpenAI, createAnthropic,
-…) use the AI SDK's default fetch — also unfiltered. None route through
-`safeFetch`.
+<pre class="has-mark"><code class="language-ts"><span class="ln">const createFixingFetch = (): typeof fetch =&gt; {</span><span class="ln">  return async (input, init) =&gt; {</span><span class="ln bug">    const response = await fetch(input, init);   // plain global fetch, no SSRF guard</span><span class="ln">    ...</span></code></pre>
 
-## Reachability
+<p class="mark-cap"><span><span class="mark-k">The bug</span>plain global fetch with no SSRF guard</span></p>
 
-1. `POST /api/space/:spaceId/integration` and
-   `PATCH /api/space/:spaceId/integration/:integrationId`
-   (`space/space.controller.ts`) are both `@Permissions('space|update')` and
-   accept an `AI` integration whose config carries `llmProviders[].baseUrl`
-   (`packages/openapi/src/space/integration-get-list.ts`).
-   → A **space admin** (a *customer* role in cloud, not a server admin) sets
-   `baseUrl` to e.g. `http://169.254.169.254/`, `http://localhost:<port>`, or
-   any internal host.
-2. `POST .../generate-stream` (`ai/ai.controller.ts`, `@Permissions('base|read')`)
-   → `ai.service.ts` merges the space integration's `llmProviders`
-   (`aiIntegrationConfig.llmProviders`, ai.service.ts ~L420) and calls the
-   provider with `baseURL: baseUrl` and `createFixingFetch`.
-3. The server connects to `baseUrl` with no private-IP/metadata filtering, and
-   `createFixingFetch` streams the upstream response body back to the caller.
+The other provider factories in `modelProviders` use the AI SDK's own default fetch, also unfiltered. None of them route through the `safeFetch` that imports and external-DB connections already enforce.
 
 ## Impact
 
-Authenticated, response-returning SSRF from a space-admin customer:
-- Reach internal-only HTTP services (internal APIs, admin panels, databases
-  exposing HTTP), and port-scan the internal network via timing/error
-  differences.
-- Reach cloud metadata endpoints (e.g. `169.254.169.254`). Note: providers POST
-  to `${baseUrl}/chat/completions`, so clean IMDSv1 credential paths are
-  awkward, but the model-listing path (`ai-gateway-models.service.ts` does a
-  `GET`) and any service that returns a readable body on POST leak content back
-  through the stream.
-- On multi-tenant/cloud (teable.io) this crosses the tenant→infrastructure
-  boundary. On single-tenant self-hosted the space admin ≈ the operator, so the
-  boundary is weaker — severity is deployment-dependent, hence the honest
-  Medium.
+I confirmed the oracle live against `ghcr.io/teableio/teable:latest` as a non-admin user, probing docker-network services the attacker has no direct route to:
 
-## Proof of Concept (validate locally — never against a third-party host)
-
-1. Run Teable locally. Start a listener on an "internal" port, e.g.
-   `python3 -m http.server 9000`.
-2. As a space admin, create an AI integration (OpenAI-compatible) with
-   `baseUrl = http://127.0.0.1:9000/v1` and any `apiKey`.
-3. In a base of that space, trigger AI generation (`.../generate-stream`).
-4. Observe the request arriving at your `:9000` listener (server-side fetch to
-   an internal address). Point `baseUrl` at other internal hosts/ports to
-   confirm reachability and response streaming. Compare with the same attempt
-   against the **import** feature, which is blocked by `safeFetch`.
-
-## Remediation
-
-Route all AI provider requests through the existing SSRF-safe fetch, exactly
-as imports and DB connections already do:
-
-```ts
-import { safeFetch } from '../../utils/ssrf-http';
-
-const createFixingFetch = (): typeof fetch => async (input, init) => {
-  const response = await safeFetch(input, init);   // was: fetch(input, init)
-  ...
-};
+```
+baseUrl teable-db:5432    (internal Postgres, OPEN) -> "Cannot connect to API: other side closed"  (connected)
+baseUrl teable-db:1       (CLOSED port)             -> "Cannot connect to API: bad port"
+baseUrl teable-cache:6379 (internal Redis, OPEN)    -> "other side closed"                         (connected)
 ```
 
-…and pass a `safeFetch`-based `fetch` to every entry in `modelProviders`, not
-only the OpenAI-compatible wrapper. Honor the same
-`TEABLE_SSRF_PROTECTION_DISABLED` escape hatch used by the DB-connection path so
-self-hosted operators keep parity.
+The distinct error per target proves the server performed the attacker-directed outbound connection and reflected the result. An unprivileged tenant in a multi-tenant deployment can enumerate and fingerprint internal services, databases, caches and cloud metadata endpoints that are otherwise unreachable from its network position, and an endpoint returning OpenAI-shaped JSON reflects its body back to the caller.
 
-Credit: if you publish an advisory or assign a CVE, I'd appreciate being credited
-as Marcel Koza. Recognition is all I'm after; no compensation needed.
+## Fix
 
-Thanks for building in the open,
-Marcel Koza
+Route the AI provider path through the existing guard: pass a `createSsrfSafeFetch()`-based fetch into every entry of `modelProviders` (not only the OpenAI-compatible wrapper) and into `createGateway`, or install it as a global undici dispatcher. Restrict `baseUrl` to public https hosts via an allowlist, and return a generic failure message instead of the raw connection error so the port oracle disappears.
+
+<section class="fs-inline" aria-labelledby="h-record"><h2 id="h-record" class="no-idx">The record</h2><dl class="fs"><dt>Weakness</dt><dd><b>CWE-918</b> Server-Side Request Forgery (SSRF)</dd><dt>Affected</dt><dd>teable <b>before release.2026-10-12T12-45-53Z.3331</b></dd><dt>Fixed in</dt><dd><b>release.2026-10-12T12-45-53Z.3331</b></dd><dt>Disclosure</dt><dd><b>2026-09-04</b> Reported privately<br><span class="fs-gap">39 days later</span><b>2026-10-13</b> Published</dd><dt>Advisory</dt><dd><a href="https://github.com/teableio/teable/security/advisories/GHSA-jvm6-86c5-f8j8">GHSA-jvm6-86c5-f8j8</a></dd><dt>Also in teable</dt><dd><a href="/advisories/ghsa-w677-p6hx-85vw/">GHSA-w677-p6hx-85vw</a> 7.1</dd></dl></section>
 
 ## About this writeup
 
@@ -173,4 +76,5 @@ All published findings: [advisory index](/advisories/).
 
 
   </div>
+  <aside class="srail" aria-label="Fact sheet" data-sev="medium"><div class="sr-h"><span class="sr-num">6.5</span><span class="sr-sev">Medium</span></div><p class="sr-src">CVSS 3.1 base</p><dl class="fs"><dt>Weakness</dt><dd><b>CWE-918</b> Server-Side Request Forgery (SSRF)</dd><dt>Affected</dt><dd>teable <b>before release.2026-10-12T12-45-53Z.3331</b></dd><dt>Fixed in</dt><dd><b>release.2026-10-12T12-45-53Z.3331</b></dd><dt>Disclosure</dt><dd><b>2026-09-04</b> Reported privately<br><span class="fs-gap">39 days later</span><b>2026-10-13</b> Published</dd><dt>Advisory</dt><dd><a href="https://github.com/teableio/teable/security/advisories/GHSA-jvm6-86c5-f8j8">GHSA-jvm6-86c5-f8j8</a></dd><dt>Also in teable</dt><dd><a href="/advisories/ghsa-w677-p6hx-85vw/">GHSA-w677-p6hx-85vw</a> 7.1</dd></dl><a class="sr-top" href="#top">Back to top</a></aside>
 </section>

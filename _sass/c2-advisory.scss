@@ -1,0 +1,245 @@
+/* ─────────────────────────────────────────────────────────────────
+   ADVISORY PAGE AND HOMEPAGE RECORD
+   The triage layout: how bad and what to do first, the reading of the
+   vector in one sentence, the metrics as plain boxes, then the writeup
+   with a fact sheet in the right margin. All of it is rendered by the
+   generator; the layout script only adds the scroll behaviour.
+   Content edges inside the panel: column 1 (the score) and column 4
+   (everything else). Nothing in the panel starts anywhere else.
+   ───────────────────────────────────────────────────────────────── */
+
+:root{ --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace; }
+
+[data-sev="critical"]{ --sev: var(--sev-critical); }
+[data-sev="high"]    { --sev: var(--sev-high); }
+[data-sev="medium"]  { --sev: var(--sev-medium); }
+[data-sev="low"]     { --sev: var(--sev-low); }
+[data-sev="none"]    { --sev: var(--ink-3); }
+
+.k-lab{ font-size: var(--t-xs); letter-spacing: .07em; text-transform: uppercase; color: var(--ink-3); }
+.tbl-tog:focus-visible{ outline: 2px solid var(--focus); outline-offset: 2px; }
+
+/* The panel's own placement. The score column carries the upright timeline,
+   so it spans every row beside it; otherwise the first row grows to its
+   height and opens a gap. */
+.ah-note{ grid-column: 4 / span 7; }
+@media (min-width: 640px){
+  .ah-score{ grid-row: 1 / span 8; }
+}
+
+/* Project the advisory belongs to, above the identifier */
+.kick-repo{ grid-column: 1 / -1; margin: 0 0 calc(var(--u) * 1.5); font-size: var(--t-xs); font-weight: 700; letter-spacing: .13em; text-transform: uppercase; color: var(--ink-3); }
+.kick-repo a{ color: inherit; text-decoration: none; border-bottom: 1px solid var(--rule-2); }
+.kick-repo a:hover{ color: var(--ink); }
+
+/* ═══════════ THE SENTENCE ═══════════ */
+.ts{ grid-column: 4 / span 7; margin: 0; max-width: 34em; font-size: clamp(17px, 1.45vw, 20px); line-height: 1.4; font-weight: 400; letter-spacing: -.006em; color: var(--ink-2); }
+.ts em{ font-style: normal; font-weight: 600; color: var(--ink); }
+.ts-src{ display: block; margin-top: calc(var(--u) * 1); font-size: var(--t-xs); font-weight: 500; letter-spacing: .07em; text-transform: uppercase; color: var(--ink-3); }
+
+/* ═══════════ WHAT TO DO ═══════════ */
+.act{ grid-column: 4 / span 7; margin: 0; }
+.act-k{ margin: 0 0 calc(var(--u) * .75); font-size: var(--t-xs); font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-2); }
+.act-v{ margin: 0; max-width: 32em; font-size: clamp(19px, 1.7vw, 23px); line-height: 1.35; letter-spacing: -.01em; color: var(--ink-2); }
+.act-v b{ color: var(--ink); font-weight: 600; font-variant-numeric: lining-nums; }
+.act-v.multi{ font-size: 17px; line-height: 1.5; }
+.act.warn .act-k::after{ content: " · check the record"; color: var(--sev); }
+
+/* ═══════════ THE METRICS, AS PLAIN BOXES ═══════════ */
+.bx{ grid-column: 4 / span 7; }
+.bx-head{ padding-bottom: calc(var(--u) * .75); border-bottom: 1px solid var(--rule-heavy); }
+.bx-row{ margin-top: calc(var(--u) * 1.5); }
+.bx-g{ margin: 0 0 calc(var(--u) * .6); font-size: var(--t-xs); font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-2); }
+.bx-grid{ display: grid; grid-template-columns: repeat(var(--n, 4), minmax(0, 1fr)); gap: 8px; margin: 0; }
+.bx-c{ border: 1px solid var(--rule); padding: 9px 11px 10px; background: var(--bg); }
+.bx-c dt{ font-size: 11px; letter-spacing: .04em; color: var(--ink-2); }
+.bx-c dd{ margin: 3px 0 0; font-size: 15px; font-weight: 600; color: var(--ink); }
+.bx-threat{ margin: calc(var(--u) * 1.5) 0 0; font-size: 12px; line-height: 1.5; color: var(--ink-2); }
+.bx-threat .k-lab{ margin-right: 8px; }
+.bx-threat b{ color: var(--ink); }
+.bx-foot{ margin-top: calc(var(--u) * 1.75); font-size: 12px; color: var(--ink-2); }
+.bx-foot a{ color: var(--ink-2); }
+
+/* ═══════════ META LINE ═══════════ */
+.meta{ grid-column: 4 / span 7; display: grid; grid-template-columns: auto auto minmax(0, 1fr); gap: calc(var(--u) * 1.25) calc(var(--u) * 3.5); margin: 0; padding: calc(var(--u) * 1.25) 0; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); font-size: var(--t-s); }
+.meta-i{ display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+.meta-i dd{ margin: 0; }
+.meta-i.wide{ grid-column: 1 / -1; }
+.meta-v{ overflow-wrap: anywhere; }
+.meta-s{ display: block; margin-top: 2px; font-size: 12px; color: var(--ink-2); }
+.meta abbr{ text-decoration: none; }
+
+/* ═══════════ DISCLOSURE TIMELINES ═══════════ */
+/* Upright, in the empty space under the score */
+.tlv{ list-style: none; margin: calc(var(--u) * 3) 0 0; padding: 0 0 0 calc(var(--u) * 1.75); border-left: 1px solid var(--rule-2); max-width: 16rem; }
+.tlv li{ position: relative; padding-bottom: calc(var(--u) * 1.5); font-size: 12px; line-height: 1.4; color: var(--ink-2); }
+.tlv li:last-child{ padding-bottom: 0; }
+.tlv li::before{ content: ""; position: absolute; left: calc(var(--u) * -1.75 - 4px); top: 4px; width: 7px; height: 7px; background: var(--ink); }
+.tlv b{ display: block; font-size: 13px; color: var(--ink); font-variant-numeric: lining-nums; }
+.tlv span{ display: block; }
+.tlv .tlv-d{ margin: 0 0 6px; font-size: var(--t-xs); font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3); }
+.tlv li:has(.tlv-d)::before{ top: 22px; }
+/* Across, for a phone, where the score column stacks above everything */
+.tl{ grid-column: 4 / span 7; display: none; align-items: flex-start; margin: calc(var(--u) * 2.5) 0 0; }
+.tl-n{ flex: 0 1 13rem; min-width: 0; }
+.tl-n::before{ content: ""; display: block; width: 9px; height: 9px; margin-bottom: calc(var(--u) * 1); background: var(--ink); }
+.tl-n b{ display: block; font-size: var(--t-s); font-weight: 700; font-variant-numeric: lining-nums; }
+.tl-n span{ display: block; margin-top: 2px; font-size: 12px; line-height: 1.35; color: var(--ink-2); }
+.tl-seg{ flex: 1 1 3rem; min-width: 2.5rem; position: relative; margin: 4px calc(var(--u) * 1.5) 0; border-top: 1px solid var(--rule-2); }
+.tl-seg span{ position: absolute; left: 50%; bottom: 5px; transform: translateX(-50%); white-space: nowrap; font-size: var(--t-xs); font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-2); }
+
+/* ═══════════ FACT SHEET: the right margin, or the foot of the writeup ═══════════ */
+.srail{ display: none; }
+@media (min-width: 1200px){
+  #writeup .ah{ grid-column: 1 / span 10; }
+  #writeup .srail{
+    display: block;
+    grid-column: 11 / span 2;
+    grid-row: 1 / span 3;
+    align-self: start;
+    position: sticky;
+    top: calc(var(--u) * 12);
+    margin-left: calc(var(--u) * 1);
+    padding-top: calc(var(--u) * 1.25);
+    border-top: 2px solid var(--rule-heavy);
+    background: var(--bg);
+    font-size: 12px;
+    transition: opacity .3s ease, transform .3s ease, visibility .3s;
+  }
+  /* With the script running it waits until the score has scrolled away, so
+     the two are never on screen together. Without it, it is simply there. */
+  :root.js #writeup .srail:not(.on){ opacity: 0; visibility: hidden; transform: translateY(6px); }
+  #writeup .fs-inline{ display: none; }
+}
+.sr-h{ display: flex; align-items: baseline; justify-content: space-between; gap: 8px; }
+.sr-num{ font-size: 30px; font-weight: 500; letter-spacing: -.03em; line-height: 1; color: var(--sev); font-variant-numeric: lining-nums; }
+.sr-sev{ font-size: var(--t-xs); font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--sev); }
+.sr-src{ margin: 4px 0 0; font-size: var(--t-xs); letter-spacing: .06em; text-transform: uppercase; color: var(--ink-3); }
+.sr-top{ display: inline-block; margin-top: calc(var(--u) * 1.25); font-size: var(--t-xs); letter-spacing: .08em; text-transform: uppercase; color: var(--ink-2); }
+.fs{ margin: calc(var(--u) * 1.25) 0 0; }
+.fs dt{ margin-top: calc(var(--u) * 1.1); padding-top: calc(var(--u) * .9); border-top: 1px solid var(--rule); font-size: 9.5px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-2); }
+.fs dt:first-child{ margin-top: 0; }
+.fs dd{ margin: 4px 0 0; font-size: 12px; line-height: 1.45; color: var(--ink-2); overflow-wrap: anywhere; }
+.fs dd b{ color: var(--ink); font-weight: 600; }
+.fs-gap{ display: block; font-size: 10.5px; color: var(--ink-3); }
+.fs-v{ display: block; }
+.fs-v + .fs-v{ margin-top: 6px; }
+.fs-inline{ margin-top: calc(var(--u) * 4); }
+.fs-inline .fs{ display: grid; grid-template-columns: 9rem minmax(0, 1fr); column-gap: calc(var(--u) * 2); border-bottom: 1px solid var(--rule); }
+.fs-inline .fs dt, .fs-inline .fs dd{ margin: 0; padding: calc(var(--u) * .9) 0; border-top: 1px solid var(--rule); }
+.fs-inline .fs dt{ padding-top: calc(var(--u) * 1.1); }
+.fs-inline .fs dt:first-child, .fs-inline .fs dt:first-child + dd{ border-top: 0; }
+.fs-inline .fs dd{ font-size: 14px; }
+.fs-inline .fs-gap{ font-size: 12px; }
+
+/* ═══════════ VERSION TRACK ═══════════ */
+.vt{ margin: calc(var(--u) * 2) 0 calc(var(--u) * 3); }
+.vt + .vt{ margin-top: calc(var(--u) * 3); }
+.vt-pkg{ font-size: var(--t-s); font-weight: 600; margin-bottom: calc(var(--u) * 1); }
+.vt-pkg span{ margin-left: 8px; }
+.vt-bar{ display: grid; grid-template-columns: 1.2fr 3fr 1.7fr; align-items: end; }
+.vt-bar.nolo{ grid-template-columns: 3.8fr 1.7fr; }
+.vt-pre, .vt-bad, .vt-fix{ padding-bottom: 7px; font-size: 12px; line-height: 1.3; }
+.vt-pre{ border-bottom: 1px dashed var(--rule-2); color: var(--ink-2); padding-right: 10px; }
+.vt-bad{ border-bottom: 5px solid var(--sev); display: flex; justify-content: space-between; gap: 10px; padding-right: 10px; color: var(--ink); }
+.vt-bad b, .vt-fix b{ font-weight: 700; font-variant-numeric: lining-nums; overflow-wrap: anywhere; }
+.vt-bad i{ font-style: normal; color: var(--ink-2); font-weight: 700; letter-spacing: .08em; text-transform: uppercase; font-size: var(--t-xs); align-self: center; }
+.vt-fix{ position: relative; border-bottom: 1px solid var(--ink); padding-left: 14px; color: var(--ink-2); }
+.vt-fix::before{ content: ""; position: absolute; left: 0; bottom: -1px; width: 1px; height: 22px; background: var(--ink); }
+.vt-fix.none{ border-bottom-style: dashed; border-bottom-color: var(--rule-2); }
+.vt-fix.none::before{ background: var(--rule-2); }
+.vt-note{ margin-top: calc(var(--u) * 1); font-size: 12px; line-height: 1.45; color: var(--ink); }
+.vt-note b{ letter-spacing: .07em; text-transform: uppercase; font-size: var(--t-xs); }
+
+/* ═══════════ CODE: the marked lines ═══════════ */
+.prose pre .ln{ display: block; margin: 0 calc(var(--u) * -2); padding: 0 calc(var(--u) * 2); }
+.prose pre .ln.bug{ background: color-mix(in srgb, var(--accent) 10%, transparent); box-shadow: inset 3px 0 0 var(--accent); }
+.prose pre .ln.fix, .prose pre .ln.add{ background: color-mix(in srgb, var(--ok) 12%, transparent); box-shadow: inset 3px 0 0 var(--ok); }
+.prose pre .ln.del{ background: color-mix(in srgb, var(--accent) 8%, transparent); box-shadow: inset 3px 0 0 var(--accent); color: var(--ink-2); }
+.prose pre.has-mark{ margin-bottom: calc(var(--u) * .75); }
+.prose .mark-cap{ margin: 0 0 calc(var(--u) * 3); max-width: none; font-size: 12px; line-height: 1.5; color: var(--ink-2); }
+.mark-cap > span{ display: block; }
+.mark-k{ margin-right: 6px; font-size: var(--t-xs); font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); }
+.mark-k.fix{ color: var(--ok); }
+:root{ --ok: #2f6b3a; }
+:root[data-theme="dark"]{ --ok: #7fbf8a; }
+
+/* ═══════════ READING PROGRESS, AND THE FACTS IN THE INDEX BAND ═══════════ */
+.rp{ position: absolute; left: 0; bottom: -1px; height: 2px; width: 100%; background: var(--accent); transform-origin: left center; transform: scaleX(var(--rp, 0)); pointer-events: none; }
+.ibf{ position: absolute; top: 50%; transform: translateY(-50%); display: flex; gap: 14px; align-items: baseline; padding-left: 18px; background: var(--bg); font-size: var(--t-xs); font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-2); opacity: 0; visibility: hidden; transition: opacity .25s ease, visibility .25s; }
+.ibf.on{ opacity: 1; visibility: visible; }
+.ibf b{ color: var(--sev); font-size: 13px; letter-spacing: 0; }
+/* Below 1100px there is no room in the band; from 1200px the margin carries the score. */
+@media (max-width: 1099px), (min-width: 1200px){ .ibf{ display: none; } }
+
+/* ═══════════ HOMEPAGE RECORD: the row that opens ═══════════ */
+.rec--compact tbody tr[data-sev]:not(.peek){ cursor: pointer; }
+.tablewrap .rec--compact tbody tr[data-sev] td.c-sc{ color: var(--sev); white-space: nowrap; }
+.tbl-tog{ font: inherit; color: inherit; background: none; border: 0; padding: 2px 0; cursor: pointer; min-height: 24px; }
+.tbl-tog .car{ display: inline-block; margin-left: 6px; color: var(--ink-3); transition: transform .15s ease; }
+tr.open .tbl-tog .car{ transform: rotate(90deg); }
+.tablewrap tr.peek td{ padding: calc(var(--u) * 1.5) 0 calc(var(--u) * 2.25); background: var(--bg); }
+.pk{ display: grid; grid-template-columns: var(--pk1, 2fr) var(--pk2, 1fr) minmax(0, 1fr) auto; gap: 0; align-items: start; white-space: normal; }
+.pk > *{ padding-right: calc(var(--u) * 3); }
+.pk-s{ font-size: 15px; line-height: 1.45; color: var(--ink-2); margin: 0; }
+.pk-s em{ font-style: normal; font-weight: 600; color: var(--ink); }
+.pk-f b{ display: block; margin-top: 4px; font-size: 14px; font-weight: 600; }
+.pk-f b.quiet{ font-weight: 400; color: var(--ink-2); }
+.pk-f small{ display: block; margin-top: 2px; font-size: 12px; color: var(--ink-2); }
+.pk-a{ align-self: end; font-size: var(--t-s); font-weight: 600; white-space: nowrap; padding-right: 0 !important; }
+
+/* Each record row is followed by its hidden reading, so the row that closes
+   the table is the second last, not the last. The block form below 1120px sets
+   rows to display: grid, which would otherwise override the hidden attribute. */
+.tablewrap .rec--compact tbody tr.peek[hidden]{ display: none; }
+.tablewrap .rec--compact tbody tr:nth-last-child(2) td,
+.tablewrap .rec--compact tbody tr:nth-last-child(2) th{ border-bottom: 1px solid var(--rule-heavy); }
+@media (max-width: 1119px){
+  .tablewrap .rec--compact tbody tr:nth-last-child(2) td,
+  .tablewrap .rec--compact tbody tr:nth-last-child(2) th{ border-bottom: 0; }
+  .tablewrap .rec--compact tbody tr:nth-last-child(2){ border-bottom: 2px solid var(--rule-heavy); }
+  .tablewrap .rec--compact tbody tr.peek{ display: block; grid-column: 1 / -1; padding-block: 0 calc(var(--u) * 2.5); }
+  .tablewrap .rec--compact tbody tr.peek td{ display: block; padding: 0 !important; }
+  .tablewrap .rec--compact tbody tr.open{ border-bottom: 0; }
+  .pk{ grid-template-columns: 1fr 1fr !important; row-gap: calc(var(--u) * 1.5); }
+  .pk > div:first-child{ grid-column: 1 / -1; }
+}
+@media (min-width: 860px) and (max-width: 1119px){
+  .tablewrap .rec--compact tbody tr:nth-last-child(4){ border-bottom: 2px solid var(--rule-heavy); }
+}
+
+/* ═══════════ RESPONSIVE: the panel's own tiers ═══════════ */
+@media (max-width: 1023px){
+  .act, .bx, .meta, .tl, .ts, .ah-note{ grid-column: 3 / span 4; }
+  .meta{ grid-template-columns: 1fr; }
+}
+@media (max-width: 639px){
+  .act, .bx, .meta, .tl, .ts, .ah-note{ grid-column: 1 / -1; }
+  .bx-grid{ grid-template-columns: 1fr 1fr; }
+  .tl{ display: flex; flex-direction: column; }
+  .tlv{ display: none; }
+  .tl-n{ flex: 0 0 auto; max-width: none; }
+  .tl-seg{ flex: 0 0 auto; min-width: 0; border-top: 0; border-left: 1px solid var(--rule-2); margin: 6px 0 6px 4px; padding: 10px 0 10px 16px; }
+  .tl-seg span{ position: static; transform: none; }
+  .vt-bar{ grid-template-columns: 1fr 2.4fr 1.5fr; }
+  .vt-bar.nolo{ grid-template-columns: 2.6fr 1.5fr; }
+  .fs-inline .fs{ grid-template-columns: 1fr; }
+  .fs-inline .fs dd{ border-top: 0; padding-top: 2px; }
+  .pk{ grid-template-columns: 1fr !important; row-gap: calc(var(--u) * 1.5); }
+}
+
+/* ═══════════ MOTION (restrained, once) ═══════════ */
+:root.motion [data-rv]{ transition: opacity 520ms cubic-bezier(.2,.7,.2,1) var(--d,0ms), transform 520ms cubic-bezier(.2,.7,.2,1) var(--d,0ms); }
+:root.motion [data-rv]:not(.in){ opacity: 0; transform: translateY(8px); }
+/* The affected range draws across once its track arrives. Driven from the
+   track: a fully clipped element never counts as visible to the observer. */
+:root.motion .vt[data-rv] .vt-bad{ transition: clip-path 900ms cubic-bezier(.2,.7,.2,1) calc(var(--d,0ms) + 150ms); }
+:root.motion .vt[data-rv]:not(.in) .vt-bad{ clip-path: inset(0 100% 0 0); }
+:root.motion .ah-meter i{ transform-origin: left center; transform: scaleX(0); transition: transform 1000ms cubic-bezier(.2,.7,.2,1) calc(var(--d,0ms) + 200ms); }
+:root.motion .in .ah-meter i, :root.motion .ah-meter.in i{ transform: scaleX(1); }
+@media (prefers-reduced-motion: reduce){ :root.motion *{ transition: none !important; } }
+@media print{
+  :root.motion [data-rv], :root.motion .vt-bad{ opacity: 1 !important; transform: none !important; clip-path: none !important; }
+  .ibf, .rp, .srail{ display: none !important; }
+  #writeup .fs-inline{ display: block !important; }
+}

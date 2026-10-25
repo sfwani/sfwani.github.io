@@ -3,11 +3,6 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="google-site-verification" content="iLZwTcGnNGWPoyMD3IJgUyWQ1iAcAJxSzp2hvI2oRx4" />
-  <meta name="mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="application-name" content="{{ site.title }}" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="#fff" />
-  <meta name="apple-mobile-web-app-title" content="{{ site.title }}" />
   <title>
     {% if page.seo_title %}{{ page.seo_title | escape }}{% elsif page.title %}{{ page.title | escape }} - {{ site.title }}{% else %}{{
     site.title | escape }}{% endif %}
@@ -51,7 +46,7 @@
         | default: site.description
         | strip_html
         | normalize_whitespace
-        | truncate: 200
+        | truncate: 320
         | escape
     }}"
   />
@@ -88,7 +83,7 @@
         | default: site.description
         | strip_html
         | normalize_whitespace
-        | truncate: 200
+        | truncate: 320
         | escape
     }}"
   />
@@ -121,7 +116,7 @@
         | default: site.description
         | strip_html
         | normalize_whitespace
-        | truncate: 200
+        | truncate: 320
         | escape
     }}"
   />
@@ -135,6 +130,7 @@
     sizes="180x180"
     href="/assets/favicons/apple-touch-icon.png"
   />
+  <link rel="icon" href="/assets/favicons/favicon.ico" sizes="any" />
   <link
     rel="icon"
     type="image/png"
@@ -151,12 +147,13 @@
   <link
     rel="mask-icon"
     href="/assets/favicons/safari-pinned-tab.svg"
-    color="#5bbad5"
+    color="#141410"
   />
   <meta name="apple-mobile-web-app-title" content="Sanaan Fayaz Wani" />
   <meta name="application-name" content="Sanaan Fayaz Wani" />
-  <meta name="msapplication-TileColor" content="#da532c" />
-  <meta name="theme-color" content="#2c2c2c" />
+  <meta name="msapplication-TileColor" content="#f2f1ec" />
+  <meta name="theme-color" content="#f2f1ec" />
+  <link rel="alternate" type="application/atom+xml" title="Published advisories" href="/feed.xml" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

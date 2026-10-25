@@ -532,3 +532,400 @@
 @media (min-width: 640px){
   .title{ padding-top: calc(var(--u) * 11); }
 }
+
+/* ───────────────────────────────────────────────────────────────
+   ADVISORY HEADER (writeup pages)
+   C2 opened each writeup with the generic section head: a numeral in
+   column 1, the heading in column 2, a note in column 8. On a one section
+   page that numeral had nothing to count so it fell back to a dash, the
+   heading only repeated the advisory id already set as the title, and the
+   note sat on a different baseline off to the right. All three are gone.
+   In their place the score hangs in the column-1 gutter where the numeral
+   would have been, the decoded CVSS vector sits beside it, and the record
+   identifiers align to the body column below. The writeup prose is unchanged.
+   ─────────────────────────────────────────────────────────────── */
+
+/* One earthy step per rating, tuned to sit on the paper rather than shout off
+   it, and brightened for the dark field the way --accent is. The score, the
+   rating word and the meter all paint from --sev, set once per panel from the
+   data-sev the generator writes. */
+/* Every value clears 4.5:1 as small text on both --bg and --bg-2, because
+   the rating word is set at 13px. High and Medium were 4.41 and 3.88 on the
+   paper; they are darkened along their own hue. In the dark field Critical
+   moves toward crimson and Medium toward olive, so neither reads as the
+   orange of High. */
+:root{
+  --sev-critical:#8f1d07;
+  --sev-high:    #ad4313;
+  --sev-medium:  #80600c;
+  --sev-low:     #5f6b53;
+}
+:root[data-theme="dark"]{
+  --sev-critical:#ff5c6c;
+  --sev-high:    #f0813f;
+  --sev-medium:  #c2b545;
+  --sev-low:     #9bb07e;
+}
+.ah[data-sev="critical"]{ --sev: var(--sev-critical); }
+.ah[data-sev="high"]    { --sev: var(--sev-high); }
+.ah[data-sev="medium"]  { --sev: var(--sev-medium); }
+.ah[data-sev="low"]     { --sev: var(--sev-low); }
+.ah[data-sev="none"]    { --sev: var(--ink-3); }
+
+.ah{
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: subgrid;
+  align-items: start;
+  row-gap: calc(var(--u) * 3);
+  margin-bottom: calc(var(--u) * 2);
+}
+
+/* ── Score, hanging in the numeral gutter ── */
+.ah-score{ grid-column: 1 / span 3; }
+.ah-num{
+  font-size: clamp(40px, 4.6vw, 54px);
+  font-weight: 500;
+  line-height: .82;
+  letter-spacing: -.03em;
+  color: var(--sev);
+  /* Proportional, not tabular: a lone display score is not a column to align,
+     and tabular figures pad the decimal point to a full digit width, floating
+     it in a gap ("9 . 9"). Proportional lets the dot take its natural width. */
+  font-variant-numeric: lining-nums proportional-nums;
+}
+.ah-sev{
+  margin-top: calc(var(--u) * 1.25);
+  font-size: var(--t-s);
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--sev);
+}
+.ah-sev--lg{ font-size: var(--t-l); letter-spacing: .02em; line-height: 1; margin-top: 0; }
+.ah-of{
+  margin-top: 4px;
+  font-size: var(--t-xs);
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.ah-tag{
+  display: inline-block;
+  margin-top: calc(var(--u) * 1);
+  padding: 2px 7px;
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  border: 1px solid var(--rule-2);
+}
+.ah-meter{
+  width: 100%;
+  max-width: 148px;
+  height: 3px;
+  margin-top: calc(var(--u) * 2);
+  background: var(--bg-3);
+}
+.ah-meter i{ display: block; height: 100%; background: var(--sev); }
+
+/* ── Decoded vector, in a hairline grid beside the score ── */
+.ah-metrics{
+  grid-column: 4 / span 7;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  border-top: 1px solid var(--rule);
+}
+.ah-metrics li{
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--u);
+  padding: calc(var(--u) * 1.1) 0;
+  border-bottom: 1px solid var(--rule);
+  font-size: var(--t-s);
+}
+.ah-metrics .k{
+  font-size: var(--t-xs);
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.ah-metrics .v{ font-weight: 600; text-align: right; }
+.ah-metrics li.dim .v{ color: var(--ink-3); font-weight: 400; }
+/* Two columns need a gutter between them and a visible break where one row's
+   right cell meets the next row's left; padding on alternate items gives both
+   without a vertical rule. */
+@media (min-width: 560px){
+  .ah-metrics{ column-gap: calc(var(--u) * 5); }
+  .ah-metrics li:nth-child(odd){ padding-right: calc(var(--u) * 2.5); }
+  .ah-metrics li:nth-child(even){ padding-left: calc(var(--u) * 2.5); }
+}
+
+/* ── Record identifiers and the orientation note, on the body column ── */
+.ah-ids{
+  grid-column: 2 / span 9;
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: calc(var(--u) * .75) calc(var(--u) * 3);
+  margin: 0;
+  font-size: var(--t-s);
+}
+.ah-ids dt{
+  font-size: var(--t-xs);
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  padding-top: 2px;
+}
+.ah-ids dd{ margin: 0; }
+.ah-note{
+  grid-column: 2 / span 9;
+  max-width: 60ch;
+  font-size: var(--t-s);
+  line-height: 1.5;
+  color: var(--ink-2);
+}
+.ah-note--disc{ color: var(--ink-3); }
+
+/* ── The six column tier ── */
+@media (max-width: 1023px){
+  .ah-score{ grid-column: 1 / span 2; }
+  .ah-metrics{ grid-column: 3 / span 4; }
+  .ah-ids,
+  .ah-note{ grid-column: 2 / span 5; }
+}
+
+/* ── Phone: everything on one column, metrics stack ── */
+@media (max-width: 639px){
+  .ah-score,
+  .ah-metrics,
+  .ah-ids,
+  .ah-note{ grid-column: 1 / -1; }
+  .ah-metrics{ grid-template-columns: 1fr; margin-top: calc(var(--u) * 1); }
+  .ah-meter{ max-width: none; }
+}
+
+/* ───────────────────────────────────────────────────────────────
+   ATTACK-CHAIN FIGURE (one hand-built figure, trigger.dev / pqxw)
+   A five step chain from a secret committed to the repo to three data
+   stores with their own credentials, each step paired with the control
+   that should have stopped it and was not there. The markup carries its
+   own classes but no CSS ever shipped, so it rendered as a wall of text
+   with the visually-hidden text alternative showing. This dresses it in
+   the same language as the score panel above: a numeral hanging in a
+   rail, hairline-ruled rows, the record-table tint for the data stores.
+
+   It lives inside .col-body .prose, so inline <code> already gets the
+   prose tint and the break behaviour for free. Two base .fig rules from
+   C2 leak in by descendant match and are overridden below: .fig b (which
+   would blow "Scope changed." up to 30px display) and .fig span (which
+   would turn the "Absent control" lead-in into a grey block).
+   ─────────────────────────────────────────────────────────────── */
+.fig-chain{
+  /* C2's .fig turns into a 4.5rem + 1fr grid at <=639px so the home-page
+     counters sit number-beside-label on a phone. This figure shares the
+     .fig class and must not inherit that: it lays itself out. Block, at
+     every width, overriding the media-query .fig by later source order. */
+  display: block;
+  margin: calc(var(--u) * 6) 0;
+}
+
+/* Caption: a kicker line under a heavy rule, then a muted standfirst. */
+.fig-chain figcaption{ margin-bottom: calc(var(--u) * 4); }
+/* .prose p caps every paragraph at 64ch, and ch is relative to the element's
+   own size, so this 10.5px kicker was held to 419px and its rule stopped well
+   short of the step rules below it: two right edges in one figure. The kicker
+   is a rule with a label, not running text, so it takes the full width. */
+.fig-chain .fig-h{
+  max-width: none;
+  margin: 0 0 calc(var(--u) * 1.5);
+  padding-bottom: calc(var(--u) * 1.5);
+  border-bottom: 1px solid var(--rule-heavy);
+  font-size: var(--t-xs);
+  font-weight: 600;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.fig-chain .fig-note{
+  max-width: 64ch;
+  margin: 0;
+  font-size: var(--t-s);
+  line-height: 1.55;
+  color: var(--ink-2);
+}
+
+/* The text alternative is for assistive tech only: take it out of the flow
+   but keep it in the accessibility tree. (C2 has no .vh utility of its own.) */
+.fig-vh{
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* The five steps, as hairline-ruled rows echoing the score panel. The
+   numeral hangs in a left rail in accent and spans the step's two rows
+   (the act/evidence pair, and the absent-control line beneath them). */
+.fig-chain .ch-steps{
+  margin: calc(var(--u) * 3) 0 0;
+  padding: 0;
+  list-style: none;
+  border-bottom: 1px solid var(--rule);
+}
+.fig-chain .ch-step{
+  display: grid;
+  grid-template-columns: calc(var(--u) * 7) 1fr;
+  column-gap: calc(var(--u) * 3);
+  row-gap: calc(var(--u) * 1.5);
+  padding: calc(var(--u) * 3) 0;
+  border-top: 1px solid var(--rule);
+}
+.fig-chain .ch-i{
+  grid-column: 1;
+  grid-row: 1 / span 2;
+  margin: 0;
+  font-size: calc(var(--t-l) * .8);
+  font-weight: 500;
+  line-height: .85;
+  letter-spacing: -.02em;
+  color: var(--accent);
+  font-variant-numeric: lining-nums tabular-nums;
+}
+.fig-chain .ch-b{ grid-column: 2; grid-row: 1; }
+.fig-chain .ch-act{
+  margin: 0 0 calc(var(--u) * 1);
+  font-size: var(--t-m);
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -.01em;
+  color: var(--ink);
+}
+.fig-chain .ch-ev{
+  margin: 0;
+  font-size: var(--t-s);
+  line-height: 1.55;
+  color: var(--ink-2);
+}
+
+/* The absent control: a muted inset on the body column. The lead-in word
+   is the one spot of accent per step, so the eye reads the five failures
+   down the page. Overrides .fig span. */
+.fig-chain .ch-gate{
+  grid-column: 2;
+  grid-row: 2;
+  margin: 0;
+  padding: calc(var(--u) * 1.25) calc(var(--u) * 2);
+  background: var(--bg-2);
+  border-left: 2px solid var(--rule-2);
+  font-size: var(--t-s);
+  line-height: 1.5;
+  color: var(--ink-2);
+}
+.fig-chain .ch-gate .ch-gk{
+  display: inline;
+  margin: 0 calc(var(--u) * 1.25) 0 0;
+  font-size: var(--t-xs);
+  font-weight: 700;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+/* The connector from the last step down into the data stores: a short
+   stub of rule continuing the rail, so the leaves read as reached, not
+   as a second unrelated list. */
+.fig-chain .ch-bus{
+  height: calc(var(--u) * 4);
+  margin: 0 0 0 calc(var(--u) * 3.5 - 1px);
+  border-left: 1px solid var(--rule-2);
+}
+
+/* The four data stores the chain reaches, as a hairline grid in the
+   record-table manner: a 1px rule background showing through the gaps. */
+.fig-chain .ch-leaves{
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
+  background: var(--rule);
+  border: 1px solid var(--rule);
+}
+.fig-chain .ch-leaves li{
+  margin: 0;
+  padding: calc(var(--u) * 2);
+  background: var(--bg);
+}
+.fig-chain .ch-ln{
+  margin: 0 0 calc(var(--u) * 1);
+  padding-left: calc(var(--u) * 1.75);
+  position: relative;
+  font-size: var(--t-xs);
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+.fig-chain .ch-ln::before{
+  content: "";
+  position: absolute;
+  left: 0; top: .18em;
+  width: calc(var(--u) * .875);
+  height: calc(var(--u) * .875);
+  background: var(--accent);
+}
+.fig-chain .ch-le{
+  margin: 0;
+  font-size: var(--t-s);
+  line-height: 1.5;
+  color: var(--ink-2);
+}
+
+/* Scope changed: the one line that explains the S:C in the vector, so it
+   gets a little more weight than the footnote. Overrides .fig b. */
+.fig-chain .ch-scope{
+  margin: calc(var(--u) * 4) 0 0;
+  padding: calc(var(--u) * 2) calc(var(--u) * 2.5);
+  border: 1px solid var(--rule);
+  border-left: 2px solid var(--accent);
+  font-size: var(--t-s);
+  line-height: 1.6;
+  color: var(--ink-2);
+}
+.fig-chain .ch-scope b{
+  display: inline;
+  font-size: inherit;
+  font-weight: 700;
+  letter-spacing: 0;
+  color: var(--ink);
+  /* C2 gives .fig b tabular figures for the counters, which in this family
+     widens the full stop: "Scope changed ." Prose spacing here. */
+  font-variant-numeric: normal;
+}
+
+.fig-chain .fig-foot{
+  margin: calc(var(--u) * 3) 0 0;
+  font-size: var(--t-xs);
+  line-height: 1.55;
+  color: var(--ink-3);
+}
+
+/* Phone: data stores stack, the number rail narrows. */
+@media (max-width: 560px){
+  .fig-chain .ch-leaves{ grid-template-columns: 1fr; }
+  .fig-chain .ch-step{
+    grid-template-columns: calc(var(--u) * 5) 1fr;
+    column-gap: calc(var(--u) * 2);
+  }
+  .fig-chain .ch-bus{ margin-left: calc(var(--u) * 2.5 - 1px); }
+}

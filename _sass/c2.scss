@@ -122,6 +122,15 @@ a:hover{ color: var(--accent); text-decoration-color: var(--accent); }
   clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap;
 }
 
+/* Hidden until a keyboard reaches it, then it sits over the masthead */
+.skip{
+  position: absolute; left: 16px; top: -100px; z-index: 100;
+  padding: 8px 12px; background: var(--ink); color: var(--bg);
+  font-size: 14px; font-weight: 600; text-decoration: none;
+}
+.skip:focus{ top: 12px; color: var(--bg); }
+.title:focus{ outline: none; }
+
 /* Tabular figures only where numbers form columns. Applying tnum globally
    widens the comma and full stop in this family and wrecks prose spacing. */
 .c-nr, .c-sc, .c-pub, .c-cwe, .fig b, .comps .yr,
@@ -382,59 +391,10 @@ h1{
 .prose p{ max-width: 64ch; overflow-wrap: anywhere; }
 .prose strong{ font-weight: 700; }
 
-/* A writeup page's body sits in the left columns; its section index sits in the
-   empty right column as a sticky rail, built from the prose headings. It tracks
-   the section in view, in the same editorial key as the running index. Hidden
-   below the two-column breakpoint, where the body already takes the full field. */
-.writeup-toc{
-  grid-column: 10 / -1;
-  align-self: start;
-  position: sticky;
-  top: calc(var(--u) * 4);
-}
-.writeup-toc .toc-h{
-  font-size: var(--t-xs);
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--ink-3);
-  margin-bottom: var(--u);
-}
-.writeup-toc ol{
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  border-top: 1px solid var(--rule);
-}
-.writeup-toc li{ border-bottom: 1px solid var(--rule); }
-.writeup-toc a{
-  display: flex;
-  gap: 0.7em;
-  align-items: baseline;
-  padding: calc(var(--u) * 1.1) 0;
-  color: var(--ink-2);
-  text-decoration: none;
-  line-height: 1.35;
-  transition: color 0.15s ease;
-}
-.writeup-toc a b{
-  font-weight: 700;
-  color: var(--ink-3);
-  font-variant-numeric: tabular-nums;
-  font-size: var(--t-xs);
-}
-.writeup-toc a:hover, .writeup-toc a:hover b{ color: var(--accent); }
-.writeup-toc a[aria-current="true"], .writeup-toc a[aria-current="true"] b{ color: var(--accent); }
-.writeup-toc a:focus-visible{ outline-offset: 2px; }
-@media (max-width: 1119px){ .writeup-toc{ display: none; } }
-
-/* A writeup body is otherwise widened to span 9 for a comfortable measure. When
-   the index is present it gives those right columns back, so the two sit side by
-   side rather than overlapping. Only at the width where the index shows; below
-   it the body keeps the full measure. The id plus class outranks the span-9 rule. */
-@media (min-width: 1120px){
-  #writeup.has-toc .col-body{ grid-column: 2 / span 8; }
-}
+/* Writeup pages: the running index is built from the page's own prose
+   subheadings and shown in the pinned top band, like the index on every other
+   page (see the layout script), rather than a right-hand rail. The body measure
+   for these pages lives with the other site-specific writeup rules in c2-site. */
 
 .kicker{
   font-size: var(--t-xs);

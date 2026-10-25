@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Sanaan Fayaz Wani: published advisories</title>
+  <subtitle>Credited security advisories in AI agent frameworks and LLM infrastructure.</subtitle>
+  <link href="https://sfwani.github.io/feed.xml" rel="self"/>
+  <link href="https://sfwani.github.io/advisories/"/>
+  <id>https://sfwani.github.io/advisories/</id>
+  <updated>2026-10-19T00:00:00Z</updated>
+  <author><name>Sanaan Fayaz Wani</name><uri>https://github.com/sfwani</uri></author>
+  <entry>
+    <title>GHSA-xf86-hfpm-92xr: AI Chat route exposes admin-only tools to non-admin users</title>
+    <link href="https://sfwani.github.io/advisories/ghsa-xf86-hfpm-92xr/"/>
+    <id>https://sfwani.github.io/advisories/ghsa-xf86-hfpm-92xr/</id>
+    <published>2026-10-19T00:00:00Z</published>
+    <updated>2026-10-19T00:00:00Z</updated>
+    <summary>AI Chat route exposes admin-only tools to non-admin users. directus, CVSS 3.1 Low, CWE-863 Incorrect authorization. Writeup by Sanaan Fayaz Wani, the credited reporter.</summary>
+  </entry>
+  <entry>
+    <title>CVE-2026-49950: Unauthenticated remote code execution through the Xinference actor transport</title>
+    <link href="https://sfwani.github.io/advisories/cve-2026-49950/"/>
+    <id>https://sfwani.github.io/advisories/cve-2026-49950/</id>
+    <published>2026-10-16T00:00:00Z</published>
+    <updated>2026-10-16T00:00:00Z</updated>
+    <summary>Unauthenticated remote code execution through the Xinference actor transport. xinference, CVSS 9.3 Critical, CWE-306 Missing authentication. Writeup by Sanaan Fayaz Wani, the credited reporter.</summary>
+  </entry>
+  <entry>
+    <title>GHSA-v3vj-mch3-x6c2: Sandbox launcher isolation failure permits host-level code execution</title>
+    <link href="https://sfwani.github.io/advisories/ghsa-v3vj-mch3-x6c2/"/>
+    <id>https://sfwani.github.io/advisories/ghsa-v3vj-mch3-x6c2/</id>
+    <published>2026-10-13T00:00:00Z</published>
+    <updated>2026-10-13T00:00:00Z</updated>
+    <summary>Sandbox launcher isolation failure permits host-level code execution. omnigent, CVSS 8.8 High, CWE-668 Resource exposure. Writeup by Sanaan Fayaz Wani, the credited reporter.</summary>
+  </entry>
+  <entry>
+    <title>GHSA-jvm6-86c5-f8j8: SSRF via AI provider baseUrl bypasses safeFetch, reachable by any space owner</title>
+    <link href="https://sfwani.github.io/advisories/ghsa-jvm6-86c5-f8j8/"/>
+    <id>https://sfwani.github.io/advisories/ghsa-jvm6-86c5-f8j8/</id>
+    <published>2026-10-13T00:00:00Z</published>
+    <updated>2026-10-13T00:00:00Z</updated>
+    <summary>SSRF via AI provider baseUrl bypasses safeFetch, reachable by any space owner. teable, CVSS 6.5 Medium, CWE-918 Server side request forgery. Writeup by Sanaan Fayaz Wani, the credited reporter.</summary>
+  </entry>
+  <entry>
+    <title>GHSA-w677-p6hx-85vw: Share password bypass: the share access token is never bound to the share it is presented for, so a token minted for one share opens any other password-protected share (plus cleartext password disclosure)</title>
+    <link href="https://sfwani.github.io/advisories/ghsa-w677-p6hx-85vw/"/>
+    <id>https://sfwani.github.io/advisories/ghsa-w677-p6hx-85vw/</id>
+    <published>2026-10-13T00:00:00Z</published>
+    <updated>2026-10-13T00:00:00Z</updated>
+    <summary>Share password bypass: the share access token is never bound to the share it is presented for, so a token minted for one share opens any other password-protected share (plus cleartext password disclosure). teable, CVSS 7.1 High, CWE-287 Authentication bypass. Writeup by Sanaan Fayaz Wani, the credited reporter.</summary>
+  </entry>
+  <entry>
+    <title>GHSA-jmr9-98g4-2phv: Non-admin bind-mount restriction bypass via Docker local-driver volumes and automatic Git redeploy (incomplete fix of CVE-2026-44849 and CVE-2026-44850)</title>
+    <link href="https://sfwani.github.io/advisories/ghsa-jmr9-98g4-2phv/"/>
+    <id>https://sfwani.github.io/advisories/ghsa-jmr9-98g4-2phv/</id>
+    <published>2026-10-08T00:00:00Z</published>
+    <updated>2026-10-08T00:00:00Z</updated>
+    <summary>Non-admin bind-mount restriction bypass via Docker local-driver volumes and automatic Git redeploy (incomplete fix of CVE-2026-44849 and CVE-2026-44850). portainer, CVSS 9.4 Critical, CWE-284 Access control. Writeup by Sanaan Fayaz Wani, the credited reporter.</summary>
+  </entry>
+  <entry>
+    <title>GHSA-24q6-6h89-f9p7: Hardcoded Default JWT Secret Enables Complete Authentication Bypass</title>
+    <link href="https://sfwani.github.io/advisories/ghsa-24q6-6h89-f9p7/"/>
+    <id>https://sfwani.github.io/advisories/ghsa-24q6-6h89-f9p7/</id>
+    <published>2026-10-05T00:00:00Z</published>
+    <updated>2026-10-05T00:00:00Z</updated>
+    <summary>Hardcoded Default JWT Secret Enables Complete Authentication Bypass. autogpt-platform-backend, CVSS 10.0 Critical, CWE-287 Authentication bypass. Writeup by Sanaan Fayaz Wani, the credited reporter.</summary>
+  </entry>
+  <entry>
+    <title>GHSA-57mf-wqwq-6g6x: Hardcoded Default Fernet Encryption Key Exposes All Stored OAuth Credentials</title>
+    <link href="https://sfwani.github.io/advisories/ghsa-57mf-wqwq-6g6x/"/>
+    <id>https://sfwani.github.io/advisories/ghsa-57mf-wqwq-6g6x/</id>
+    <published>2026-10-05T00:00:00Z</published>
+    <updated>2026-10-05T00:00:00Z</updated>
+    <summary>Hardcoded Default Fernet Encryption Key Exposes All Stored OAuth Credentials. autogpt-platform-backend, CVSS 8.2 High, CWE-321 Hard-coded crypto key. Writeup by Sanaan Fayaz Wani, the credited reporter.</summary>
+  </entry>
+  <entry>
+    <title>GHSA-42mf-vpmr-gw5r: Command Filter Bypass in LocalShellEnvironment via shell=True Allows Arbitrary OS Command Execution</title>
+    <link href="https://sfwani.github.io/advisories/ghsa-42mf-vpmr-gw5r/"/>
+    <id>https://sfwani.github.io/advisories/ghsa-42mf-vpmr-gw5r/</id>
+    <published>2026-10-03T00:00:00Z</published>
+    <updated>2026-10-03T00:00:00Z</updated>
+    <summary>Command Filter Bypass in LocalShellEnvironment via shell=True Allows Arbitrary OS Command Execution. ag2, CVSS 9.9 Critical, CWE-78 Command injection. Writeup by Sanaan Fayaz Wani, the credited reporter.</summary>
+  </entry>
+  <entry>
+    <title>GHSA-qrjx-72xx-xhmh: Path Traversal in DiskKnowledgeStore via Incorrect startswith Path Containment Check</title>
+    <link href="https://sfwani.github.io/advisories/ghsa-qrjx-72xx-xhmh/"/>
+    <id>https://sfwani.github.io/advisories/ghsa-qrjx-72xx-xhmh/</id>
+    <published>2026-09-25T00:00:00Z</published>
+    <updated>2026-09-25T00:00:00Z</updated>
+    <summary>Path Traversal in DiskKnowledgeStore via Incorrect startswith Path Containment Check. ag2, CVSS 8.1 High, CWE-22 Path traversal. Writeup by Sanaan Fayaz Wani, the credited reporter.</summary>
+  </entry>
+  <entry>
+    <title>GHSA-8p4j-2mm9-rh78: Registry HTTP actions could reach private network destinations before nsjail egress filtering</title>
+    <link href="https://sfwani.github.io/advisories/ghsa-8p4j-2mm9-rh78/"/>
+    <id>https://sfwani.github.io/advisories/ghsa-8p4j-2mm9-rh78/</id>
+    <published>2026-09-20T00:00:00Z</published>
+    <updated>2026-09-20T00:00:00Z</updated>
+    <summary>Registry HTTP actions could reach private network destinations before nsjail egress filtering. Tracecat, CVSS 6.5 Medium, CWE-918 Server side request forgery. Writeup by Sanaan Fayaz Wani, the credited reporter.</summary>
+  </entry>
+  <entry>
+    <title>GHSA-3c52-v5v2-3r56: SSRF in AI Table Generation via uploadUrl: raw fetch without blacklist protection</title>
+    <link href="https://sfwani.github.io/advisories/ghsa-3c52-v5v2-3r56/"/>
+    <id>https://sfwani.github.io/advisories/ghsa-3c52-v5v2-3r56/</id>
+    <published>2026-09-17T00:00:00Z</published>
+    <updated>2026-09-17T00:00:00Z</updated>
+    <summary>SSRF in AI Table Generation via uploadUrl: raw fetch without blacklist protection. budibase, CVSS 7.7 High, CWE-918 Server side request forgery. Writeup by Sanaan Fayaz Wani, the credited reporter.</summary>
+  </entry>
+  <entry>
+    <title>GHSA-jc26-22qp-cgqj: Supervisor workload API lacks cross-tenant authentication</title>
+    <link href="https://sfwani.github.io/advisories/ghsa-jc26-22qp-cgqj/"/>
+    <id>https://sfwani.github.io/advisories/ghsa-jc26-22qp-cgqj/</id>
+    <published>2026-09-14T00:00:00Z</published>
+    <updated>2026-09-14T00:00:00Z</updated>
+    <summary>Supervisor workload API lacks cross-tenant authentication. trigger.dev, CVSS 7.9 High, CWE-306 Missing authentication. Writeup by Sanaan Fayaz Wani, the credited reporter.</summary>
+  </entry>
+  <entry>
+    <title>CVE-2026-73301: Budibase: Missing RBAC on GET /api/global/groups allows BASIC users to enumerate all tenant groups and role mappings</title>
+    <link href="https://sfwani.github.io/advisories/cve-2026-73301/"/>
+    <id>https://sfwani.github.io/advisories/cve-2026-73301/</id>
+    <published>2026-07-22T00:00:00Z</published>
+    <updated>2026-07-22T00:00:00Z</updated>
+    <summary>Budibase: Missing RBAC on GET /api/global/groups allows BASIC users to enumerate all tenant groups and role mappings. @budibase/server, CVSS 4.3 Medium, CWE-862 Missing authorization. Writeup by Sanaan Fayaz Wani, the credited reporter.</summary>
+  </entry>
+  <entry>
+    <title>GHSA-59h8-w5q6-mfmp: Trigger.dev: Unauthenticated Realtime Stream Data Injection via Run FriendlyId</title>
+    <link href="https://sfwani.github.io/advisories/ghsa-59h8-w5q6-mfmp/"/>
+    <id>https://sfwani.github.io/advisories/ghsa-59h8-w5q6-mfmp/</id>
+    <published>2026-07-21T00:00:00Z</published>
+    <updated>2026-07-21T00:00:00Z</updated>
+    <summary>Trigger.dev: Unauthenticated Realtime Stream Data Injection via Run FriendlyId. trigger.dev, CVSS 5.3 Medium, CWE-306 Missing authentication. Writeup by Sanaan Fayaz Wani, the credited reporter.</summary>
+  </entry>
+  <entry>
+    <title>GHSA-pqxw-g93w-hj9x: Trigger.dev Self-Hosted Deployment: Default Secrets allow Unauthenticated Infrastructure Compromise</title>
+    <link href="https://sfwani.github.io/advisories/ghsa-pqxw-g93w-hj9x/"/>
+    <id>https://sfwani.github.io/advisories/ghsa-pqxw-g93w-hj9x/</id>
+    <published>2026-07-21T00:00:00Z</published>
+    <updated>2026-07-21T00:00:00Z</updated>
+    <summary>Trigger.dev Self-Hosted Deployment: Default Secrets allow Unauthenticated Infrastructure Compromise. trigger.dev, CVSS 8.1 High, CWE-653 Improper isolation. Writeup by Sanaan Fayaz Wani, the credited reporter.</summary>
+  </entry>
+  <entry>
+    <title>CVE-2026-56673: Path traversal in LoadImage via the /prompt API allows arbitrary file existence probing and image exfiltration</title>
+    <link href="https://sfwani.github.io/advisories/cve-2026-56673/"/>
+    <id>https://sfwani.github.io/advisories/cve-2026-56673/</id>
+    <published>2026-07-15T00:00:00Z</published>
+    <updated>2026-07-15T00:00:00Z</updated>
+    <summary>Path traversal in LoadImage via the /prompt API allows arbitrary file existence probing and image exfiltration. ComfyUI, CVSS 7.5 High, CWE-22 Path traversal. Writeup by Sanaan Fayaz Wani, the credited reporter.</summary>
+  </entry>
+  <entry>
+    <title>CVE-2026-56671: Path traversal in /experiment/models/preview allows arbitrary image file read</title>
+    <link href="https://sfwani.github.io/advisories/cve-2026-56671/"/>
+    <id>https://sfwani.github.io/advisories/cve-2026-56671/</id>
+    <published>2026-07-15T00:00:00Z</published>
+    <updated>2026-07-15T00:00:00Z</updated>
+    <summary>Path traversal in /experiment/models/preview allows arbitrary image file read. ComfyUI, CVSS 7.5 High, CWE-22 Path traversal. Writeup by Sanaan Fayaz Wani, the credited reporter.</summary>
+  </entry>
+  <entry>
+    <title>CVE-2026-59714: Open WebUI: Cross-channel message overwrite via chat completion API (single-model and multimodel message_ids)</title>
+    <link href="https://sfwani.github.io/advisories/cve-2026-59714/"/>
+    <id>https://sfwani.github.io/advisories/cve-2026-59714/</id>
+    <published>2026-07-02T00:00:00Z</published>
+    <updated>2026-07-02T00:00:00Z</updated>
+    <summary>Open WebUI: Cross-channel message overwrite via chat completion API (single-model and multimodel message_ids). open-webui, CVSS 7.1 High, CWE-862 Missing authorization. Writeup by Sanaan Fayaz Wani, the credited reporter.</summary>
+  </entry>
+  <entry>
+    <title>CVE-2026-59715: Open WebUI: Unauthenticated WebSocket Access to Collaborative Document Handlers (ydoc:awareness:update, ydoc:document:leave)</title>
+    <link href="https://sfwani.github.io/advisories/cve-2026-59715/"/>
+    <id>https://sfwani.github.io/advisories/cve-2026-59715/</id>
+    <published>2026-07-02T00:00:00Z</published>
+    <updated>2026-07-02T00:00:00Z</updated>
+    <summary>Open WebUI: Unauthenticated WebSocket Access to Collaborative Document Handlers (ydoc:awareness:update, ydoc:document:leave). open-webui, CVSS 3.1 Low, CWE-306 Missing authentication. Writeup by Sanaan Fayaz Wani, the credited reporter.</summary>
+  </entry>
+  <entry>
+    <title>CVE-2026-57516: Ray: Arbitrary code execution via ray.data.read_webdataset default decoder: pickle.loads(value) and torch.load(weights_only=False)</title>
+    <link href="https://sfwani.github.io/advisories/cve-2026-57516/"/>
+    <id>https://sfwani.github.io/advisories/cve-2026-57516/</id>
+    <published>2026-07-01T00:00:00Z</published>
+    <updated>2026-07-01T00:00:00Z</updated>
+    <summary>Ray: Arbitrary code execution via ray.data.read_webdataset default decoder: pickle.loads(value) and torch.load(weights_only=False). ray, CVSS 8.8 High, CWE-94 Code injection. Writeup by Sanaan Fayaz Wani, the credited reporter.</summary>
+  </entry>
+  <entry>
+    <title>CVE-2026-63342: Hatchet: Cross-Tenant Durable Task Event Log Disclosure via Missing Authorization Check</title>
+    <link href="https://sfwani.github.io/advisories/cve-2026-63342/"/>
+    <id>https://sfwani.github.io/advisories/cve-2026-63342/</id>
+    <published>2026-06-30T00:00:00Z</published>
+    <updated>2026-06-30T00:00:00Z</updated>
+    <summary>Hatchet: Cross-Tenant Durable Task Event Log Disclosure via Missing Authorization Check. hatchet, CVSS 6.3 Medium, CWE-863 Incorrect authorization. Writeup by Sanaan Fayaz Wani, the credited reporter.</summary>
+  </entry>
+  <entry>
+    <title>CVE-2026-53577: Cross-Execution File Read via Preview Endpoint (IDOR)</title>
+    <link href="https://sfwani.github.io/advisories/cve-2026-53577/"/>
+    <id>https://sfwani.github.io/advisories/cve-2026-53577/</id>
+    <published>2026-06-03T00:00:00Z</published>
+    <updated>2026-06-03T00:00:00Z</updated>
+    <summary>Cross-Execution File Read via Preview Endpoint (IDOR). kestra, CVSS 6.5 Medium, CWE-863 Incorrect authorization. Writeup by Sanaan Fayaz Wani, the credited reporter.</summary>
+  </entry>
+  <entry>
+    <title>CVE-2026-45675: Open WebUI: LDAP and OAuth First-User Race Condition Allows Multiple Admin Accounts</title>
+    <link href="https://sfwani.github.io/advisories/cve-2026-45675/"/>
+    <id>https://sfwani.github.io/advisories/cve-2026-45675/</id>
+    <published>2026-05-11T00:00:00Z</published>
+    <updated>2026-05-11T00:00:00Z</updated>
+    <summary>Open WebUI: LDAP and OAuth First-User Race Condition Allows Multiple Admin Accounts. open-webui, CVSS 8.1 High, CWE-269 Privilege escalation. Writeup by Sanaan Fayaz Wani, the credited reporter.</summary>
+  </entry>
+</feed>

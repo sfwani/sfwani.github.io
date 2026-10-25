@@ -11,7 +11,7 @@
       <p class="ch-i">00</p>
       <div class="ch-b">
         <p class="ch-act">The secret ships in the repository</p>
-        <p class="ch-ev"><code>hosting/docker/.env.example</code> lines 9&ndash;12 hold four fixed values, among them <code>MAGIC_LINK_SECRET=44da78b7bbb0dfe709cf38931d25dcdd</code>. The documented install is <code>cp .env.example .env</code>.</p>
+        <p class="ch-ev"><code>hosting/docker/.env.example</code> lines 9 to 12 hold four fixed values, among them <code>MAGIC_LINK_SECRET=44da78b7bbb0dfe709cf38931d25dcdd</code>. The documented install is <code>cp .env.example .env</code>.</p>
       </div>
       <p class="ch-gate"><span class="ch-gk">Absent control</span>Secrets are not generated on first boot, and the service does not refuse to start on a known value.</p>
     </li>
@@ -43,7 +43,7 @@
       <p class="ch-i">04</p>
       <div class="ch-b">
         <p class="ch-act">Stand on the infrastructure network</p>
-        <p class="ch-ev"><code>DOCKER_RUNNER_NETWORKS: webapp,supervisor</code> &mdash; <code>hosting/docker/worker/docker-compose.yml:42</code> puts runner containers on the same Docker networks as the platform&rsquo;s own data stores.</p>
+        <p class="ch-ev"><code>DOCKER_RUNNER_NETWORKS: webapp,supervisor</code> at <code>hosting/docker/worker/docker-compose.yml:42</code> puts runner containers on the same Docker networks as the platform&rsquo;s own data stores.</p>
       </div>
       <p class="ch-gate"><span class="ch-gk">Absent control</span>No segmentation between run sandboxes and infrastructure.</p>
     </li>
@@ -72,5 +72,5 @@
 
   <p class="ch-scope"><b>Scope changed.</b> The vulnerable component is the webapp. Postgres, Redis and ClickHouse are separate security authorities with credentials of their own, and the chain reaches them anyway. That is the <code>S:C</code> in the vector, and it is most of what separates this from a single-app compromise.</p>
 
-  <p class="fig-foot">Vector <code>CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:C/C:H/I:H/A:H</code> at 9.0. This advisory was published with a severity but no CVSS score and no vector, so the score and vector here are my own assessment of the finding as published. Steps 3 to 5 of the advisory verify Postgres, Redis and ClickHouse with commands; pushing backdoored images to the registry and manipulating job queues are stated in its impact section without a verification step. Affects trigger.dev <code>&lt;= 4.5.5</code>. Published 2026-07-21.</p>
+  <p class="fig-foot">Steps 3 to 5 of the advisory verify Postgres, Redis and ClickHouse with commands; pushing backdoored images to the registry and manipulating job queues are stated in its impact section without a verification step. Affects trigger.dev <code>&lt;= 4.5.5</code>. Published 2026-07-21.</p>
 </figure>

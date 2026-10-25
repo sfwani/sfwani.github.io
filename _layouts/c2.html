@@ -6,11 +6,13 @@ layout: compress
 {% include header.html %}
 <body>
 <script>
+  document.documentElement.classList.add('js');
   try {
     var t = localStorage.getItem('sfw-theme');
     if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t);
   } catch (e) {}
 </script>
+<a class="skip" href="#top">Skip to content</a>
 <div class="page">
   <div class="gridlines" aria-hidden="true">
     <div class="wrap"><span></span><span></span><span></span><span></span><span></span><span></span>
@@ -32,7 +34,8 @@ layout: compress
 
     <nav class="index" id="index" aria-label="Contents"></nav>
 
-    <div class="title g" id="top">
+    <div class="title g" id="top" tabindex="-1">
+      {% if page.kicker_repo and page.kicker_repo != "" %}<p class="kick-repo"><a href="https://github.com/{{ page.kicker_repo }}">{{ page.kicker_repo }}</a></p>{% endif %}
       <h1>{{ page.heading | default: page.title }}</h1>
       {% if page.role %}<p class="title-role">{{ page.role }}</p>{% endif %}
       {% if page.standfirst %}<p class="title-meta">{{ page.standfirst }}</p>{% endif %}
@@ -72,11 +75,28 @@ layout: compress
 })();
 
 /* The running index is built from this page's own section headings, so every
-   page gets its own contents without the layout knowing what they are. */
+   page gets its own contents without the layout knowing what they are. A
+   writeup page carries a single section whose heading is the advisory id, so
+   there the index is built from that page's prose subheadings instead: the
+   same pinned band, the same numerals and the same scroll-spy as every other
+   page, rather than a separate right-hand rail. */
 (function () {
   var nav = document.getElementById('index');
   if (!nav) return;
-  var hs = [].slice.call(document.querySelectorAll('main .sec > .sec-head h2[id], .sec > .sec-head h2[id]'));
+  var writeup = document.getElementById('writeup');
+  var prose = writeup && writeup.querySelector('.prose');
+  var hs;
+  if (prose) {
+    hs = [].slice.call(prose.querySelectorAll('h2:not(.no-idx)'));
+    hs.forEach(function (h, i) {
+      if (!h.id) {
+        h.id = 'w' + (i + 1) + '-' + h.textContent.toLowerCase()
+          .replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 24);
+      }
+    });
+  } else {
+    hs = [].slice.call(document.querySelectorAll('main .sec > .sec-head h2[id], .sec > .sec-head h2[id]'));
+  }
   if (hs.length < 2) { nav.remove(); return; }
   /* The stylesheet lays this out as .index ol > li, so the list is not
      optional: bare anchors stack vertically and eat the top of the page. */
@@ -123,54 +143,153 @@ layout: compress
   mark();
 })();
 
-/* Writeup pages: a sticky section index in the right column, built from the
-   prose headings, with the same scroll-spy. The running index above removes
-   itself on these pages (one section heading), so the two never both show. */
-(function () {
-  var sec = document.getElementById('writeup');
-  var prose = sec && sec.querySelector('.prose');
-  if (!prose) return;
-  var hs = [].slice.call(prose.querySelectorAll('h2'));
-  if (hs.length < 2) return;
-  hs.forEach(function (h, i) {
-    if (!h.id) {
-      h.id = 'w' + (i + 1) + '-' + h.textContent.toLowerCase()
-        .replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 24);
-    }
-  });
-  var nav = document.createElement('nav');
-  nav.className = 'writeup-toc';
-  nav.setAttribute('aria-label', 'On this page');
-  nav.innerHTML = '<p class="toc-h">On this page</p><ol>' + hs.map(function (h, i) {
-    var n = (i + 1 < 10 ? '0' : '') + (i + 1);
-    return '<li><a href="#' + h.id + '"><b>' + n + '</b><span>' +
-           h.textContent.trim() + '</span></a></li>';
-  }).join('') + '</ol>';
-  sec.appendChild(nav);
-  sec.classList.add('has-toc');
+/* Everything below is behaviour over content the page already carries, so a
+   reader without scripts loses nothing but the motion. */
+function sfwOnScroll(fn) {
+  var ticking = false;
+  window.addEventListener('scroll', function () {
+    if (ticking) return;
+    ticking = true;
+    window.requestAnimationFrame(function () { ticking = false; fn(); });
+  }, { passive: true });
+  fn();
+}
 
-  var pairs = [].slice.call(nav.querySelectorAll('a')).map(function (a) {
-    return [document.getElementById(a.getAttribute('href').slice(1)), a];
-  }).filter(function (p) { return p[0]; });
-  var ticking = false, last = null;
-  function mark() {
-    ticking = false;
-    var cut = 120, best = pairs[0];
-    for (var i = 0; i < pairs.length; i++) {
-      if (pairs[i][0].getBoundingClientRect().top <= cut) best = pairs[i];
-    }
-    if (window.innerHeight + window.scrollY >= document.body.scrollHeight - 4) {
-      best = pairs[pairs.length - 1];
-    }
-    if (!best || best[1] === last) return;
-    if (last) last.removeAttribute('aria-current');
-    best[1].setAttribute('aria-current', 'true');
-    last = best[1];
+/* Advisory pages: the fact sheet in the margin waits until the score has
+   scrolled away, so the two are never on screen together; the score and the
+   short advice ride in the index band; a hairline tracks reading progress. */
+(function () {
+  var w = document.getElementById('writeup');
+  var ah = w && w.querySelector('.ah');
+  if (!ah) return;
+  var score = ah.querySelector('.ah-score'), rail = w.querySelector('.srail');
+  if (rail && score) sfwOnScroll(function () {
+    rail.classList.toggle('on', score.getBoundingClientRect().bottom < 80);
+  });
+  var idx = document.getElementById('index'), mast = document.querySelector('.masthead');
+  if (!idx) return;
+  var bar = document.createElement('div');
+  bar.className = 'rp';
+  bar.setAttribute('aria-hidden', 'true');
+  idx.appendChild(bar);
+  function progress() {
+    var r = w.getBoundingClientRect(), span = r.height - window.innerHeight;
+    bar.style.setProperty('--rp', (span > 0 ? Math.min(1, Math.max(0, -r.top / span)) : 1).toFixed(4));
   }
-  function schedule() { if (ticking) return; ticking = true; requestAnimationFrame(mark); }
-  window.addEventListener('scroll', schedule, { passive: true });
-  window.addEventListener('resize', schedule);
-  mark();
+  sfwOnScroll(progress);
+  window.addEventListener('resize', progress);
+  if (!w.dataset.score || !mast) return;
+  var f = document.createElement('div');
+  f.className = 'ibf';
+  f.setAttribute('aria-hidden', 'true');
+  f.setAttribute('data-sev', w.dataset.sev || 'none');
+  f.innerHTML = '<span><b></b> </span><span></span>';
+  f.querySelector('b').textContent = w.dataset.score;
+  f.firstChild.appendChild(document.createTextNode(w.dataset.sevword || ''));
+  f.lastChild.textContent = w.dataset.short || '';
+  idx.appendChild(f);
+  function place() {
+    f.style.right = Math.max(0, idx.getBoundingClientRect().right - mast.getBoundingClientRect().right) + 'px';
+  }
+  place();
+  window.addEventListener('resize', place);
+  sfwOnScroll(function () {
+    f.classList.toggle('on', ah.getBoundingClientRect().bottom < idx.getBoundingClientRect().bottom);
+  });
+})();
+
+/* Homepage record: the row number opens a short reading of that advisory,
+   which the page already carries in a hidden row beneath it. */
+(function () {
+  var table = document.querySelector('.rec--compact');
+  if (!table) return;
+  var head = [].slice.call(table.querySelectorAll('thead th'));
+  [].forEach.call(table.querySelectorAll('tbody tr[data-sev]:not(.peek)'), function (tr) {
+    var peek = tr.nextElementSibling, nr = tr.querySelector('.c-nr'), link = tr.querySelector('.c-id a');
+    if (!peek || !peek.classList.contains('peek') || !nr) return;
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'tbl-tog';
+    btn.setAttribute('aria-expanded', 'false');
+    btn.setAttribute('aria-controls', peek.id);
+    btn.innerHTML = '<span class="car" aria-hidden="true">&#8250;</span><span class="vh"></span>';
+    btn.insertBefore(document.createTextNode(nr.textContent.trim()), btn.firstChild);
+    btn.querySelector('.vh').textContent = ' details for ' + (link ? link.textContent : '');
+    nr.textContent = '';
+    nr.appendChild(btn);
+    function toggle() {
+      var open = peek.hidden;
+      peek.hidden = !open;
+      tr.classList.toggle('open', open);
+      btn.setAttribute('aria-expanded', open);
+      /* Line the reading up under the CVSS and Weakness columns above it. */
+      var thSc = table.querySelector('thead th.c-sc'), thW = head.filter(function (t) { return /weak/i.test(t.textContent); })[0];
+      var pk = peek.querySelector('.pk');
+      if (open && pk && thSc && thW && window.innerWidth >= 640) {
+        var x0 = table.getBoundingClientRect().left;
+        pk.style.setProperty('--pk1', Math.round(thSc.getBoundingClientRect().left - x0) + 'px');
+        pk.style.setProperty('--pk2', Math.round(thW.getBoundingClientRect().left - thSc.getBoundingClientRect().left) + 'px');
+      }
+    }
+    btn.addEventListener('click', function (ev) { ev.stopPropagation(); toggle(); });
+    tr.addEventListener('click', function (ev) { if (!ev.target.closest('a, button')) toggle(); });
+  });
+})();
+
+/* Motion: restrained, once, and never for a reader who asked for less. */
+(function () {
+  var root = document.documentElement;
+  if (!('IntersectionObserver' in window)) return;
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var targets = document.querySelectorAll('.ah-score, .act, .ts, .bx-c, .meta-i, .tlv li, .tl-n, .tl-seg, ' +
+    '.vt, .ah-note, #writeup .col-body h2, .fig-chain .ch-step, .fig-chain .ch-leaves li, ' +
+    '.fig-chain .ch-scope, .figs .fig');
+  if (!targets.length) return;
+  var io;
+  try {
+    io = new IntersectionObserver(function (entries) {
+      var hits = entries.filter(function (e) { return e.isIntersecting; }).map(function (e) { return e.target; });
+      hits.sort(function (a, b) { return a.compareDocumentPosition(b) & Node.DOCUMENT_POSITION_FOLLOWING ? -1 : 1; });
+      hits.forEach(function (e, i) {
+        e.style.setProperty('--d', Math.min(i * 55, 900) + 'ms');
+        e.classList.add('in');
+        io.unobserve(e);
+        if (e.classList.contains('fig')) { var b = e.querySelector('b'); if (b) count(b, i * 55); }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -5% 0px' });
+  } catch (err) { return; }
+  root.classList.add('motion');
+  [].forEach.call(targets, function (e) { e.setAttribute('data-rv', ''); });
+  /* Anything already scrolled past (a reload halfway down) appears at once. */
+  var pending = [].slice.call(targets);
+  /* At the foot of the page there is nothing left to scroll, so whatever is
+     on screen shows even inside the observer's bottom margin. */
+  sfwOnScroll(function () {
+    var atEnd = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4;
+    pending = pending.filter(function (e) {
+      if (e.classList.contains('in')) return false;
+      var r = e.getBoundingClientRect();
+      if (r.bottom < 0 && r.height > 0) { e.style.transition = 'none'; e.classList.add('in'); io.unobserve(e); return false; }
+      if (atEnd && r.top < window.innerHeight) { e.classList.add('in'); io.unobserve(e); return false; }
+      return true;
+    });
+  });
+  window.requestAnimationFrame(function () { window.requestAnimationFrame(function () {
+    [].forEach.call(targets, function (e) { if (!e.classList.contains('in')) io.observe(e); });
+  }); });
+  function count(b, delay) {
+    var raw = b.textContent.trim(), n = Number(raw);
+    if (!/^\d+$/.test(raw)) return;
+    b.textContent = '0';
+    setTimeout(function () {
+      var t0 = performance.now();
+      (function step(t) {
+        var p = Math.min(1, (t - t0) / 900), e = 1 - Math.pow(1 - p, 3);
+        b.textContent = String(Math.round(n * e));
+        if (p < 1) window.requestAnimationFrame(step); else b.textContent = raw;
+      })(t0);
+    }, delay + 150);
+  }
 })();
 </script>
 </body>

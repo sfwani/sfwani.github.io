@@ -1,0 +1,5 @@
+# Reporting a security issue with this site or its pages.
+Contact: mailto:code.sanaan@gmail.com
+Expires: 2027-10-24T00:00:00Z
+Preferred-Languages: en
+Canonical: https://sfwani.github.io/.well-known/security.txt

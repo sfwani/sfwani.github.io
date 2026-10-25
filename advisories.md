@@ -3,24 +3,24 @@ layout: c2
 title: Advisories
 heading: Advisories
 seo_title: "Published security advisories credited to Sanaan Fayaz Wani"
-role: "Every advisory below is published, fixed and credited. Reports still in coordinated disclosure are not listed, named or hinted at until the maintainer ships a fix."
+role: "Every advisory below is published and credited. Reports still in coordinated disclosure are not listed, named or hinted at until the maintainer publishes them."
 description: Published security advisories credited to Sanaan Fayaz Wani, with CVSS base vectors, weakness classes and full writeups.
 permalink: /advisories/
-last_modified_at: 2026-10-22T04:19:43+00:00
+last_modified_at: 2026-10-24T19:57:13+00:00
 ---
 
 <section class="sec g" id="advisories" aria-labelledby="h-adv">
       <div class="sec-head">
         <p class="idx idx--none">&mdash;</p>
         <h2 id="h-adv">Full record</h2>
-        <p class="sec-sub">Every entry is published, fixed and credited. Descending by CVSS base score. Summaries are keyed to the NR column and set below the table.</p>
+        <p class="sec-sub">Every entry is published and credited. Descending by CVSS base score. Summaries are keyed to the NR column and set below the table.</p>
       </div>
 
       <!-- RECORD:START -->
 
       <div class="tablewrap" role="region" aria-label="Published advisories, full table" tabindex="0">
         <table role="table">
-          <caption>Published advisories, 2026-05-14 to 2026-10-19</caption>
+          <caption>Published advisories, 2026-05-11 to 2026-10-19</caption>
           <thead role="rowgroup">
             <tr role="row">
               <th role="columnheader" scope="col" rowspan="2" class="c-nr">NR</th>
@@ -113,7 +113,7 @@ last_modified_at: 2026-10-22T04:19:43+00:00
               <td role="cell" class="c-cwe">94</td>
               <td role="cell" class="v" data-m="AV">N</td><td role="cell" class="v" data-m="AC">L</td><td role="cell" class="v" data-m="PR">N</td><td role="cell" class="v" data-m="UI">R</td>
               <td role="cell" class="v" data-m="S">U</td><td role="cell" class="v" data-m="C">H</td><td role="cell" class="v" data-m="I">H</td><td role="cell" class="v" data-m="A">H</td>
-              <td role="cell" class="c-pub">2026-07-24</td>
+              <td role="cell" class="c-pub">2026-07-01</td>
             </tr>
             <tr role="row">
               <th role="rowheader" scope="row" class="c-nr">07</th>
@@ -129,6 +129,18 @@ last_modified_at: 2026-10-22T04:19:43+00:00
             </tr>
             <tr role="row">
               <th role="rowheader" scope="row" class="c-nr">08</th>
+              <td role="cell" class="c-id"><a href="/advisories/ghsa-qrjx-72xx-xhmh/">GHSA-qrjx-72xx-xhmh</a></td>
+              <td role="cell" class="c-pkg">ag2</td>
+              <td role="cell" class="c-sc">8.1</td>
+              <td role="cell" class="c-sev sev-high">High</td>
+              <td role="cell" class="c-cls">Path traversal</td>
+              <td role="cell" class="c-cwe">22</td>
+              <td role="cell" class="v" data-m="AV">N</td><td role="cell" class="v" data-m="AC">L</td><td role="cell" class="v" data-m="PR">L</td><td role="cell" class="v" data-m="UI">N</td>
+              <td role="cell" class="v" data-m="S">U</td><td role="cell" class="v" data-m="C">H</td><td role="cell" class="v" data-m="I">H</td><td role="cell" class="v" data-m="A">N</td>
+              <td role="cell" class="c-pub">2026-09-25</td>
+            </tr>
+            <tr role="row">
+              <th role="rowheader" scope="row" class="c-nr">09</th>
               <td role="cell" class="c-id"><a href="/advisories/cve-2026-45675/">CVE-2026-45675</a></td>
               <td role="cell" class="c-pkg">open-webui</td>
               <td role="cell" class="c-sc">8.1</td>
@@ -137,22 +149,21 @@ last_modified_at: 2026-10-22T04:19:43+00:00
               <td role="cell" class="c-cwe">269</td>
               <td role="cell" class="v" data-m="AV">N</td><td role="cell" class="v" data-m="AC">H</td><td role="cell" class="v" data-m="PR">N</td><td role="cell" class="v" data-m="UI">N</td>
               <td role="cell" class="v" data-m="S">U</td><td role="cell" class="v" data-m="C">H</td><td role="cell" class="v" data-m="I">H</td><td role="cell" class="v" data-m="A">H</td>
-              <td role="cell" class="c-pub">2026-05-14</td>
+              <td role="cell" class="c-pub">2026-05-11</td>
             </tr>
             <tr role="row">
-              <th role="rowheader" scope="row" class="c-nr">09</th>
+              <th role="rowheader" scope="row" class="c-nr">10</th>
               <td role="cell" class="c-id"><a href="/advisories/ghsa-pqxw-g93w-hj9x/">GHSA-pqxw-g93w-hj9x</a></td>
               <td role="cell" class="c-pkg">trigger.dev</td>
               <td role="cell" class="c-sc">8.1</td>
               <td role="cell" class="c-sev sev-high">High</td>
               <td role="cell" class="c-cls">Improper isolation</td>
               <td role="cell" class="c-cwe">653</td>
-              <td role="cell" class="v" data-m="AV">N</td><td role="cell" class="v" data-m="AC">H</td><td role="cell" class="v" data-m="PR">N</td><td role="cell" class="v" data-m="UI">N</td>
-              <td role="cell" class="v" data-m="S">U</td><td role="cell" class="v" data-m="C">H</td><td role="cell" class="v" data-m="I">H</td><td role="cell" class="v" data-m="A">H</td>
-              <td role="cell" class="c-pub">2026-10-02</td>
+              <td role="cell" class="v v--whole" colspan="8"><span class="vq">CVSS:4.0/<wbr>AV:N/<wbr>AC:H/<wbr>AT:N/<wbr>PR:N/<wbr>UI:N/<wbr>VC:H/<wbr>VI:H/<wbr>VA:N/<wbr>SC:N/<wbr>SI:N/<wbr>SA:N/<wbr>E:P</span></td>
+              <td role="cell" class="c-pub">2026-07-21</td>
             </tr>
             <tr role="row">
-              <th role="rowheader" scope="row" class="c-nr">10</th>
+              <th role="rowheader" scope="row" class="c-nr">11</th>
               <td role="cell" class="c-id"><a href="/advisories/ghsa-jc26-22qp-cgqj/">GHSA-jc26-22qp-cgqj</a></td>
               <td role="cell" class="c-pkg">trigger.dev</td>
               <td role="cell" class="c-sc">7.9</td>
@@ -164,7 +175,7 @@ last_modified_at: 2026-10-22T04:19:43+00:00
               <td role="cell" class="c-pub">2026-09-14</td>
             </tr>
             <tr role="row">
-              <th role="rowheader" scope="row" class="c-nr">11</th>
+              <th role="rowheader" scope="row" class="c-nr">12</th>
               <td role="cell" class="c-id"><a href="/advisories/ghsa-3c52-v5v2-3r56/">GHSA-3c52-v5v2-3r56</a></td>
               <td role="cell" class="c-pkg">budibase</td>
               <td role="cell" class="c-sc">7.7</td>
@@ -176,7 +187,7 @@ last_modified_at: 2026-10-22T04:19:43+00:00
               <td role="cell" class="c-pub">2026-09-17</td>
             </tr>
             <tr role="row">
-              <th role="rowheader" scope="row" class="c-nr">12</th>
+              <th role="rowheader" scope="row" class="c-nr">13</th>
               <td role="cell" class="c-id"><a href="/advisories/cve-2026-56673/">CVE-2026-56673</a></td>
               <td role="cell" class="c-pkg">ComfyUI</td>
               <td role="cell" class="c-sc">7.5</td>
@@ -188,7 +199,7 @@ last_modified_at: 2026-10-22T04:19:43+00:00
               <td role="cell" class="c-pub">2026-07-15</td>
             </tr>
             <tr role="row">
-              <th role="rowheader" scope="row" class="c-nr">13</th>
+              <th role="rowheader" scope="row" class="c-nr">14</th>
               <td role="cell" class="c-id"><a href="/advisories/cve-2026-56671/">CVE-2026-56671</a></td>
               <td role="cell" class="c-pkg">ComfyUI</td>
               <td role="cell" class="c-sc">7.5</td>
@@ -200,18 +211,6 @@ last_modified_at: 2026-10-22T04:19:43+00:00
               <td role="cell" class="c-pub">2026-07-15</td>
             </tr>
             <tr role="row">
-              <th role="rowheader" scope="row" class="c-nr">14</th>
-              <td role="cell" class="c-id"><a href="/advisories/ghsa-qrjx-72xx-xhmh/">GHSA-qrjx-72xx-xhmh</a></td>
-              <td role="cell" class="c-pkg">ag2</td>
-              <td role="cell" class="c-sc">7.5</td>
-              <td role="cell" class="c-sev sev-high">High</td>
-              <td role="cell" class="c-cls">Path traversal</td>
-              <td role="cell" class="c-cwe">22</td>
-              <td role="cell" class="v" data-m="AV">N</td><td role="cell" class="v" data-m="AC">L</td><td role="cell" class="v" data-m="PR">L</td><td role="cell" class="v" data-m="UI">N</td>
-              <td role="cell" class="v" data-m="S">U</td><td role="cell" class="v" data-m="C">H</td><td role="cell" class="v" data-m="I">H</td><td role="cell" class="v" data-m="A">N</td>
-              <td role="cell" class="c-pub">2026-09-25</td>
-            </tr>
-            <tr role="row">
               <th role="rowheader" scope="row" class="c-nr">15</th>
               <td role="cell" class="c-id"><a href="/advisories/cve-2026-59714/">CVE-2026-59714</a></td>
               <td role="cell" class="c-pkg">open-webui</td>
@@ -221,7 +220,7 @@ last_modified_at: 2026-10-22T04:19:43+00:00
               <td role="cell" class="c-cwe">862</td>
               <td role="cell" class="v" data-m="AV">N</td><td role="cell" class="v" data-m="AC">L</td><td role="cell" class="v" data-m="PR">L</td><td role="cell" class="v" data-m="UI">N</td>
               <td role="cell" class="v" data-m="S">U</td><td role="cell" class="v" data-m="C">N</td><td role="cell" class="v" data-m="I">H</td><td role="cell" class="v" data-m="A">L</td>
-              <td role="cell" class="c-pub">2026-07-24</td>
+              <td role="cell" class="c-pub">2026-07-02</td>
             </tr>
             <tr role="row">
               <th role="rowheader" scope="row" class="c-nr">16</th>
@@ -281,7 +280,7 @@ last_modified_at: 2026-10-22T04:19:43+00:00
               <td role="cell" class="c-cwe">863</td>
               <td role="cell" class="v" data-m="AV">N</td><td role="cell" class="v" data-m="AC">H</td><td role="cell" class="v" data-m="PR">L</td><td role="cell" class="v" data-m="UI">N</td>
               <td role="cell" class="v" data-m="S">C</td><td role="cell" class="v" data-m="C">H</td><td role="cell" class="v" data-m="I">N</td><td role="cell" class="v" data-m="A">N</td>
-              <td role="cell" class="c-pub">2026-09-22</td>
+              <td role="cell" class="c-pub">2026-06-30</td>
             </tr>
             <tr role="row">
               <th role="rowheader" scope="row" class="c-nr">21</th>
@@ -293,7 +292,7 @@ last_modified_at: 2026-10-22T04:19:43+00:00
               <td role="cell" class="c-cwe">306</td>
               <td role="cell" class="v" data-m="AV">N</td><td role="cell" class="v" data-m="AC">L</td><td role="cell" class="v" data-m="PR">N</td><td role="cell" class="v" data-m="UI">N</td>
               <td role="cell" class="v" data-m="S">U</td><td role="cell" class="v" data-m="C">N</td><td role="cell" class="v" data-m="I">L</td><td role="cell" class="v" data-m="A">N</td>
-              <td role="cell" class="c-pub">2026-10-02</td>
+              <td role="cell" class="c-pub">2026-07-21</td>
             </tr>
             <tr role="row">
               <th role="rowheader" scope="row" class="c-nr">22</th>
@@ -305,7 +304,7 @@ last_modified_at: 2026-10-22T04:19:43+00:00
               <td role="cell" class="c-cwe">862</td>
               <td role="cell" class="v" data-m="AV">N</td><td role="cell" class="v" data-m="AC">L</td><td role="cell" class="v" data-m="PR">L</td><td role="cell" class="v" data-m="UI">N</td>
               <td role="cell" class="v" data-m="S">U</td><td role="cell" class="v" data-m="C">L</td><td role="cell" class="v" data-m="I">N</td><td role="cell" class="v" data-m="A">N</td>
-              <td role="cell" class="c-pub">2026-07-24</td>
+              <td role="cell" class="c-pub">2026-07-22</td>
             </tr>
             <tr role="row">
               <th role="rowheader" scope="row" class="c-nr">23</th>
@@ -329,7 +328,7 @@ last_modified_at: 2026-10-22T04:19:43+00:00
               <td role="cell" class="c-cwe">306</td>
               <td role="cell" class="v" data-m="AV">N</td><td role="cell" class="v" data-m="AC">H</td><td role="cell" class="v" data-m="PR">L</td><td role="cell" class="v" data-m="UI">N</td>
               <td role="cell" class="v" data-m="S">U</td><td role="cell" class="v" data-m="C">N</td><td role="cell" class="v" data-m="I">L</td><td role="cell" class="v" data-m="A">N</td>
-              <td role="cell" class="c-pub">2026-07-24</td>
+              <td role="cell" class="c-pub">2026-07-02</td>
             </tr>
           </tbody>
         </table>
@@ -337,7 +336,7 @@ last_modified_at: 2026-10-22T04:19:43+00:00
 
 <!-- RECORD:END -->
       <div class="tfoot">
-        <p class="right">Every entry regenerates daily from the <a href="https://github.com/advisories?query=credit%3Asfwani">GitHub Advisory Database</a>, so this list only ever shows work that is published, fixed and credited.</p>
+        <p class="right">Every entry regenerates daily from the <a href="https://github.com/advisories?query=credit%3Asfwani">GitHub Advisory Database</a>, so this list only ever shows work that is published and credited.</p>
       </div>
 
       <ol class="notes">
