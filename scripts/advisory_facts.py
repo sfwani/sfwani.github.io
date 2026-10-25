@@ -9,6 +9,8 @@ own affected range is said plainly rather than smoothed over.
 """
 
 import html
+import json
+import pathlib
 import re
 from datetime import date
 
@@ -297,8 +299,36 @@ def disclosure_facts(s, a, repo=None):
         # Present only when the advisory began as a private vulnerability
         # report; otherwise created_at is just when the maintainer opened it.
         private = bool(j.get("submission"))
-    return {"repo": repo, "reported": (reported or "")[:10] or None,
-            "repo_published": (repo_published or "")[:10] or None, "private_report": private}
+    out = {"repo": repo, "reported": (reported or "")[:10] or None,
+           "repo_published": (repo_published or "")[:10] or None, "private_report": private}
+    # When the report was filed is shown only to the advisory's collaborators,
+    # which includes its reporter but not the workflow's token. A local build
+    # run as the reporter records it here; the daily job falls back on it so
+    # it does not quietly drop the date every morning.
+    known = _disclosure_cache().get(a["ghsa_id"])
+    if not out["reported"] and known:
+        out["reported"], out["private_report"] = known["reported"], known["private_report"]
+    return out
+
+
+DISCLOSURE_CACHE = pathlib.Path(__file__).resolve().parent / "disclosure.json"
+
+
+def _disclosure_cache():
+    try:
+        return json.loads(DISCLOSURE_CACHE.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return {}
+
+
+def save_disclosure(facts):
+    """facts: {ghsa_id: disclosure_facts(...)}. Keeps only what a reporter's
+    view adds, and never forgets a date it already had."""
+    cache = _disclosure_cache()
+    for gid, d in facts.items():
+        if d.get("reported"):
+            cache[gid] = {"reported": d["reported"], "private_report": d["private_report"]}
+    DISCLOSURE_CACHE.write_text(json.dumps(cache, indent=1, sort_keys=True) + "\n", encoding="utf-8")
 
 
 def disclosure(d, published):

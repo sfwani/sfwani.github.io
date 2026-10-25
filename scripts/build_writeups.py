@@ -692,6 +692,7 @@ def main():
     if not rows:
         raise SystemExit("no advisories resolved, refusing to write empty pages")
     ctxs = contexts(s, rows)
+    F.save_disclosure(ctxs)
     changed = sum(write_page(a, ctxs[a["ghsa_id"]], stamp) for a in rows)
     write_index(list(rows), stamp)
     write_llms_txt(rows)
