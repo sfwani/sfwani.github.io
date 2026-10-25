@@ -1,6 +1,6 @@
 # Sanaan Fayaz Wani
 
-> Security Engineer at Amazon working in IAM security and agentic AI, and an independent vulnerability researcher. 10 assigned CVEs and 24 published, credited security advisories against AI agent frameworks and the infrastructure that runs large language models, from 167 advisories filed across 59 open source projects.
+> Security Engineer at Amazon working in IAM security and agentic AI, and an independent vulnerability researcher. 10 assigned CVEs and 25 published, credited security advisories against AI agent frameworks and the infrastructure that runs large language models, from 167 advisories filed across 59 open source projects.
 
 Every advisory below is published and credited to Sanaan Fayaz Wani (GitHub: sfwani). Each page carries the root cause, the vulnerable code, reproduction steps and the fix.
 
@@ -11,6 +11,7 @@ Every advisory below is published and credited to Sanaan Fayaz Wani (GitHub: sfw
 
 ## Published advisories
 
+- [GHSA-hxvp-ff3g-qcj7](https://sfwani.github.io/advisories/ghsa-hxvp-ff3g-qcj7/): @vendure/core, 8.8 High, CWE-200. Published 2026-10-23. Advisory of record: https://github.com/vendurehq/vendure/security/advisories/GHSA-hxvp-ff3g-qcj7
 - [GHSA-xf86-hfpm-92xr](https://sfwani.github.io/advisories/ghsa-xf86-hfpm-92xr/): directus, 3.1 Low, CWE-863. Published 2026-10-19. Advisory of record: https://github.com/directus/directus/security/advisories/GHSA-xf86-hfpm-92xr
 - [CVE-2026-49950](https://sfwani.github.io/advisories/cve-2026-49950/): xinference, 9.3 Critical, CWE-306. Published 2026-10-16. Advisory of record: https://github.com/xorbitsai/inference/security/advisories/GHSA-2hj6-h88x-mv4j
 - [GHSA-v3vj-mch3-x6c2](https://sfwani.github.io/advisories/ghsa-v3vj-mch3-x6c2/): omnigent, 8.8 High, CWE-668. Published 2026-10-13. Advisory of record: https://github.com/omnigent-ai/omnigent/security/advisories/GHSA-v3vj-mch3-x6c2

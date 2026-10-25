@@ -5,8 +5,16 @@
   <link href="https://sfwani.github.io/feed.xml" rel="self"/>
   <link href="https://sfwani.github.io/advisories/"/>
   <id>https://sfwani.github.io/advisories/</id>
-  <updated>2026-10-19T00:00:00Z</updated>
+  <updated>2026-10-23T00:00:00Z</updated>
   <author><name>Sanaan Fayaz Wani</name><uri>https://github.com/sfwani</uri></author>
+  <entry>
+    <title>GHSA-hxvp-ff3g-qcj7: Low-privilege administrator can read password-reset / verification / email-change tokens from Job.data and take over any customer account (cross-channel)</title>
+    <link href="https://sfwani.github.io/advisories/ghsa-hxvp-ff3g-qcj7/"/>
+    <id>https://sfwani.github.io/advisories/ghsa-hxvp-ff3g-qcj7/</id>
+    <published>2026-10-23T00:00:00Z</published>
+    <updated>2026-10-23T00:00:00Z</updated>
+    <summary>Low-privilege administrator can read password-reset / verification / email-change tokens from Job.data and take over any customer account (cross-channel). @vendure/core, CVSS 8.8 High, CWE-200 Information disclosure. Writeup by Sanaan Fayaz Wani, the credited reporter.</summary>
+  </entry>
   <entry>
     <title>GHSA-xf86-hfpm-92xr: AI Chat route exposes admin-only tools to non-admin users</title>
     <link href="https://sfwani.github.io/advisories/ghsa-xf86-hfpm-92xr/"/>

@@ -31,6 +31,10 @@
   "private_report": true,
   "reported": "2026-04-07"
  },
+ "GHSA-hxvp-ff3g-qcj7": {
+  "private_report": true,
+  "reported": "2026-10-04"
+ },
  "GHSA-jc26-22qp-cgqj": {
   "private_report": true,
   "reported": "2026-05-22"
