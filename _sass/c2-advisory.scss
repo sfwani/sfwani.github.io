@@ -173,8 +173,8 @@
 @media (max-width: 1099px), (min-width: 1200px){ .ibf{ display: none; } }
 
 /* ═══════════ HOMEPAGE RECORD: the row that opens ═══════════ */
-.rec--compact tbody tr[data-sev]:not(.peek){ cursor: pointer; }
-.tablewrap .rec--compact tbody tr[data-sev] td.c-sc{ color: var(--sev); white-space: nowrap; }
+.tablewrap tbody tr[data-sev]:not(.peek){ cursor: pointer; }
+.tablewrap tbody tr[data-sev] td.c-sc{ color: var(--sev); white-space: nowrap; }
 .tbl-tog{ font: inherit; color: inherit; background: none; border: 0; padding: 2px 0; cursor: pointer; min-height: 24px; }
 .tbl-tog .car{ display: inline-block; margin-left: 6px; color: var(--ink-3); transition: transform .15s ease; }
 tr.open .tbl-tog .car{ transform: rotate(90deg); }
@@ -188,24 +188,35 @@ tr.open .tbl-tog .car{ transform: rotate(90deg); }
 .pk-f small{ display: block; margin-top: 2px; font-size: 12px; color: var(--ink-2); }
 .pk-a{ align-self: end; font-size: var(--t-s); font-weight: 600; white-space: nowrap; padding-right: 0 !important; }
 
+/* ═══════════ V4.0 VECTOR, AS CHIPS ═══════════ */
+/* A v4.0 advisory carries eleven base metrics, which do not map onto the eight
+   v3 columns. The spanning cell sets each metric as its own key/value chip on
+   the glyph tone field, so the vector reads as discrete tokens that wrap at chip
+   boundaries, never the mid token character soup the raw string produced. */
+.tablewrap td.v--v4{ padding: 6px 8px; white-space: normal; line-height: 1.5; }
+.tablewrap td.v--v4 .v4-scale{ display: inline-block; margin-right: 6px; font-size: 9.5px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); }
+.tablewrap td.v--v4 .v4-m{ display: inline-block; margin: 0 9px 0 0; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.tablewrap td.v--v4 .v4-m i{ font-style: normal; font-size: var(--t-xs); letter-spacing: .04em; color: var(--ink-3); }
+.tablewrap td.v--v4 .v4-m b{ margin-left: 3px; font-size: var(--t-s); font-weight: 600; color: var(--ink); }
+
 /* Each record row is followed by its hidden reading, so the row that closes
    the table is the second last, not the last. The block form below 1120px sets
    rows to display: grid, which would otherwise override the hidden attribute. */
-.tablewrap .rec--compact tbody tr.peek[hidden]{ display: none; }
-.tablewrap .rec--compact tbody tr:nth-last-child(2) td,
-.tablewrap .rec--compact tbody tr:nth-last-child(2) th{ border-bottom: 1px solid var(--rule-heavy); }
+.tablewrap tbody tr.peek[hidden]{ display: none; }
+.tablewrap tbody tr:nth-last-child(2) td,
+.tablewrap tbody tr:nth-last-child(2) th{ border-bottom: 1px solid var(--rule-heavy); }
 @media (max-width: 1119px){
-  .tablewrap .rec--compact tbody tr:nth-last-child(2) td,
-  .tablewrap .rec--compact tbody tr:nth-last-child(2) th{ border-bottom: 0; }
-  .tablewrap .rec--compact tbody tr:nth-last-child(2){ border-bottom: 2px solid var(--rule-heavy); }
-  .tablewrap .rec--compact tbody tr.peek{ display: block; grid-column: 1 / -1; padding-block: 0 calc(var(--u) * 2.5); }
-  .tablewrap .rec--compact tbody tr.peek td{ display: block; padding: 0 !important; }
-  .tablewrap .rec--compact tbody tr.open{ border-bottom: 0; }
+  .tablewrap tbody tr:nth-last-child(2) td,
+  .tablewrap tbody tr:nth-last-child(2) th{ border-bottom: 0; }
+  .tablewrap tbody tr:nth-last-child(2){ border-bottom: 2px solid var(--rule-heavy); }
+  .tablewrap tbody tr.peek{ display: block; grid-column: 1 / -1; padding-block: 0 calc(var(--u) * 2.5); }
+  .tablewrap tbody tr.peek td{ display: block; padding: 0 !important; }
+  .tablewrap tbody tr.open{ border-bottom: 0; }
   .pk{ grid-template-columns: 1fr 1fr !important; row-gap: calc(var(--u) * 1.5); }
   .pk > div:first-child{ grid-column: 1 / -1; }
 }
 @media (min-width: 860px) and (max-width: 1119px){
-  .tablewrap .rec--compact tbody tr:nth-last-child(4){ border-bottom: 2px solid var(--rule-heavy); }
+  .tablewrap tbody tr:nth-last-child(4){ border-bottom: 2px solid var(--rule-heavy); }
 }
 
 /* ═══════════ RESPONSIVE: the panel's own tiers ═══════════ */

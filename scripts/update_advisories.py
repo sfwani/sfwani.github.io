@@ -238,9 +238,12 @@ def render_counters(rows):
     return f'      <ul class="figs">{items}\n      </ul>'
 
 
-def peek_row(i, r, sev):
+def peek_row(i, r, sev, cols=16):
     """The short reading a row opens to: the vector as a sentence, what to do,
-    and how long disclosure took. Hidden until the reader asks for it."""
+    and how long disclosure took. Hidden until the reader asks for it.
+
+    cols spans the peek cell across the whole row; the record ledger has 16
+    columns, so that is the default."""
     import html as _h
     e = lambda x: _h.escape(str(x), quote=True)
     act = F.action(r["vulns"])
@@ -256,7 +259,7 @@ def peek_row(i, r, sev):
     note = ('<div class="pk-f"><small>Score is my assessment; GitHub published no CVSS for this advisory.</small></div>'
             if r["self_assessed"] else "")
     return (f'<tr role="row" class="peek" id="peek-{i:02d}" data-sev="{e(sev.lower())}" hidden>'
-            f'<td role="cell" colspan="7"><div class="pk">'
+            f'<td role="cell" colspan="{cols}"><div class="pk">'
             f'<div><p class="pk-s">{sent}</p>{note}</div>'
             f'<div class="pk-f"><span class="k-lab">What to do</span><b{" class=\"quiet\"" if act["warn"] else ""}>{e(act["short"])}</b></div>'
             f'<div class="pk-f"><span class="k-lab">{disc_k}</span>{disc}</div>'
@@ -450,13 +453,18 @@ def advisory_row(n, r, absolute=False):
         vector_cells = (f'{v("AV")}{v("AC")}{v("PR")}{v("UI")}\n'
                         f'              {v("S")}{v("C")}{v("I")}{v("A")}')
     else:
-        # <wbr> after each slash gives the browser a break point at every metric
-        # boundary, so a long v4 vector wraps cleanly instead of mid token.
-        vec = e(r["vector"]).replace("/", "/<wbr>")
-        vector_cells = (f'<td role="cell" class="v v--whole" colspan="8">'
-                        f'<span class="vq">{vec}</span></td>')
+        # A v4.0 advisory carries eleven base metrics (plus optional threat
+        # metrics), which do not map onto the eight v3 columns. Each metric is
+        # set as its own key/value chip in one spanning cell, so the vector reads
+        # as discrete tokens on the glyph tone field instead of a wrapped string.
+        pairs = [kv.split(":", 1) for kv in (r["vector"] or "").split("/")[1:] if ":" in kv]
+        scale = e((r["vector"] or "CVSS:4.0").split("/", 1)[0].replace("CVSS:", "v"))
+        chips = "".join(
+            f'<span class="v4-m"><i>{e(k)}</i><b>{e(val)}</b></span>' for k, val in pairs)
+        vector_cells = (f'<td role="cell" class="v v--whole v--v4" colspan="8">'
+                        f'<span class="v4-scale">{scale}</span>{chips}</td>')
     return (
-        f'<tr role="row">\n'
+        f'<tr role="row" data-sev="{e(sev.lower())}">\n'
         f'              <th role="rowheader" scope="row" class="c-nr">{n:02d}</th>\n'
         f'              <td role="cell" class="c-id"><a href="{href}">{e(ident)}</a></td>\n'
         f'              <td role="cell" class="c-pkg">{_pkg(r["package"])}</td>\n'
@@ -486,7 +494,10 @@ def render_record(rows):
                         ["Attack vector", "Attack complexity", "Privileges required",
                          "User interaction", "Scope", "Confidentiality", "Integrity",
                          "Availability"]))
-    body = "\n            ".join(advisory_row(i, r) for i, r in enumerate(rows, 1))
+    def _pair(i, r):
+        sev = band(r["score"]) if r["score"] is not None else r["severity"]
+        return advisory_row(i, r) + "\n            " + peek_row(i, r, sev, 16)
+    body = "\n            ".join(_pair(i, r) for i, r in enumerate(rows, 1))
     return f"""      <div class="tablewrap" role="region" aria-label="Published advisories, full table" tabindex="0">
         <table role="table">
           <caption>Published advisories, {first} to {last}</caption>
@@ -610,7 +621,9 @@ def main():
     ))
 
     original = open(README, encoding="utf-8").read()
-    updated = splice(original, "ADVISORIES", render_table(rows))
+    # The home page and /advisories/ now render the same record: the full base
+    # vector ledger, with colored scores and the row that opens to a reading.
+    updated = splice(original, "ADVISORIES", render_record(rows))
     updated = splice(updated, "COUNTERS", render_counters(rows))
     record_path = "advisories.md"
     try:

@@ -198,41 +198,35 @@ function sfwOnScroll(fn) {
   });
 })();
 
-/* Homepage record: the row number opens a short reading of that advisory,
-   which the page already carries in a hidden row beneath it. */
+/* The advisory record, on the home page and on /advisories/: the row number
+   opens a short reading of that advisory, carried in a hidden row beneath it.
+   Both pages render the same ledger, so this binds to every advisory table that
+   has peek rows rather than one page's class. */
 (function () {
-  var table = document.querySelector('.rec--compact');
-  if (!table) return;
-  var head = [].slice.call(table.querySelectorAll('thead th'));
-  [].forEach.call(table.querySelectorAll('tbody tr[data-sev]:not(.peek)'), function (tr) {
-    var peek = tr.nextElementSibling, nr = tr.querySelector('.c-nr'), link = tr.querySelector('.c-id a');
-    if (!peek || !peek.classList.contains('peek') || !nr) return;
-    var btn = document.createElement('button');
-    btn.type = 'button';
-    btn.className = 'tbl-tog';
-    btn.setAttribute('aria-expanded', 'false');
-    btn.setAttribute('aria-controls', peek.id);
-    btn.innerHTML = '<span class="car" aria-hidden="true">&#8250;</span><span class="vh"></span>';
-    btn.insertBefore(document.createTextNode(nr.textContent.trim()), btn.firstChild);
-    btn.querySelector('.vh').textContent = ' details for ' + (link ? link.textContent : '');
-    nr.textContent = '';
-    nr.appendChild(btn);
-    function toggle() {
-      var open = peek.hidden;
-      peek.hidden = !open;
-      tr.classList.toggle('open', open);
-      btn.setAttribute('aria-expanded', open);
-      /* Line the reading up under the CVSS and Weakness columns above it. */
-      var thSc = table.querySelector('thead th.c-sc'), thW = head.filter(function (t) { return /weak/i.test(t.textContent); })[0];
-      var pk = peek.querySelector('.pk');
-      if (open && pk && thSc && thW && window.innerWidth >= 640) {
-        var x0 = table.getBoundingClientRect().left;
-        pk.style.setProperty('--pk1', Math.round(thSc.getBoundingClientRect().left - x0) + 'px');
-        pk.style.setProperty('--pk2', Math.round(thW.getBoundingClientRect().left - thSc.getBoundingClientRect().left) + 'px');
+  [].forEach.call(document.querySelectorAll('.tablewrap table'), function (table) {
+    if (!table.querySelector('tbody tr.peek')) return;
+    [].forEach.call(table.querySelectorAll('tbody tr[data-sev]:not(.peek)'), function (tr) {
+      var peek = tr.nextElementSibling, nr = tr.querySelector('.c-nr'), link = tr.querySelector('.c-id a');
+      if (!peek || !peek.classList.contains('peek') || !nr) return;
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'tbl-tog';
+      btn.setAttribute('aria-expanded', 'false');
+      btn.setAttribute('aria-controls', peek.id);
+      btn.innerHTML = '<span class="car" aria-hidden="true">&#8250;</span><span class="vh"></span>';
+      btn.insertBefore(document.createTextNode(nr.textContent.trim()), btn.firstChild);
+      btn.querySelector('.vh').textContent = ' details for ' + (link ? link.textContent : '');
+      nr.textContent = '';
+      nr.appendChild(btn);
+      function toggle() {
+        var open = peek.hidden;
+        peek.hidden = !open;
+        tr.classList.toggle('open', open);
+        btn.setAttribute('aria-expanded', open);
       }
-    }
-    btn.addEventListener('click', function (ev) { ev.stopPropagation(); toggle(); });
-    tr.addEventListener('click', function (ev) { if (!ev.target.closest('a, button')) toggle(); });
+      btn.addEventListener('click', function (ev) { ev.stopPropagation(); toggle(); });
+      tr.addEventListener('click', function (ev) { if (!ev.target.closest('a, button')) toggle(); });
+    });
   });
 })();
 
