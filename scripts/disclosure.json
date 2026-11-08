@@ -15,6 +15,14 @@
   "private_report": true,
   "reported": "2026-05-22"
  },
+ "GHSA-5mc6-2qfj-59cg": {
+  "private_report": true,
+  "reported": "2026-10-25"
+ },
+ "GHSA-64mc-4p6f-r7x9": {
+  "private_report": true,
+  "reported": "2026-09-17"
+ },
  "GHSA-8p4j-2mm9-rh78": {
   "private_report": true,
   "reported": "2026-05-28"
@@ -38,6 +46,10 @@
  "GHSA-jc26-22qp-cgqj": {
   "private_report": true,
   "reported": "2026-05-22"
+ },
+ "GHSA-jmgj-cq6g-6hr2": {
+  "private_report": true,
+  "reported": "2026-09-24"
  },
  "GHSA-jvm6-86c5-f8j8": {
   "private_report": true,

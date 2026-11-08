@@ -5,8 +5,40 @@
   <link href="https://sfwani.github.io/feed.xml" rel="self"/>
   <link href="https://sfwani.github.io/advisories/"/>
   <id>https://sfwani.github.io/advisories/</id>
-  <updated>2026-10-23T00:00:00Z</updated>
+  <updated>2026-11-05T00:00:00Z</updated>
   <author><name>Sanaan Fayaz Wani</name><uri>https://github.com/sfwani</uri></author>
+  <entry>
+    <title>GHSA-5mc6-2qfj-59cg: Opik SDKs render Jinja2/Nunjucks prompt templates without a sandbox, allowing code execution</title>
+    <link href="https://sfwani.github.io/advisories/ghsa-5mc6-2qfj-59cg/"/>
+    <id>https://sfwani.github.io/advisories/ghsa-5mc6-2qfj-59cg/</id>
+    <published>2026-11-05T00:00:00Z</published>
+    <updated>2026-11-05T00:00:00Z</updated>
+    <summary>Opik SDKs render Jinja2/Nunjucks prompt templates without a sandbox, allowing code execution. opik, CVSS 8.8 High, CWE-94 Code injection. Writeup by Sanaan Fayaz Wani, the credited reporter.</summary>
+  </entry>
+  <entry>
+    <title>GHSA-jcc2-3vff-7867: Database Credential Exposure via Connection Test Endpoint</title>
+    <link href="https://sfwani.github.io/advisories/ghsa-jcc2-3vff-7867/"/>
+    <id>https://sfwani.github.io/advisories/ghsa-jcc2-3vff-7867/</id>
+    <published>2026-11-02T00:00:00Z</published>
+    <updated>2026-11-02T00:00:00Z</updated>
+    <summary>Database Credential Exposure via Connection Test Endpoint. nocodb, CVSS 6.5 Medium, CWE-522. Writeup by Sanaan Fayaz Wani, the credited reporter.</summary>
+  </entry>
+  <entry>
+    <title>GHSA-jmgj-cq6g-6hr2: Incorrect Authorization via Base Member Removal</title>
+    <link href="https://sfwani.github.io/advisories/ghsa-jmgj-cq6g-6hr2/"/>
+    <id>https://sfwani.github.io/advisories/ghsa-jmgj-cq6g-6hr2/</id>
+    <published>2026-11-02T00:00:00Z</published>
+    <updated>2026-11-02T00:00:00Z</updated>
+    <summary>Incorrect Authorization via Base Member Removal. nocodb, CVSS 2.7 Low, CWE-863 Incorrect authorization. Writeup by Sanaan Fayaz Wani, the credited reporter.</summary>
+  </entry>
+  <entry>
+    <title>GHSA-64mc-4p6f-r7x9: Revoked or unconfirmed organization Admin can read cipher audit logs</title>
+    <link href="https://sfwani.github.io/advisories/ghsa-64mc-4p6f-r7x9/"/>
+    <id>https://sfwani.github.io/advisories/ghsa-64mc-4p6f-r7x9/</id>
+    <published>2026-10-28T00:00:00Z</published>
+    <updated>2026-10-28T00:00:00Z</updated>
+    <summary>Revoked or unconfirmed organization Admin can read cipher audit logs. vaultwarden, CVSS 4.3 Medium, CWE-863 Incorrect authorization. Writeup by Sanaan Fayaz Wani, the credited reporter.</summary>
+  </entry>
   <entry>
     <title>GHSA-hxvp-ff3g-qcj7: Low-privilege administrator can read password-reset / verification / email-change tokens from Job.data and take over any customer account (cross-channel)</title>
     <link href="https://sfwani.github.io/advisories/ghsa-hxvp-ff3g-qcj7/"/>
