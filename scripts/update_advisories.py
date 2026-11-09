@@ -238,11 +238,11 @@ def render_counters(rows):
     return f'      <ul class="figs">{items}\n      </ul>'
 
 
-def peek_row(i, r, sev, cols=16):
+def peek_row(i, r, sev, cols=9):
     """The short reading a row opens to: the vector as a sentence, what to do,
     and how long disclosure took. Hidden until the reader asks for it.
 
-    cols spans the peek cell across the whole row; the record ledger has 16
+    cols spans the peek cell across the whole row; the record ledger has 9
     columns, so that is the default."""
     import html as _h
     e = lambda x: _h.escape(str(x), quote=True)
@@ -267,46 +267,91 @@ def peek_row(i, r, sev, cols=16):
             f'</div></td></tr>')
 
 
-def render_table(rows):
-    """The home page record: identifier, project, score, severity, weakness,
-    date. The eight base-vector columns stay on /advisories/, so the landing
-    page answers "is this real" without becoming the reference itself.
-    """
+# The home page "Advisories" section shows a curated grid of finding cards,
+# chosen for technical depth and severity, plus a quieter card that opens the
+# full record. The complete ledger (every row, every base vector) is /advisories/.
+CURATED = [
+    "GHSA-24q6-6h89-f9p7",  # AutoGPT 10.0 auth bypass
+    "GHSA-42mf-vpmr-gw5r",  # ag2 9.9 command injection
+    "GHSA-jmr9-98g4-2phv",  # portainer 9.4 access control (v4)
+    "CVE-2026-49950",       # xinference 9.3 missing auth (v4, CVE)
+    "CVE-2026-57516",       # ray 8.8 code injection (CVE)
+    "GHSA-5mc6-2qfj-59cg",  # opik 8.8 template injection -> RCE
+    "CVE-2026-45675",       # open-webui 8.1 privilege escalation (CVE)
+    "GHSA-hxvp-ff3g-qcj7",  # vendure 8.8 information disclosure
+]
+
+
+def _norm(s):
+    return re.sub(r"[^a-z0-9]", "", s.lower())
+
+
+def _card_hook(url, package):
+    """The card's one-line hook: the advisory file's description, first sentence,
+    with a leading 'Project: ' prefix dropped when it only echoes the package
+    name already shown as the card title (e.g. 'Ray: Arbitrary code...')."""
+    slug = url.strip("/").split("/")[-1]
+    path = os.path.join(os.path.dirname(README) or ".", "advisories", slug + ".md")
+    try:
+        fm = open(path, encoding="utf-8").read()
+    except FileNotFoundError:
+        return ""
+    m = re.search(r'^description:\s*"(.*?)"', fm, re.M | re.S)
+    if not m:
+        return ""
+    desc = m.group(1)
+    hm = re.match(r"(.*?)\.\s+[^.]*,\s+CVSS", desc, re.S)
+    hook = (hm.group(1) if hm else desc.split(". ")[0]).strip()
+    pm = re.match(r"^([A-Za-z0-9 .&/_-]{1,28}?):\s+(.*)$", hook, re.S)
+    if pm:
+        lead, pkgtoks = _norm(pm.group(1)), _norm(re.sub(r"^.*/", "", package))
+        if lead and (lead in pkgtoks or pkgtoks in lead):
+            rest = pm.group(2)
+            hook = rest[:1].upper() + rest[1:]
+    return hook
+
+
+def render_cards(rows):
+    """The home page "Advisories" grid: the curated finding cards plus the
+    quieter card that opens the full record."""
     import html as _h
     e = lambda x: _h.escape(str(x), quote=True)
-    body = []
-    for i, r in enumerate(rows, 1):
+    by_id = {}
+    for r in rows:
+        for key in (r.get("cve_id"), r.get("ghsa_id")):
+            if key:
+                by_id[key] = r
+    cards = []
+    for ident in CURATED:
+        r = by_id.get(ident)
+        if not r:
+            continue
         sev = band(r["score"]) if r["score"] is not None else r["severity"]
-        ident = r["cve_id"] or r["ghsa_id"]
-        body.append(
-            f'<tr role="row" data-sev="{e(sev.lower())}">'
-            f'<th role="rowheader" scope="row" class="c-nr">{i:02d}</th>'
-            f'<td role="cell" class="c-id"><a href="{e(r["url"])}">{e(ident)}</a></td>'
-            # The column is headed Project: a Go module path such as
-            # github.com/portainer/portainer is the package, not the project,
-            # and it wrapped to two lines. The /advisories/ record keeps the
-            # full path under its Package header.
-            f'<td role="cell" class="c-pkg">{_pkg(short_package(r["package"]))}</td>'
-            f'<td role="cell" class="c-sc">{r["score"]:.1f}</td>'
-            f'<td role="cell" class="c-sev sev-{SEV_CLASS[sev]}">{sev}</td>'
-            f'<td role="cell" class="c-cls">{e(label(r["cwe"]))}</td>'
-            f'<td role="cell" class="c-pub">{r["published"]}</td>'
-            f'</tr>' + peek_row(i, r, sev))
-    head = ('<thead role="rowgroup"><tr role="row">'
-            '<th role="columnheader" scope="col" class="c-nr">NR</th>'
-            '<th role="columnheader" scope="col" class="c-id">Advisory</th>'
-            '<th role="columnheader" scope="col" class="c-pkg">Project</th>'
-            '<th role="columnheader" scope="col" class="c-sc">CVSS</th>'
-            '<th role="columnheader" scope="col" class="c-sev">Severity</th>'
-            '<th role="columnheader" scope="col" class="c-cls">Weakness</th>'
-            '<th role="columnheader" scope="col" class="c-pub">Published</th>'
-            '</tr></thead>')
-    return ('      <div class="tablewrap tablewrap--compact" role="region" '
-            'aria-label="Published advisories" tabindex="0">\n'
-            '        <table role="table" class="rec rec--compact">\n'
-            f'          {head}\n'
-            f'          <tbody role="rowgroup">{"".join(body)}</tbody>\n'
-            '        </table>\n      </div>')
+        name = r["cve_id"] or r["ghsa_id"]
+        badge = ('<span class="k-cve">CVE</span>' if name.startswith("CVE-")
+                 else '<span class="k-ghsa">GHSA</span>')
+        hook = _card_hook(r["url"], r["package"])
+        cards.append(
+            f'<a class="card" data-sev="{e(sev.lower())}" href="{e(r["url"])}">'
+            f'<div class="card-top"><span class="card-score">{r["score"]:.1f}</span>'
+            f'<span class="card-sev">{e(sev)}</span></div>'
+            f'<div class="card-proj">{e(r["package"])}</div>'
+            f'<p class="card-hook">{e(hook)}</p>'
+            f'<div class="card-foot"><span class="card-cls">{e(label(r["cwe"]))}</span>'
+            f'<span class="card-cwe">CWE-{(r["cwe"] or "").replace("CWE-", "")}</span>'
+            f'{badge}</div></a>')
+    n = len(rows)
+    all_card = (
+        f'<a class="card card--all" href="/advisories/">'
+        f'<div class="all-top"><span class="all-n">{n}</span>'
+        f'<span class="all-tag">Record</span></div>'
+        f'<div class="all-title">The full record</div>'
+        f'<div class="all-s">Every published advisory, each with its CVSS base vector, '
+        f'weakness class and writeup.</div>'
+        f'<span class="all-go">Browse all advisories &rarr;</span></a>')
+    return ('      <div class="cards">\n        '
+            + "\n        ".join(cards)
+            + '\n        ' + all_card + '\n      </div>')
 
 
 
@@ -440,29 +485,20 @@ def advisory_row(n, r, absolute=False):
     """
     import html as _h
     e = lambda x: _h.escape(str(x), quote=True)
-    parts = dict(kv.split(":", 1) for kv in (r["vector"] or "").split("/")[1:] if ":" in kv)
     sev = band(r["score"]) if r["score"] is not None else r["severity"]
     ident = r["cve_id"] or r["ghsa_id"]
     href = (SITE_ORIGIN if absolute else "") + r["url"]
-    v = lambda k: f'<td role="cell" class="v" data-m="{k}">{parts[k]}</td>'
-    # The eight metric columns are CVSS v3.1. An advisory the maintainer scored
-    # on v4.0 has a different metric set, so rather than force it into v3 cells
-    # its real v4 vector spans the group in one cell, flagged so the reader sees
-    # it is a different scale.
-    if all(m in parts for m in METRIC_ORDER):
-        vector_cells = (f'{v("AV")}{v("AC")}{v("PR")}{v("UI")}\n'
-                        f'              {v("S")}{v("C")}{v("I")}{v("A")}')
-    else:
-        # A v4.0 advisory carries eleven base metrics (plus optional threat
-        # metrics), which do not map onto the eight v3 columns. Each metric is
-        # set as its own key/value chip in one spanning cell, so the vector reads
-        # as discrete tokens on the glyph tone field instead of a wrapped string.
-        pairs = [kv.split(":", 1) for kv in (r["vector"] or "").split("/")[1:] if ":" in kv]
-        scale = e((r["vector"] or "CVSS:4.0").split("/", 1)[0].replace("CVSS:", "v"))
-        chips = "".join(
-            f'<span class="v4-m"><i>{e(k)}</i><b>{e(val)}</b></span>' for k, val in pairs)
-        vector_cells = (f'<td role="cell" class="v v--whole v--v4" colspan="8">'
-                        f'<span class="v4-scale">{scale}</span>{chips}</td>')
+    # One base-vector column, rendered identically for every row: a muted scale
+    # tag (v3.1 / v4.0) then one self-labeled chip per metric. A v3.1 vector is
+    # eight chips and sits on one line; a v4.0 vector is eleven (plus any threat
+    # metric) and wraps to a second line in the same style, so the two scales
+    # read as one consistent column instead of breaking the grid with a spanning
+    # cell. The chip carries its own metric key, so no shared header is needed.
+    pairs = [kv.split(":", 1) for kv in (r["vector"] or "").split("/")[1:] if ":" in kv]
+    scale = e((r["vector"] or "CVSS:4.0").split("/", 1)[0].replace("CVSS:", "v"))
+    chips = "".join(f'<span class="vm"><i>{e(k)}</i><b>{e(val)}</b></span>' for k, val in pairs)
+    vector_cell = (f'<td role="cell" class="c-vec">'
+                   f'<span class="vm-s">{scale}</span>{chips}</td>')
     return (
         f'<tr role="row" data-sev="{e(sev.lower())}">\n'
         f'              <th role="rowheader" scope="row" class="c-nr">{n:02d}</th>\n'
@@ -472,7 +508,7 @@ def advisory_row(n, r, absolute=False):
         f'              <td role="cell" class="c-sev sev-{SEV_CLASS[sev]}">{sev}</td>\n'
         f'              <td role="cell" class="c-cls">{e(label(r["cwe"]))}</td>\n'
         f'              <td role="cell" class="c-cwe">{(r["cwe"] or "").replace("CWE-", "")}</td>\n'
-        f'              {vector_cells}\n'
+        f'              {vector_cell}\n'
         f'              <td role="cell" class="c-pub">{r["published"]}</td>\n'
         f'            </tr>')
 
@@ -480,40 +516,30 @@ AUTH_CWES = {"CWE-306", "CWE-862", "CWE-863"}
 
 
 def render_record(rows):
-    """The full record for /advisories/: every base vector, metric by metric.
+    """The full record for /advisories/: every base vector in one column.
 
-    Below 1120px each row becomes a block with the eight metrics as a 4x2
-    grid, which is the whole reason this design was chosen: the vector stays
+    Each row shows its CVSS base vector as a muted scale tag and one self-labeled
+    chip per metric, the same way for v3.1 and v4.0. Below 1120px each row becomes
+    a block and the vector chips wrap as their own band, so the vector stays
     readable on a phone with no horizontal gesture.
     """
-    first = min(r["published"] for r in rows if r["published"])
-    last = max(r["published"] for r in rows if r["published"])
-    vh = "".join(
-        f'\n              <th role="columnheader" scope="col" class="v" title="{t}">{m}</th>'
-        for m, t in zip(METRIC_ORDER,
-                        ["Attack vector", "Attack complexity", "Privileges required",
-                         "User interaction", "Scope", "Confidentiality", "Integrity",
-                         "Availability"]))
     def _pair(i, r):
         sev = band(r["score"]) if r["score"] is not None else r["severity"]
-        return advisory_row(i, r) + "\n            " + peek_row(i, r, sev, 16)
+        return advisory_row(i, r) + "\n            " + peek_row(i, r, sev, 9)
     body = "\n            ".join(_pair(i, r) for i, r in enumerate(rows, 1))
     return f"""      <div class="tablewrap" role="region" aria-label="Published advisories, full table" tabindex="0">
         <table role="table">
-          <caption>Published advisories, {first} to {last}</caption>
           <thead role="rowgroup">
             <tr role="row">
-              <th role="columnheader" scope="col" rowspan="2" class="c-nr">NR</th>
-              <th role="columnheader" scope="col" rowspan="2" class="c-id">Advisory</th>
-              <th role="columnheader" scope="col" rowspan="2" class="c-pkg">Package</th>
-              <th role="columnheader" scope="col" rowspan="2" class="c-sc">CVSS</th>
-              <th role="columnheader" scope="col" rowspan="2" class="c-sev">Severity</th>
-              <th role="columnheader" scope="col" rowspan="2" class="c-cls">Weakness</th>
-              <th role="columnheader" scope="col" rowspan="2" class="c-cwe">CWE</th>
-              <th role="columnheader" scope="colgroup" colspan="8" class="vgroup">Base vector</th>
-              <th role="columnheader" scope="col" rowspan="2" class="c-pub">Published</th>
-            </tr>
-            <tr role="row">{vh}
+              <th role="columnheader" scope="col" class="c-nr">NR</th>
+              <th role="columnheader" scope="col" class="c-id">Advisory</th>
+              <th role="columnheader" scope="col" class="c-pkg">Package</th>
+              <th role="columnheader" scope="col" class="c-sc">CVSS</th>
+              <th role="columnheader" scope="col" class="c-sev">Severity</th>
+              <th role="columnheader" scope="col" class="c-cls">Weakness</th>
+              <th role="columnheader" scope="col" class="c-cwe">CWE</th>
+              <th role="columnheader" scope="col" class="c-vec">Base vector</th>
+              <th role="columnheader" scope="col" class="c-pub">Published</th>
             </tr>
           </thead>
           <tbody role="rowgroup">
@@ -621,9 +647,9 @@ def main():
     ))
 
     original = open(README, encoding="utf-8").read()
-    # The home page and /advisories/ now render the same record: the full base
-    # vector ledger, with colored scores and the row that opens to a reading.
-    updated = splice(original, "ADVISORIES", render_record(rows))
+    # The home page shows a curated grid of finding cards (render_cards); the
+    # full base-vector ledger lives on /advisories/ (render_record).
+    updated = splice(original, "ADVISORIES", render_cards(rows))
     updated = splice(updated, "COUNTERS", render_counters(rows))
     record_path = "advisories.md"
     try:
@@ -631,6 +657,9 @@ def main():
     except FileNotFoundError:
         rec = None
     if rec is not None and "<!-- RECORD:START -->" in rec:
+        # Keep the section-head count (the "29" index beside "Full record") in
+        # sync with the record, so it never drifts from the number of rows.
+        rec = re.sub(r'(<p class="idx">)\d+(</p>)', rf'\g<1>{len(rows)}\g<2>', rec, count=1)
         new_rec = splice(rec, "RECORD", render_record(rows))
         if new_rec != rec:
             new_rec = stamp_last_modified(new_rec)

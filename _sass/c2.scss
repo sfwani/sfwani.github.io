@@ -387,6 +387,104 @@ h1{
   max-width: 40ch;
 }
 
+/* ───────────────────────────────────────────────────────────────
+   SELECTED WORK CARDS (home "Advisories" section)
+   A curated grid of finding cards plus a quieter card that opens the
+   full record. Each finding card leads with its CVSS score in the
+   severity tone; the record card leads with a muted ink count so it
+   reads as a sibling of the finding cards, not as a finding itself.
+   On hover a card lifts rather than filling with a flat tone behind
+   its text, which read as a highlight.
+   ─────────────────────────────────────────────────────────────── */
+.cards{
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(316px, 1fr));
+  gap: 16px;
+  margin-top: calc(var(--u) * 0.5);
+}
+.card{
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+  padding: 18px;
+  background: var(--bg);
+  border: 1px solid var(--rule);
+  border-top: 3px solid var(--sev);
+  text-decoration: none;
+  color: inherit;
+  transition: transform .16s ease, border-color .16s ease, box-shadow .16s ease;
+}
+.card:hover{
+  transform: translateY(-3px);
+  border-color: var(--rule-2);
+  box-shadow: 0 12px 26px -18px rgba(20, 20, 16, 0.55);
+}
+.card-top{ display: flex; align-items: baseline; justify-content: space-between; }
+.card-score{
+  font-size: 40px;
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  color: var(--sev);
+  font-variant-numeric: tabular-nums;
+}
+.card-sev{
+  font-size: var(--t-xs);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--sev);
+}
+.card-proj{ font-size: 18px; font-weight: 600; color: var(--ink); word-break: break-word; }
+.card-hook{ margin: 0; flex: 1; font-size: 14px; line-height: 1.5; color: var(--ink-2); }
+.card-foot{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+  align-items: center;
+  font-size: var(--t-xs);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.card-cls{ font-weight: 600; color: var(--ink-2); }
+.card .k-cve, .card .k-ghsa{
+  margin-left: auto;
+  padding: 2px 6px;
+  border: 1px solid var(--rule-2);
+  font-size: 9.5px;
+  letter-spacing: 0.08em;
+}
+.card .k-cve{ color: var(--accent); border-color: var(--accent); }
+
+/* the quieter record card: the finding-card rhythm, but a muted ink count in
+   place of a severity-coloured score, and a plain rule instead of the sev rule */
+.card--all{ border-top: 1px solid var(--rule); background: var(--bg-2); }
+.card--all .all-top{ display: flex; align-items: baseline; justify-content: space-between; }
+.card--all .all-n{
+  font-size: 40px;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+.card--all .all-tag{
+  font-size: var(--t-xs);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.card--all .all-title{ font-size: 18px; font-weight: 600; color: var(--ink); }
+.card--all .all-s{ margin: 0; flex: 1; font-size: 14px; line-height: 1.5; color: var(--ink-2); }
+.card--all .all-go{ font-size: var(--t-s); font-weight: 600; color: var(--accent); letter-spacing: 0.01em; }
+
+@media (max-width: 520px){
+  .cards{ grid-template-columns: 1fr; }
+}
+
 .prose > * + *{ margin-top: calc(var(--u) * 2.5); }
 .prose p{ max-width: 64ch; overflow-wrap: anywhere; }
 .prose strong{ font-weight: 700; }
@@ -445,7 +543,7 @@ h1{
 }
 .tablewrap table{
   width: 100%;
-  min-width: 980px;
+  min-width: 1040px;
   table-layout: fixed;
   border-collapse: collapse;
   font-size: var(--t-s);
@@ -479,58 +577,65 @@ h1{
 .tablewrap thead tr:first-child th{ padding-top: 10px; }
 .tablewrap tbody tr:last-child td{ border-bottom: 1px solid var(--rule-heavy); }
 
-.tablewrap .c-nr   { width: 3.39%;  color: var(--ink-3); font-weight: 500; }
-.tablewrap .c-id   { width: 16.40%; font-weight: 500; white-space: nowrap; }
+.tablewrap .c-nr   { width: 3.4%;  color: var(--ink-3); font-weight: 500; }
+.tablewrap .c-id   { width: 15%;   font-weight: 500; white-space: nowrap; }
 .tablewrap .c-id a { text-decoration-color: var(--rule); }
-.tablewrap .c-pkg  { width: 12.90%; color: var(--ink-2); overflow-wrap: anywhere; }
+.tablewrap .c-pkg  { width: 10.5%; color: var(--ink-2); overflow-wrap: anywhere; }
 
 /* The one element given real compositional weight: the score column is
-   set at the large step, so eleven numerals fall 9.0 to 3.1 down a single
-   column and give the table, and the page, a focal point. */
-.tablewrap .c-sc   { width: 8.40%; font-variant-numeric: tabular-nums; }
+   set at the large step, so the numerals fall down a single column and
+   give the table, and the page, a focal point. */
+.tablewrap .c-sc   { width: 7.4%; font-variant-numeric: tabular-nums; }
 .tablewrap tbody td.c-sc{
   font-size: var(--t-l);
   font-weight: 500;
   line-height: 0.95;
   letter-spacing: -0.03em;
 }
-.tablewrap .c-sev  { width: 7.60%;  }
-.tablewrap .c-cls  { width: 17.30%; }
-.tablewrap .c-cwe  { width: 4.71%;  color: var(--ink-2); white-space: nowrap; }
-.tablewrap .c-pub  { width: 8.94%;  color: var(--ink-2); white-space: nowrap; }
+.tablewrap .c-sev  { width: 7%;    }
+.tablewrap .c-cls  { width: 13.5%; }
+.tablewrap .c-cwe  { width: 4.4%;  color: var(--ink-2); white-space: nowrap; }
+.tablewrap .c-pub  { width: 8%;    color: var(--ink-2); white-space: nowrap; }
 
-/* the eight-cell CVSS glyph: a flat tone field, no border, no radius */
-.tablewrap .v{
-  width: 2.545%;
+/* The base vector gets one proper-width column, rendered identically for v3.1
+   and v4.0: a muted scale tag then one self-labeled chip per metric. A v3.1
+   vector (eight metrics) sits on one line; a v4.0 vector (eleven, plus any
+   threat metric) wraps to a second line in the same style, so the column reads
+   as one consistent tone field instead of a spanning cell that breaks the grid. */
+.tablewrap .c-vec{ width: 28%; }
+.tablewrap th.c-vec{ background: var(--bg-2); text-indent: 6px; }
+.tablewrap td.c-vec{
   background: var(--bg-2);
-  font-weight: 500;
-  padding-left: 0;
-  padding-right: 4px;
-  text-indent: 6px;
+  padding: 8px 10px;
+  white-space: normal;
+  line-height: 1.5;
 }
-.tablewrap th.v{ background: var(--bg-2); letter-spacing: 0.02em; }
-.tablewrap th.vgroup{
-  background: var(--bg-2);
-  text-indent: 6px;
-  padding-right: 4px;
+.tablewrap td.c-vec .vm-s{
+  display: inline-block;
+  margin: 0 9px 2px 0;
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-3);
 }
-
-/* A v4.0 advisory has a different metric set than the eight v3 cells, so its
-   vector spans the whole base-vector group as one tinted cell on the same tone
-   field as the glyph, rather than being forced into columns that do not fit. */
-.tablewrap .v--whole{
-  background: var(--bg-2);
-  padding: 0 8px;
-}
-.tablewrap .v--whole .vq{
-  font-size: var(--t-xs);
+.tablewrap td.c-vec .vm{
+  display: inline-block;
+  margin: 0 9px 0 0;
+  white-space: nowrap;
   font-variant-numeric: tabular-nums;
-  letter-spacing: 0.01em;
-  color: var(--ink-2);
-  /* Break only at the slash boundaries (marked with <wbr> in the markup), never
-     mid metric, so the vector never shatters into character soup. */
-  overflow-wrap: normal;
-  word-break: normal;
+}
+.tablewrap td.c-vec .vm i{
+  font-style: normal;
+  font-size: var(--t-xs);
+  letter-spacing: 0.04em;
+  color: var(--ink-3);
+}
+.tablewrap td.c-vec .vm b{
+  margin-left: 3px;
+  font-size: var(--t-s);
+  font-weight: 600;
+  color: var(--ink);
 }
 
 /* Weight tracks severity so the eye lands on the worst first: Critical is the
@@ -550,14 +655,14 @@ h1{
 }
 
 .tablewrap tbody tr:hover td{ background: var(--bg-2); }
-.tablewrap tbody tr:hover td.v{ background: var(--bg-3); }
+.tablewrap tbody tr:hover td.c-vec{ background: var(--bg-3); }
 /* the display score sets the row height, so the 13px cells drop to sit
    on its baseline instead of hanging off the cap line */
 @media (min-width: 1120px){
   .tablewrap tbody th.c-nr{ padding-top: 14px; }
   tbody .c-id, tbody .c-pkg, tbody .c-sev,
-  tbody .c-cls, tbody .c-cwe, tbody .c-pub,
-  .tablewrap tbody td.v{ padding-top: 15px; }
+  tbody .c-cls, tbody .c-cwe, tbody .c-pub{ padding-top: 15px; }
+  .tablewrap tbody td.c-vec{ padding-top: 13px; }
   .tablewrap tbody td.c-sc{ padding-top: 8px; }
 }
 
@@ -579,14 +684,13 @@ h1{
 
 /* ───────────────────────────────────────────────────────────────
    ADVISORY TABLE, BLOCK FORM
-   The fifteen column matrix needs 980px of measure, and the field
-   cannot give it that below about 1120px. Rather than push the CVSS
-   vector, which is the most specific thing on this page, off the right
-   edge behind a swipe, every row becomes a block below that width and
-   the eight metrics become a fixed 4x2 matrix. Same cells, same order,
-   same table semantics (the roles are declared in the markup so they
-   survive the display change). No sideways scroll at any width.
-   ─────────────────────────────────────────────────────────────── */
+   The nine column record needs 1040px of measure, and the field cannot
+   give it that below about 1120px. Rather than push the CVSS vector,
+   which is the most specific thing on this page, off the right edge
+   behind a swipe, every row becomes a block below that width and the
+   base-vector cell spans the full block, its self-labeled chips wrapping
+   as a band. Same cells, same table semantics (the roles are declared in
+   the markup so they survive the display change). No sideways scroll. */
 @media (max-width: 1119px){
   /* tbody tr:last-child td (0,1,3) outranked the block-form reset (0,0,2),
      so the final advisory kept a near-black rule under all sixteen cells. */
@@ -622,8 +726,8 @@ h1{
     border-bottom: 0;
     background: none;
   }
-  .tablewrap tbody tr:hover td, .tablewrap tbody tr:hover td.v{ background: none; }
-  .tablewrap tbody tr:hover td.v{ background: var(--bg-2); }
+  .tablewrap tbody tr:hover td, .tablewrap tbody tr:hover td.c-vec{ background: none; }
+  .tablewrap tbody tr:hover td.c-vec{ background: var(--bg-2); }
 
   .tablewrap .c-nr { grid-area: 1 / 1 / 2 / 3; width: auto; color: var(--accent); font-weight: 700; padding-top: 0; }
   .tablewrap .c-sc { grid-area: 1 / 3 / 2 / 5; width: auto; text-align: right; padding-top: 0; }
@@ -636,36 +740,17 @@ h1{
   .tablewrap .c-pub{ grid-area: 5 / 1 / 6 / 5; width: auto; color: var(--ink-3); padding-top: 3px; }
   .tablewrap .c-pub::before{ content: "Published "; }
 
-  /* A v4.0 advisory's single spanning cell takes the full row width here, not
-     one quarter column, so its vector reads on one block instead of a narrow
-     strip that wraps every few characters. */
-  .tablewrap td.v--whole{
+  /* The base-vector cell takes the full row width here and its self-labeled
+     chips wrap as their own band, so the vector reads on one block instead of
+     a narrow strip behind a sideways swipe. v3.1 and v4.0 render the same way. */
+  .tablewrap td.c-vec{
     grid-column: 1 / -1;
-    margin-top: 4px;
-    padding: 8px 10px 9px;
-  }
-  .tablewrap td.v--whole .vq{ font-size: var(--t-s); line-height: 1.5; }
-
-  /* rows 1 to 5 are fully covered, so the eight metric cells auto-flow
-     into rows 6 and 7 as a 4x2 matrix */
-  .tablewrap td.v{
     width: auto;
+    margin-top: calc(var(--u) * 1.75);
     background: var(--bg-2);
     text-indent: 0;
-    padding: 7px 8px 8px;
-    margin-top: 2px;
-    font-size: var(--t-m);
-    font-weight: 500;
-    line-height: 1;
-  }
-  .tablewrap td.v::before{
-    content: attr(data-m);
-    display: block;
-    margin-bottom: 5px;
-    font-size: var(--t-xs);
-    font-weight: 500;
-    letter-spacing: 0.13em;
-    color: var(--ink-3);
+    padding: 9px 11px 10px;
+    line-height: 1.6;
   }
 }
 

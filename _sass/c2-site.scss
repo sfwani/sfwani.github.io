@@ -446,18 +446,25 @@
 }
 
 /* ── Section head alignment ────────────────────────────────────────
-   C2 aligns the section head on the baseline, which is right for the
-   numeral against the heading but wrong for the note beside it: the
-   heading is 30px and the note 13px, so sharing a baseline put the note's
-   first line 16px below the top of the heading in every section. The row
-   below them, body against aside, starts level, which is what makes the
-   head look off by comparison.
-   The numeral and the heading keep their shared baseline; the note tops
-   out instead. 3px of residual offset is the difference in half leading
-   between the two sizes and is not removable without faking it. */
-.sec-head{ align-items: start; }
-.sec-head h2,
-.sec-head .idx{ align-self: baseline; }
+   C2 aligns the section head on the baseline, which sat the note's first
+   line 16px below the top of the heading in every section. Only the note
+   should centre against the heading; the numeral must stay locked to the
+   bottom of the heading text. So the numeral and heading are wrapped in a
+   .sec-title block that baseline-locks them as a unit, and the head centres
+   that unit against the note. Net: numeral at the heading baseline, note
+   centred on the heading. The .sec-title wrapper is in the section markup
+   (index.md, advisories.md) so the two children can share a baseline while
+   the pair and the note share a centre, which a flat three-item grid cannot
+   express at once. */
+.sec-head{ align-items: center; }
+.sec-title{
+  grid-column: 1 / span 6;
+  display: grid;
+  grid-template-columns: subgrid;
+  align-items: baseline;
+}
+.sec-title .idx{ grid-column: 1 / span 1; }
+.sec-title h2{ grid-column: 2 / span 5; }
 
 /* ── Where the organisation marks sit ──────────────────────────────
    They ended on column 12, the line the section rules run to, so they sat

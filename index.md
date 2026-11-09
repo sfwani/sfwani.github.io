@@ -6,7 +6,7 @@ seo_title: "Sanaan Fayaz Wani - Security Engineer and vulnerability researcher"
 role: "Security Engineer at Amazon, bringing agentic AI into identity and access management. Independent vulnerability research across open source infrastructure."
 description: Vulnerability research on AI agent frameworks and LLM infrastructure. Assigned CVEs and published, credited advisories, each with root cause, reproduction and fix.
 permalink: /
-last_modified_at: 2026-11-08T01:39:34+00:00
+last_modified_at: 2026-11-09T02:07:40+00:00
 ---
 
 <div class="figs-lead g">
@@ -25,8 +25,10 @@ last_modified_at: 2026-11-08T01:39:34+00:00
 
 <section class="sec g" id="profile" aria-labelledby="h-profile">
       <div class="sec-head">
-        <p class="idx">01</p>
-        <h2 id="h-profile">Profile</h2>
+        <div class="sec-title">
+          <p class="idx">01</p>
+          <h2 id="h-profile">Profile</h2>
+        </div>
         <p class="sec-sub">Amazon, Cyber Florida, University of South Florida. Independent vulnerability research separately.</p>
       </div>
 
@@ -43,430 +45,37 @@ last_modified_at: 2026-11-08T01:39:34+00:00
 
 <section class="sec g" id="advisories" aria-labelledby="h-adv">
       <div class="sec-head">
-        <p class="idx">02</p>
-        <h2 id="h-adv">Advisories</h2>
-        <p class="sec-sub">Every entry is published and credited. Nothing is named here until the
-          maintainer publishes it. The full record, with each CVSS base vector set out metric by metric,
-          is on the <a href="/advisories/">advisories page</a>.</p>
+        <div class="sec-title">
+          <p class="idx">02</p>
+          <h2 id="h-adv">Advisories</h2>
+        </div>
+        <p class="sec-sub">A selection of the published advisories, chosen for technical depth and
+          severity. Every entry is published and credited. The full record, each entry with its base
+          vector and writeup, is on the <a href="/advisories/">advisories page</a>.</p>
       </div>
 <!-- ADVISORIES:START -->
 
-      <div class="tablewrap" role="region" aria-label="Published advisories, full table" tabindex="0">
-        <table role="table">
-          <caption>Published advisories, 2026-05-11 to 2026-11-05</caption>
-          <thead role="rowgroup">
-            <tr role="row">
-              <th role="columnheader" scope="col" rowspan="2" class="c-nr">NR</th>
-              <th role="columnheader" scope="col" rowspan="2" class="c-id">Advisory</th>
-              <th role="columnheader" scope="col" rowspan="2" class="c-pkg">Package</th>
-              <th role="columnheader" scope="col" rowspan="2" class="c-sc">CVSS</th>
-              <th role="columnheader" scope="col" rowspan="2" class="c-sev">Severity</th>
-              <th role="columnheader" scope="col" rowspan="2" class="c-cls">Weakness</th>
-              <th role="columnheader" scope="col" rowspan="2" class="c-cwe">CWE</th>
-              <th role="columnheader" scope="colgroup" colspan="8" class="vgroup">Base vector</th>
-              <th role="columnheader" scope="col" rowspan="2" class="c-pub">Published</th>
-            </tr>
-            <tr role="row">
-              <th role="columnheader" scope="col" class="v" title="Attack vector">AV</th>
-              <th role="columnheader" scope="col" class="v" title="Attack complexity">AC</th>
-              <th role="columnheader" scope="col" class="v" title="Privileges required">PR</th>
-              <th role="columnheader" scope="col" class="v" title="User interaction">UI</th>
-              <th role="columnheader" scope="col" class="v" title="Scope">S</th>
-              <th role="columnheader" scope="col" class="v" title="Confidentiality">C</th>
-              <th role="columnheader" scope="col" class="v" title="Integrity">I</th>
-              <th role="columnheader" scope="col" class="v" title="Availability">A</th>
-            </tr>
-          </thead>
-          <tbody role="rowgroup">
-            <tr role="row" data-sev="critical">
-              <th role="rowheader" scope="row" class="c-nr">01</th>
-              <td role="cell" class="c-id"><a href="/advisories/ghsa-24q6-6h89-f9p7/">GHSA-24q6-6h89-f9p7</a></td>
-              <td role="cell" class="c-pkg">autogpt-platform-backend</td>
-              <td role="cell" class="c-sc">10.0</td>
-              <td role="cell" class="c-sev sev-crit">Critical</td>
-              <td role="cell" class="c-cls">Authentication bypass</td>
-              <td role="cell" class="c-cwe">287</td>
-              <td role="cell" class="v" data-m="AV">N</td><td role="cell" class="v" data-m="AC">L</td><td role="cell" class="v" data-m="PR">N</td><td role="cell" class="v" data-m="UI">N</td>
-              <td role="cell" class="v" data-m="S">C</td><td role="cell" class="v" data-m="C">H</td><td role="cell" class="v" data-m="I">H</td><td role="cell" class="v" data-m="A">H</td>
-              <td role="cell" class="c-pub">2026-10-05</td>
-            </tr>
-            <tr role="row" class="peek" id="peek-01" data-sev="critical" hidden><td role="cell" colspan="16"><div class="pk"><div><p class="pk-s"><em>Anyone who can reach it over the network</em>, with <em>no account</em> and no user interaction, can <em>read and change sensitive data and make it unavailable</em>, and <em>the impact reaches beyond the vulnerable component</em>.</p></div><div class="pk-f"><span class="k-lab">What to do</span><b>Upgrade to 0.8.0</b></div><div class="pk-f"><span class="k-lab">Published</span><b>2026-10-05</b><small>Published by the maintainer</small></div><a class="pk-a" href="/advisories/ghsa-24q6-6h89-f9p7/">Read the writeup &rarr;</a></div></td></tr>
-            <tr role="row" data-sev="critical">
-              <th role="rowheader" scope="row" class="c-nr">02</th>
-              <td role="cell" class="c-id"><a href="/advisories/ghsa-42mf-vpmr-gw5r/">GHSA-42mf-vpmr-gw5r</a></td>
-              <td role="cell" class="c-pkg">ag2</td>
-              <td role="cell" class="c-sc">9.9</td>
-              <td role="cell" class="c-sev sev-crit">Critical</td>
-              <td role="cell" class="c-cls">Command injection</td>
-              <td role="cell" class="c-cwe">78</td>
-              <td role="cell" class="v" data-m="AV">N</td><td role="cell" class="v" data-m="AC">L</td><td role="cell" class="v" data-m="PR">L</td><td role="cell" class="v" data-m="UI">N</td>
-              <td role="cell" class="v" data-m="S">C</td><td role="cell" class="v" data-m="C">H</td><td role="cell" class="v" data-m="I">H</td><td role="cell" class="v" data-m="A">H</td>
-              <td role="cell" class="c-pub">2026-10-03</td>
-            </tr>
-            <tr role="row" class="peek" id="peek-02" data-sev="critical" hidden><td role="cell" colspan="16"><div class="pk"><div><p class="pk-s"><em>Anyone who can reach it over the network</em>, with <em>a low-privilege account</em> and no user interaction, can <em>read and change sensitive data and make it unavailable</em>, and <em>the impact reaches beyond the vulnerable component</em>.</p><div class="pk-f"><small>Score is my assessment; GitHub published no CVSS for this advisory.</small></div></div><div class="pk-f"><span class="k-lab">What to do</span><b>Upgrade to 1.1.2</b></div><div class="pk-f"><span class="k-lab">Report to publication</span><b>134 days</b><small>Reported privately 2026-05-22, published 2026-10-03</small></div><a class="pk-a" href="/advisories/ghsa-42mf-vpmr-gw5r/">Read the writeup &rarr;</a></div></td></tr>
-            <tr role="row" data-sev="critical">
-              <th role="rowheader" scope="row" class="c-nr">03</th>
-              <td role="cell" class="c-id"><a href="/advisories/ghsa-jmr9-98g4-2phv/">GHSA-jmr9-98g4-2phv</a></td>
-              <td role="cell" class="c-pkg">github.com/<wbr>portainer/<wbr>portainer</td>
-              <td role="cell" class="c-sc">9.4</td>
-              <td role="cell" class="c-sev sev-crit">Critical</td>
-              <td role="cell" class="c-cls">Access control</td>
-              <td role="cell" class="c-cwe">284</td>
-              <td role="cell" class="v v--whole v--v4" colspan="8"><span class="v4-scale">v4.0</span><span class="v4-m"><i>AV</i><b>N</b></span><span class="v4-m"><i>AC</i><b>L</b></span><span class="v4-m"><i>AT</i><b>N</b></span><span class="v4-m"><i>PR</i><b>L</b></span><span class="v4-m"><i>UI</i><b>N</b></span><span class="v4-m"><i>VC</i><b>H</b></span><span class="v4-m"><i>VI</i><b>H</b></span><span class="v4-m"><i>VA</i><b>H</b></span><span class="v4-m"><i>SC</i><b>H</b></span><span class="v4-m"><i>SI</i><b>H</b></span><span class="v4-m"><i>SA</i><b>H</b></span></td>
-              <td role="cell" class="c-pub">2026-10-08</td>
-            </tr>
-            <tr role="row" class="peek" id="peek-03" data-sev="critical" hidden><td role="cell" colspan="16"><div class="pk"><div><p class="pk-s"><em>Anyone who can reach it over the network</em>, with <em>a low-privilege account</em> and no user interaction, can <em>read and change sensitive data and make it unavailable</em>, and <em>other systems are affected too</em>.</p></div><div class="pk-f"><span class="k-lab">What to do</span><b class="quiet">Fix differs by range</b></div><div class="pk-f"><span class="k-lab">Published</span><b>2026-10-08</b><small>Published by the maintainer</small></div><a class="pk-a" href="/advisories/ghsa-jmr9-98g4-2phv/">Read the writeup &rarr;</a></div></td></tr>
-            <tr role="row" data-sev="critical">
-              <th role="rowheader" scope="row" class="c-nr">04</th>
-              <td role="cell" class="c-id"><a href="/advisories/cve-2026-49950/">CVE-2026-49950</a></td>
-              <td role="cell" class="c-pkg">xinference</td>
-              <td role="cell" class="c-sc">9.3</td>
-              <td role="cell" class="c-sev sev-crit">Critical</td>
-              <td role="cell" class="c-cls">Missing authentication</td>
-              <td role="cell" class="c-cwe">306</td>
-              <td role="cell" class="v v--whole v--v4" colspan="8"><span class="v4-scale">v4.0</span><span class="v4-m"><i>AV</i><b>N</b></span><span class="v4-m"><i>AC</i><b>L</b></span><span class="v4-m"><i>AT</i><b>N</b></span><span class="v4-m"><i>PR</i><b>N</b></span><span class="v4-m"><i>UI</i><b>N</b></span><span class="v4-m"><i>VC</i><b>H</b></span><span class="v4-m"><i>VI</i><b>H</b></span><span class="v4-m"><i>VA</i><b>H</b></span><span class="v4-m"><i>SC</i><b>N</b></span><span class="v4-m"><i>SI</i><b>N</b></span><span class="v4-m"><i>SA</i><b>N</b></span></td>
-              <td role="cell" class="c-pub">2026-10-16</td>
-            </tr>
-            <tr role="row" class="peek" id="peek-04" data-sev="critical" hidden><td role="cell" colspan="16"><div class="pk"><div><p class="pk-s"><em>Anyone who can reach it over the network</em>, with <em>no account</em> and no user interaction, can <em>read and change sensitive data and make it unavailable</em>.</p></div><div class="pk-f"><span class="k-lab">What to do</span><b class="quiet">No fix listed</b></div><div class="pk-f"><span class="k-lab">Published</span><b>2026-10-16</b><small>Published by the maintainer</small></div><a class="pk-a" href="/advisories/cve-2026-49950/">Read the writeup &rarr;</a></div></td></tr>
-            <tr role="row" data-sev="high">
-              <th role="rowheader" scope="row" class="c-nr">05</th>
-              <td role="cell" class="c-id"><a href="/advisories/ghsa-hxvp-ff3g-qcj7/">GHSA-hxvp-ff3g-qcj7</a></td>
-              <td role="cell" class="c-pkg">@vendure/core</td>
-              <td role="cell" class="c-sc">8.8</td>
-              <td role="cell" class="c-sev sev-high">High</td>
-              <td role="cell" class="c-cls">Information disclosure</td>
-              <td role="cell" class="c-cwe">200</td>
-              <td role="cell" class="v" data-m="AV">N</td><td role="cell" class="v" data-m="AC">L</td><td role="cell" class="v" data-m="PR">L</td><td role="cell" class="v" data-m="UI">N</td>
-              <td role="cell" class="v" data-m="S">U</td><td role="cell" class="v" data-m="C">H</td><td role="cell" class="v" data-m="I">H</td><td role="cell" class="v" data-m="A">H</td>
-              <td role="cell" class="c-pub">2026-10-23</td>
-            </tr>
-            <tr role="row" class="peek" id="peek-05" data-sev="high" hidden><td role="cell" colspan="16"><div class="pk"><div><p class="pk-s"><em>Anyone who can reach it over the network</em>, with <em>a low-privilege account</em> and no user interaction, can <em>read and change sensitive data and make it unavailable</em>.</p></div><div class="pk-f"><span class="k-lab">What to do</span><b class="quiet">No fix listed</b></div><div class="pk-f"><span class="k-lab">Report to publication</span><b>19 days</b><small>Reported privately 2026-10-04, published 2026-10-23</small></div><a class="pk-a" href="/advisories/ghsa-hxvp-ff3g-qcj7/">Read the writeup &rarr;</a></div></td></tr>
-            <tr role="row" data-sev="high">
-              <th role="rowheader" scope="row" class="c-nr">06</th>
-              <td role="cell" class="c-id"><a href="/advisories/ghsa-v3vj-mch3-x6c2/">GHSA-v3vj-mch3-x6c2</a></td>
-              <td role="cell" class="c-pkg">omnigent</td>
-              <td role="cell" class="c-sc">8.8</td>
-              <td role="cell" class="c-sev sev-high">High</td>
-              <td role="cell" class="c-cls">Resource exposure</td>
-              <td role="cell" class="c-cwe">668</td>
-              <td role="cell" class="v" data-m="AV">L</td><td role="cell" class="v" data-m="AC">L</td><td role="cell" class="v" data-m="PR">L</td><td role="cell" class="v" data-m="UI">N</td>
-              <td role="cell" class="v" data-m="S">C</td><td role="cell" class="v" data-m="C">H</td><td role="cell" class="v" data-m="I">H</td><td role="cell" class="v" data-m="A">H</td>
-              <td role="cell" class="c-pub">2026-10-13</td>
-            </tr>
-            <tr role="row" class="peek" id="peek-06" data-sev="high" hidden><td role="cell" colspan="16"><div class="pk"><div><p class="pk-s"><em>Someone with local access</em>, with <em>a low-privilege account</em> and no user interaction, can <em>read and change sensitive data and make it unavailable</em>, and <em>the impact reaches beyond the vulnerable component</em>.</p></div><div class="pk-f"><span class="k-lab">What to do</span><b>Upgrade to 0.18.0</b></div><div class="pk-f"><span class="k-lab">Report to publication</span><b>59 days</b><small>Reported privately 2026-08-15, published 2026-10-13</small></div><a class="pk-a" href="/advisories/ghsa-v3vj-mch3-x6c2/">Read the writeup &rarr;</a></div></td></tr>
-            <tr role="row" data-sev="high">
-              <th role="rowheader" scope="row" class="c-nr">07</th>
-              <td role="cell" class="c-id"><a href="/advisories/ghsa-5mc6-2qfj-59cg/">GHSA-5mc6-2qfj-59cg</a></td>
-              <td role="cell" class="c-pkg">opik</td>
-              <td role="cell" class="c-sc">8.8</td>
-              <td role="cell" class="c-sev sev-high">High</td>
-              <td role="cell" class="c-cls">Code injection</td>
-              <td role="cell" class="c-cwe">94</td>
-              <td role="cell" class="v" data-m="AV">N</td><td role="cell" class="v" data-m="AC">L</td><td role="cell" class="v" data-m="PR">N</td><td role="cell" class="v" data-m="UI">R</td>
-              <td role="cell" class="v" data-m="S">U</td><td role="cell" class="v" data-m="C">H</td><td role="cell" class="v" data-m="I">H</td><td role="cell" class="v" data-m="A">H</td>
-              <td role="cell" class="c-pub">2026-11-05</td>
-            </tr>
-            <tr role="row" class="peek" id="peek-07" data-sev="high" hidden><td role="cell" colspan="16"><div class="pk"><div><p class="pk-s"><em>Anyone who can reach it over the network</em>, with <em>no account</em>, if a user takes some action, can <em>read and change sensitive data and make it unavailable</em>.</p></div><div class="pk-f"><span class="k-lab">What to do</span><b>Fix differs by range</b></div><div class="pk-f"><span class="k-lab">Report to publication</span><b>11 days</b><small>Reported privately 2026-10-25, published 2026-11-05</small></div><a class="pk-a" href="/advisories/ghsa-5mc6-2qfj-59cg/">Read the writeup &rarr;</a></div></td></tr>
-            <tr role="row" data-sev="high">
-              <th role="rowheader" scope="row" class="c-nr">08</th>
-              <td role="cell" class="c-id"><a href="/advisories/cve-2026-57516/">CVE-2026-57516</a></td>
-              <td role="cell" class="c-pkg">ray</td>
-              <td role="cell" class="c-sc">8.8</td>
-              <td role="cell" class="c-sev sev-high">High</td>
-              <td role="cell" class="c-cls">Code injection</td>
-              <td role="cell" class="c-cwe">94</td>
-              <td role="cell" class="v" data-m="AV">N</td><td role="cell" class="v" data-m="AC">L</td><td role="cell" class="v" data-m="PR">N</td><td role="cell" class="v" data-m="UI">R</td>
-              <td role="cell" class="v" data-m="S">U</td><td role="cell" class="v" data-m="C">H</td><td role="cell" class="v" data-m="I">H</td><td role="cell" class="v" data-m="A">H</td>
-              <td role="cell" class="c-pub">2026-07-01</td>
-            </tr>
-            <tr role="row" class="peek" id="peek-08" data-sev="high" hidden><td role="cell" colspan="16"><div class="pk"><div><p class="pk-s"><em>Anyone who can reach it over the network</em>, with <em>no account</em>, if a user takes some action, can <em>read and change sensitive data and make it unavailable</em>.</p></div><div class="pk-f"><span class="k-lab">What to do</span><b>Upgrade to 2.56.0</b></div><div class="pk-f"><span class="k-lab">Published</span><b>2026-07-01</b><small>Published by the maintainer</small></div><a class="pk-a" href="/advisories/cve-2026-57516/">Read the writeup &rarr;</a></div></td></tr>
-            <tr role="row" data-sev="high">
-              <th role="rowheader" scope="row" class="c-nr">09</th>
-              <td role="cell" class="c-id"><a href="/advisories/ghsa-57mf-wqwq-6g6x/">GHSA-57mf-wqwq-6g6x</a></td>
-              <td role="cell" class="c-pkg">autogpt-platform-backend</td>
-              <td role="cell" class="c-sc">8.2</td>
-              <td role="cell" class="c-sev sev-high">High</td>
-              <td role="cell" class="c-cls">Hard-coded crypto key</td>
-              <td role="cell" class="c-cwe">321</td>
-              <td role="cell" class="v" data-m="AV">N</td><td role="cell" class="v" data-m="AC">H</td><td role="cell" class="v" data-m="PR">L</td><td role="cell" class="v" data-m="UI">N</td>
-              <td role="cell" class="v" data-m="S">C</td><td role="cell" class="v" data-m="C">H</td><td role="cell" class="v" data-m="I">H</td><td role="cell" class="v" data-m="A">N</td>
-              <td role="cell" class="c-pub">2026-10-05</td>
-            </tr>
-            <tr role="row" class="peek" id="peek-09" data-sev="high" hidden><td role="cell" colspan="16"><div class="pk"><div><p class="pk-s"><em>Anyone who can reach it over the network</em>, with <em>a low-privilege account</em> and no user interaction, given conditions outside the attacker's control, can <em>read and change sensitive data</em>, and <em>the impact reaches beyond the vulnerable component</em>.</p></div><div class="pk-f"><span class="k-lab">What to do</span><b>Upgrade to 0.8.0</b></div><div class="pk-f"><span class="k-lab">Published</span><b>2026-10-05</b><small>Published by the maintainer</small></div><a class="pk-a" href="/advisories/ghsa-57mf-wqwq-6g6x/">Read the writeup &rarr;</a></div></td></tr>
-            <tr role="row" data-sev="high">
-              <th role="rowheader" scope="row" class="c-nr">10</th>
-              <td role="cell" class="c-id"><a href="/advisories/ghsa-qrjx-72xx-xhmh/">GHSA-qrjx-72xx-xhmh</a></td>
-              <td role="cell" class="c-pkg">ag2</td>
-              <td role="cell" class="c-sc">8.1</td>
-              <td role="cell" class="c-sev sev-high">High</td>
-              <td role="cell" class="c-cls">Path traversal</td>
-              <td role="cell" class="c-cwe">22</td>
-              <td role="cell" class="v" data-m="AV">N</td><td role="cell" class="v" data-m="AC">L</td><td role="cell" class="v" data-m="PR">L</td><td role="cell" class="v" data-m="UI">N</td>
-              <td role="cell" class="v" data-m="S">U</td><td role="cell" class="v" data-m="C">H</td><td role="cell" class="v" data-m="I">H</td><td role="cell" class="v" data-m="A">N</td>
-              <td role="cell" class="c-pub">2026-09-25</td>
-            </tr>
-            <tr role="row" class="peek" id="peek-10" data-sev="high" hidden><td role="cell" colspan="16"><div class="pk"><div><p class="pk-s"><em>Anyone who can reach it over the network</em>, with <em>a low-privilege account</em> and no user interaction, can <em>read and change sensitive data</em>.</p><div class="pk-f"><small>Score is my assessment; GitHub published no CVSS for this advisory.</small></div></div><div class="pk-f"><span class="k-lab">What to do</span><b class="quiet">Fix differs by range</b></div><div class="pk-f"><span class="k-lab">Report to publication</span><b>126 days</b><small>Reported privately 2026-05-22, published 2026-09-25</small></div><a class="pk-a" href="/advisories/ghsa-qrjx-72xx-xhmh/">Read the writeup &rarr;</a></div></td></tr>
-            <tr role="row" data-sev="high">
-              <th role="rowheader" scope="row" class="c-nr">11</th>
-              <td role="cell" class="c-id"><a href="/advisories/cve-2026-45675/">CVE-2026-45675</a></td>
-              <td role="cell" class="c-pkg">open-webui</td>
-              <td role="cell" class="c-sc">8.1</td>
-              <td role="cell" class="c-sev sev-high">High</td>
-              <td role="cell" class="c-cls">Privilege escalation</td>
-              <td role="cell" class="c-cwe">269</td>
-              <td role="cell" class="v" data-m="AV">N</td><td role="cell" class="v" data-m="AC">H</td><td role="cell" class="v" data-m="PR">N</td><td role="cell" class="v" data-m="UI">N</td>
-              <td role="cell" class="v" data-m="S">U</td><td role="cell" class="v" data-m="C">H</td><td role="cell" class="v" data-m="I">H</td><td role="cell" class="v" data-m="A">H</td>
-              <td role="cell" class="c-pub">2026-05-11</td>
-            </tr>
-            <tr role="row" class="peek" id="peek-11" data-sev="high" hidden><td role="cell" colspan="16"><div class="pk"><div><p class="pk-s"><em>Anyone who can reach it over the network</em>, with <em>no account</em> and no user interaction, given conditions outside the attacker's control, can <em>read and change sensitive data and make it unavailable</em>.</p></div><div class="pk-f"><span class="k-lab">What to do</span><b>Upgrade to 0.9.0</b></div><div class="pk-f"><span class="k-lab">Report to publication</span><b>34 days</b><small>Reported privately 2026-04-07, published 2026-05-11</small></div><a class="pk-a" href="/advisories/cve-2026-45675/">Read the writeup &rarr;</a></div></td></tr>
-            <tr role="row" data-sev="high">
-              <th role="rowheader" scope="row" class="c-nr">12</th>
-              <td role="cell" class="c-id"><a href="/advisories/ghsa-pqxw-g93w-hj9x/">GHSA-pqxw-g93w-hj9x</a></td>
-              <td role="cell" class="c-pkg">trigger.dev</td>
-              <td role="cell" class="c-sc">8.1</td>
-              <td role="cell" class="c-sev sev-high">High</td>
-              <td role="cell" class="c-cls">Improper isolation</td>
-              <td role="cell" class="c-cwe">653</td>
-              <td role="cell" class="v v--whole v--v4" colspan="8"><span class="v4-scale">v4.0</span><span class="v4-m"><i>AV</i><b>N</b></span><span class="v4-m"><i>AC</i><b>H</b></span><span class="v4-m"><i>AT</i><b>N</b></span><span class="v4-m"><i>PR</i><b>N</b></span><span class="v4-m"><i>UI</i><b>N</b></span><span class="v4-m"><i>VC</i><b>H</b></span><span class="v4-m"><i>VI</i><b>H</b></span><span class="v4-m"><i>VA</i><b>N</b></span><span class="v4-m"><i>SC</i><b>N</b></span><span class="v4-m"><i>SI</i><b>N</b></span><span class="v4-m"><i>SA</i><b>N</b></span><span class="v4-m"><i>E</i><b>P</b></span></td>
-              <td role="cell" class="c-pub">2026-07-21</td>
-            </tr>
-            <tr role="row" class="peek" id="peek-12" data-sev="high" hidden><td role="cell" colspan="16"><div class="pk"><div><p class="pk-s"><em>Anyone who can reach it over the network</em>, with <em>no account</em> and no user interaction, if they can defeat a protection or obtain a target-specific secret, can <em>read and change sensitive data</em>.</p></div><div class="pk-f"><span class="k-lab">What to do</span><b>Upgrade to 4.5.6</b></div><div class="pk-f"><span class="k-lab">Report to publication</span><b>60 days</b><small>Reported privately 2026-05-22, published 2026-07-21</small></div><a class="pk-a" href="/advisories/ghsa-pqxw-g93w-hj9x/">Read the writeup &rarr;</a></div></td></tr>
-            <tr role="row" data-sev="high">
-              <th role="rowheader" scope="row" class="c-nr">13</th>
-              <td role="cell" class="c-id"><a href="/advisories/ghsa-jc26-22qp-cgqj/">GHSA-jc26-22qp-cgqj</a></td>
-              <td role="cell" class="c-pkg">trigger.dev</td>
-              <td role="cell" class="c-sc">7.9</td>
-              <td role="cell" class="c-sev sev-high">High</td>
-              <td role="cell" class="c-cls">Missing authentication</td>
-              <td role="cell" class="c-cwe">306</td>
-              <td role="cell" class="v" data-m="AV">A</td><td role="cell" class="v" data-m="AC">H</td><td role="cell" class="v" data-m="PR">L</td><td role="cell" class="v" data-m="UI">N</td>
-              <td role="cell" class="v" data-m="S">C</td><td role="cell" class="v" data-m="C">H</td><td role="cell" class="v" data-m="I">H</td><td role="cell" class="v" data-m="A">L</td>
-              <td role="cell" class="c-pub">2026-09-14</td>
-            </tr>
-            <tr role="row" class="peek" id="peek-13" data-sev="high" hidden><td role="cell" colspan="16"><div class="pk"><div><p class="pk-s"><em>Anyone on an adjacent network</em>, with <em>a low-privilege account</em> and no user interaction, given conditions outside the attacker's control, can <em>read and change sensitive data and degrade its availability</em>, and <em>the impact reaches beyond the vulnerable component</em>.</p></div><div class="pk-f"><span class="k-lab">What to do</span><b class="quiet">Fix unclear</b></div><div class="pk-f"><span class="k-lab">Report to publication</span><b>115 days</b><small>Reported privately 2026-05-22, published 2026-09-14</small></div><a class="pk-a" href="/advisories/ghsa-jc26-22qp-cgqj/">Read the writeup &rarr;</a></div></td></tr>
-            <tr role="row" data-sev="high">
-              <th role="rowheader" scope="row" class="c-nr">14</th>
-              <td role="cell" class="c-id"><a href="/advisories/ghsa-3c52-v5v2-3r56/">GHSA-3c52-v5v2-3r56</a></td>
-              <td role="cell" class="c-pkg">budibase</td>
-              <td role="cell" class="c-sc">7.7</td>
-              <td role="cell" class="c-sev sev-high">High</td>
-              <td role="cell" class="c-cls">Server side request forgery</td>
-              <td role="cell" class="c-cwe">918</td>
-              <td role="cell" class="v" data-m="AV">N</td><td role="cell" class="v" data-m="AC">L</td><td role="cell" class="v" data-m="PR">L</td><td role="cell" class="v" data-m="UI">N</td>
-              <td role="cell" class="v" data-m="S">C</td><td role="cell" class="v" data-m="C">H</td><td role="cell" class="v" data-m="I">N</td><td role="cell" class="v" data-m="A">N</td>
-              <td role="cell" class="c-pub">2026-09-17</td>
-            </tr>
-            <tr role="row" class="peek" id="peek-14" data-sev="high" hidden><td role="cell" colspan="16"><div class="pk"><div><p class="pk-s"><em>Anyone who can reach it over the network</em>, with <em>a low-privilege account</em> and no user interaction, can <em>read sensitive data</em>, and <em>the impact reaches beyond the vulnerable component</em>.</p></div><div class="pk-f"><span class="k-lab">What to do</span><b>Upgrade past 3.41.0</b></div><div class="pk-f"><span class="k-lab">Report to publication</span><b>118 days</b><small>Reported privately 2026-05-22, published 2026-09-17</small></div><a class="pk-a" href="/advisories/ghsa-3c52-v5v2-3r56/">Read the writeup &rarr;</a></div></td></tr>
-            <tr role="row" data-sev="high">
-              <th role="rowheader" scope="row" class="c-nr">15</th>
-              <td role="cell" class="c-id"><a href="/advisories/cve-2026-56673/">CVE-2026-56673</a></td>
-              <td role="cell" class="c-pkg">ComfyUI</td>
-              <td role="cell" class="c-sc">7.5</td>
-              <td role="cell" class="c-sev sev-high">High</td>
-              <td role="cell" class="c-cls">Path traversal</td>
-              <td role="cell" class="c-cwe">22</td>
-              <td role="cell" class="v" data-m="AV">N</td><td role="cell" class="v" data-m="AC">L</td><td role="cell" class="v" data-m="PR">N</td><td role="cell" class="v" data-m="UI">N</td>
-              <td role="cell" class="v" data-m="S">U</td><td role="cell" class="v" data-m="C">H</td><td role="cell" class="v" data-m="I">N</td><td role="cell" class="v" data-m="A">N</td>
-              <td role="cell" class="c-pub">2026-07-15</td>
-            </tr>
-            <tr role="row" class="peek" id="peek-15" data-sev="high" hidden><td role="cell" colspan="16"><div class="pk"><div><p class="pk-s"><em>Anyone who can reach it over the network</em>, with <em>no account</em> and no user interaction, can <em>read sensitive data</em>.</p></div><div class="pk-f"><span class="k-lab">What to do</span><b>Upgrade to 0.28.0</b></div><div class="pk-f"><span class="k-lab">Published</span><b>2026-07-15</b><small>Published by the maintainer</small></div><a class="pk-a" href="/advisories/cve-2026-56673/">Read the writeup &rarr;</a></div></td></tr>
-            <tr role="row" data-sev="high">
-              <th role="rowheader" scope="row" class="c-nr">16</th>
-              <td role="cell" class="c-id"><a href="/advisories/cve-2026-56671/">CVE-2026-56671</a></td>
-              <td role="cell" class="c-pkg">ComfyUI</td>
-              <td role="cell" class="c-sc">7.5</td>
-              <td role="cell" class="c-sev sev-high">High</td>
-              <td role="cell" class="c-cls">Path traversal</td>
-              <td role="cell" class="c-cwe">22</td>
-              <td role="cell" class="v" data-m="AV">N</td><td role="cell" class="v" data-m="AC">L</td><td role="cell" class="v" data-m="PR">N</td><td role="cell" class="v" data-m="UI">N</td>
-              <td role="cell" class="v" data-m="S">U</td><td role="cell" class="v" data-m="C">H</td><td role="cell" class="v" data-m="I">N</td><td role="cell" class="v" data-m="A">N</td>
-              <td role="cell" class="c-pub">2026-07-15</td>
-            </tr>
-            <tr role="row" class="peek" id="peek-16" data-sev="high" hidden><td role="cell" colspan="16"><div class="pk"><div><p class="pk-s"><em>Anyone who can reach it over the network</em>, with <em>no account</em> and no user interaction, can <em>read sensitive data</em>.</p></div><div class="pk-f"><span class="k-lab">What to do</span><b>Upgrade to 0.28.0</b></div><div class="pk-f"><span class="k-lab">Published</span><b>2026-07-15</b><small>Published by the maintainer</small></div><a class="pk-a" href="/advisories/cve-2026-56671/">Read the writeup &rarr;</a></div></td></tr>
-            <tr role="row" data-sev="high">
-              <th role="rowheader" scope="row" class="c-nr">17</th>
-              <td role="cell" class="c-id"><a href="/advisories/cve-2026-59714/">CVE-2026-59714</a></td>
-              <td role="cell" class="c-pkg">open-webui</td>
-              <td role="cell" class="c-sc">7.1</td>
-              <td role="cell" class="c-sev sev-high">High</td>
-              <td role="cell" class="c-cls">Missing authorization</td>
-              <td role="cell" class="c-cwe">862</td>
-              <td role="cell" class="v" data-m="AV">N</td><td role="cell" class="v" data-m="AC">L</td><td role="cell" class="v" data-m="PR">L</td><td role="cell" class="v" data-m="UI">N</td>
-              <td role="cell" class="v" data-m="S">U</td><td role="cell" class="v" data-m="C">N</td><td role="cell" class="v" data-m="I">H</td><td role="cell" class="v" data-m="A">L</td>
-              <td role="cell" class="c-pub">2026-07-02</td>
-            </tr>
-            <tr role="row" class="peek" id="peek-17" data-sev="high" hidden><td role="cell" colspan="16"><div class="pk"><div><p class="pk-s"><em>Anyone who can reach it over the network</em>, with <em>a low-privilege account</em> and no user interaction, can <em>change data with serious effect and degrade its availability</em>.</p></div><div class="pk-f"><span class="k-lab">What to do</span><b>Upgrade to 0.10.0</b></div><div class="pk-f"><span class="k-lab">Report to publication</span><b>49 days</b><small>Reported privately 2026-05-14, published 2026-07-02</small></div><a class="pk-a" href="/advisories/cve-2026-59714/">Read the writeup &rarr;</a></div></td></tr>
-            <tr role="row" data-sev="high">
-              <th role="rowheader" scope="row" class="c-nr">18</th>
-              <td role="cell" class="c-id"><a href="/advisories/ghsa-w677-p6hx-85vw/">GHSA-w677-p6hx-85vw</a></td>
-              <td role="cell" class="c-pkg">teableio/teable</td>
-              <td role="cell" class="c-sc">7.1</td>
-              <td role="cell" class="c-sev sev-high">High</td>
-              <td role="cell" class="c-cls">Authentication bypass</td>
-              <td role="cell" class="c-cwe">287</td>
-              <td role="cell" class="v" data-m="AV">N</td><td role="cell" class="v" data-m="AC">L</td><td role="cell" class="v" data-m="PR">L</td><td role="cell" class="v" data-m="UI">N</td>
-              <td role="cell" class="v" data-m="S">U</td><td role="cell" class="v" data-m="C">H</td><td role="cell" class="v" data-m="I">L</td><td role="cell" class="v" data-m="A">N</td>
-              <td role="cell" class="c-pub">2026-10-13</td>
-            </tr>
-            <tr role="row" class="peek" id="peek-18" data-sev="high" hidden><td role="cell" colspan="16"><div class="pk"><div><p class="pk-s"><em>Anyone who can reach it over the network</em>, with <em>a low-privilege account</em> and no user interaction, can <em>read sensitive data and change some data</em>.</p></div><div class="pk-f"><span class="k-lab">What to do</span><b>Upgrade to release.2026-10-12T12-45-53Z.3331</b></div><div class="pk-f"><span class="k-lab">Report to publication</span><b>38 days</b><small>Reported privately 2026-09-05, published 2026-10-13</small></div><a class="pk-a" href="/advisories/ghsa-w677-p6hx-85vw/">Read the writeup &rarr;</a></div></td></tr>
-            <tr role="row" data-sev="medium">
-              <th role="rowheader" scope="row" class="c-nr">19</th>
-              <td role="cell" class="c-id"><a href="/advisories/ghsa-8p4j-2mm9-rh78/">GHSA-8p4j-2mm9-rh78</a></td>
-              <td role="cell" class="c-pkg">Tracecat</td>
-              <td role="cell" class="c-sc">6.5</td>
-              <td role="cell" class="c-sev sev-med">Medium</td>
-              <td role="cell" class="c-cls">Server side request forgery</td>
-              <td role="cell" class="c-cwe">918</td>
-              <td role="cell" class="v" data-m="AV">N</td><td role="cell" class="v" data-m="AC">L</td><td role="cell" class="v" data-m="PR">L</td><td role="cell" class="v" data-m="UI">N</td>
-              <td role="cell" class="v" data-m="S">U</td><td role="cell" class="v" data-m="C">H</td><td role="cell" class="v" data-m="I">N</td><td role="cell" class="v" data-m="A">N</td>
-              <td role="cell" class="c-pub">2026-09-20</td>
-            </tr>
-            <tr role="row" class="peek" id="peek-19" data-sev="medium" hidden><td role="cell" colspan="16"><div class="pk"><div><p class="pk-s"><em>Anyone who can reach it over the network</em>, with <em>a low-privilege account</em> and no user interaction, can <em>read sensitive data</em>.</p></div><div class="pk-f"><span class="k-lab">What to do</span><b>Upgrade to 1.0.0-beta.52-rc.3</b></div><div class="pk-f"><span class="k-lab">Report to publication</span><b>115 days</b><small>Reported privately 2026-05-28, published 2026-09-20</small></div><a class="pk-a" href="/advisories/ghsa-8p4j-2mm9-rh78/">Read the writeup &rarr;</a></div></td></tr>
-            <tr role="row" data-sev="medium">
-              <th role="rowheader" scope="row" class="c-nr">20</th>
-              <td role="cell" class="c-id"><a href="/advisories/cve-2026-53577/">CVE-2026-53577</a></td>
-              <td role="cell" class="c-pkg">io.kestra:kestra</td>
-              <td role="cell" class="c-sc">6.5</td>
-              <td role="cell" class="c-sev sev-med">Medium</td>
-              <td role="cell" class="c-cls">Incorrect authorization</td>
-              <td role="cell" class="c-cwe">863</td>
-              <td role="cell" class="v" data-m="AV">N</td><td role="cell" class="v" data-m="AC">L</td><td role="cell" class="v" data-m="PR">L</td><td role="cell" class="v" data-m="UI">N</td>
-              <td role="cell" class="v" data-m="S">U</td><td role="cell" class="v" data-m="C">H</td><td role="cell" class="v" data-m="I">N</td><td role="cell" class="v" data-m="A">N</td>
-              <td role="cell" class="c-pub">2026-06-03</td>
-            </tr>
-            <tr role="row" class="peek" id="peek-20" data-sev="medium" hidden><td role="cell" colspan="16"><div class="pk"><div><p class="pk-s"><em>Anyone who can reach it over the network</em>, with <em>a low-privilege account</em> and no user interaction, can <em>read sensitive data</em>.</p></div><div class="pk-f"><span class="k-lab">What to do</span><b>Fixed in 1.0.45 or 1.3.21</b></div><div class="pk-f"><span class="k-lab">Report to publication</span><b>12 days</b><small>Reported privately 2026-05-22, published 2026-06-03</small></div><a class="pk-a" href="/advisories/cve-2026-53577/">Read the writeup &rarr;</a></div></td></tr>
-            <tr role="row" data-sev="medium">
-              <th role="rowheader" scope="row" class="c-nr">21</th>
-              <td role="cell" class="c-id"><a href="/advisories/ghsa-jcc2-3vff-7867/">GHSA-jcc2-3vff-7867</a></td>
-              <td role="cell" class="c-pkg">nocodb</td>
-              <td role="cell" class="c-sc">6.5</td>
-              <td role="cell" class="c-sev sev-med">Medium</td>
-              <td role="cell" class="c-cls">CWE-522</td>
-              <td role="cell" class="c-cwe">522</td>
-              <td role="cell" class="v" data-m="AV">N</td><td role="cell" class="v" data-m="AC">L</td><td role="cell" class="v" data-m="PR">L</td><td role="cell" class="v" data-m="UI">N</td>
-              <td role="cell" class="v" data-m="S">U</td><td role="cell" class="v" data-m="C">H</td><td role="cell" class="v" data-m="I">N</td><td role="cell" class="v" data-m="A">N</td>
-              <td role="cell" class="c-pub">2026-11-02</td>
-            </tr>
-            <tr role="row" class="peek" id="peek-21" data-sev="medium" hidden><td role="cell" colspan="16"><div class="pk"><div><p class="pk-s"><em>Anyone who can reach it over the network</em>, with <em>a low-privilege account</em> and no user interaction, can <em>read sensitive data</em>.</p></div><div class="pk-f"><span class="k-lab">What to do</span><b>Upgrade to 2026.10.1</b></div><div class="pk-f"><span class="k-lab">Published</span><b>2026-11-02</b><small>Published by the maintainer</small></div><a class="pk-a" href="/advisories/ghsa-jcc2-3vff-7867/">Read the writeup &rarr;</a></div></td></tr>
-            <tr role="row" data-sev="medium">
-              <th role="rowheader" scope="row" class="c-nr">22</th>
-              <td role="cell" class="c-id"><a href="/advisories/ghsa-jvm6-86c5-f8j8/">GHSA-jvm6-86c5-f8j8</a></td>
-              <td role="cell" class="c-pkg">teableio/teable</td>
-              <td role="cell" class="c-sc">6.5</td>
-              <td role="cell" class="c-sev sev-med">Medium</td>
-              <td role="cell" class="c-cls">Server side request forgery</td>
-              <td role="cell" class="c-cwe">918</td>
-              <td role="cell" class="v" data-m="AV">N</td><td role="cell" class="v" data-m="AC">L</td><td role="cell" class="v" data-m="PR">L</td><td role="cell" class="v" data-m="UI">N</td>
-              <td role="cell" class="v" data-m="S">U</td><td role="cell" class="v" data-m="C">H</td><td role="cell" class="v" data-m="I">N</td><td role="cell" class="v" data-m="A">N</td>
-              <td role="cell" class="c-pub">2026-10-13</td>
-            </tr>
-            <tr role="row" class="peek" id="peek-22" data-sev="medium" hidden><td role="cell" colspan="16"><div class="pk"><div><p class="pk-s"><em>Anyone who can reach it over the network</em>, with <em>a low-privilege account</em> and no user interaction, can <em>read sensitive data</em>.</p></div><div class="pk-f"><span class="k-lab">What to do</span><b>Upgrade to release.2026-10-12T12-45-53Z.3331</b></div><div class="pk-f"><span class="k-lab">Report to publication</span><b>39 days</b><small>Reported privately 2026-09-04, published 2026-10-13</small></div><a class="pk-a" href="/advisories/ghsa-jvm6-86c5-f8j8/">Read the writeup &rarr;</a></div></td></tr>
-            <tr role="row" data-sev="medium">
-              <th role="rowheader" scope="row" class="c-nr">23</th>
-              <td role="cell" class="c-id"><a href="/advisories/cve-2026-63342/">CVE-2026-63342</a></td>
-              <td role="cell" class="c-pkg">github.com/<wbr>hatchet-dev/<wbr>hatchet</td>
-              <td role="cell" class="c-sc">6.3</td>
-              <td role="cell" class="c-sev sev-med">Medium</td>
-              <td role="cell" class="c-cls">Incorrect authorization</td>
-              <td role="cell" class="c-cwe">863</td>
-              <td role="cell" class="v" data-m="AV">N</td><td role="cell" class="v" data-m="AC">H</td><td role="cell" class="v" data-m="PR">L</td><td role="cell" class="v" data-m="UI">N</td>
-              <td role="cell" class="v" data-m="S">C</td><td role="cell" class="v" data-m="C">H</td><td role="cell" class="v" data-m="I">N</td><td role="cell" class="v" data-m="A">N</td>
-              <td role="cell" class="c-pub">2026-06-30</td>
-            </tr>
-            <tr role="row" class="peek" id="peek-23" data-sev="medium" hidden><td role="cell" colspan="16"><div class="pk"><div><p class="pk-s"><em>Anyone who can reach it over the network</em>, with <em>a low-privilege account</em> and no user interaction, given conditions outside the attacker's control, can <em>read sensitive data</em>, and <em>the impact reaches beyond the vulnerable component</em>.</p></div><div class="pk-f"><span class="k-lab">What to do</span><b>Upgrade to 0.91.1</b></div><div class="pk-f"><span class="k-lab">Report to publication</span><b>39 days</b><small>Reported privately 2026-05-22, published 2026-06-30</small></div><a class="pk-a" href="/advisories/cve-2026-63342/">Read the writeup &rarr;</a></div></td></tr>
-            <tr role="row" data-sev="medium">
-              <th role="rowheader" scope="row" class="c-nr">24</th>
-              <td role="cell" class="c-id"><a href="/advisories/ghsa-59h8-w5q6-mfmp/">GHSA-59h8-w5q6-mfmp</a></td>
-              <td role="cell" class="c-pkg">trigger.dev</td>
-              <td role="cell" class="c-sc">5.3</td>
-              <td role="cell" class="c-sev sev-med">Medium</td>
-              <td role="cell" class="c-cls">Missing authentication</td>
-              <td role="cell" class="c-cwe">306</td>
-              <td role="cell" class="v" data-m="AV">N</td><td role="cell" class="v" data-m="AC">L</td><td role="cell" class="v" data-m="PR">N</td><td role="cell" class="v" data-m="UI">N</td>
-              <td role="cell" class="v" data-m="S">U</td><td role="cell" class="v" data-m="C">N</td><td role="cell" class="v" data-m="I">L</td><td role="cell" class="v" data-m="A">N</td>
-              <td role="cell" class="c-pub">2026-07-21</td>
-            </tr>
-            <tr role="row" class="peek" id="peek-24" data-sev="medium" hidden><td role="cell" colspan="16"><div class="pk"><div><p class="pk-s"><em>Anyone who can reach it over the network</em>, with <em>no account</em> and no user interaction, can <em>change some data</em>.</p></div><div class="pk-f"><span class="k-lab">What to do</span><b>Upgrade to 4.5.5</b></div><div class="pk-f"><span class="k-lab">Report to publication</span><b>60 days</b><small>Reported privately 2026-05-22, published 2026-07-21</small></div><a class="pk-a" href="/advisories/ghsa-59h8-w5q6-mfmp/">Read the writeup &rarr;</a></div></td></tr>
-            <tr role="row" data-sev="medium">
-              <th role="rowheader" scope="row" class="c-nr">25</th>
-              <td role="cell" class="c-id"><a href="/advisories/cve-2026-73301/">CVE-2026-73301</a></td>
-              <td role="cell" class="c-pkg">@budibase/server</td>
-              <td role="cell" class="c-sc">4.3</td>
-              <td role="cell" class="c-sev sev-med">Medium</td>
-              <td role="cell" class="c-cls">Missing authorization</td>
-              <td role="cell" class="c-cwe">862</td>
-              <td role="cell" class="v" data-m="AV">N</td><td role="cell" class="v" data-m="AC">L</td><td role="cell" class="v" data-m="PR">L</td><td role="cell" class="v" data-m="UI">N</td>
-              <td role="cell" class="v" data-m="S">U</td><td role="cell" class="v" data-m="C">L</td><td role="cell" class="v" data-m="I">N</td><td role="cell" class="v" data-m="A">N</td>
-              <td role="cell" class="c-pub">2026-07-22</td>
-            </tr>
-            <tr role="row" class="peek" id="peek-25" data-sev="medium" hidden><td role="cell" colspan="16"><div class="pk"><div><p class="pk-s"><em>Anyone who can reach it over the network</em>, with <em>a low-privilege account</em> and no user interaction, can <em>read some data</em>.</p></div><div class="pk-f"><span class="k-lab">What to do</span><b class="quiet">No fix listed</b></div><div class="pk-f"><span class="k-lab">Report to publication</span><b>61 days</b><small>Reported privately 2026-05-22, published 2026-07-22</small></div><a class="pk-a" href="/advisories/cve-2026-73301/">Read the writeup &rarr;</a></div></td></tr>
-            <tr role="row" data-sev="medium">
-              <th role="rowheader" scope="row" class="c-nr">26</th>
-              <td role="cell" class="c-id"><a href="/advisories/ghsa-64mc-4p6f-r7x9/">GHSA-64mc-4p6f-r7x9</a></td>
-              <td role="cell" class="c-pkg">vaultwarden</td>
-              <td role="cell" class="c-sc">4.3</td>
-              <td role="cell" class="c-sev sev-med">Medium</td>
-              <td role="cell" class="c-cls">Incorrect authorization</td>
-              <td role="cell" class="c-cwe">863</td>
-              <td role="cell" class="v" data-m="AV">N</td><td role="cell" class="v" data-m="AC">L</td><td role="cell" class="v" data-m="PR">L</td><td role="cell" class="v" data-m="UI">N</td>
-              <td role="cell" class="v" data-m="S">U</td><td role="cell" class="v" data-m="C">L</td><td role="cell" class="v" data-m="I">N</td><td role="cell" class="v" data-m="A">N</td>
-              <td role="cell" class="c-pub">2026-10-28</td>
-            </tr>
-            <tr role="row" class="peek" id="peek-26" data-sev="medium" hidden><td role="cell" colspan="16"><div class="pk"><div><p class="pk-s"><em>Anyone who can reach it over the network</em>, with <em>a low-privilege account</em> and no user interaction, can <em>read some data</em>.</p></div><div class="pk-f"><span class="k-lab">What to do</span><b>Upgrade to 1.37.4</b></div><div class="pk-f"><span class="k-lab">Report to publication</span><b>41 days</b><small>Reported privately 2026-09-17, published 2026-10-28</small></div><a class="pk-a" href="/advisories/ghsa-64mc-4p6f-r7x9/">Read the writeup &rarr;</a></div></td></tr>
-            <tr role="row" data-sev="low">
-              <th role="rowheader" scope="row" class="c-nr">27</th>
-              <td role="cell" class="c-id"><a href="/advisories/ghsa-xf86-hfpm-92xr/">GHSA-xf86-hfpm-92xr</a></td>
-              <td role="cell" class="c-pkg">directus</td>
-              <td role="cell" class="c-sc">3.1</td>
-              <td role="cell" class="c-sev sev-low">Low</td>
-              <td role="cell" class="c-cls">Incorrect authorization</td>
-              <td role="cell" class="c-cwe">863</td>
-              <td role="cell" class="v" data-m="AV">N</td><td role="cell" class="v" data-m="AC">H</td><td role="cell" class="v" data-m="PR">L</td><td role="cell" class="v" data-m="UI">N</td>
-              <td role="cell" class="v" data-m="S">U</td><td role="cell" class="v" data-m="C">L</td><td role="cell" class="v" data-m="I">N</td><td role="cell" class="v" data-m="A">N</td>
-              <td role="cell" class="c-pub">2026-10-19</td>
-            </tr>
-            <tr role="row" class="peek" id="peek-27" data-sev="low" hidden><td role="cell" colspan="16"><div class="pk"><div><p class="pk-s"><em>Anyone who can reach it over the network</em>, with <em>a low-privilege account</em> and no user interaction, given conditions outside the attacker's control, can <em>read some data</em>.</p></div><div class="pk-f"><span class="k-lab">What to do</span><b>Upgrade to 12.3.0</b></div><div class="pk-f"><span class="k-lab">Report to publication</span><b>150 days</b><small>Reported privately 2026-05-22, published 2026-10-19</small></div><a class="pk-a" href="/advisories/ghsa-xf86-hfpm-92xr/">Read the writeup &rarr;</a></div></td></tr>
-            <tr role="row" data-sev="low">
-              <th role="rowheader" scope="row" class="c-nr">28</th>
-              <td role="cell" class="c-id"><a href="/advisories/cve-2026-59715/">CVE-2026-59715</a></td>
-              <td role="cell" class="c-pkg">open-webui</td>
-              <td role="cell" class="c-sc">3.1</td>
-              <td role="cell" class="c-sev sev-low">Low</td>
-              <td role="cell" class="c-cls">Missing authentication</td>
-              <td role="cell" class="c-cwe">306</td>
-              <td role="cell" class="v" data-m="AV">N</td><td role="cell" class="v" data-m="AC">H</td><td role="cell" class="v" data-m="PR">L</td><td role="cell" class="v" data-m="UI">N</td>
-              <td role="cell" class="v" data-m="S">U</td><td role="cell" class="v" data-m="C">N</td><td role="cell" class="v" data-m="I">L</td><td role="cell" class="v" data-m="A">N</td>
-              <td role="cell" class="c-pub">2026-07-02</td>
-            </tr>
-            <tr role="row" class="peek" id="peek-28" data-sev="low" hidden><td role="cell" colspan="16"><div class="pk"><div><p class="pk-s"><em>Anyone who can reach it over the network</em>, with <em>a low-privilege account</em> and no user interaction, given conditions outside the attacker's control, can <em>change some data</em>.</p></div><div class="pk-f"><span class="k-lab">What to do</span><b>Upgrade to 0.10.0</b></div><div class="pk-f"><span class="k-lab">Report to publication</span><b>86 days</b><small>Reported privately 2026-04-07, published 2026-07-02</small></div><a class="pk-a" href="/advisories/cve-2026-59715/">Read the writeup &rarr;</a></div></td></tr>
-            <tr role="row" data-sev="low">
-              <th role="rowheader" scope="row" class="c-nr">29</th>
-              <td role="cell" class="c-id"><a href="/advisories/ghsa-jmgj-cq6g-6hr2/">GHSA-jmgj-cq6g-6hr2</a></td>
-              <td role="cell" class="c-pkg">nocodb</td>
-              <td role="cell" class="c-sc">2.7</td>
-              <td role="cell" class="c-sev sev-low">Low</td>
-              <td role="cell" class="c-cls">Incorrect authorization</td>
-              <td role="cell" class="c-cwe">863</td>
-              <td role="cell" class="v" data-m="AV">N</td><td role="cell" class="v" data-m="AC">L</td><td role="cell" class="v" data-m="PR">H</td><td role="cell" class="v" data-m="UI">N</td>
-              <td role="cell" class="v" data-m="S">U</td><td role="cell" class="v" data-m="C">N</td><td role="cell" class="v" data-m="I">L</td><td role="cell" class="v" data-m="A">N</td>
-              <td role="cell" class="c-pub">2026-11-02</td>
-            </tr>
-            <tr role="row" class="peek" id="peek-29" data-sev="low" hidden><td role="cell" colspan="16"><div class="pk"><div><p class="pk-s"><em>Anyone who can reach it over the network</em>, with <em>a high-privilege account</em> and no user interaction, can <em>change some data</em>.</p></div><div class="pk-f"><span class="k-lab">What to do</span><b>Upgrade to 2026.09.1</b></div><div class="pk-f"><span class="k-lab">Report to publication</span><b>39 days</b><small>Reported privately 2026-09-24, published 2026-11-02</small></div><a class="pk-a" href="/advisories/ghsa-jmgj-cq6g-6hr2/">Read the writeup &rarr;</a></div></td></tr>
-          </tbody>
-        </table>
+      <div class="cards">
+        <a class="card" data-sev="critical" href="/advisories/ghsa-24q6-6h89-f9p7/"><div class="card-top"><span class="card-score">10.0</span><span class="card-sev">Critical</span></div><div class="card-proj">autogpt-platform-backend</div><p class="card-hook">Hardcoded Default JWT Secret Enables Complete Authentication Bypass</p><div class="card-foot"><span class="card-cls">Authentication bypass</span><span class="card-cwe">CWE-287</span><span class="k-ghsa">GHSA</span></div></a>
+        <a class="card" data-sev="critical" href="/advisories/ghsa-42mf-vpmr-gw5r/"><div class="card-top"><span class="card-score">9.9</span><span class="card-sev">Critical</span></div><div class="card-proj">ag2</div><p class="card-hook">Command Filter Bypass in LocalShellEnvironment via shell=True Allows Arbitrary OS Command Execution</p><div class="card-foot"><span class="card-cls">Command injection</span><span class="card-cwe">CWE-78</span><span class="k-ghsa">GHSA</span></div></a>
+        <a class="card" data-sev="critical" href="/advisories/ghsa-jmr9-98g4-2phv/"><div class="card-top"><span class="card-score">9.4</span><span class="card-sev">Critical</span></div><div class="card-proj">github.com/portainer/portainer</div><p class="card-hook">Non-admin bind-mount restriction bypass via Docker local-driver volumes and automatic Git redeploy (incomplete fix of CVE-2026-44849 and CVE-2026-44850)</p><div class="card-foot"><span class="card-cls">Access control</span><span class="card-cwe">CWE-284</span><span class="k-ghsa">GHSA</span></div></a>
+        <a class="card" data-sev="critical" href="/advisories/cve-2026-49950/"><div class="card-top"><span class="card-score">9.3</span><span class="card-sev">Critical</span></div><div class="card-proj">xinference</div><p class="card-hook">Unauthenticated remote code execution through the Xinference actor transport</p><div class="card-foot"><span class="card-cls">Missing authentication</span><span class="card-cwe">CWE-306</span><span class="k-cve">CVE</span></div></a>
+        <a class="card" data-sev="high" href="/advisories/cve-2026-57516/"><div class="card-top"><span class="card-score">8.8</span><span class="card-sev">High</span></div><div class="card-proj">ray</div><p class="card-hook">Arbitrary code execution via ray.data.read_webdataset default decoder: pickle.loads(value) and torch.load(weights_only=False)</p><div class="card-foot"><span class="card-cls">Code injection</span><span class="card-cwe">CWE-94</span><span class="k-cve">CVE</span></div></a>
+        <a class="card" data-sev="high" href="/advisories/ghsa-5mc6-2qfj-59cg/"><div class="card-top"><span class="card-score">8.8</span><span class="card-sev">High</span></div><div class="card-proj">opik</div><p class="card-hook">Opik SDKs render Jinja2/Nunjucks prompt templates without a sandbox, allowing code execution</p><div class="card-foot"><span class="card-cls">Code injection</span><span class="card-cwe">CWE-94</span><span class="k-ghsa">GHSA</span></div></a>
+        <a class="card" data-sev="high" href="/advisories/cve-2026-45675/"><div class="card-top"><span class="card-score">8.1</span><span class="card-sev">High</span></div><div class="card-proj">open-webui</div><p class="card-hook">LDAP and OAuth First-User Race Condition Allows Multiple Admin Accounts</p><div class="card-foot"><span class="card-cls">Privilege escalation</span><span class="card-cwe">CWE-269</span><span class="k-cve">CVE</span></div></a>
+        <a class="card" data-sev="high" href="/advisories/ghsa-hxvp-ff3g-qcj7/"><div class="card-top"><span class="card-score">8.8</span><span class="card-sev">High</span></div><div class="card-proj">@vendure/core</div><p class="card-hook">Low-privilege administrator can read password-reset / verification / email-change tokens from Job.data and take over any customer account (cross-channel)</p><div class="card-foot"><span class="card-cls">Information disclosure</span><span class="card-cwe">CWE-200</span><span class="k-ghsa">GHSA</span></div></a>
+        <a class="card card--all" href="/advisories/"><div class="all-top"><span class="all-n">29</span><span class="all-tag">Record</span></div><div class="all-title">The full record</div><div class="all-s">Every published advisory, each with its CVSS base vector, weakness class and writeup.</div><span class="all-go">Browse all advisories &rarr;</span></a>
       </div>
 
 <!-- ADVISORIES:END -->
-
-      <div class="tfoot">
-        <p class="left"><a href="/advisories/">The full record, with base vectors and writeups &rarr;</a></p>
-      </div>
     </section>
 
 <section class="sec g" id="classes" aria-labelledby="h-classes">
       <div class="sec-head">
-        <p class="idx">03</p>
-        <h2 id="h-classes">Weakness classes</h2>
+        <div class="sec-title">
+          <p class="idx">03</p>
+          <h2 id="h-classes">Weakness classes</h2>
+        </div>
         <p class="sec-sub">Four recurring, in rough order of volume.</p>
       </div>
 
@@ -497,8 +106,10 @@ last_modified_at: 2026-11-08T01:39:34+00:00
 
 <section class="sec g" id="method" aria-labelledby="h-method">
       <div class="sec-head">
-        <p class="idx">04</p>
-        <h2 id="h-method">Method</h2>
+        <div class="sec-title">
+          <p class="idx">04</p>
+          <h2 id="h-method">Method</h2>
+        </div>
         <p class="sec-sub">Reproduced before reported. Private first, public only after the fix.</p>
       </div>
 
@@ -517,8 +128,10 @@ last_modified_at: 2026-11-08T01:39:34+00:00
 
 <section class="sec g" id="record" aria-labelledby="h-record">
       <div class="sec-head">
-        <p class="idx">05</p>
-        <h2 id="h-record">Record</h2>
+        <div class="sec-title">
+          <p class="idx">05</p>
+          <h2 id="h-record">Record</h2>
+        </div>
         <p class="sec-sub">Roles, degree, certifications and competition results as of September 2026. Dates are YYYY.MM.</p>
       </div>
 
@@ -598,8 +211,10 @@ last_modified_at: 2026-11-08T01:39:34+00:00
 
 <section class="sec g" id="coverage" aria-labelledby="h-coverage">
       <div class="sec-head">
-        <p class="idx">06</p>
-        <h2 id="h-coverage">Coverage</h2>
+        <div class="sec-title">
+          <p class="idx">06</p>
+          <h2 id="h-coverage">Coverage</h2>
+        </div>
         <p class="sec-sub">Third party sources that name him, newest first.</p>
       </div>
 
@@ -649,8 +264,10 @@ last_modified_at: 2026-11-08T01:39:34+00:00
 
 <section class="sec g" id="contact" aria-labelledby="h-contact">
       <div class="sec-head">
-        <p class="idx">07</p>
-        <h2 id="h-contact">Contact</h2>
+        <div class="sec-title">
+          <p class="idx">07</p>
+          <h2 id="h-contact">Contact</h2>
+        </div>
       </div>
 
       <ul class="contact">
