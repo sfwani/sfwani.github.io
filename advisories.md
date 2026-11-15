@@ -6,7 +6,7 @@ seo_title: "Published security advisories credited to Sanaan Fayaz Wani"
 role: "Every advisory below is published and credited. Reports still in coordinated disclosure are not listed, named or hinted at until the maintainer publishes them."
 description: Published security advisories credited to Sanaan Fayaz Wani, with CVSS base vectors, weakness classes and full writeups.
 permalink: /advisories/
-last_modified_at: 2026-11-09T02:07:40+00:00
+last_modified_at: 2026-11-15T14:16:05+00:00
 ---
 
 <section class="sec g" id="advisories" aria-labelledby="h-adv">
@@ -39,7 +39,7 @@ last_modified_at: 2026-11-09T02:07:40+00:00
             <tr role="row" data-sev="critical">
               <th role="rowheader" scope="row" class="c-nr">01</th>
               <td role="cell" class="c-id"><a href="/advisories/ghsa-24q6-6h89-f9p7/">GHSA-24q6-6h89-f9p7</a></td>
-              <td role="cell" class="c-pkg">autogpt-platform-backend</td>
+              <td role="cell" class="c-pkg">autogpt-platform-beta</td>
               <td role="cell" class="c-sc">10.0</td>
               <td role="cell" class="c-sev sev-crit">Critical</td>
               <td role="cell" class="c-cls">Authentication bypass</td>
@@ -135,7 +135,7 @@ last_modified_at: 2026-11-09T02:07:40+00:00
             <tr role="row" data-sev="high">
               <th role="rowheader" scope="row" class="c-nr">09</th>
               <td role="cell" class="c-id"><a href="/advisories/ghsa-57mf-wqwq-6g6x/">GHSA-57mf-wqwq-6g6x</a></td>
-              <td role="cell" class="c-pkg">autogpt-platform-backend</td>
+              <td role="cell" class="c-pkg">autogpt-platform-beta</td>
               <td role="cell" class="c-sc">8.2</td>
               <td role="cell" class="c-sev sev-high">High</td>
               <td role="cell" class="c-cls">Hard-coded crypto key</td>
