@@ -6,7 +6,7 @@ seo_title: "Published security advisories credited to Sanaan Fayaz Wani"
 role: "Every advisory below is published and credited. Reports still in coordinated disclosure are not listed, named or hinted at until the maintainer publishes them."
 description: Published security advisories credited to Sanaan Fayaz Wani, with CVSS base vectors, weakness classes and full writeups.
 permalink: /advisories/
-last_modified_at: 2026-11-15T14:16:05+00:00
+last_modified_at: 2026-11-18T15:56:42+00:00
 ---
 
 <section class="sec g" id="advisories" aria-labelledby="h-adv">
@@ -62,18 +62,6 @@ last_modified_at: 2026-11-15T14:16:05+00:00
             <tr role="row" class="peek" id="peek-02" data-sev="critical" hidden><td role="cell" colspan="9"><div class="pk"><div><p class="pk-s"><em>Anyone who can reach it over the network</em>, with <em>a low-privilege account</em> and no user interaction, can <em>read and change sensitive data and make it unavailable</em>, and <em>the impact reaches beyond the vulnerable component</em>.</p><div class="pk-f"><small>Score is my assessment; GitHub published no CVSS for this advisory.</small></div></div><div class="pk-f"><span class="k-lab">What to do</span><b>Upgrade to 1.1.2</b></div><div class="pk-f"><span class="k-lab">Report to publication</span><b>134 days</b><small>Reported privately 2026-05-22, published 2026-10-03</small></div><a class="pk-a" href="/advisories/ghsa-42mf-vpmr-gw5r/">Read the writeup &rarr;</a></div></td></tr>
             <tr role="row" data-sev="critical">
               <th role="rowheader" scope="row" class="c-nr">03</th>
-              <td role="cell" class="c-id"><a href="/advisories/ghsa-jmr9-98g4-2phv/">GHSA-jmr9-98g4-2phv</a></td>
-              <td role="cell" class="c-pkg">github.com/<wbr>portainer/<wbr>portainer</td>
-              <td role="cell" class="c-sc">9.4</td>
-              <td role="cell" class="c-sev sev-crit">Critical</td>
-              <td role="cell" class="c-cls">Access control</td>
-              <td role="cell" class="c-cwe">284</td>
-              <td role="cell" class="c-vec"><span class="vm-s">v4.0</span><span class="vm"><i>AV</i><b>N</b></span><span class="vm"><i>AC</i><b>L</b></span><span class="vm"><i>AT</i><b>N</b></span><span class="vm"><i>PR</i><b>L</b></span><span class="vm"><i>UI</i><b>N</b></span><span class="vm"><i>VC</i><b>H</b></span><span class="vm"><i>VI</i><b>H</b></span><span class="vm"><i>VA</i><b>H</b></span><span class="vm"><i>SC</i><b>H</b></span><span class="vm"><i>SI</i><b>H</b></span><span class="vm"><i>SA</i><b>H</b></span></td>
-              <td role="cell" class="c-pub">2026-10-08</td>
-            </tr>
-            <tr role="row" class="peek" id="peek-03" data-sev="critical" hidden><td role="cell" colspan="9"><div class="pk"><div><p class="pk-s"><em>Anyone who can reach it over the network</em>, with <em>a low-privilege account</em> and no user interaction, can <em>read and change sensitive data and make it unavailable</em>, and <em>other systems are affected too</em>.</p></div><div class="pk-f"><span class="k-lab">What to do</span><b class="quiet">Fix differs by range</b></div><div class="pk-f"><span class="k-lab">Published</span><b>2026-10-08</b><small>Published by the maintainer</small></div><a class="pk-a" href="/advisories/ghsa-jmr9-98g4-2phv/">Read the writeup &rarr;</a></div></td></tr>
-            <tr role="row" data-sev="critical">
-              <th role="rowheader" scope="row" class="c-nr">04</th>
               <td role="cell" class="c-id"><a href="/advisories/cve-2026-49950/">CVE-2026-49950</a></td>
               <td role="cell" class="c-pkg">xinference</td>
               <td role="cell" class="c-sc">9.3</td>
@@ -83,9 +71,9 @@ last_modified_at: 2026-11-15T14:16:05+00:00
               <td role="cell" class="c-vec"><span class="vm-s">v4.0</span><span class="vm"><i>AV</i><b>N</b></span><span class="vm"><i>AC</i><b>L</b></span><span class="vm"><i>AT</i><b>N</b></span><span class="vm"><i>PR</i><b>N</b></span><span class="vm"><i>UI</i><b>N</b></span><span class="vm"><i>VC</i><b>H</b></span><span class="vm"><i>VI</i><b>H</b></span><span class="vm"><i>VA</i><b>H</b></span><span class="vm"><i>SC</i><b>N</b></span><span class="vm"><i>SI</i><b>N</b></span><span class="vm"><i>SA</i><b>N</b></span></td>
               <td role="cell" class="c-pub">2026-10-16</td>
             </tr>
-            <tr role="row" class="peek" id="peek-04" data-sev="critical" hidden><td role="cell" colspan="9"><div class="pk"><div><p class="pk-s"><em>Anyone who can reach it over the network</em>, with <em>no account</em> and no user interaction, can <em>read and change sensitive data and make it unavailable</em>.</p></div><div class="pk-f"><span class="k-lab">What to do</span><b class="quiet">No fix listed</b></div><div class="pk-f"><span class="k-lab">Published</span><b>2026-10-16</b><small>Published by the maintainer</small></div><a class="pk-a" href="/advisories/cve-2026-49950/">Read the writeup &rarr;</a></div></td></tr>
+            <tr role="row" class="peek" id="peek-03" data-sev="critical" hidden><td role="cell" colspan="9"><div class="pk"><div><p class="pk-s"><em>Anyone who can reach it over the network</em>, with <em>no account</em> and no user interaction, can <em>read and change sensitive data and make it unavailable</em>.</p></div><div class="pk-f"><span class="k-lab">What to do</span><b class="quiet">No fix listed</b></div><div class="pk-f"><span class="k-lab">Published</span><b>2026-10-16</b><small>Published by the maintainer</small></div><a class="pk-a" href="/advisories/cve-2026-49950/">Read the writeup &rarr;</a></div></td></tr>
             <tr role="row" data-sev="high">
-              <th role="rowheader" scope="row" class="c-nr">05</th>
+              <th role="rowheader" scope="row" class="c-nr">04</th>
               <td role="cell" class="c-id"><a href="/advisories/ghsa-hxvp-ff3g-qcj7/">GHSA-hxvp-ff3g-qcj7</a></td>
               <td role="cell" class="c-pkg">@vendure/core</td>
               <td role="cell" class="c-sc">8.8</td>
@@ -95,9 +83,9 @@ last_modified_at: 2026-11-15T14:16:05+00:00
               <td role="cell" class="c-vec"><span class="vm-s">v3.1</span><span class="vm"><i>AV</i><b>N</b></span><span class="vm"><i>AC</i><b>L</b></span><span class="vm"><i>PR</i><b>L</b></span><span class="vm"><i>UI</i><b>N</b></span><span class="vm"><i>S</i><b>U</b></span><span class="vm"><i>C</i><b>H</b></span><span class="vm"><i>I</i><b>H</b></span><span class="vm"><i>A</i><b>H</b></span></td>
               <td role="cell" class="c-pub">2026-10-23</td>
             </tr>
-            <tr role="row" class="peek" id="peek-05" data-sev="high" hidden><td role="cell" colspan="9"><div class="pk"><div><p class="pk-s"><em>Anyone who can reach it over the network</em>, with <em>a low-privilege account</em> and no user interaction, can <em>read and change sensitive data and make it unavailable</em>.</p></div><div class="pk-f"><span class="k-lab">What to do</span><b class="quiet">No fix listed</b></div><div class="pk-f"><span class="k-lab">Report to publication</span><b>19 days</b><small>Reported privately 2026-10-04, published 2026-10-23</small></div><a class="pk-a" href="/advisories/ghsa-hxvp-ff3g-qcj7/">Read the writeup &rarr;</a></div></td></tr>
+            <tr role="row" class="peek" id="peek-04" data-sev="high" hidden><td role="cell" colspan="9"><div class="pk"><div><p class="pk-s"><em>Anyone who can reach it over the network</em>, with <em>a low-privilege account</em> and no user interaction, can <em>read and change sensitive data and make it unavailable</em>.</p></div><div class="pk-f"><span class="k-lab">What to do</span><b class="quiet">No fix listed</b></div><div class="pk-f"><span class="k-lab">Report to publication</span><b>19 days</b><small>Reported privately 2026-10-04, published 2026-10-23</small></div><a class="pk-a" href="/advisories/ghsa-hxvp-ff3g-qcj7/">Read the writeup &rarr;</a></div></td></tr>
             <tr role="row" data-sev="high">
-              <th role="rowheader" scope="row" class="c-nr">06</th>
+              <th role="rowheader" scope="row" class="c-nr">05</th>
               <td role="cell" class="c-id"><a href="/advisories/ghsa-v3vj-mch3-x6c2/">GHSA-v3vj-mch3-x6c2</a></td>
               <td role="cell" class="c-pkg">omnigent</td>
               <td role="cell" class="c-sc">8.8</td>
@@ -107,9 +95,9 @@ last_modified_at: 2026-11-15T14:16:05+00:00
               <td role="cell" class="c-vec"><span class="vm-s">v3.1</span><span class="vm"><i>AV</i><b>L</b></span><span class="vm"><i>AC</i><b>L</b></span><span class="vm"><i>PR</i><b>L</b></span><span class="vm"><i>UI</i><b>N</b></span><span class="vm"><i>S</i><b>C</b></span><span class="vm"><i>C</i><b>H</b></span><span class="vm"><i>I</i><b>H</b></span><span class="vm"><i>A</i><b>H</b></span></td>
               <td role="cell" class="c-pub">2026-10-13</td>
             </tr>
-            <tr role="row" class="peek" id="peek-06" data-sev="high" hidden><td role="cell" colspan="9"><div class="pk"><div><p class="pk-s"><em>Someone with local access</em>, with <em>a low-privilege account</em> and no user interaction, can <em>read and change sensitive data and make it unavailable</em>, and <em>the impact reaches beyond the vulnerable component</em>.</p></div><div class="pk-f"><span class="k-lab">What to do</span><b>Upgrade to 0.18.0</b></div><div class="pk-f"><span class="k-lab">Report to publication</span><b>59 days</b><small>Reported privately 2026-08-15, published 2026-10-13</small></div><a class="pk-a" href="/advisories/ghsa-v3vj-mch3-x6c2/">Read the writeup &rarr;</a></div></td></tr>
+            <tr role="row" class="peek" id="peek-05" data-sev="high" hidden><td role="cell" colspan="9"><div class="pk"><div><p class="pk-s"><em>Someone with local access</em>, with <em>a low-privilege account</em> and no user interaction, can <em>read and change sensitive data and make it unavailable</em>, and <em>the impact reaches beyond the vulnerable component</em>.</p></div><div class="pk-f"><span class="k-lab">What to do</span><b>Upgrade to 0.18.0</b></div><div class="pk-f"><span class="k-lab">Report to publication</span><b>59 days</b><small>Reported privately 2026-08-15, published 2026-10-13</small></div><a class="pk-a" href="/advisories/ghsa-v3vj-mch3-x6c2/">Read the writeup &rarr;</a></div></td></tr>
             <tr role="row" data-sev="high">
-              <th role="rowheader" scope="row" class="c-nr">07</th>
+              <th role="rowheader" scope="row" class="c-nr">06</th>
               <td role="cell" class="c-id"><a href="/advisories/ghsa-5mc6-2qfj-59cg/">GHSA-5mc6-2qfj-59cg</a></td>
               <td role="cell" class="c-pkg">opik</td>
               <td role="cell" class="c-sc">8.8</td>
@@ -119,9 +107,9 @@ last_modified_at: 2026-11-15T14:16:05+00:00
               <td role="cell" class="c-vec"><span class="vm-s">v3.1</span><span class="vm"><i>AV</i><b>N</b></span><span class="vm"><i>AC</i><b>L</b></span><span class="vm"><i>PR</i><b>N</b></span><span class="vm"><i>UI</i><b>R</b></span><span class="vm"><i>S</i><b>U</b></span><span class="vm"><i>C</i><b>H</b></span><span class="vm"><i>I</i><b>H</b></span><span class="vm"><i>A</i><b>H</b></span></td>
               <td role="cell" class="c-pub">2026-11-05</td>
             </tr>
-            <tr role="row" class="peek" id="peek-07" data-sev="high" hidden><td role="cell" colspan="9"><div class="pk"><div><p class="pk-s"><em>Anyone who can reach it over the network</em>, with <em>no account</em>, if a user takes some action, can <em>read and change sensitive data and make it unavailable</em>.</p></div><div class="pk-f"><span class="k-lab">What to do</span><b>Fix differs by range</b></div><div class="pk-f"><span class="k-lab">Report to publication</span><b>11 days</b><small>Reported privately 2026-10-25, published 2026-11-05</small></div><a class="pk-a" href="/advisories/ghsa-5mc6-2qfj-59cg/">Read the writeup &rarr;</a></div></td></tr>
+            <tr role="row" class="peek" id="peek-06" data-sev="high" hidden><td role="cell" colspan="9"><div class="pk"><div><p class="pk-s"><em>Anyone who can reach it over the network</em>, with <em>no account</em>, if a user takes some action, can <em>read and change sensitive data and make it unavailable</em>.</p></div><div class="pk-f"><span class="k-lab">What to do</span><b>Fix differs by range</b></div><div class="pk-f"><span class="k-lab">Report to publication</span><b>11 days</b><small>Reported privately 2026-10-25, published 2026-11-05</small></div><a class="pk-a" href="/advisories/ghsa-5mc6-2qfj-59cg/">Read the writeup &rarr;</a></div></td></tr>
             <tr role="row" data-sev="high">
-              <th role="rowheader" scope="row" class="c-nr">08</th>
+              <th role="rowheader" scope="row" class="c-nr">07</th>
               <td role="cell" class="c-id"><a href="/advisories/cve-2026-57516/">CVE-2026-57516</a></td>
               <td role="cell" class="c-pkg">ray</td>
               <td role="cell" class="c-sc">8.8</td>
@@ -131,7 +119,19 @@ last_modified_at: 2026-11-15T14:16:05+00:00
               <td role="cell" class="c-vec"><span class="vm-s">v3.1</span><span class="vm"><i>AV</i><b>N</b></span><span class="vm"><i>AC</i><b>L</b></span><span class="vm"><i>PR</i><b>N</b></span><span class="vm"><i>UI</i><b>R</b></span><span class="vm"><i>S</i><b>U</b></span><span class="vm"><i>C</i><b>H</b></span><span class="vm"><i>I</i><b>H</b></span><span class="vm"><i>A</i><b>H</b></span></td>
               <td role="cell" class="c-pub">2026-07-01</td>
             </tr>
-            <tr role="row" class="peek" id="peek-08" data-sev="high" hidden><td role="cell" colspan="9"><div class="pk"><div><p class="pk-s"><em>Anyone who can reach it over the network</em>, with <em>no account</em>, if a user takes some action, can <em>read and change sensitive data and make it unavailable</em>.</p></div><div class="pk-f"><span class="k-lab">What to do</span><b>Upgrade to 2.56.0</b></div><div class="pk-f"><span class="k-lab">Published</span><b>2026-07-01</b><small>Published by the maintainer</small></div><a class="pk-a" href="/advisories/cve-2026-57516/">Read the writeup &rarr;</a></div></td></tr>
+            <tr role="row" class="peek" id="peek-07" data-sev="high" hidden><td role="cell" colspan="9"><div class="pk"><div><p class="pk-s"><em>Anyone who can reach it over the network</em>, with <em>no account</em>, if a user takes some action, can <em>read and change sensitive data and make it unavailable</em>.</p></div><div class="pk-f"><span class="k-lab">What to do</span><b>Upgrade to 2.56.0</b></div><div class="pk-f"><span class="k-lab">Published</span><b>2026-07-01</b><small>Published by the maintainer</small></div><a class="pk-a" href="/advisories/cve-2026-57516/">Read the writeup &rarr;</a></div></td></tr>
+            <tr role="row" data-sev="high">
+              <th role="rowheader" scope="row" class="c-nr">08</th>
+              <td role="cell" class="c-id"><a href="/advisories/ghsa-jmr9-98g4-2phv/">GHSA-jmr9-98g4-2phv</a></td>
+              <td role="cell" class="c-pkg">github.com/<wbr>portainer/<wbr>portainer</td>
+              <td role="cell" class="c-sc">8.7</td>
+              <td role="cell" class="c-sev sev-high">High</td>
+              <td role="cell" class="c-cls">Access control</td>
+              <td role="cell" class="c-cwe">284</td>
+              <td role="cell" class="c-vec"><span class="vm-s">v4.0</span><span class="vm"><i>AV</i><b>N</b></span><span class="vm"><i>AC</i><b>L</b></span><span class="vm"><i>AT</i><b>N</b></span><span class="vm"><i>PR</i><b>L</b></span><span class="vm"><i>UI</i><b>N</b></span><span class="vm"><i>VC</i><b>H</b></span><span class="vm"><i>VI</i><b>H</b></span><span class="vm"><i>VA</i><b>H</b></span><span class="vm"><i>SC</i><b>N</b></span><span class="vm"><i>SI</i><b>N</b></span><span class="vm"><i>SA</i><b>N</b></span></td>
+              <td role="cell" class="c-pub">2026-10-08</td>
+            </tr>
+            <tr role="row" class="peek" id="peek-08" data-sev="high" hidden><td role="cell" colspan="9"><div class="pk"><div><p class="pk-s"><em>Anyone who can reach it over the network</em>, with <em>a low-privilege account</em> and no user interaction, can <em>read and change sensitive data and make it unavailable</em>.</p></div><div class="pk-f"><span class="k-lab">What to do</span><b class="quiet">Fix differs by range</b></div><div class="pk-f"><span class="k-lab">Published</span><b>2026-10-08</b><small>Published by the maintainer</small></div><a class="pk-a" href="/advisories/ghsa-jmr9-98g4-2phv/">Read the writeup &rarr;</a></div></td></tr>
             <tr role="row" data-sev="high">
               <th role="rowheader" scope="row" class="c-nr">09</th>
               <td role="cell" class="c-id"><a href="/advisories/ghsa-57mf-wqwq-6g6x/">GHSA-57mf-wqwq-6g6x</a></td>
