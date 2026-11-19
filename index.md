@@ -6,14 +6,14 @@ seo_title: "Sanaan Fayaz Wani - Security Engineer and vulnerability researcher"
 role: "Security Engineer at Amazon, bringing agentic AI into identity and access management. Independent vulnerability research across open source infrastructure."
 description: Vulnerability research on AI agent frameworks and LLM infrastructure. Assigned CVEs and published, credited advisories, each with root cause, reproduction and fix.
 permalink: /
-last_modified_at: 2026-11-18T15:56:42+00:00
+last_modified_at: 2026-11-19T16:00:30+00:00
 ---
 
 <div class="figs-lead g">
 <!-- COUNTERS:START -->
 
       <ul class="figs">
-        <li class="fig"><b>10</b><span>CVEs assigned</span></li>
+        <li class="fig"><b>11</b><span>CVEs assigned</span></li>
         <li class="fig"><b>29</b><span>Advisories published</span></li>
         <li class="fig"><b>19</b><span>Projects credited</span></li>
         <li class="fig"><b>167</b><span>Reports filed</span></li>
@@ -56,7 +56,7 @@ last_modified_at: 2026-11-18T15:56:42+00:00
 <!-- ADVISORIES:START -->
 
       <div class="cards">
-        <a class="card" data-sev="critical" href="/advisories/ghsa-24q6-6h89-f9p7/"><div class="card-top"><span class="card-score">10.0</span><span class="card-sev">Critical</span></div><div class="card-proj">autogpt-platform-beta</div><p class="card-hook">Hardcoded Default JWT Secret Enables Complete Authentication Bypass</p><div class="card-foot"><span class="card-cls">Authentication bypass</span><span class="card-cwe">CWE-287</span><span class="k-ghsa">GHSA</span></div></a>
+        <a class="card" data-sev="critical" href="/advisories/cve-2026-130169/"><div class="card-top"><span class="card-score">10.0</span><span class="card-sev">Critical</span></div><div class="card-proj">autogpt-platform-beta</div><p class="card-hook"></p><div class="card-foot"><span class="card-cls">Authentication bypass</span><span class="card-cwe">CWE-287</span><span class="k-cve">CVE</span></div></a>
         <a class="card" data-sev="critical" href="/advisories/ghsa-42mf-vpmr-gw5r/"><div class="card-top"><span class="card-score">9.9</span><span class="card-sev">Critical</span></div><div class="card-proj">ag2</div><p class="card-hook">Command Filter Bypass in LocalShellEnvironment via shell=True Allows Arbitrary OS Command Execution</p><div class="card-foot"><span class="card-cls">Command injection</span><span class="card-cwe">CWE-78</span><span class="k-ghsa">GHSA</span></div></a>
         <a class="card" data-sev="high" href="/advisories/ghsa-jmr9-98g4-2phv/"><div class="card-top"><span class="card-score">8.7</span><span class="card-sev">High</span></div><div class="card-proj">github.com/portainer/portainer</div><p class="card-hook">Non-admin bind-mount restriction bypass via Docker local-driver volumes and automatic Git redeploy (incomplete fix of CVE-2026-44849 and CVE-2026-44850)</p><div class="card-foot"><span class="card-cls">Access control</span><span class="card-cwe">CWE-284</span><span class="k-ghsa">GHSA</span></div></a>
         <a class="card" data-sev="critical" href="/advisories/cve-2026-49950/"><div class="card-top"><span class="card-score">9.3</span><span class="card-sev">Critical</span></div><div class="card-proj">xinference</div><p class="card-hook">Unauthenticated remote code execution through the Xinference actor transport</p><div class="card-foot"><span class="card-cls">Missing authentication</span><span class="card-cwe">CWE-306</span><span class="k-cve">CVE</span></div></a>

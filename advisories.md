@@ -6,7 +6,7 @@ seo_title: "Published security advisories credited to Sanaan Fayaz Wani"
 role: "Every advisory below is published and credited. Reports still in coordinated disclosure are not listed, named or hinted at until the maintainer publishes them."
 description: Published security advisories credited to Sanaan Fayaz Wani, with CVSS base vectors, weakness classes and full writeups.
 permalink: /advisories/
-last_modified_at: 2026-11-18T15:56:42+00:00
+last_modified_at: 2026-11-19T16:00:29+00:00
 ---
 
 <section class="sec g" id="advisories" aria-labelledby="h-adv">
@@ -38,7 +38,7 @@ last_modified_at: 2026-11-18T15:56:42+00:00
           <tbody role="rowgroup">
             <tr role="row" data-sev="critical">
               <th role="rowheader" scope="row" class="c-nr">01</th>
-              <td role="cell" class="c-id"><a href="/advisories/ghsa-24q6-6h89-f9p7/">GHSA-24q6-6h89-f9p7</a></td>
+              <td role="cell" class="c-id"><a href="/advisories/cve-2026-130169/">CVE-2026-130169</a></td>
               <td role="cell" class="c-pkg">autogpt-platform-beta</td>
               <td role="cell" class="c-sc">10.0</td>
               <td role="cell" class="c-sev sev-crit">Critical</td>
@@ -47,7 +47,7 @@ last_modified_at: 2026-11-18T15:56:42+00:00
               <td role="cell" class="c-vec"><span class="vm-s">v3.1</span><span class="vm"><i>AV</i><b>N</b></span><span class="vm"><i>AC</i><b>L</b></span><span class="vm"><i>PR</i><b>N</b></span><span class="vm"><i>UI</i><b>N</b></span><span class="vm"><i>S</i><b>C</b></span><span class="vm"><i>C</i><b>H</b></span><span class="vm"><i>I</i><b>H</b></span><span class="vm"><i>A</i><b>H</b></span></td>
               <td role="cell" class="c-pub">2026-10-05</td>
             </tr>
-            <tr role="row" class="peek" id="peek-01" data-sev="critical" hidden><td role="cell" colspan="9"><div class="pk"><div><p class="pk-s"><em>Anyone who can reach it over the network</em>, with <em>no account</em> and no user interaction, can <em>read and change sensitive data and make it unavailable</em>, and <em>the impact reaches beyond the vulnerable component</em>.</p></div><div class="pk-f"><span class="k-lab">What to do</span><b>Upgrade to 0.8.0</b></div><div class="pk-f"><span class="k-lab">Published</span><b>2026-10-05</b><small>Published by the maintainer</small></div><a class="pk-a" href="/advisories/ghsa-24q6-6h89-f9p7/">Read the writeup &rarr;</a></div></td></tr>
+            <tr role="row" class="peek" id="peek-01" data-sev="critical" hidden><td role="cell" colspan="9"><div class="pk"><div><p class="pk-s"><em>Anyone who can reach it over the network</em>, with <em>no account</em> and no user interaction, can <em>read and change sensitive data and make it unavailable</em>, and <em>the impact reaches beyond the vulnerable component</em>.</p></div><div class="pk-f"><span class="k-lab">What to do</span><b>Upgrade to 0.8.0</b></div><div class="pk-f"><span class="k-lab">Published</span><b>2026-10-05</b><small>Published by the maintainer</small></div><a class="pk-a" href="/advisories/cve-2026-130169/">Read the writeup &rarr;</a></div></td></tr>
             <tr role="row" data-sev="critical">
               <th role="rowheader" scope="row" class="c-nr">02</th>
               <td role="cell" class="c-id"><a href="/advisories/ghsa-42mf-vpmr-gw5r/">GHSA-42mf-vpmr-gw5r</a></td>
